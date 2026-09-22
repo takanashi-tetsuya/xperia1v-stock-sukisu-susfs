@@ -1,0 +1,6 @@
+{
+  "source_files_compared": 74116,
+  "matches_original_successful_build_sources": true,
+  "bootstrap_validation": "local Git mirror; network download not exercised",
+  "full_portable_rebuild": "not run"
+}

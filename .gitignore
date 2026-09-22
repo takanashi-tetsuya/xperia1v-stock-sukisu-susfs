@@ -1,0 +1,7 @@
+/sources/
+/toolchains/
+/out/
+/dist/
+/logs/
+/host-tools/
+__pycache__/

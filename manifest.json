@@ -1,0 +1,128 @@
+{
+  "device": "Sony Xperia 1 V / XQ-DQ72 / pdx234",
+  "firmware": "67.2.A.3.178",
+  "android": 15,
+  "security_patch": "2026-06-01",
+  "status": "BETA; DEVICE_OWNER_REPORTED_FUNCTIONAL",
+  "original_source_tracked_changes_preserved": true,
+  "susfs_upstream_commit": "7af04b08f86a5f811cbea28805f96d52368e005f",
+  "sukisu_version_reference_main": "7755cdb36f63945f286d7b1cab662b42b18f2789",
+  "sukisu_version_formula": "40000 + 3737 - 2815 = 40922",
+  "manager_apk": "SukiSU_v4.2.0_40900_releases.apk",
+  "manager_sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+  "zygisk_next": {
+    "target": "official 1.5.0",
+    "included": false,
+    "reason": "Official download endpoints returned HTTP 404",
+    "device_compatibility": "NOT_RUN"
+  },
+  "sources_directory": "sources",
+  "kernel_driver_symlink": "common/drivers/kernelsu -> ../../SukiSU-Ultra/kernel",
+  "runtime_report": {
+    "date": "2026-09-22",
+    "evidence": "device owner report; no runtime logs independently collected",
+    "general": "all functions reported normal",
+    "rezygisk": {
+      "version": "1.0.0",
+      "status": "enabled; normal operation reported"
+    },
+    "zygisk_next": {
+      "version": null,
+      "status": "installation confirmed; subsequent enabled/normal reply is ambiguous between Zygisk Next and ReZygisk"
+    },
+    "shamiko": "not installed or tested"
+  },
+  "historical_offline_evidence": {
+    "kernel": {
+      "status": "PASS_OFFLINE_BUILD_CHECKS",
+      "kernel_release": "5.15.189-android13-8-sukisu40922",
+      "sukisu_version_code": 40922,
+      "ksu_uapi": 2,
+      "compiler": "\"Android (8508608, based on r450784e) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)\"",
+      "required_config": {
+        "CONFIG_KSU": "y",
+        "CONFIG_KSU_SUSFS": "y",
+        "CONFIG_LTO_CLANG_FULL": "y",
+        "CONFIG_CFI_CLANG": "y",
+        "CONFIG_MODULES": "y",
+        "CONFIG_MODVERSIONS": "y",
+        "CONFIG_MODULE_SIG_PROTECT": "y",
+        "CONFIG_TCP_CONG_BBR": "y",
+        "CONFIG_DEFAULT_TCP_CONG": "\"cubic\"",
+        "CONFIG_KSU_SUSFS_SUS_PATH": "y",
+        "CONFIG_KSU_SUSFS_SUS_MOUNT": "y",
+        "CONFIG_KSU_SUSFS_SUS_KSTAT": "y",
+        "CONFIG_KSU_SUSFS_SPOOF_UNAME": "y",
+        "CONFIG_KSU_SUSFS_ENABLE_LOG": "y",
+        "CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS": "y",
+        "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG": "y",
+        "CONFIG_KSU_SUSFS_OPEN_REDIRECT": "y",
+        "CONFIG_KSU_SUSFS_SUS_MAP": "y"
+      },
+      "embedded_config_matches": true,
+      "btf_required_function_count": 15,
+      "source_inputs": {
+        "common": {
+          "upstream_commit": "51bba4309aac6b0889f1546c72865851cba20612",
+          "patch_sha256": "8abf8be15ccbf5dec1d94d25b814cea1f0519ba1e3590ca930bce7db9e9a9ea1"
+        },
+        "SukiSU-Ultra": {
+          "upstream_commit": "b20dee702035af09cb2ecb5f35443bbc1747f3e6",
+          "patch_sha256": "2328dacce9f765e13348879970f60b51830830c08173cf2a8ee6060dd2b15f6b"
+        },
+        "AnyKernel3": {
+          "upstream_commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+          "patch_sha256": "1b75687f44eb3e5ca95c372205f1cf18d4324bb09b05abf077d39dc25eadd3dd"
+        }
+      },
+      "added_source_files": {
+        "sources/common/fs/susfs.c": "4ff984276e09ac68e0e7cdf9840a215338ee4c0cad6ee902176869ce140c98c5",
+        "sources/common/include/linux/susfs.h": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+        "sources/common/include/linux/susfs_def.h": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+      },
+      "built_modules": 5,
+      "phone_runtime": "NOT_RUN"
+    },
+    "packaging": {
+      "kernel_sha256": "31612a88cd898eab9bb379a1f07361430f6fee32b05f60e3b59453f980f7e0cb",
+      "boot_sha256": "5369d90ccdea043cbe00657a4a733aef183c7ac230bc2d55894cc0aeeb91c3a8",
+      "anykernel_sha256": "c9751a3f2859b7add985ed97db94acfe7f959c22479226f4de2233631cf66bae",
+      "stock_boot_unchanged": true,
+      "boot_header_version": 4,
+      "boot_partition_size": 100663296,
+      "boot_ramdisk_size": 0,
+      "avb_algorithm": "NONE (unsigned custom image)",
+      "avb_hash_check": "PASS",
+      "boot_header_other_fields_match_stock": true,
+      "boot_and_zip_kernel_payloads_match_Image": true,
+      "phone_boot_and_installer_execution": "NOT_RUN"
+    },
+    "vendor_abi": {
+      "symvers": "out/Module.symvers",
+      "symvers_sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+      "module_count": 556,
+      "unique_module_hashes": 370,
+      "candidate_export_count": 15418,
+      "stock_module_export_count": 2652,
+      "module_import_references": 31333,
+      "candidate_imports": 27928,
+      "kernel_imports": 27918,
+      "candidate_module_imports": 10,
+      "peer_imports": 3405,
+      "kernel_crc_mismatch_count": 0,
+      "candidate_crc_mismatch_count": 0,
+      "peer_crc_mismatch_count": 0,
+      "unresolved_reference_count": 0,
+      "unresolved_unique_symbols": [],
+      "unversioned_undefined_reference_count": 3,
+      "unresolved_strong_unversioned_reference_count": 0,
+      "mismatched_unique_kernel_symbols": [],
+      "vermagics": [
+        "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+        "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
+        "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
+      ],
+      "status": "PASS_STATIC"
+    }
+  }
+}
