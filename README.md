@@ -2,7 +2,7 @@
 
 This local candidate targets **Sony XQ-DQ72 / pdx234, firmware 67.2.A.3.178, Android 15**, with an unlocked bootloader. Build and packaging results are recorded in `dist/manifest.json`; do not interpret host tests as phone testing. No application compatibility improvement is promised.
 
-The repository mirrors this candidate's recorded results in `manifest.json` and `verification/`. Fresh builds write their own results under `dist/` and `logs/`. Binary downloads and the complete source archive are kept in the candidate draft Release; the older published beta is a different build.
+The repository mirrors this candidate's recorded results in `manifest.json` and `verification/`. Fresh builds write their own results under `dist/` and `logs/`. The candidate draft Release is partially uploaded: its AK3 ZIP and small assets are available, but Image, the direct boot image and full_source.tar.gz remain local after an upload timeout. See `RELEASE_STATUS.json` for exact inventory. The older published beta is a different build.
 
 ## Exact versions
 

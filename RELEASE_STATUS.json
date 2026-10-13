@@ -1,0 +1,24 @@
+{
+  "status": "SOURCE_SYNC_COMPLETE_RELEASE_ASSETS_PARTIAL",
+  "source_commit": "c3903a0f241b7f9a7ab87e1a52e7b0ecfb0a10ff",
+  "code_ci": "https://github.com/takanashi-tetsuya/xperia1v-stock-sukisu-susfs/actions/runs/38361739752",
+  "code_ci_conclusion": "success",
+  "release_id": 411394063,
+  "release_draft": true,
+  "uploaded_asset_count": 18,
+  "missing_assets": {
+    "Image": {
+      "sha256": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+      "size": 48564736
+    },
+    "boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img": {
+      "sha256": "8e2a4ac8299b99414e829f54b8a2119cf092f4d0bcff87a4f0fc243381a5cde7",
+      "size": 100663296
+    },
+    "full_source.tar.gz": {
+      "sha256": "9bb77bd35753ee8634b11e527824a0fc9483aa756189f948cc183f3d7214a326",
+      "size": 458290954
+    }
+  },
+  "reason": "Initial batch returned GitHub HTTP 408. Independent HTTP/1 retries remained around 10-30 KB/s per connection and were stopped; large files remain local. No upload jobs remain running."
+}

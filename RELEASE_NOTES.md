@@ -1,3 +1,5 @@
+上傳狀態：原始碼與 CI 已同步成功。草稿目前有 18 個已核對資產；Image、boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img、full_source.tar.gz 尚未上傳。首次批次遇到 GitHub HTTP 408；獨立連線重試速度約 10–30 KB/s，已停止額外的大檔上傳。三個完整檔案仍保留本機。下方檔案清單是完整候選的組成，不代表所有資產已在 GitHub 上可下載。原始碼重建可使用倉庫的鎖定來源與腳本。
+
 Xperia 1 V / XQ-DQ72，Android 15，韌體 67.2.A.3.178 的 SukiSU 40900 + SUSFS 2.3 修復候選。
 
 以官方 v4.2.0 / 40900 對應的 builtin e2912817、Manager/ksud 904c60d1、UAPI 2 為基線；回移簽名驗證與 SELinux 修復，修正 SUSFS 隱藏路徑、ctime 工具協定與 AnyKernel3 日期範圍，改善可重建性及封裝檢查。保留手動/inline hook；KPM 停用。
