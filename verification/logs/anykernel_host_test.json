@@ -1,0 +1,165 @@
+{
+  "status": "PASS",
+  "tests": 20,
+  "anykernel_sha256": "31b0621f542c5cff0dedbbba89e13b295cedd55e45781fe2eb6929a06965d9e7",
+  "scope": "Actual extracted installer functions; no installer entrypoint, mounting or flashing",
+  "limits": "Upstream level check alone can accept missing property; exact firmware guard remains required",
+  "results": [
+    {
+      "observed": "2026-05-01",
+      "function": "do_levelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-05-01",
+      "function": "do_levelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-05-01",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-05-01",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-06-01",
+      "function": "do_levelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-01",
+      "function": "do_levelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-01",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-01",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-30",
+      "function": "do_levelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-30",
+      "function": "do_levelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-30",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-06-30",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 0
+    },
+    {
+      "observed": "2026-07-01",
+      "function": "do_levelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-07-01",
+      "function": "do_levelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-07-01",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "bash"
+      ],
+      "returncode": 42
+    },
+    {
+      "observed": "2026-07-01",
+      "function": "do_vendorlevelcheck",
+      "shell": [
+        "busybox",
+        "ash"
+      ],
+      "returncode": 42
+    },
+    {
+      "file_firmware": "67.2.A.3.178",
+      "fallback_firmware": "recovery",
+      "returncode": 0
+    },
+    {
+      "file_firmware": "",
+      "fallback_firmware": "67.2.A.3.178",
+      "returncode": 0
+    },
+    {
+      "file_firmware": "",
+      "fallback_firmware": "recovery",
+      "returncode": 42
+    },
+    {
+      "file_firmware": "",
+      "fallback_firmware": "",
+      "returncode": 42
+    }
+  ]
+}

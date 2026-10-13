@@ -1,0 +1,30 @@
+name: Verify sources and host regressions
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install host test dependencies
+        run: sudo apt-get update && sudo apt-get install -y build-essential clang libssl-dev busybox shellcheck
+      - name: Script checks and isolated packaging tests
+        run: |
+          shellcheck build.sh prepare-sources.sh tests/packaging_test.sh
+          bash tests/packaging_test.sh
+      - name: Fetch exact sources and check all patches and added files
+        run: bash prepare-sources.sh
+      - name: SUSFS source regressions
+        run: |
+          python3 tests/susfs_namei_regression.py
+          python3 tests/susfs_legacy_regression.py sources/common
+          python3 tests/userspace_ctime_test.py
+          python3 tests/userspace_wire_test.py
+          python3 tests/anykernel_test.py
+      - name: Verify real release APK and security backports
+        run: |
+          curl --fail --location --retry 3 https://github.com/SukiSU-Ultra/SukiSU-Ultra/releases/download/v4.2.0/SukiSU_v4.2.0_40900-release.apk -o /tmp/SukiSU40900.apk
+          echo '4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3  /tmp/SukiSU40900.apk' | sha256sum -c -
+          python3 tests/suki_security_test.py --apk /tmp/SukiSU40900.apk

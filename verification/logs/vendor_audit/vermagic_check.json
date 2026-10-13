@@ -1,0 +1,16 @@
+{
+  "candidate_vermagic": "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+  "loader_source": "sources/common/kernel/module.c:1316",
+  "loader_source_sha256": "102f733f1b3275db74818190166ba721a08a3c5f9b4f2336238b3be750b5840a",
+  "mismatches": [],
+  "module_count": 556,
+  "modules_with_crc_records": 556,
+  "rule": "CONFIG_MODVERSIONS=y: same_magic ignores the first kernel-version token for modules with CRCs",
+  "runtime_loading": "NOT_RUN",
+  "status": "PASS_STATIC",
+  "stock_vermagics": [
+    "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+    "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
+    "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
+  ]
+}

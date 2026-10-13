@@ -1,0 +1,27 @@
+{
+  "symvers": "/home/liu/android/build_sukisu_20261013/out/Module.symvers",
+  "symvers_sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+  "module_count": 556,
+  "unique_module_hashes": 370,
+  "candidate_export_count": 15418,
+  "stock_module_export_count": 2652,
+  "module_import_references": 31333,
+  "candidate_imports": 27928,
+  "kernel_imports": 27918,
+  "candidate_module_imports": 10,
+  "peer_imports": 3405,
+  "kernel_crc_mismatch_count": 0,
+  "candidate_crc_mismatch_count": 0,
+  "peer_crc_mismatch_count": 0,
+  "unresolved_reference_count": 0,
+  "unresolved_unique_symbols": [],
+  "unversioned_undefined_reference_count": 3,
+  "unresolved_strong_unversioned_reference_count": 0,
+  "mismatched_unique_kernel_symbols": [],
+  "vermagics": [
+    "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+    "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
+    "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
+  ],
+  "status": "PASS_STATIC"
+}

@@ -1,0 +1,78 @@
+{
+  "build": {
+    "build_timestamp": "Tue Oct 13 00:00:00 UTC 2026",
+    "kernel_release": "5.15.189-android13-8-g51bba4309aac",
+    "ksu_full_version": "v4.2.0-e2912817+local-susfs2.3@xperia-20261013",
+    "ksu_uapi": 2,
+    "ksu_version": 40900,
+    "source_date_epoch": 1791849600
+  },
+  "frozen": true,
+  "repositories": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_file": "patches/final_AnyKernel3.patch",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {},
+      "url": "https://github.com/osm0sis/AnyKernel3.git"
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "paired_commit": "904c60d18f026340ce38ca2d5a1da529aadcba1a",
+      "paired_ref": "refs/heads/release-main-40900",
+      "patch_file": "patches/final_SukiSU-Ultra.patch",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {},
+      "url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra.git"
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_file": "patches/final_common.patch",
+      "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+        }
+      },
+      "url": "https://android.googlesource.com/kernel/common"
+    }
+  },
+  "schema_version": 1,
+  "stock": {
+    "header_version": 4,
+    "ramdisk_size": 0,
+    "sha256": "06dbe42eccb4ea14a53e7b34d1f509bc7b176776db89d3280adba44c4b8b3731",
+    "signature_size": 0,
+    "size": 100663296
+  },
+  "toolchain": {
+    "binary_sha256": {
+      "bin/clang": "41131b03d674645836c23635a7e2ae478bd869b3b3da98204365c06610ec5438",
+      "bin/clang++": "41131b03d674645836c23635a7e2ae478bd869b3b3da98204365c06610ec5438",
+      "bin/clang-14": "78778caa0f0e5ae1d5d83106b25a9b0b351703206ca4e3d1385d0c54948f6001",
+      "bin/ld.lld": "858eaed0308ad1da1d21ff1df1616130cfe4b96f2502fd7099086f9cd48dbb41",
+      "bin/llvm-ar": "4cc0e1b230346004052c966781aafefd1f3feb9a019222ce2221154802c6972b",
+      "bin/llvm-objcopy": "611dc046eb2bb98d7ec80918355b977540399d38fca972b9d73309ab62fc5512"
+    },
+    "clang_revision": "r450784e",
+    "clang_version": "14.0.7",
+    "pahole_version": "1.31",
+    "upstream_commit": "7c3dd2ed6a61f781016dc231e6589118a61aa59f"
+  }
+}

@@ -1,0 +1,58 @@
+Xperia 1 V / 67.2.A.3.178 — 2026-10-13 修復報告
+
+版本結論
+官方沒有 41000 正式版；最新正式 APK 為 v4.2.0 / 40900。main 的 40971
+只是開發分支計數值，其 UAPI 已到 5。本候選使用真正的 builtin e2912817，
+搭配官方 APK/ksud 904c60d1 的 40900 / UAPI 2，再清楚標示本地回移修正。
+沒有把 main 新版功能冒稱為 40900 已有，也沒有單純改數字充當升級。
+
+原審核 21 項的處置
+1. AK3 的兩個 patchlevel 改為 2026-06 - 2026-06；20 項抽取實際 shell
+   函式測試通過。ZIP 安裝器本身尚未在手機執行。缺失 patch property 仍
+   不能只靠上游日期函式拒絕，因此保留精確韌體 guard；未知韌體即中止。
+2. 回移 #3700 簽名 ID 白名單（保留合法 verity padding）、#3680 SELinux
+   序列化長度、#3572 適用配置失敗檢查。#3594 已由原有 read_exact 取代。
+   官方 APK 與失敗路徑共 59 項 host 測試通過；未宣稱已證明 Sony 上有可利用漏洞。
+3. 固定官方 40900 版本碼，記錄 paired source；不再下載 main 全歷史計數。
+4. 核心維持正確 ctime bit 8，附同版官方來源修正後的完整 ksu_susfs CLI；
+   Android arm64/API35 已編譯，9 項真實 parser payload host 測試通過。
+   安裝模組可能自帶另一份 CLI，需一併保持相容；本次未替換手機工具。
+5. 已從鎖定的官方網路來源重新取得三棵來源、驗證一致，並在空白 out 完整
+   編譯成功；核心版本、嵌入 config、15 項 BTF 與產物雜湊檢查通過。
+   沿用已驗證的編譯工具，沒有聲稱在全新容器重建；完整紀錄見 manifest。
+6. package/verify/finalize 的安全檢查使用明確錯誤，不依賴可被 -O 省略的 assert。
+7. README 補齊 Magisk/LKM 的 init_boot 遷移、OTA、原廠 boot SHA 及回滾說明。
+8. 新核心與 556 個原廠模組的靜態 ABI 比對通過，CRC 不符及未解析符號均為 0；
+   實際產生的 GKI 保護表為空。簽名金鑰不同不等於所有模組不能載入；
+   完整載入/初始化與 stock lsmod 比對仍待實機。
+9. 關閉 CONFIG_KSU_SUSFS_ENABLE_LOG；不是等待用戶態開機後才關閉。
+10. uname 使用 ACK 原廠格式；關閉 IKCONFIG_PROC 和 ADBROOT，保留嵌入 config
+    作離線核對。嵌入完整版本及 manifest 誠實標識修改；沒有保證 root 無法檢測。
+11. 保留第三方授權，補專案腳本 MIT 與 LICENSE inventory。SUSFS GPL-3.0 /
+    Linux GPL-2.0-only 的二進位再散布相容性仍未解決，不能靠一份 README 修好。
+    AnyKernel3 原本已附 bundled tools 的授權 notice；未聯絡作者或公開發佈。
+12. 驗證 clang 版本與 6 個 LLVM 檔案 hash，文件記錄固定來源 tree；不把
+    Gitiles 即時壓縮包 hash 當永久下載契約。補 pahole 1.31 取得與路徑說明。
+13. prepare 先校驗 patch/added，再暫存下載與套用，完整檢查後原子發布；
+   完整相同來源可重跑，殘缺/已修改工作不會被刪除。改 shallow fetch 後回歸通過。
+   Git clone 不保留 0664 的問題另以輸入權限檢查及輸出權限還原修正，來源 lock 不變。
+14. 具名錯誤、實體路徑、預期 dirty diff/added identity 檢查及工具 PATH 說明。
+15. 參數在 CLI 解析，使用 sys.executable，建立 logs；AVB 從 stock 實讀和比對。
+    Stock 的 AVB Android13 欄位是原廠值，不擅自改成目前 ROM Android15。
+16. 維持 recovery vendor/韌體無法驗證時中止，文件說明執行環境要求；未稱已刷ZIP。
+17. 保留 BTF 建置流程並驗證產物；原廠 module BTF 的完整 runtime 接受度待實機，
+    MODULE_ALLOW_BTF_MISMATCH 也不能當成實際成功載入的證據。
+18. 清理 sulog helper linkage 與非 SUSFS 分支的提權錯誤回傳。每個 driver ioctl
+    原本仍有權限檢查，generic fd 並非自動無限制 root。#3679 的專用 su fd
+    涉及 UAPI/userspace 改變，未盲目回移；受限 profile 的 TTY/wrapper 限制保留。
+19. 完全移除假名稱 ..5.u.S lookup fallback，隱藏目標回 ENOENT，避免 mkdir /
+    rename 誤碰同目錄項目。修正 refcount/RCU 與 cold open 查找；stat flag 加 else。
+    215 host tests 全過，舊版同組僅100通過，既有63項inode/readlink仍全過。
+    未涵蓋所有檔案系統和併發條件，需開機後確認實際工作負載。
+20. 清理內部發佈文案，補上 SUSFS、官方 APK、來源與授權連結。
+21. 加入 CI workflow，包含腳本檢查、normal/optimized packaging 測試、真實
+    鎖定來源套用和 host C 回歸。本報告記錄本地驗證；遠端執行結果以 GitHub
+    該提交的 Actions 狀態為準，不把 workflow 檔案存在當成 CI 已通過。
+
+已通過的 host 測試不保證 dアニメ、Apple Music、X 或 ChatGPT Remote 的
+登入/授權狀態改變；本次不宣稱修復上述 App。新候選尚未刷機，實機紀錄須另收集。

@@ -1,0 +1,25 @@
+Third-party license inventory
+
+Linux source: https://android.googlesource.com/kernel/common
+Pinned source and COPYING are recorded in source-lock.json and common_COPYING.
+Linux is GPL-2.0-only; individual files may have their own compatible notices.
+
+SukiSU: https://github.com/SukiSU-Ultra/SukiSU-Ultra
+Its original LICENSE is included as SukiSU-Ultra_LICENSE. Local changes are
+provided as patches against the exact source commits in source-lock.json.
+
+SUSFS: https://gitlab.com/simonpunk/susfs4ksu
+Pinned commit 7af04b08f86a5f811cbea28805f96d52368e005f supplies GPL-3.0.
+Its original LICENSE is included as SUSFS_LICENSE. The Linux GPL-2.0-only /
+SUSFS GPL-3.0 combination leaves binary redistribution compatibility
+unresolved. This notice does not grant a dual license or resolve that issue.
+Do not interpret local compilation or availability of patches as clearance
+for public redistribution. No author has been contacted by this task.
+
+AnyKernel3: https://github.com/osm0sis/AnyKernel3
+Its LICENSE is included as AnyKernel3_LICENSE and remains in the installer ZIP.
+That notice includes the bundled busybox and magiskboot licensing/source
+information. The exact binaries are those in the pinned AK3 commit, whose
+tree identifies their content; no replacement binaries were fetched here.
+
+The project-owned scripts' MIT license does not relicense any of the above.

@@ -44,7 +44,6 @@ DEFINE_STATIC_KEY_TRUE(susfs_is_log_enabled);
 DEFINE_STATIC_SRCU(susfs_srcu_sus_path_loop);
 static DEFINE_MUTEX(susfs_mutex_lock_sus_path);
 static LIST_HEAD(LH_SUS_PATH_LOOP);
-const struct qstr susfs_fake_qstr_name = QSTR_INIT("..5.u.S", 7); // used to re-test the dcache lookup, make sure you don't have file named like this!!
 
 void susfs_add_sus_path(void __user **user_info) {
 	struct st_susfs_sus_path info = {0};
@@ -577,7 +576,8 @@ void susfs_sus_kstat_spoof_generic_fillattr(struct inode *inode, struct kstat *s
 out_spoof_kstat:
 	rcu_read_lock();
 	hash_for_each_possible_rcu(SUS_KSTAT_HLIST, entry, node, target_ino) {
-		if (entry->target_dev == target_dev &&
+		if (entry->target_ino == target_ino &&
+			entry->target_dev == target_dev &&
 			entry->is_fuse == is_fuse)
 		{
 			SUSFS_LOGI("spoofing kstat for vfs_getattr_nosec, target_ino: %lu, target_dev: %u\n",
@@ -646,7 +646,8 @@ void susfs_sus_kstat_spoof_show_map_vma(struct inode *inode, dev_t *out_dev, uns
 out_spoof_kstat:
 	rcu_read_lock();
 	hash_for_each_possible_rcu(SUS_KSTAT_HLIST, entry, node, target_ino) {
-		if (entry->target_dev == target_dev &&
+		if (entry->target_ino == target_ino &&
+			entry->target_dev == target_dev &&
 			entry->is_fuse == is_fuse)
 		{
 			SUSFS_LOGI("spoofing kstat for show_map_vma, target_ino: %lu, target_dev: %u\n", target_ino, target_dev);
@@ -668,7 +669,9 @@ int susfs_sus_kstat_spoof_vfs_statfs(struct inode *inode, struct kstatfs *buf, b
 
 	rcu_read_lock();
 	hash_for_each_possible_rcu(SUS_KSTAT_HLIST, entry, node, target_inode->i_ino) {
-		if (entry->target_dev == inode->i_sb->s_dev)
+		if (entry->target_ino == target_inode->i_ino &&
+			entry->target_dev == target_inode->i_sb->s_dev &&
+			entry->is_fuse == *is_fuse)
 		{
 			SUSFS_LOGI("spoofing kstat for vfs_statfs, target_ino: %lu, target_dev: %u\n", target_inode->i_ino, target_inode->i_sb->s_dev);
 			memcpy(buf, &entry->spoofed_kstatfs, sizeof(struct kstatfs));
@@ -685,7 +688,8 @@ void susfs_sus_kstat_spoof_inotify_fdinfo(unsigned long *out_target_ino, dev_t *
 
 	rcu_read_lock();
 	hash_for_each_possible_rcu(SUS_KSTAT_HLIST, entry, node, *out_target_ino) {
-		if (entry->target_dev == *out_target_dev)
+		if (entry->target_ino == *out_target_ino &&
+			entry->target_dev == *out_target_dev)
 		{
 			SUSFS_LOGI("spoofing kstat for inotify_fdinfo, target_ino: %lu, target_dev: %u\n", *out_target_ino, *out_target_dev);
 			*out_target_ino = entry->info.spoofed_ino;
@@ -702,7 +706,8 @@ void susfs_sus_kstat_spoof_proc_fd_seq_show(int *out_target_mnt_id, unsigned lon
 
 	rcu_read_lock();
 	hash_for_each_possible_rcu(SUS_KSTAT_HLIST, entry, node, *out_target_ino) {
-		if (entry->target_dev == target_dev)
+		if (entry->target_ino == *out_target_ino &&
+			entry->target_dev == target_dev)
 		{
 			SUSFS_LOGI("spoofing kstat for proc_fd_seq_show, target_ino: %lu, target_dev: %u\n", *out_target_ino, target_dev);
 			*out_target_mnt_id = entry->spoofed_mnt_id;
@@ -1041,6 +1046,7 @@ struct filename *susfs_open_redirect_spoof_do_sys_openat(struct inode *inode) {
 
 	hash_for_each_possible_rcu(OPEN_REDIRECT_HLIST, entry, node, inode->i_ino) {
 		if (!entry->reversed_lookup_only &&
+			entry->target_ino == inode->i_ino &&
 			entry->target_dev == inode->i_sb->s_dev)
 		{
 			switch(entry->info.uid_scheme) {
@@ -1081,26 +1087,20 @@ out_srcu_read_unlock:
 
 int susfs_open_redirect_spoof_vfs_readlink(struct inode *inode, char __user *buffer, int buflen) {
 	struct st_susfs_open_redirect_hlist *entry = NULL;
+	int ret;
 	int srcu_idx = srcu_read_lock(&susfs_srcu_open_redirect);
 
 	hash_for_each_possible_rcu(OPEN_REDIRECT_HLIST, entry, node, inode->i_ino) {
 		if (entry->reversed_lookup_only &&
+			entry->target_ino == inode->i_ino &&
 			entry->target_dev == inode->i_sb->s_dev)
 		{
 			SUSFS_LOGI("spoof path '%s' to '%s'\n",
 					entry->info.target_pathname, entry->info.redirected_pathname);
-			if (strlen(entry->info.redirected_pathname) >= buflen) {
-				SUSFS_LOGE("buflen not big enough\n");
-				srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
-				return -ENAMETOOLONG;
-			}
-			if (copy_to_user(buffer, entry->info.redirected_pathname, strlen(entry->info.redirected_pathname))) {
-				SUSFS_LOGE("copy_to_user() failed\n");
-				srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
-				return -EFAULT;
-			}
+			/* Match readlink(2): return copied bytes and truncate to buflen. */
+			ret = readlink_copy(buffer, buflen, entry->info.redirected_pathname);
 			srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
-			return 0;
+			return ret;
 		}
 	}
 	srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
@@ -1109,22 +1109,20 @@ int susfs_open_redirect_spoof_vfs_readlink(struct inode *inode, char __user *buf
 
 int susfs_open_redirect_spoof_do_proc_readlink(struct inode *inode, char *tmp_buf, int buflen) {
 	struct st_susfs_open_redirect_hlist *entry = NULL;
+	int ret;
 	int srcu_idx = srcu_read_lock(&susfs_srcu_open_redirect);
 
 	hash_for_each_possible_rcu(OPEN_REDIRECT_HLIST, entry, node, inode->i_ino) {
 		if (entry->reversed_lookup_only &&
+			entry->target_ino == inode->i_ino &&
 			entry->target_dev == inode->i_sb->s_dev)
 		{
 			SUSFS_LOGI("spoof path '%s' to '%s'\n",
 					entry->info.target_pathname, entry->info.redirected_pathname);
-			if (strlen(entry->info.redirected_pathname) >= buflen) {
-				SUSFS_LOGE("buflen not big enough\n");
-				srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
-				return -ENAMETOOLONG;
-			}
-			strscpy(tmp_buf, entry->info.redirected_pathname, SUSFS_MAX_LEN_PATHNAME - 1);
+			/* buflen is the kernel buffer capacity, not the user's read size. */
+			ret = strscpy(tmp_buf, entry->info.redirected_pathname, buflen);
 			srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
-			return 0;
+			return ret;
 		}
 	}
 	srcu_read_unlock(&susfs_srcu_open_redirect, srcu_idx);
@@ -1142,6 +1140,7 @@ int susfs_open_redirect_spoof_show_map_vma_srcu(struct inode *inode, unsigned lo
 
 	hash_for_each_possible_rcu(OPEN_REDIRECT_HLIST, entry, node, inode->i_ino) {
 		if (entry->reversed_lookup_only &&
+			entry->target_ino == inode->i_ino &&
 			entry->target_dev == inode->i_sb->s_dev)
 		{
 			SUSFS_LOGI("spoof maps ino/dev/name for redirected path: '%s'\n",
@@ -1533,4 +1532,3 @@ void susfs_init(void) {\
 
 /* No module exit is needed becuase it should never be a loadable kernel module */
 //void __init susfs_exit(void)
-

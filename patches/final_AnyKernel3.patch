@@ -1,5 +1,5 @@
 diff --git a/anykernel.sh b/anykernel.sh
-index 0ac823a..2ba208c 100755
+index 0ac823ada2be18fe9c2aa75810116e7c08eea605..46f400ed308b55718cf06a563b4ae618a59740f6 100755
 --- a/anykernel.sh
 +++ b/anykernel.sh
 @@ -4,118 +4,41 @@
@@ -7,7 +7,7 @@ index 0ac823a..2ba208c 100755
  # global properties
  properties() { '
 -kernel.string=ExampleKernel by osm0sis @ xda-developers
-+kernel.string=SukiSU Ultra 40922 + SUSFS 2.3 (20260920) for Sony Xperia 1 V
++kernel.string=SukiSU Ultra 40900 + SUSFS 2.3 (20261013) for Sony Xperia 1 V
  do.devicecheck=1
  do.modules=0
  do.systemless=1
@@ -26,8 +26,8 @@ index 0ac823a..2ba208c 100755
 -supported.patchlevels=
 -supported.vendorpatchlevels=
 +supported.versions=15
-+supported.patchlevels=2026-06
-+supported.vendorpatchlevels=2026-06
++supported.patchlevels=2026-06 - 2026-06
++supported.vendorpatchlevels=2026-06 - 2026-06
  '; } # end properties
  
 -

@@ -1,6 +1,108 @@
 {
-  "source_files_compared": 74116,
-  "matches_original_successful_build_sources": true,
-  "bootstrap_validation": "local Git mirror; network download not exercised",
-  "full_portable_rebuild": "not run"
+  "build": {
+    "build_completion_sha256": "f1f91dce16c39d89b2dfc5cb69a13ac2eecf2c092d9020416b7d6a2530faab4d",
+    "build_verification_sha256": "e6c7920c52b8feedf1ac1c4a7d220b4a84be5217dd2eb71d9cc912a618267b97",
+    "clean_output_directory": true,
+    "completed_at": "2026-10-13T04:03:58.359733+00:00",
+    "kernel_sha256": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+    "process_exit_code": 0,
+    "started_at": "2026-10-13T03:38:45.208866+00:00",
+    "status": "PASS_OFFLINE_BUILD_CHECKS"
+  },
+  "environment": {
+    "clean_container": false,
+    "reused_verified_toolchain": true,
+    "toolchain_fresh_download": false
+  },
+  "network_reconstruction": {
+    "activated_source_path": "sources",
+    "local_mirror_used": false,
+    "log": "logs/network_prepare.log",
+    "process_exit_code": 0,
+    "remote_urls": {
+      "AnyKernel3": "https://github.com/osm0sis/AnyKernel3.git",
+      "SukiSU-Ultra": "https://github.com/SukiSU-Ultra/SukiSU-Ultra.git",
+      "common": "https://android.googlesource.com/kernel/common"
+    },
+    "reviewed_source_path": "sources-reviewed",
+    "source_inputs": {
+      "AnyKernel3": {
+        "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+        "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+        "untracked": {}
+      },
+      "SukiSU-Ultra": {
+        "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+        "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+        "untracked": {}
+      },
+      "common": {
+        "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+        "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+        "untracked": {
+          "drivers/kernelsu": {
+            "kind": "symlink",
+            "target": "../../SukiSU-Ultra/kernel"
+          },
+          "fs/susfs.c": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+          },
+          "include/linux/susfs.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+          },
+          "include/linux/susfs_def.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+          }
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  "reviewed_source_inputs": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {}
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {}
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+        }
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_lock_sha256": "1e10abd0acb3483774aef2ef0d86fd070be4c377b0ce8afbcc62319bf0925160",
+  "source_trees_match": true,
+  "status": "PASS_NETWORK_RECONSTRUCTION_AND_BUILD"
 }

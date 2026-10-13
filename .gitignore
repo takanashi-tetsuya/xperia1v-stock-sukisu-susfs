@@ -1,7 +1,13 @@
-/sources/
-/toolchains/
 /out/
 /dist/
 /logs/
+/sources/
+/sources-reviewed/
+/reconstruction_network/
+/toolchains/
 /host-tools/
+/userspace/toolchains/
+/userspace/upstream-susfs/ksu_susfs/obj/
+/userspace/upstream-susfs/ksu_susfs/libs/
 __pycache__/
+*.pyc

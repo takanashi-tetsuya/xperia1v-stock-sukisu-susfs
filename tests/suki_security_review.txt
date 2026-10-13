@@ -1,0 +1,109 @@
+SukiSU security backport review — 2026-10-13
+
+Reviewed source: sources/SukiSU-Ultra/kernel
+Git HEAD: e2912817f4e1b194e582a06e0b5eacf6a3fb7083
+Kernel version: 40900
+Full version: v4.2.0-e2912817+local-susfs2.3@xperia-20261013
+Kernel UAPI: 2
+
+Result: No blocker found in the reviewed security backports. This review made
+no production-source changes and performed no complete kernel build or device
+operation. Scope was the listed changes below, not a full security audit.
+
+Reviewed changes
+
+- #3700: check_v2_signature permits exactly the v2 signing ID and APK verity
+  padding, rejects every other ID, and still requires exactly one v2 pair.
+  The existing bounded read_exact / nested-container parser is preserved.
+- #3680: ksu_dup_sepolicy reserves 12 bytes per type for a self-type bitmap
+  entry, derives the serialized length from policy_file's remaining capacity,
+  passes that actual length to policydb_read, and stores it in the new policy.
+- #3572: the target 5.15 filename-transition path checks datum, key and name
+  allocations and the hashtab_insert result, freeing all newly owned objects
+  on those failures. It does not free an existing table's objects on failure.
+  The obsolete throne_tracker allocation path was not introduced.
+- Non-SUSFS ksud escape now propagates the escape helper's error and uses
+  current_cred rather than obtaining an extra credential reference. This is
+  an inactive branch in the CONFIG_KSU_SUSFS=y delivery, not a claimed active
+  device security defect.
+- ksu_sulog_free_pending remains static with only its event.c call site and
+  no declaration in event.h. This is linkage cleanup, not a security boundary.
+- Makefile pins the verified official 40900 release number and explicit local
+  full-version string. No git history count, network curl or fetch remains in
+  version generation. Numeric 40900 does not imply all main-branch features.
+
+Host verification
+
+Run from the build directory:
+  python3 tests/suki_security_test.py
+
+The test extracts the actual production functions from the current files on
+each run, builds two small C harnesses, and substitutes only dependencies.
+
+42 APK cases passed:
+- Unmodified official 40900 APK with SHA256
+  4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3.
+- Actual OpenSSL SHA256 certificate hashing against the production trusted
+  key table, including rejection after certificate corruption.
+- v2 only; verity padding before and after v2; EOCD comments.
+- Unknown IDs before and after v2, including v3/v3.1 IDs and arbitrary IDs.
+- Duplicate/missing v2, nested-length overflow, malformed pair/header/footer
+  lengths, central-directory bounds, ZIP64 marker, truncation, short reads,
+  empty/tiny inputs and file-open failure.
+- Every opened test file was closed on success and error paths.
+
+17 sepolicy cases passed:
+- Allocation failure at each of datum/key/name, insert ENOMEM/EEXIST,
+  successful insertion, duplicate update, existing matching output type,
+  and missing source type.
+- Serialization lengths of 100, 124 and 148 bytes with 148-byte reservation;
+  correct rewind/read length, stored length and Android config bits.
+- vmalloc/kmemdup failure, policydb_write/read failure, and insufficient
+  serialization capacity, with balanced tracked allocation ownership.
+
+Both harnesses passed AddressSanitizer and UndefinedBehaviorSanitizer with
+-Wall -Wextra -Werror. LeakSanitizer is disabled because the command sandbox
+uses ptrace; explicit allocation and open-file tracking checks cleanup.
+Python bytecode compilation and the candidate git diff --check also passed.
+
+Four temporary negative controls were rejected as expected:
+- Removing the whitelist: the unknown-ID fixture was incorrectly accepted,
+  and the test failed.
+- Removing the first allocation check: UBSan caught the null datum access.
+- Removing extra serialization capacity: the capacity/result check failed.
+- Removing actual-length accounting: the mocked reader rejected the extra
+  uninitialized-capacity bytes passed as serialized data.
+These controls altered only temporary test harnesses, never production files.
+
+Limits and deliberately preserved compatibility gap
+
+The APK fixtures exercise the kernel's certificate identity parser. They do
+not establish Android installation validity, full APK signature verification,
+or exploitation on the Sony framework. Unknown-ID rejection is hardening;
+the missing previous whitelist alone did not prove installed-app escalation.
+
+The SELinux dependency mock honors policy_file remaining-length semantics and
+policydb_read's own failure cleanup (confirmed in the local 5.15 source). It
+does not establish that this Sony policy grows or replace a real policy parse,
+serialize and load test. Non-SUSFS runtime behavior was source-reviewed only.
+
+#3679 scoped su-session descriptors are intentionally NOT ported. The paired
+official 40900 userspace and this kernel use UAPI 2; upstream scoped descriptor
+handling requires coordinated kernel/userspace/UAPI changes. The residual gap
+is restricted-profile/TTY compatibility, not proof that a generic descriptor
+grants unrestricted commands. A mechanical ksu_install_fd rename would not be
+a complete or compatible repair. This build must not be represented as having
+the upstream scoped su-session behavior.
+
+#3594 behavior is already superseded by the bounded #3613 parser; no duplicate
+old hunk is required. This review does not extend coverage to kernels older
+than the target 5.15 branch or validate an unpaired newer manager/userspace.
+
+Reviewed production file SHA256 values
+
+e03cee6e29d70add9ab28d3e8af58a0126c7820c825a12502fefd2513b22f364  kernel/manager/apk_sign.c
+96bb0e9c8fbf56d5a701ab7cf2fbdb8377f9a142f2f3ac4b5d01d65c7fe24bd0  kernel/selinux/sepolicy.c
+3e8771b4239509d10ec06f634e677bffa6a69826d903dabc2bcc01514f09a705  kernel/runtime/ksud.c
+11967fca9bb1d9c1ee99574508c2e7d4edf3e4aab7c381a0feaee74f0be73b96  kernel/sulog/event.c
+73979aedc4ac6629d3c7d21a3e3229b843120a327d21cb2b39768b8bd5fe6517  kernel/sulog/event.h
+4f9b382a1ca4c87a19bee834f287762c1f0c4491f7e09598b5b4fcafad8e2891  kernel/Makefile

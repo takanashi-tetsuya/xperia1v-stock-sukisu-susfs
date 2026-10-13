@@ -1,0 +1,23 @@
+{
+  "config": {
+    "CONFIG_MODULE_SIG": "y",
+    "CONFIG_MODULE_SIG_FORCE": "n",
+    "CONFIG_MODULE_SIG_PROTECT": "y",
+    "CONFIG_MODVERSIONS": "y",
+    "CONFIG_MODULE_FORCE_LOAD": "n"
+  },
+  "protected_import_table_entries": 0,
+  "protected_export_table_entries": 0,
+  "signed_modules": [
+    "/home/liu/android/build_sukisu_20260920/vendor_audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/drivers/block/zram/zram.ko",
+    "/home/liu/android/build_sukisu_20260920/vendor_audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/mm/zsmalloc.ko"
+  ],
+  "untrusted_module_protection_collisions": [],
+  "signature_verification": "NOT_VERIFIED",
+  "status": "PASS_STATIC_NO_TRUST_NEEDED",
+  "limits": [
+    "Unknown signing keys may taint the kernel.",
+    "No runtime module loading or initialization has been performed.",
+    "This check covers signature trust and GKI symbol protection, not every loader condition."
+  ]
+}

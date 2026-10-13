@@ -1,0 +1,35 @@
+{
+  "status": "ANDROID_ARM64_COMPILED_HOST_PAYLOAD_TESTS_PASS_NOT_DEVICE_TESTED",
+  "upstream_commit": "7af04b08f86a5f811cbea28805f96d52368e005f",
+  "source_url": "https://gitlab.com/simonpunk/susfs4ksu",
+  "upstream_archive_sha256": "340f020adbce3e35a4e46baf9b9777059b0ecca2ca0cdbc95595401b8fb92c7a",
+  "patch_sha256": "a55a8b6416ce56334514ce3b19ade6f3bff6f82608851d4a17cbea9257a2c8fa",
+  "binary_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+  "ndk": "r27d / 27.3.13750724",
+  "ndk_download": "https://dl.google.com/android/repository/android-ndk-r27d-linux.zip",
+  "ndk_official_sha1": "22105e410cf29afcf163760cc95522b9fb981121",
+  "ndk_download_sha256": "601246087a682d1944e1e16dd85bc6e49560fe8b6d61255be2829178c8ed15d9",
+  "abi": "arm64-v8a",
+  "android_api": 35,
+  "command": "ndk-build APP_PLATFORM=android-35 -j4",
+  "feature_tests": {
+    "status": "PASS",
+    "tests": 9,
+    "source_sha256": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4",
+    "scope": "Actual CLI parser, recorded syscall payload; host stat fixture; no phone interaction",
+    "result": "PASS: 9 actual CLI payload cases; no real syscalls performed"
+  },
+  "wire_abi_verification": {
+    "status": "PASS",
+    "architecture": "AArch64 LP64",
+    "field_offsets": 17,
+    "flags": 12,
+    "sizeof_matches": true,
+    "source_sha256": {
+      "sources/common/include/linux/susfs.h": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+      "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4"
+    },
+    "scope": "Compiled real kernel/CLI declarations, no runtime syscalls"
+  },
+  "source_archive_recipe": "Pinned upstream commit + ctime-flag.patch; jni source included in source bundles"
+}

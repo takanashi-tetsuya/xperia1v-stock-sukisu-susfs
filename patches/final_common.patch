@@ -1,8 +1,17 @@
 diff --git a/arch/arm64/configs/gki_defconfig b/arch/arm64/configs/gki_defconfig
-index 518fa2583..f93cd46f2 100644
+index 518fa2583b3d20b5cb9544cfaaca10e937ad3974..9772fb0751f7c0b95d6ff4e6f26658b594b35e06 100644
 --- a/arch/arm64/configs/gki_defconfig
 +++ b/arch/arm64/configs/gki_defconfig
-@@ -718,3 +718,25 @@ CONFIG_HIST_TRIGGERS=y
+@@ -18,7 +18,7 @@ CONFIG_RCU_NOCB_CPU=y
+ CONFIG_RCU_LAZY=y
+ CONFIG_RCU_LAZY_DEFAULT_OFF=y
+ CONFIG_IKCONFIG=y
+-CONFIG_IKCONFIG_PROC=y
++# CONFIG_IKCONFIG_PROC is not set
+ CONFIG_IKHEADERS=y
+ CONFIG_UCLAMP_TASK=y
+ CONFIG_UCLAMP_BUCKETS_COUNT=20
+@@ -718,3 +718,28 @@ CONFIG_HIST_TRIGGERS=y
  CONFIG_PID_IN_CONTEXTIDR=y
  CONFIG_FUNCTION_ERROR_INJECTION=y
  # CONFIG_RUNTIME_TESTING_MENU is not set
@@ -14,7 +23,7 @@ index 518fa2583..f93cd46f2 100644
 +CONFIG_KSU_SUSFS_SUS_MOUNT=y
 +CONFIG_KSU_SUSFS_SUS_KSTAT=y
 +CONFIG_KSU_SUSFS_SPOOF_UNAME=y
-+CONFIG_KSU_SUSFS_ENABLE_LOG=y
++# CONFIG_KSU_SUSFS_ENABLE_LOG is not set
 +CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS=y
 +CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG=y
 +CONFIG_KSU_SUSFS_OPEN_REDIRECT=y
@@ -26,10 +35,13 @@ index 518fa2583..f93cd46f2 100644
 +CONFIG_DEFAULT_CUBIC=y
 +
 +# Explicit custom release, retaining the stock KMI generation in its prefix.
-+CONFIG_LOCALVERSION="-android13-8-sukisu40922"
++CONFIG_LOCALVERSION="-android13-8-g51bba4309aac"
 +# CONFIG_LOCALVERSION_AUTO is not set
++
++# Keep optional ADB-root support out of this release.
++# CONFIG_KSU_FEATURE_ADBROOT is not set
 diff --git a/drivers/Kconfig b/drivers/Kconfig
-index 0d399ddaa..6ed612d9c 100644
+index 0d399ddaa185a7cdf5974f7f294f50032747f577..6ed612d9c97d760df6e4d70e6b509bcecff3d7e2 100644
 --- a/drivers/Kconfig
 +++ b/drivers/Kconfig
 @@ -236,4 +236,5 @@ source "drivers/interconnect/Kconfig"
@@ -39,7 +51,7 @@ index 0d399ddaa..6ed612d9c 100644
 +source "drivers/kernelsu/Kconfig"
  endmenu
 diff --git a/drivers/Makefile b/drivers/Makefile
-index a110338c8..a988045b7 100644
+index a110338c860c770d4affa688375dc2086007a6b5..a988045b77535076f8d6f08ff9d5c766f2f06476 100644
 --- a/drivers/Makefile
 +++ b/drivers/Makefile
 @@ -187,3 +187,4 @@ obj-$(CONFIG_GNSS)		+= gnss/
@@ -48,7 +60,7 @@ index a110338c8..a988045b7 100644
  obj-$(CONFIG_MOST)		+= most/
 +obj-$(CONFIG_KSU) += kernelsu/
 diff --git a/drivers/input/input.c b/drivers/input/input.c
-index 171f71bd4..8f19dad15 100644
+index 171f71bd4c2a20cf12d94c9c4921a6f21d928e68..8f19dad15947d033fcfc3fe164892dd9024cbcae 100644
 --- a/drivers/input/input.c
 +++ b/drivers/input/input.c
 @@ -375,6 +375,12 @@ static int input_get_disposition(struct input_dev *dev,
@@ -77,7 +89,7 @@ index 171f71bd4..8f19dad15 100644
  		add_input_randomness(type, code, value);
  
 diff --git a/fs/Makefile b/fs/Makefile
-index e4adb9882..2461d8986 100644
+index e4adb988218c121856bba3e4a58d5254f70b4f59..2461d8986ee5790a6be5ccc2cb21bcb80d1bb29f 100644
 --- a/fs/Makefile
 +++ b/fs/Makefile
 @@ -18,6 +18,8 @@ obj-y :=	open.o read_write.o file_table.o super.o \
@@ -90,7 +102,7 @@ index e4adb9882..2461d8986 100644
  obj-y +=	buffer.o direct-io.o mpage.o
  else
 diff --git a/fs/exec.c b/fs/exec.c
-index b1b9db56a..d1ec7bfe0 100644
+index b1b9db56a6092ef452392f9a5aacb9ef579e23a0..d1ec7bfe09b3de19dcddf48db044eb9ee6785d6d 100644
 --- a/fs/exec.c
 +++ b/fs/exec.c
 @@ -65,6 +65,9 @@
@@ -163,10 +175,10 @@ index b1b9db56a..d1ec7bfe0 100644
  	free_bprm(bprm);
  
 diff --git a/fs/namei.c b/fs/namei.c
-index ce97b60fe..f3def161d 100644
+index ce97b60fe55781e725812ab8bb784d5b1ced0e67..0b06ed6b790922c388f1c8193105fe5dc4baaadf 100644
 --- a/fs/namei.c
 +++ b/fs/namei.c
-@@ -39,10 +39,21 @@
+@@ -39,10 +39,20 @@
  #include <linux/bitops.h>
  #include <linux/init_task.h>
  #include <linux/uaccess.h>
@@ -179,7 +191,6 @@ index ce97b60fe..f3def161d 100644
  
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
 +extern bool susfs_is_inode_sus_path(struct inode *inode);
-+extern const struct qstr susfs_fake_qstr_name;
 +#endif
 +#ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
 +extern struct filename *susfs_open_redirect_spoof_do_sys_openat(struct inode *inode);
@@ -188,60 +199,35 @@ index ce97b60fe..f3def161d 100644
  /* [Feb-1997 T. Schoebel-Theuer]
   * Fundamental changes in the pathname lookup mechanisms (namei)
   * were necessary because of omirr.  The reason is that omirr needs
-@@ -1531,6 +1542,14 @@ static struct dentry *lookup_dcache(const struct qstr *name,
+@@ -1531,6 +1541,12 @@ static struct dentry *lookup_dcache(const struct qstr *name,
  			return ERR_PTR(error);
  		}
  	}
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (dentry && !IS_ERR(dentry) && dentry->d_inode && susfs_is_inode_sus_path(dentry->d_inode)) {
-+		if (d_in_lookup(dentry))
-+			d_lookup_done(dentry);
++	if (dentry && dentry->d_inode && susfs_is_inode_sus_path(dentry->d_inode)) {
 +		dput(dentry);
-+		return NULL;
++		return ERR_PTR(-ENOENT);
 +	}
 +#endif
  	return dentry;
  }
  
-@@ -1548,6 +1567,9 @@ struct dentry *lookup_one_qstr_excl(const struct qstr *name,
- 	struct dentry *dentry = lookup_dcache(name, base, flags);
- 	struct dentry *old;
- 	struct inode *dir = base->d_inode;
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	bool found_sus_path = false;
-+#endif
- 
- 	if (dentry)
- 		return dentry;
-@@ -1557,6 +1579,9 @@ struct dentry *lookup_one_qstr_excl(const struct qstr *name,
- 		return ERR_PTR(-ENOENT);
- 
- 	dentry = d_alloc(base, name);
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+retry:
-+#endif
- 	if (unlikely(!dentry))
- 		return ERR_PTR(-ENOMEM);
- 
-@@ -1565,6 +1590,17 @@ struct dentry *lookup_one_qstr_excl(const struct qstr *name,
+@@ -1565,6 +1581,14 @@ struct dentry *lookup_one_qstr_excl(const struct qstr *name,
  		dput(dentry);
  		dentry = old;
  	}
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (unlikely(dentry) && !IS_ERR(dentry) && dentry->d_inode && !found_sus_path && susfs_is_inode_sus_path(dentry->d_inode)) {
-+		if (d_in_lookup(dentry))
-+			d_lookup_done(dentry);
-+		if (!(flags & LOOKUP_RCU))
-+			dput(dentry);
-+		dentry = d_alloc(base, &susfs_fake_qstr_name);
-+		found_sus_path = true;
-+		goto retry;
++	if (!IS_ERR(dentry) && dentry->d_inode &&
++	    susfs_is_inode_sus_path(dentry->d_inode)) {
++		/* Never substitute a negative dentry: callers may create or rename. */
++		dput(dentry);
++		return ERR_PTR(-ENOENT);
 +	}
 +#endif
  	return dentry;
  }
  EXPORT_SYMBOL(lookup_one_qstr_excl);
-@@ -1575,6 +1611,9 @@ static struct dentry *lookup_fast(struct nameidata *nd,
+@@ -1575,6 +1599,9 @@ static struct dentry *lookup_fast(struct nameidata *nd,
  {
  	struct dentry *dentry, *parent = nd->path.dentry;
  	int status = 1;
@@ -251,94 +237,62 @@ index ce97b60fe..f3def161d 100644
  
  	/*
  	 * Rename seqlock is not required here because in the off chance
-@@ -1584,6 +1623,16 @@ static struct dentry *lookup_fast(struct nameidata *nd,
- 	if (nd->flags & LOOKUP_RCU) {
- 		unsigned seq;
- 		dentry = __d_lookup_rcu(parent, &nd->last, &seq);
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+		if (is_nd_state_lookup_last_and_open_last && dentry && !IS_ERR(dentry) && dentry->d_inode &&
-+			susfs_is_inode_sus_path(dentry->d_inode))
-+		{
-+			if (d_in_lookup(dentry))
-+				d_lookup_done(dentry);
-+			// no dput() here, __d_lookup_rcu() does not take the dentry->d_lockref.count
-+			dentry = NULL;
-+		}
-+#endif
- 		if (unlikely(!dentry)) {
- 			if (!try_to_unlazy(nd))
- 				return ERR_PTR(-ECHILD);
-@@ -1619,6 +1668,16 @@ static struct dentry *lookup_fast(struct nameidata *nd,
- 			status = d_revalidate(dentry, nd->flags);
- 	} else {
- 		dentry = __d_lookup(parent, &nd->last);
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+		if (is_nd_state_lookup_last_and_open_last && dentry && !IS_ERR(dentry) && dentry->d_inode &&
-+			susfs_is_inode_sus_path(dentry->d_inode))
-+		{
-+			if (d_in_lookup(dentry))
-+				d_lookup_done(dentry);
-+			dput(dentry);
-+			dentry = NULL;
-+		}
-+#endif
- 		if (unlikely(!dentry))
- 			return NULL;
- 		status = d_revalidate(dentry, nd->flags);
-@@ -1640,12 +1699,19 @@ static struct dentry *__lookup_slow(const struct qstr *name,
- 	struct dentry *dentry, *old;
- 	struct inode *inode = dir->d_inode;
- 	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wq);
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	bool found_sus_path = false;
-+	bool is_nd_flags_lookup_last = (flags & ND_FLAGS_LOOKUP_LAST);
-+#endif
+@@ -1610,8 +1637,15 @@ static struct dentry *lookup_fast(struct nameidata *nd,
  
- 	/* Don't go there if it's already dead */
- 	if (unlikely(IS_DEADDIR(inode)))
- 		return ERR_PTR(-ENOENT);
- again:
- 	dentry = d_alloc_parallel(dir, name, &wq);
+ 		*seqp = seq;
+ 		status = d_revalidate(dentry, nd->flags);
+-		if (likely(status > 0))
++		if (likely(status > 0)) {
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+retry:
++			/* RCU lookup owns no reference; retry before reporting absence. */
++			if (is_nd_state_lookup_last_and_open_last && *inode &&
++			    susfs_is_inode_sus_path(*inode))
++				return ERR_PTR(-ECHILD);
 +#endif
- 	if (IS_ERR(dentry))
- 		return dentry;
- 	if (unlikely(!d_in_lookup(dentry))) {
-@@ -1654,6 +1720,12 @@ static struct dentry *__lookup_slow(const struct qstr *name,
- 			if (!error) {
- 				d_invalidate(dentry);
- 				dput(dentry);
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+				if (found_sus_path) {
-+					dentry = d_alloc_parallel(dir, &susfs_fake_qstr_name, &wq);
-+					goto retry;
-+				}
-+#endif
- 				goto again;
- 			}
- 			dput(dentry);
-@@ -1667,6 +1739,19 @@ static struct dentry *__lookup_slow(const struct qstr *name,
- 			dentry = old;
- 		}
+ 			return dentry;
++		}
+ 		if (!try_to_unlazy_next(nd, dentry, seq))
+ 			return ERR_PTR(-ECHILD);
+ 		if (status == -ECHILD)
+@@ -1629,6 +1663,13 @@ static struct dentry *lookup_fast(struct nameidata *nd,
+ 		dput(dentry);
+ 		return ERR_PTR(status);
  	}
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (is_nd_flags_lookup_last && !found_sus_path && dentry && !IS_ERR(dentry) && dentry->d_inode &&
-+		susfs_is_inode_sus_path(dentry->d_inode))
-+	{
-+		if (d_in_lookup(dentry))
-+			d_lookup_done(dentry);
-+		if (!(flags & LOOKUP_RCU))
-+			dput(dentry);
-+		dentry = d_alloc_parallel(dir, &susfs_fake_qstr_name, &wq);
-+		found_sus_path = true;
-+		goto retry;
++	if (is_nd_state_lookup_last_and_open_last && dentry->d_inode &&
++	    susfs_is_inode_sus_path(dentry->d_inode)) {
++		dput(dentry);
++		return ERR_PTR(-ENOENT);
 +	}
 +#endif
  	return dentry;
  }
  
-@@ -1973,6 +2058,11 @@ static const char *walk_component(struct nameidata *nd, int flags)
+@@ -1640,6 +1681,9 @@ static struct dentry *__lookup_slow(const struct qstr *name,
+ 	struct dentry *dentry, *old;
+ 	struct inode *inode = dir->d_inode;
+ 	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wq);
++#ifdef CONFIG_KSU_SUSFS_SUS_PATH
++	bool is_nd_flags_lookup_last = (flags & ND_FLAGS_LOOKUP_LAST);
++#endif
+ 
+ 	/* Don't go there if it's already dead */
+ 	if (unlikely(IS_DEADDIR(inode)))
+@@ -1667,6 +1711,13 @@ static struct dentry *__lookup_slow(const struct qstr *name,
+ 			dentry = old;
+ 		}
+ 	}
++#ifdef CONFIG_KSU_SUSFS_SUS_PATH
++	if (is_nd_flags_lookup_last && !IS_ERR(dentry) && dentry->d_inode &&
++	    susfs_is_inode_sus_path(dentry->d_inode)) {
++		dput(dentry);
++		return ERR_PTR(-ENOENT);
++	}
++#endif
+ 	return dentry;
+ }
+ 
+@@ -1973,6 +2024,11 @@ static const char *walk_component(struct nameidata *nd, int flags)
  	if (IS_ERR(dentry))
  		return ERR_CAST(dentry);
  	if (unlikely(!dentry)) {
@@ -350,7 +304,7 @@ index ce97b60fe..f3def161d 100644
  		dentry = lookup_slow(&nd->last, nd->path.dentry, nd->flags);
  		if (IS_ERR(dentry))
  			return ERR_CAST(dentry);
-@@ -2240,6 +2330,15 @@ static int link_path_walk(const char *name, struct nameidata *nd)
+@@ -2240,6 +2296,15 @@ static int link_path_walk(const char *name, struct nameidata *nd)
  		const char *link;
  		u64 hash_len;
  		int type;
@@ -366,7 +320,7 @@ index ce97b60fe..f3def161d 100644
  
  		mnt_userns = mnt_user_ns(nd->path.mnt);
  		err = may_lookup(mnt_userns, nd);
-@@ -2427,6 +2526,9 @@ static inline const char *lookup_last(struct nameidata *nd)
+@@ -2427,6 +2492,9 @@ static inline const char *lookup_last(struct nameidata *nd)
  {
  	if (nd->last_type == LAST_NORM && nd->last.name[nd->last.len])
  		nd->flags |= LOOKUP_FOLLOW | LOOKUP_DIRECTORY;
@@ -376,47 +330,47 @@ index ce97b60fe..f3def161d 100644
  
  	return walk_component(nd, WALK_TRAILING);
  }
-@@ -3376,15 +3478,39 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
+@@ -3376,6 +3444,10 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
  	int error, create_error = 0;
  	umode_t mode = op->mode;
  	DECLARE_WAIT_QUEUE_HEAD_ONSTACK(wq);
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	bool found_sus_path = false;
-+	bool is_nd_state_open_last = (nd->state & ND_STATE_OPEN_LAST);
++	bool check_sus_path = (nd->state & ND_STATE_OPEN_LAST) &&
++			      susfs_is_current_proc_umounted_app();
 +#endif
  
  	if (unlikely(IS_DEADDIR(dir_inode)))
  		return ERR_PTR(-ENOENT);
- 
- 	file->f_mode &= ~FMODE_CREATED;
- 	dentry = d_lookup(dir, &nd->last);
+@@ -3400,6 +3472,28 @@ static struct dentry *lookup_open(struct nameidata *nd, struct file *file,
+ 		dput(dentry);
+ 		dentry = NULL;
+ 	}
 +#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+	if (is_nd_state_open_last && dentry && !IS_ERR(dentry) && dentry->d_inode &&
-+		susfs_is_inode_sus_path(dentry->d_inode))
-+	{
-+		if (d_in_lookup(dentry))
++	if (check_sus_path) {
++		/* Resolve before atomic_open can open an unchecked hidden inode. */
++		if (d_in_lookup(dentry)) {
++			struct dentry *res = dir_inode->i_op->lookup(dir_inode, dentry,
++								 nd->flags);
 +			d_lookup_done(dentry);
-+		dput(dentry);
-+		dentry = NULL;
-+		found_sus_path = true;
++			if (unlikely(res)) {
++				if (IS_ERR(res)) {
++					error = PTR_ERR(res);
++					goto out_dput;
++				}
++				dput(dentry);
++				dentry = res;
++			}
++		}
++		if (dentry->d_inode && susfs_is_inode_sus_path(dentry->d_inode)) {
++			error = -ENOENT;
++			goto out_dput;
++		}
 +	}
 +#endif
- 	for (;;) {
- 		if (!dentry) {
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+			if (found_sus_path) {
-+				dentry = d_alloc_parallel(dir, &susfs_fake_qstr_name, &wq);
-+				goto skip_orig_flow;
-+			}
-+#endif
- 			dentry = d_alloc_parallel(dir, &nd->last, &wq);
-+#ifdef CONFIG_KSU_SUSFS_SUS_PATH
-+skip_orig_flow:
-+#endif
- 			if (IS_ERR(dentry))
- 				return dentry;
- 		}
-@@ -3485,6 +3611,9 @@ static const char *open_last_lookups(struct nameidata *nd,
+ 	if (dentry->d_inode) {
+ 		/* Cached positive dentry: will open in f_op->open */
+ 		return dentry;
+@@ -3485,6 +3579,9 @@ static const char *open_last_lookups(struct nameidata *nd,
  	struct inode *inode;
  	struct dentry *dentry;
  	const char *res;
@@ -426,7 +380,7 @@ index ce97b60fe..f3def161d 100644
  
  	nd->flags |= op->intent;
  
-@@ -3679,10 +3808,32 @@ static int do_tmpfile(struct nameidata *nd, unsigned flags,
+@@ -3679,10 +3776,32 @@ static int do_tmpfile(struct nameidata *nd, unsigned flags,
  		const struct open_flags *op,
  		struct file *file)
  {
@@ -459,7 +413,7 @@ index ce97b60fe..f3def161d 100644
  	if (unlikely(error))
  		return error;
  	error = mnt_want_write(path.mnt);
-@@ -3704,24 +3855,59 @@ static int do_tmpfile(struct nameidata *nd, unsigned flags,
+@@ -3704,24 +3823,59 @@ static int do_tmpfile(struct nameidata *nd, unsigned flags,
  	mnt_drop_write(path.mnt);
  out:
  	path_put(&path);
@@ -519,7 +473,7 @@ index ce97b60fe..f3def161d 100644
  	struct file *file;
  	int error;
  
-@@ -3738,10 +3924,31 @@ static struct file *path_openat(struct nameidata *nd,
+@@ -3738,10 +3892,31 @@ static struct file *path_openat(struct nameidata *nd,
  		while (!(error = link_path_walk(s, nd)) &&
  		       (s = open_last_lookups(nd, file, op)) != NULL)
  			;
@@ -551,7 +505,7 @@ index ce97b60fe..f3def161d 100644
  	if (likely(!error)) {
  		if (likely(file->f_mode & FMODE_OPENED))
  			return file;
-@@ -5057,6 +5264,11 @@ int readlink_copy(char __user *buffer, int buflen, const char *link)
+@@ -5057,6 +5232,11 @@ int readlink_copy(char __user *buffer, int buflen, const char *link)
   *
   * Does not call security hook.
   */
@@ -563,7 +517,7 @@ index ce97b60fe..f3def161d 100644
  int vfs_readlink(struct dentry *dentry, char __user *buffer, int buflen)
  {
  	struct inode *inode = d_inode(dentry);
-@@ -5066,7 +5278,18 @@ int vfs_readlink(struct dentry *dentry, char __user *buffer, int buflen)
+@@ -5066,7 +5246,18 @@ int vfs_readlink(struct dentry *dentry, char __user *buffer, int buflen)
  
  	if (unlikely(!(inode->i_opflags & IOP_DEFAULT_READLINK))) {
  		if (unlikely(inode->i_op->readlink))
@@ -571,25 +525,25 @@ index ce97b60fe..f3def161d 100644
 +		{
 +			if (SUSFS_IS_INODE_OPEN_REDIRECT(inode)) {
 +				res = susfs_open_redirect_spoof_vfs_readlink(inode, buffer, buflen);
-+				if (!res)
++				if (res != -ENOENT)
 +					return res;
 +			}
-+			return inode->i_op->readlink(dentry, buffer, buflen);
+ 			return inode->i_op->readlink(dentry, buffer, buflen);
 +		}
 +#else
- 			return inode->i_op->readlink(dentry, buffer, buflen);
++			return inode->i_op->readlink(dentry, buffer, buflen);
 +#endif
  
  		if (!d_is_symlink(dentry))
  			return -EINVAL;
-@@ -5082,6 +5305,15 @@ int vfs_readlink(struct dentry *dentry, char __user *buffer, int buflen)
+@@ -5082,6 +5273,15 @@ int vfs_readlink(struct dentry *dentry, char __user *buffer, int buflen)
  		if (IS_ERR(link))
  			return PTR_ERR(link);
  	}
 +#ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
 +	if (SUSFS_IS_INODE_OPEN_REDIRECT(inode)) {
 +		res = susfs_open_redirect_spoof_vfs_readlink(inode, buffer, buflen);
-+		if (!res) {
++		if (res != -ENOENT) {
 +			do_delayed_call(&done);
 +			return res;
 +		}
@@ -599,7 +553,7 @@ index ce97b60fe..f3def161d 100644
  	do_delayed_call(&done);
  	return res;
 diff --git a/fs/namespace.c b/fs/namespace.c
-index e5eeafc5a..d6e32678a 100644
+index e5eeafc5a13ae5c88bb1ab1a824fec30a0536616..d6e32678a33e3c27832fa5192654c251815efd80 100644
 --- a/fs/namespace.c
 +++ b/fs/namespace.c
 @@ -32,10 +32,20 @@
@@ -923,7 +877,7 @@ index e5eeafc5a..d6e32678a 100644
 +}
 +#endif // #ifdef CONFIG_KSU_SUSFS
 diff --git a/fs/notify/fdinfo.c b/fs/notify/fdinfo.c
-index 3451708fd..ddf285bb2 100644
+index 3451708fd035c86b662791c9033bf91659b4443e..ddf285bb258f8b95b9f5c1e69730adfc10aca692 100644
 --- a/fs/notify/fdinfo.c
 +++ b/fs/notify/fdinfo.c
 @@ -12,6 +12,9 @@
@@ -1044,7 +998,7 @@ index 3451708fd..ddf285bb2 100644
  			   inode_mark->wd, inode->i_ino, inode->i_sb->s_dev,
  			   inotify_mark_user_mask(mark));
 diff --git a/fs/open.c b/fs/open.c
-index 39779f1ba..c3843d6f2 100644
+index 39779f1ba4e15250cab3d232b0e7b849e34f0f5b..c3843d6f2d938eb0c896a4b2aadcfe09c4820ff2 100644
 --- a/fs/open.c
 +++ b/fs/open.c
 @@ -33,6 +33,9 @@
@@ -1105,7 +1059,7 @@ index 39779f1ba..c3843d6f2 100644
  		goto out;
  
 diff --git a/fs/proc/base.c b/fs/proc/base.c
-index 7624ae2c1..79f326d45 100644
+index 7624ae2c115c78ef7c9d4a9214e2dd65590b9a56..dde72cffe79e735e47a8d92ffe8c0e442e8fd6af 100644
 --- a/fs/proc/base.c
 +++ b/fs/proc/base.c
 @@ -100,6 +100,10 @@
@@ -1130,18 +1084,18 @@ index 7624ae2c1..79f326d45 100644
  static int do_proc_readlink(struct path *path, char __user *buffer, int buflen)
  {
  	char *tmp = (char *)__get_free_page(GFP_KERNEL);
-@@ -1832,6 +1840,18 @@ static int do_proc_readlink(struct path *path, char __user *buffer, int buflen)
+@@ -1832,12 +1840,27 @@ static int do_proc_readlink(struct path *path, char __user *buffer, int buflen)
  	if (!tmp)
  		return -ENOMEM;
  
 +#ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
 +	if (SUSFS_IS_INODE_OPEN_REDIRECT(path->dentry->d_inode)) {
-+		if (!susfs_open_redirect_spoof_do_proc_readlink(path->dentry->d_inode, tmp, buflen)) {
-+			len = strlen(tmp);
-+			if (copy_to_user(buffer, tmp, len))
-+				len = -EFAULT;
-+			kfree(tmp);
-+			return len;
++		len = susfs_open_redirect_spoof_do_proc_readlink(path->dentry->d_inode, tmp, PAGE_SIZE);
++		if (len != -ENOENT) {
++			if (len < 0)
++				goto out;
++			pathname = tmp;
++			goto out_copy;
 +		}
 +	}
 +#endif
@@ -1149,7 +1103,16 @@ index 7624ae2c1..79f326d45 100644
  	pathname = d_path(path, tmp, PAGE_SIZE);
  	len = PTR_ERR(pathname);
  	if (IS_ERR(pathname))
-@@ -2451,6 +2471,10 @@ proc_map_files_readdir(struct file *file, struct dir_context *ctx)
+ 		goto out;
+ 	len = tmp + PAGE_SIZE - 1 - pathname;
+ 
++#ifdef CONFIG_KSU_SUSFS_OPEN_REDIRECT
++out_copy:
++#endif
+ 	if (len > buflen)
+ 		len = buflen;
+ 	if (copy_to_user(buffer, pathname, len))
+@@ -2451,6 +2474,10 @@ proc_map_files_readdir(struct file *file, struct dir_context *ctx)
  	for (vma = mm->mmap, pos = 2; vma; vma = vma->vm_next) {
  		if (!vma->vm_file)
  			continue;
@@ -1161,7 +1124,7 @@ index 7624ae2c1..79f326d45 100644
  			continue;
  
 diff --git a/fs/proc/bootconfig.c b/fs/proc/bootconfig.c
-index 2e244ada1..ca76c06d0 100644
+index 2e244ada1f970b40dfc11417e5fd43579074d42f..ca76c06d0bbffbe8ed185d79c8e52d77f5d520eb 100644
 --- a/fs/proc/bootconfig.c
 +++ b/fs/proc/bootconfig.c
 @@ -12,8 +12,21 @@
@@ -1187,7 +1150,7 @@ index 2e244ada1..ca76c06d0 100644
  		seq_puts(m, saved_boot_config);
  	return 0;
 diff --git a/fs/proc/fd.c b/fs/proc/fd.c
-index 913bef0d2..39e63d028 100644
+index 913bef0d2a36c4ed0d49dfba1b18cac612cdbe5f..39e63d02852a6bac022bb7e47018d5ea3e58eedc 100644
 --- a/fs/proc/fd.c
 +++ b/fs/proc/fd.c
 @@ -13,11 +13,22 @@
@@ -1285,7 +1248,7 @@ index 913bef0d2..39e63d028 100644
  	show_fd_locks(m, file, files);
  	if (seq_has_overflowed(m))
 diff --git a/fs/proc/task_mmu.c b/fs/proc/task_mmu.c
-index 3823dfae5..8bf726c91 100644
+index 3823dfae52d57323f4aa07943dfa92c74c34a829..8bf726c910131af8f54f486713f52535ef7387f3 100644
 --- a/fs/proc/task_mmu.c
 +++ b/fs/proc/task_mmu.c
 @@ -21,6 +21,9 @@
@@ -1421,7 +1384,7 @@ index 3823dfae5..8bf726c91 100644
  		start_vaddr = end;
  
 diff --git a/fs/proc_namespace.c b/fs/proc_namespace.c
-index 49650e54d..4499feb54 100644
+index 49650e54d2f882f279a34dd32ca18e8dffd9efad..4499feb5409c96c40d171bef93863b02dc1e2fdd 100644
 --- a/fs/proc_namespace.c
 +++ b/fs/proc_namespace.c
 @@ -12,12 +12,20 @@
@@ -1640,7 +1603,7 @@ index 49650e54d..4499feb54 100644
  }
  
 diff --git a/fs/read_write.c b/fs/read_write.c
-index 3f6818620..10608b7d8 100644
+index 3f68186207a948ccda188410839cab7f98e238c0..10608b7d8712ecd36e04c58367eab231b5ec68df 100644
 --- a/fs/read_write.c
 +++ b/fs/read_write.c
 @@ -628,8 +628,18 @@ ssize_t ksys_read(unsigned int fd, char __user *buf, size_t count)
@@ -1663,7 +1626,7 @@ index 3f6818620..10608b7d8 100644
  }
  
 diff --git a/fs/readdir.c b/fs/readdir.c
-index 09e8ed7d4..419947280 100644
+index 09e8ed7d416141406ed5b2eacef0a9de30120bd3..4199472804dec6b9bd30727a9af59ea5e7534b51 100644
 --- a/fs/readdir.c
 +++ b/fs/readdir.c
 @@ -24,6 +24,10 @@
@@ -1923,7 +1886,7 @@ index 09e8ed7d4..419947280 100644
  	if (error >= 0)
  		error = buf.error;
 diff --git a/fs/stat.c b/fs/stat.c
-index 357a1db41..832c497db 100644
+index 357a1db410ece2a83ed2da2c1ab9f35c1c192b15..8039283bb24e0fe7ede813a59571f90ea77719eb 100644
 --- a/fs/stat.c
 +++ b/fs/stat.c
 @@ -18,12 +18,27 @@
@@ -1962,12 +1925,12 @@ index 357a1db41..832c497db 100644
 +	if (susfs_is_current_app_uid()) {
 +		bool is_fuse = false;
 +		if (susfs_is_inode_sus_kstat(d_backing_inode(path->dentry), &is_fuse)) {
-+			if (!is_fuse) {
-+				stat->mnt_id = real_mount(path->mnt)->mnt_id;
-+				stat->result_mask |= STATX_SUS_KSTAT;
-+			}
 +			stat->mnt_id = real_mount(path->mnt)->mnt_id;
-+			stat->result_mask |= STATX_SUS_KSTAT_FUSE;
++			if (!is_fuse) {
++				stat->result_mask |= STATX_SUS_KSTAT;
++			} else {
++				stat->result_mask |= STATX_SUS_KSTAT_FUSE;
++			}
 +		}
 +	}
 +#endif // #ifdef CONFIG_KSU_SUSFS_SUS_KSTAT
@@ -2067,7 +2030,7 @@ index 357a1db41..832c497db 100644
  	if (path.mnt->mnt_root == path.dentry)
  		stat->attributes |= STATX_ATTR_MOUNT_ROOT;
 diff --git a/fs/statfs.c b/fs/statfs.c
-index 2a37f9f3d..ca4e18cd8 100644
+index 2a37f9f3dba1f421cced281056906298024e71be..ca4e18cd8cb7f3e7bca7f2b70eafc2b93b108deb 100644
 --- a/fs/statfs.c
 +++ b/fs/statfs.c
 @@ -9,8 +9,20 @@
@@ -2161,7 +2124,7 @@ index 2a37f9f3d..ca4e18cd8 100644
  	if (!error)
  		buf->f_flags = calculate_f_flags(path->mnt);
 diff --git a/fs/super.c b/fs/super.c
-index 011ce7acd..1334b6ec9 100644
+index 011ce7acdfc61337a8495532cd72dfa9a3100e71..1334b6ec992a15a54f2f0e03ec847111d48e714d 100644
 --- a/fs/super.c
 +++ b/fs/super.c
 @@ -37,9 +37,17 @@
@@ -2206,7 +2169,7 @@ index 011ce7acd..1334b6ec9 100644
  	 * Many userspace utilities consider an FSID of 0 invalid.
  	 * Always return at least 1 from get_anon_bdev.
 diff --git a/kernel/kallsyms.c b/kernel/kallsyms.c
-index e0d9f77cf..be9c35b46 100644
+index e0d9f77cf2d4b1408de94c6f6e09a3fe647b76ed..be9c35b4621687023d535ee301f69b3700330626 100644
 --- a/kernel/kallsyms.c
 +++ b/kernel/kallsyms.c
 @@ -29,6 +29,9 @@
@@ -2257,7 +2220,7 @@ index e0d9f77cf..be9c35b46 100644
  }
  
 diff --git a/kernel/reboot.c b/kernel/reboot.c
-index 5105f2a46..760a21c6e 100644
+index 5105f2a4635966479616fda9816611b8aa999532..760a21c6e311b0a8a9ea318cb29b7ccc0078fd66 100644
 --- a/kernel/reboot.c
 +++ b/kernel/reboot.c
 @@ -305,6 +305,9 @@ EXPORT_SYMBOL_GPL(kernel_power_off);
@@ -2287,7 +2250,7 @@ index 5105f2a46..760a21c6e 100644
  	if (!ns_capable(pid_ns->user_ns, CAP_SYS_BOOT))
  		return -EPERM;
 diff --git a/kernel/sys.c b/kernel/sys.c
-index 0e7609307..cdd8c07b2 100644
+index 0e76093073c78559865b60dda7f3d14b919262cd..cdd8c07b269ff913a0c451d65e4d73d33ebf7427 100644
 --- a/kernel/sys.c
 +++ b/kernel/sys.c
 @@ -647,6 +647,9 @@ SYSCALL_DEFINE1(setuid, uid_t, uid)
@@ -2333,7 +2296,7 @@ index 0e7609307..cdd8c07b2 100644
  	if (copy_to_user(name, &tmp, sizeof(tmp)))
  		return -EFAULT;
 diff --git a/mm/memory.c b/mm/memory.c
-index 3bd6be833..6d8d6b4e7 100644
+index 3bd6be833f6cc0e1726b8bb0cda42c6670de2871..6d8d6b4e7862b37d4febf266fab5fb4dbd09f57e 100644
 --- a/mm/memory.c
 +++ b/mm/memory.c
 @@ -74,6 +74,9 @@
@@ -2369,7 +2332,7 @@ index 3bd6be833..6d8d6b4e7 100644
  				gup_flags, &page, &vma, NULL);
  		if (ret <= 0) {
 diff --git a/scripts/extract-cert.c b/scripts/extract-cert.c
-index 71b298023..b2a3c0013 100644
+index 71b2980230226219e1bf03114d148e0851a703a3..b2a3c00136197c59bacf03dbfee07dfd46ebd5a2 100644
 --- a/scripts/extract-cert.c
 +++ b/scripts/extract-cert.c
 @@ -21,6 +21,9 @@
@@ -2383,7 +2346,7 @@ index 71b298023..b2a3c0013 100644
  
  /*
 diff --git a/scripts/pahole-flags.sh b/scripts/pahole-flags.sh
-index 5c724f697..1e7fe243a 100755
+index 5c724f6971009d2836f88a7b72bdd966a4ec79f5..1e7fe243a621b1552b699807d859d6d13407bd78 100755
 --- a/scripts/pahole-flags.sh
 +++ b/scripts/pahole-flags.sh
 @@ -21,7 +21,7 @@ if [ "${pahole_ver}" -ge "124" ]; then
@@ -2396,7 +2359,7 @@ index 5c724f697..1e7fe243a 100755
  
  echo ${extra_paholeopt}
 diff --git a/security/selinux/avc.c b/security/selinux/avc.c
-index 2ee2c8a31..490280141 100644
+index 2ee2c8a315e7e8af0b61c665c6f7b43167ca1a1f..49028014164587403d8615f8058856955f5c583a 100644
 --- a/security/selinux/avc.c
 +++ b/security/selinux/avc.c
 @@ -47,6 +47,12 @@
@@ -2439,7 +2402,7 @@ index 2ee2c8a31..490280141 100644
  	audit_log_format(ab, " tclass=%s", tclass);
  
 diff --git a/security/selinux/hooks.c b/security/selinux/hooks.c
-index dd95466d5..611960d05 100644
+index dd95466d5c9ed399cf017856893f218e69b982e0..611960d05c40b57d70afa491a18c8617bf74252d 100644
 --- a/security/selinux/hooks.c
 +++ b/security/selinux/hooks.c
 @@ -105,6 +105,10 @@
@@ -2510,7 +2473,7 @@ index dd95466d5..611960d05 100644
  	LSM_HOOK_INIT(ismaclabel, selinux_ismaclabel),
  	LSM_HOOK_INIT(secctx_to_secid, selinux_secctx_to_secid),
 diff --git a/security/selinux/selinuxfs.c b/security/selinux/selinuxfs.c
-index 13be7826a..57f35ebff 100644
+index 13be7826ae804de268920481ef8f22b52b1a67d1..57f35ebff50744a20d867a1ec734314a31bd5b94 100644
 --- a/security/selinux/selinuxfs.c
 +++ b/security/selinux/selinuxfs.c
 @@ -43,6 +43,15 @@

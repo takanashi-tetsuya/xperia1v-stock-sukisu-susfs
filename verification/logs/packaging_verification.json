@@ -1,0 +1,75 @@
+{
+  "anykernel_path": "dist/packages/8ca2f33c14ca4d82-1e10abd0acb3/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip",
+  "anykernel_sha256": "caf68af8f9d59ca5faad5b262b99b0ea8ce40b4d017ac6433730f743f2dcc90c",
+  "avb_algorithm": "NONE (unsigned custom image)",
+  "avb_hash_check": "PASS",
+  "boot_and_zip_kernel_payloads_match_Image": true,
+  "boot_header_other_fields_match_stock": true,
+  "boot_header_version": 4,
+  "boot_partition_size": 100663296,
+  "boot_path": "dist/packages/8ca2f33c14ca4d82-1e10abd0acb3/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
+  "boot_ramdisk_size": 0,
+  "boot_sha256": "8e2a4ac8299b99414e829f54b8a2119cf092f4d0bcff87a4f0fc243381a5cde7",
+  "candidate_avb_metadata": {
+    "algorithm": "NONE",
+    "flags": 0,
+    "hash_algorithm": "sha256",
+    "hash_flags": 0,
+    "partition_name": "boot",
+    "properties": [
+      [
+        "com.android.build.boot.os_version",
+        "13"
+      ],
+      [
+        "com.android.build.boot.fingerprint",
+        "Sony/pdx234/pdx234:13/TKQ1.221114.001/YODO-1.2.0-REL-260518-0520:user/release-keys"
+      ],
+      [
+        "com.android.build.boot.security_patch",
+        "2026-06-01"
+      ],
+      [
+        "com.android.build.boot.security_patch",
+        "2026-06-01"
+      ]
+    ],
+    "rollback_index": 1780272000,
+    "rollback_index_location": 0,
+    "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
+  },
+  "kernel_sha256": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+  "phone_boot_and_installer_execution": "NOT_RUN",
+  "source_lock_sha256": "1e10abd0acb3483774aef2ef0d86fd070be4c377b0ce8afbcc62319bf0925160",
+  "status": "PASS_OFFLINE_PACKAGING_CHECKS",
+  "stock_avb_metadata": {
+    "algorithm": "SHA256_RSA4096",
+    "flags": 0,
+    "hash_algorithm": "sha256",
+    "hash_flags": 0,
+    "partition_name": "boot",
+    "properties": [
+      [
+        "com.android.build.boot.os_version",
+        "13"
+      ],
+      [
+        "com.android.build.boot.fingerprint",
+        "Sony/pdx234/pdx234:13/TKQ1.221114.001/YODO-1.2.0-REL-260518-0520:user/release-keys"
+      ],
+      [
+        "com.android.build.boot.security_patch",
+        "2026-06-01"
+      ],
+      [
+        "com.android.build.boot.security_patch",
+        "2026-06-01"
+      ]
+    ],
+    "rollback_index": 1780272000,
+    "rollback_index_location": 0,
+    "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
+  },
+  "stock_boot_unchanged": true,
+  "stock_sha256": "06dbe42eccb4ea14a53e7b34d1f509bc7b176776db89d3280adba44c4b8b3731"
+}
