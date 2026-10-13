@@ -1,0 +1,13 @@
+{
+  "status": "PASS_SINGLE_LOCALVERSION_CHANGE",
+  "changed_source": "sources/common/arch/arm64/configs/gki_defconfig",
+  "old_kernel_release": "5.15.189-android13-8-g51bba4309aac",
+  "new_kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+  "ksu_version": 40900,
+  "ksu_source_patch_unchanged": true,
+  "anykernel_patch_unchanged": true,
+  "susfs_added_sources_unchanged": true,
+  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "application_fix_claimed": false,
+  "device_access": "NOT_USED"
+}

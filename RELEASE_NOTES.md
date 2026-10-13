@@ -1,15 +1,13 @@
-上傳狀態：原始碼與 CI 已同步成功。草稿目前有 18 個已核對資產；Image、boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img、full_source.tar.gz 尚未上傳。首次批次遇到 GitHub HTTP 408；獨立連線重試速度約 10–30 KB/s，已停止額外的大檔上傳。三個完整檔案仍保留本機。下方檔案清單是完整候選的組成，不代表所有資產已在 GitHub 上可下載。原始碼重建可使用倉庫的鎖定來源與腳本。
+# Xperia 1 V SukiSU 40900 + SUSFS 2.3 — r2
 
-Xperia 1 V / XQ-DQ72，Android 15，韌體 67.2.A.3.178 的 SukiSU 40900 + SUSFS 2.3 修復候選。
+適用 XQ-DQ72 / pdx234、原廠韌體 67.2.A.3.178，Android 15。
 
-以官方 v4.2.0 / 40900 對應的 builtin e2912817、Manager/ksud 904c60d1、UAPI 2 為基線；回移簽名驗證與 SELinux 修復，修正 SUSFS 隱藏路徑、ctime 工具協定與 AnyKernel3 日期範圍，改善可重建性及封裝檢查。保留手動/inline hook；KPM 停用。
+修復公開證據的工作站路徑與 SHA-256 連結、維護者交付輸入、測試缺檔提示及產物忽略規則。核心配置改為原廠 boot 的完整版本 `5.15.189-android13-8-00016-g51bba4309aac-ab14546557`，從空白 out 重新編譯。SukiSU 維持官方 40900 / UAPI 2。
 
-驗證：官方網路來源重新取得後完成空白 out 全量編譯；BTF/config/映像檢查通過；556 個 vendor 模組靜態 ABI、保護表、vermagic 檢查通過；boot/ZIP 的 header、AVB metadata 與 kernel payload 檢查通過。完整來源包已重新解壓並離線核對 source-lock。
+完整交付包含 Image、直接 boot 映像、AnyKernel3 ZIP、官方 Manager APK、修正 ctime bit 8 的 CLI、兩種來源包及測試／授權資料。核對下載檔請使用 RELEASE_SHA256SUMS；DELIVERY_SHA256SUMS.txt 則對應原始 dist 目錄布局。實際 GitHub 資產完整性另見倉庫 RELEASE_STATUS.json。
 
-尚未刷入、開機或執行 AK3 安裝器；不宣稱已解決 App 相容性或實機模組載入問題。這是一份草稿 Release，舊版 v0.1.0-beta.1 保留。
+boot 映像與 ZIP 是替代安裝方式，目標分區為 boot；安裝前請讀 README 的原廠 init_boot、備份及 OTA 說明。此候選尚未刷機或執行 AK3 安裝器，不保證 App 登入、DRM 或 root 隱藏效果。
 
-boot 映像與 AnyKernel3 ZIP 是替代安裝方式，目標為 boot，不是 init_boot。先閱讀 README.md 的韌體、slot、init_boot、備份與回滾條件。
+本機完整編譯、來源重建與主機測試、靜態模組分析、第三方完整重建及實機結果分開記錄。GitHub CI 只驗證來源與主機測試，不編譯整顆核心。第三方完整重建、手機模組／BTF 實際載入與 VFS 併發壓測仍待驗證。
 
-完整來源：full_source.tar.gz。小型補丁/重建材料：source_changes.tar.gz。配套修正 CLI：userspace.tar.gz（解壓後 userspace/ksu_susfs）。驗證報告：verification.tar.gz；封裝詳細資料：packaging_metadata.tar.gz。個別下載資產以 RELEASE_SHA256SUMS 核對；DELIVERY_SHA256SUMS.txt 保留原始目錄結構的交付雜湊。官方 Manager APK 未修改。
-
-SUSFS GPL-3.0 與 Linux GPL-2.0-only 的二進位再散布相容性仍未解決；本次不將草稿發布為公開二進位 Release。
+SUSFS GPL-3.0 與 Linux GPL-2.0-only 的再散布相容性仍未解決，本版維持草稿。舊版本及 Git 歷史保留；舊提交仍可能含先前工作站路徑。

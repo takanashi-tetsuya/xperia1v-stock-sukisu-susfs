@@ -1,5 +1,32 @@
 Xperia 1 V / 67.2.A.3.178 — 2026-10-13 修復報告
 
+r2：新報告十項處置
+1. 公開路徑：新證據以專案相對路徑／外部來源標籤輸出。公開匯出保留原始
+   本機紀錄不動，重新計算公開副本及其相互引用的 SHA256，附轉換收據。
+   程式、CI、補丁、來源 lock 保持逐位元原樣，不把可執行路徑當成日誌打碼。
+   此次不改寫 Git 歷史；過去提交中原有的工作站路徑仍可能存在。
+2. Finalizer：明確標為維護者交付工具，research、舊 40922/40900 dist 和
+   CLI binary 改為必要明確參數。一般 prepare/build/verify/package 不依賴它。
+3. 資產：本輪按使用者要求完整上傳，獨立 Image、boot 與完整來源包都在範圍內。
+   最終是否完成以 GitHub 資產清單、大小與 SHA256 核對收據為準。
+   上次已有完整 AK3 ZIP；缺少獨立 boot/Image 不代表完全没有可刷檔。
+4. 證據：manifest 區分本機完整編譯、來源／host CI、第三方完整重編和實機。
+   本機編譯有真實 Image/vmlinux/BTF；第三方完整重編與實機仍為 NOT_RUN。
+5. VFS：新報告指出實機／併發驗證不足，沒有證實新的引用計數或 oops 缺陷。
+   本輪不再改動該邏輯，保留 215 項 host 回歸和已知限制，實機壓測仍待執行。
+6. 隱藏 inode 建立／改名回 ENOENT 為既有行為，仍可能形成辨識差異。
+7. 六支測試增加友善的來源／依賴前置檢查，失敗清除舊 PASS；安全測試要求
+   明確 --apk。新增 10 項輸入測試，正常與 Python -O 模式均須通過。
+8. 核心配置完整對齊原廠 boot 的
+   5.15.189-android13-8-00016-g51bba4309aac-ab14546557，重新完整編譯。
+   舊值少了兩段尾碼；原廠和上一版 SUBLEVEL 都是 189，不是 SUBLEVEL 錯誤。
+   此修正不能證明或保證 App 登入、DRM 或隱藏行為改變。
+9. GPL-2.0-only / GPL-3.0 再散布相容性仍未解決；二進位 Release 維持草稿。
+10. 補 /userspace/bin/ 忽略規則；完整 CLI 來源、修正與 NDK 建置說明仍納管。
+
+本輪新增的公開匯出／輸入驗證也納入 CI，正常及 -O 模式均需通過。
+建置、封裝與 GitHub 上傳的最終執行狀態請核對 manifest 和 RELEASE_STATUS。
+
 版本結論
 官方沒有 41000 正式版；最新正式 APK 為 v4.2.0 / 40900。main 的 40971
 只是開發分支計數值，其 UAPI 已到 5。本候選使用真正的 builtin e2912817，
@@ -26,7 +53,7 @@ Xperia 1 V / 67.2.A.3.178 — 2026-10-13 修復報告
    實際產生的 GKI 保護表為空。簽名金鑰不同不等於所有模組不能載入；
    完整載入/初始化與 stock lsmod 比對仍待實機。
 9. 關閉 CONFIG_KSU_SUSFS_ENABLE_LOG；不是等待用戶態開機後才關閉。
-10. uname 使用 ACK 原廠格式；關閉 IKCONFIG_PROC 和 ADBROOT，保留嵌入 config
+10. r2 uname 完整對齊原廠 boot；關閉 IKCONFIG_PROC 和 ADBROOT，保留嵌入 config
     作離線核對。嵌入完整版本及 manifest 誠實標識修改；沒有保證 root 無法檢測。
 11. 保留第三方授權，補專案腳本 MIT 與 LICENSE inventory。SUSFS GPL-3.0 /
     Linux GPL-2.0-only 的二進位再散布相容性仍未解決，不能靠一份 README 修好。

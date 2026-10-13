@@ -35,7 +35,7 @@ Reviewed changes
 Host verification
 
 Run from the build directory:
-  python3 tests/suki_security_test.py
+  python3 tests/suki_security_test.py --apk /path/to/SukiSU_v4.2.0_40900-release.apk
 
 The test extracts the actual production functions from the current files on
 each run, builds two small C harnesses, and substitutes only dependencies.

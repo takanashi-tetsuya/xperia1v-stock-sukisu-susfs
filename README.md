@@ -1,8 +1,8 @@
-# Xperia 1 V — SukiSU 40900 + SUSFS 2.3 repair candidate
+# Xperia 1 V — SukiSU 40900 + SUSFS 2.3 repair candidate r2
 
 This local candidate targets **Sony XQ-DQ72 / pdx234, firmware 67.2.A.3.178, Android 15**, with an unlocked bootloader. Build and packaging results are recorded in `dist/manifest.json`; do not interpret host tests as phone testing. No application compatibility improvement is promised.
 
-The repository mirrors this candidate's recorded results in `manifest.json` and `verification/`. Fresh builds write their own results under `dist/` and `logs/`. The candidate draft Release is partially uploaded: its AK3 ZIP and small assets are available, but Image, the direct boot image and full_source.tar.gz remain local after an upload timeout. See `RELEASE_STATUS.json` for exact inventory. The older published beta is a different build.
+The GitHub repository snapshot mirrors the candidate's `manifest.json` and `verification/` at its root. Upload completeness is recorded in [`RELEASE_STATUS.json`](https://github.com/takanashi-tetsuya/xperia1v-stock-sukisu-susfs/blob/main/RELEASE_STATUS.json). The r2 draft tag is `40900-repair-20261013-r2`; the earlier published beta and previous repair draft are different builds.
 
 ## Exact versions
 
@@ -22,7 +22,9 @@ The candidate retains SUSFS inline/manual integration, CFI and Full LTO, and the
 
 Hidden inode lookup returns an error instead of substituting a `..5.u.S` sibling name. This intentionally makes creation/rename onto an already hidden inode fail; it must not create or modify a different sibling. Host regressions cover lookup and reference ownership; filesystem and phone runtime validation remain separate.
 
-SUSFS logging, `/proc/config.gz`, and ADB-root support are disabled in the release configuration. Embedded IKCONFIG remains for offline verification. `uname -r` uses `5.15.189-android13-8-g51bba4309aac`; the embedded SukiSU full version and manifest still identify this modified build. No claim of undetectable root follows from these settings. KPM remains disabled.
+SUSFS logging, `/proc/config.gz`, and ADB-root support are disabled in the release configuration. Embedded IKCONFIG remains for offline verification. r2 changes the real kernel configuration to use the stock boot's complete release, `5.15.189-android13-8-00016-g51bba4309aac-ab14546557`, and rebuilds the kernel. The previous candidate omitted `-00016` and `-ab14546557`; both kernels have SUBLEVEL 189. The embedded SukiSU full version and manifest still identify this modified build. No claim of undetectable root follows from these settings. KPM remains disabled.
+
+r2 also removes workstation paths from newly exported evidence, preserves their digest references, and gives the host tests clear missing-input errors. Test reports use project-relative paths or named external inputs. The export receipt distinguishes raw local evidence hashes from public-copy hashes. Earlier Git history is retained and may still contain old workstation paths.
 
 The kernel uses the correct ctime-seconds flag, bit 8. **Use the supplied corrected `ksu_susfs` tool when using this CLI**; the original 7af04b0 CLI has `(1 < 8)` and is incompatible for this field. SukiSU's paired ksud already uses bit 8. A module may ship and overwrite its own CLI: updating only `/data/adb/ksu/bin/ksu_susfs` does not update another module's private copy. Do not run multiple copies with different protocols. See `userspace/README.txt` for the exact correction and build recipe.
 
@@ -58,9 +60,36 @@ Preparation stages downloads and changes in a temporary directory, then publishe
 
 The small `source_changes.tar.gz` requires obtaining its Git bases. The complete `full_source.tar.gz` also contains the working sources and the minimal Git objects, refs and shallow metadata needed to verify them offline. It excludes reflogs, hooks, tools, build output and device logs. After extracting the complete archive into a new directory, source preparation can validate the already present trees without a download; provide the compiler/pahole/avbtool paths as above. The manifest records the archive extraction and source-identity check separately from a full compile. Toolchains and the matching original boot image still need to be supplied.
 
-Source reconstruction, kernel compilation, module CRC analysis, host regressions, phone boot, actual module loading and AK3 installation are different evidence categories. Read the current manifest for which were actually run. Module signature flags alone cannot establish failure: examine the generated protected-symbol tables. BTF layout/runtime acceptance and the complete stock/custom loaded module inventory still require device testing.
+Source reconstruction, kernel compilation, module CRC analysis, host regressions, phone boot, actual module loading and AK3 installation are different evidence categories. Read the current manifest for which were actually run. The local clean kernel build is maintainer evidence. GitHub Actions checks source reconstruction and host regressions; it does not compile the kernel. An independent full rebuild and device tests remain NOT_RUN. Module signature flags alone cannot establish failure: examine the generated protected-symbol tables. BTF layout/runtime acceptance and the complete stock/custom loaded module inventory still require device testing.
 
 Rebuildable source does not imply a byte-identical Image: a clean kernel build generates a fresh module-signing key, which can change binary hashes. The fixed source lock, compiler checks, actual config, kernel release, Module.symvers and packaging metadata are verified separately. Generated private signing keys are not included in the source packages.
+
+## Maintainer delivery export
+
+`finalize_delivery.py` assembles this maintainer's release evidence after the ordinary build and package workflow. It is not required to rebuild or package the kernel. It additionally requires the approved release research records, the original preserved 40922 and 40900 products, and the corrected CLI binary built with the recipe in `userspace/README.txt`. Supply these inputs explicitly:
+
+```sh
+python3 finalize_delivery.py --root /path/to/checkout \
+  --research /path/to/release-research \
+  --original-dist /path/to/preserved-40922-dist \
+  --previous-40900-dist /path/to/preserved-40900-dist \
+  --cli-binary /path/to/ksu_susfs
+```
+
+The required evidence and its validation are defined in that script. `export_publication.py` produces sanitized copies and recomputes references to exported evidence without modifying local input records. Missing preservation or release inputs are errors, not permission to fabricate evidence. Generated `userspace/bin/` files are ignored by Git; the CLI source and correction remain tracked. Binary delivery stays in a draft Release while the licensing and device-validation limits below remain unresolved.
+
+After upload, `verify_github_sync.py` independently reads the draft's complete asset list and checks names, sizes, SHA-256 digests, the exact source commit and its latest successful `verify.yml` run. The repository delivery snapshot supplies `RELEASE_ASSETS.json`; an extracted source-only bundle needs that separate expected-asset list. With authenticated `gh` access to the draft, run:
+
+```sh
+python3 verify_github_sync.py \
+  --repo takanashi-tetsuya/xperia1v-stock-sukisu-susfs \
+  --tag 40900-repair-20261013-r2 \
+  --expected-assets-json RELEASE_ASSETS.json \
+  --source-commit FULL_40_CHARACTER_COMMIT \
+  --workflow verify.yml --output /path/to/github-sync-result.json
+```
+
+The output is a remote verification receipt, not evidence of phone testing. A missing GitHub asset digest triggers a download of that asset for hashing. Draft access is limited to authorized repository users.
 
 ## Licenses
 

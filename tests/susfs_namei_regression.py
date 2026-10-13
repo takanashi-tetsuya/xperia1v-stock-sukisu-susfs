@@ -13,6 +13,9 @@ import re
 import resource
 import subprocess
 import tempfile
+from test_support import project_path, require_command, require_files, run_cli, source_label
+
+ROOT = Path(__file__).resolve().parents[1]
 
 FUNCTIONS = ["lookup_dcache", "lookup_one_qstr_excl", "lookup_fast", "__lookup_slow",
              "lookup_open", "filename_create", "done_path_create", "do_mkdirat", "do_renameat2"]
@@ -307,10 +310,17 @@ def main():
     # Baseline assertions are expected to fail; never generate core dumps.
     resource.setrlimit(resource.RLIMIT_CORE, (0, 0))
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", type=Path, default=Path(__file__).resolve().parents[1] / "sources/common")
+    parser.add_argument("--source", type=Path, default=Path("sources/common"))
     parser.add_argument("--output", type=Path)
+    parser.epilog = "Relative input and output paths are relative to the project root."
     args = parser.parse_args()
-    src = args.source.resolve()
+    src = project_path(args.source, ROOT)
+    if args.output:
+        args.output = project_path(args.output, ROOT)
+        args.output.unlink(missing_ok=True)
+    require_files([src / name for name in ("fs/namei.c", "fs/stat.c")],
+                  "Run bash prepare-sources.sh first, or pass --source /path/to/common.")
+    require_command("cc")
     namei = (src / "fs/namei.c").read_text()
     stat = (src / "fs/stat.c").read_text()
     generated = STUBS + "\n".join(extract(namei,n) for n in FUNCTIONS) + extract(stat,"vfs_getattr_nosec") + TESTS
@@ -335,13 +345,15 @@ def main():
         for case in cases:
             run = subprocess.run([str(exe),*map(str,case)],text=True,capture_output=True,timeout=5)
             results.append({"case":list(case),"passed":run.returncode==0,"detail":run.stderr.strip()})
-    report = {"source":str(src),"sha256":{n:hashlib.sha256((src/n).read_bytes()).hexdigest() for n in ("fs/namei.c","fs/stat.c")},
+    report = {"source":source_label(src, ROOT, "susfs-baseline/common"),"sha256":{n:hashlib.sha256((src/n).read_bytes()).hexdigest() for n in ("fs/namei.c","fs/stat.c")},
               "extracted_functions":FUNCTIONS+["vfs_getattr_nosec"],"tests":len(results),"passed":sum(x["passed"] for x in results),
               "scope":"Actual C bodies; mocked VFS and metadata. Not a kernel, concurrency, filesystem integration, or device test.","results":results}
-    if args.output: args.output.write_text(json.dumps(report,indent=2)+"\n")
+    if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        args.output.write_text(json.dumps(report,indent=2)+"\n")
     print(json.dumps({k:v for k,v in report.items() if k!="results"},indent=2))
     for result in results:
         if not result["passed"]: print(json.dumps(result))
     raise SystemExit(any(not x["passed"] for x in results))
 
-if __name__=="__main__": main()
+if __name__=="__main__": run_cli(main)

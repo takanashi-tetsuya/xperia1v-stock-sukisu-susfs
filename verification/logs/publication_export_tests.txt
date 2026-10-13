@@ -1,0 +1,44 @@
+Mode: normal
+test_binary_digest_references_never_rebound (test_publication_export.ExportTests.test_binary_digest_references_never_rebound) ... ok
+test_binary_unchanged (test_publication_export.ExportTests.test_binary_unchanged) ... ok
+test_changed_input_rejected (test_publication_export.ExportTests.test_changed_input_rejected) ... ok
+test_changed_input_rejected_after_cached_render (test_publication_export.ExportTests.test_changed_input_rejected_after_cached_render) ... ok
+test_inline_report_uses_exported_hash (test_publication_export.ExportTests.test_inline_report_uses_exported_hash) ... ok
+test_json_text_and_external_metadata_redacted (test_publication_export.ExportTests.test_json_text_and_external_metadata_redacted) ... ok
+test_nonempty_destination_untouched (test_publication_export.ExportTests.test_nonempty_destination_untouched) ... ok
+test_preservation_record_keeps_historical_raw_hash (test_publication_export.ExportTests.test_preservation_record_keeps_historical_raw_hash) ... ok
+test_private_path_in_executable_is_rejected_not_rewritten (test_publication_export.ExportTests.test_private_path_in_executable_is_rejected_not_rewritten) ... ok
+test_real_ci_and_script_paths_are_byte_preserved (test_publication_export.ExportTests.test_real_ci_and_script_paths_are_byte_preserved) ... ok
+test_recursive_references_and_raw_evidence_preserved (test_publication_export.ExportTests.test_recursive_references_and_raw_evidence_preserved) ... ok
+test_source_archive_uses_public_copies_and_preserves_modes (test_publication_export.ExportTests.test_source_archive_uses_public_copies_and_preserves_modes) ... ok
+test_symlink_and_escape_rejected (test_publication_export.ExportTests.test_symlink_and_escape_rejected) ... ok
+test_explicit_input_validation (test_publication_export.MaintainerArgumentsTests.test_explicit_input_validation) ... ok
+test_missing_inputs_do_not_delete_attestation (test_publication_export.MaintainerArgumentsTests.test_missing_inputs_do_not_delete_attestation) ... ok
+test_required_arguments_friendly_under_both_modes (test_publication_export.MaintainerArgumentsTests.test_required_arguments_friendly_under_both_modes) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.297s
+
+OK
+Mode: optimized
+test_binary_digest_references_never_rebound (test_publication_export.ExportTests.test_binary_digest_references_never_rebound) ... ok
+test_binary_unchanged (test_publication_export.ExportTests.test_binary_unchanged) ... ok
+test_changed_input_rejected (test_publication_export.ExportTests.test_changed_input_rejected) ... ok
+test_changed_input_rejected_after_cached_render (test_publication_export.ExportTests.test_changed_input_rejected_after_cached_render) ... ok
+test_inline_report_uses_exported_hash (test_publication_export.ExportTests.test_inline_report_uses_exported_hash) ... ok
+test_json_text_and_external_metadata_redacted (test_publication_export.ExportTests.test_json_text_and_external_metadata_redacted) ... ok
+test_nonempty_destination_untouched (test_publication_export.ExportTests.test_nonempty_destination_untouched) ... ok
+test_preservation_record_keeps_historical_raw_hash (test_publication_export.ExportTests.test_preservation_record_keeps_historical_raw_hash) ... ok
+test_private_path_in_executable_is_rejected_not_rewritten (test_publication_export.ExportTests.test_private_path_in_executable_is_rejected_not_rewritten) ... ok
+test_real_ci_and_script_paths_are_byte_preserved (test_publication_export.ExportTests.test_real_ci_and_script_paths_are_byte_preserved) ... ok
+test_recursive_references_and_raw_evidence_preserved (test_publication_export.ExportTests.test_recursive_references_and_raw_evidence_preserved) ... ok
+test_source_archive_uses_public_copies_and_preserves_modes (test_publication_export.ExportTests.test_source_archive_uses_public_copies_and_preserves_modes) ... ok
+test_symlink_and_escape_rejected (test_publication_export.ExportTests.test_symlink_and_escape_rejected) ... ok
+test_explicit_input_validation (test_publication_export.MaintainerArgumentsTests.test_explicit_input_validation) ... ok
+test_missing_inputs_do_not_delete_attestation (test_publication_export.MaintainerArgumentsTests.test_missing_inputs_do_not_delete_attestation) ... ok
+test_required_arguments_friendly_under_both_modes (test_publication_export.MaintainerArgumentsTests.test_required_arguments_friendly_under_both_modes) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.298s
+
+OK

@@ -1,5 +1,5 @@
 {
-  "candidate_vermagic": "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+  "candidate_vermagic": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557 SMP preempt mod_unload modversions aarch64",
   "loader_source": "sources/common/kernel/module.c:1316",
   "loader_source_sha256": "102f733f1b3275db74818190166ba721a08a3c5f9b4f2336238b3be750b5840a",
   "mismatches": [],

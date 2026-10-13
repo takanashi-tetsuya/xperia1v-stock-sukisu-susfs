@@ -14,6 +14,12 @@ jobs:
         run: |
           shellcheck build.sh prepare-sources.sh tests/packaging_test.sh
           bash tests/packaging_test.sh
+          python3 -m unittest discover -s tests -p 'test_cli_inputs.py'
+          python3 -O -m unittest discover -s tests -p 'test_cli_inputs.py'
+          python3 -m unittest discover -s tests -p 'test_publication_export.py'
+          python3 -O -m unittest discover -s tests -p 'test_publication_export.py'
+          python3 -m unittest discover -s tests -p 'test_github_sync_verifier.py'
+          python3 -O -m unittest discover -s tests -p 'test_github_sync_verifier.py'
       - name: Fetch exact sources and check all patches and added files
         run: bash prepare-sources.sh
       - name: SUSFS source regressions

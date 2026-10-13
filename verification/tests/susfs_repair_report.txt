@@ -1,5 +1,5 @@
 SUSFS repair handoff — 2026-10-13
-Source: /home/liu/android/build_sukisu_20261013/sources/common
+Source: external/redacted-home
 Source frozen after candidate 215/215 and preserved 40900 63/63 passed.
 
 Changes
@@ -58,9 +58,9 @@ Verification
    the incoming 40900-backported sources.
 
 Reproduction (from build_sukisu_20261013):
-  python3 tests/susfs_namei_regression.py --output /tmp/susfs_candidate.json
-  python3 tests/susfs_legacy_regression.py sources/common --output /tmp/susfs_legacy.json
-  python3 tests/susfs_namei_regression.py --source /home/liu/android/build_sukisu_20260930/sources/common --output /tmp/susfs_baseline.json
+  python3 tests/susfs_namei_regression.py --output external/temporary
+  python3 tests/susfs_legacy_regression.py sources/common --output external/temporary
+  python3 tests/susfs_namei_regression.py --source external/redacted-home --output external/temporary
 The old-tree namei.c digest matches the baseline snapshot exactly. The baseline
 command is expected to exit nonzero. Results are host mocks, not kernel build,
 concurrency, filesystem integration or device validation. This agent did not

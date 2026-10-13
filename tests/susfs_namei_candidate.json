@@ -1,5 +1,5 @@
 {
-  "source": "/home/liu/android/build_sukisu_20261013/sources/common",
+  "source": "sources/common",
   "sha256": {
     "fs/namei.c": "5319336a801d6e6cb928ca6f306ebdd1dbc509d5e48344b5a252e4af9d3acfef",
     "fs/stat.c": "c0e6fabb07a6a6ba3cd5e763b605c9c9b7238cd057fe182868b7e526701c60e4"

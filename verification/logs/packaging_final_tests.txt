@@ -28,7 +28,7 @@ test_publish_does_not_replace_existing_empty_directory (packaging_prepare_test.P
 test_tampered_patch_and_added_file_are_rejected (packaging_prepare_test.PrepareSourcesTests.test_tampered_patch_and_added_file_are_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 28 tests in 49.116s
+Ran 28 tests in 9.392s
 
 OK
 test_avb_failure_leaves_no_published_boot_or_zip (packaging_pipeline_test.PipelineTests.test_avb_failure_leaves_no_published_boot_or_zip) ... ok
@@ -61,6 +61,6 @@ test_publish_does_not_replace_existing_empty_directory (packaging_prepare_test.P
 test_tampered_patch_and_added_file_are_rejected (packaging_prepare_test.PrepareSourcesTests.test_tampered_patch_and_added_file_are_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 28 tests in 73.071s
+Ran 28 tests in 14.643s
 
 OK

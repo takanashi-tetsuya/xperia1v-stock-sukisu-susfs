@@ -2,6 +2,7 @@
   "status": "PASS",
   "tests": 20,
   "anykernel_sha256": "31b0621f542c5cff0dedbbba89e13b295cedd55e45781fe2eb6929a06965d9e7",
+  "source": "sources/AnyKernel3",
   "scope": "Actual extracted installer functions; no installer entrypoint, mounting or flashing",
   "limits": "Upstream level check alone can accept missing property; exact firmware guard remains required",
   "results": [

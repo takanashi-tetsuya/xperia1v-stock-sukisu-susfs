@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """Exercise the real upstream CLI argument parser with a recorded syscall."""
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import subprocess
 import tempfile
+from test_support import project_path, require_command, require_files, run_cli, source_label
 
 ROOT = Path(__file__).resolve().parents[1]
 JNI = ROOT / 'userspace/upstream-susfs/ksu_susfs/jni'
@@ -67,21 +69,32 @@ int main(void) {
 '''
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--jni', type=Path, default=JNI)
+    parser.add_argument('--output', type=Path, default=Path('logs/userspace_ctime_test.json'))
+    parser.epilog = 'Relative input and output paths are relative to the project root.'
+    args = parser.parse_args()
+    jni, output = project_path(args.jni, ROOT), project_path(args.output, ROOT)
+    source = jni / 'features/sus_kstat.c'
+    output.unlink(missing_ok=True)
+    require_files([source], 'Retain userspace/upstream-susfs/ksu_susfs/jni, or pass --jni /path/to/jni.')
+    require_command('cc')
     with tempfile.TemporaryDirectory(prefix='ctime-cli-') as temp:
         t = Path(temp)
         (t / 'android').mkdir()
         (t / 'android/log.h').write_text('/* Android logging API is unused by this source. */\n')
         (t / 'test.c').write_text(HARNESS)
         subprocess.run(['cc', '-std=gnu11', '-Werror=implicit-function-declaration',
-                        '-I', str(t), '-I', str(JNI / 'includes'), '-I', str(JNI / 'features'),
+                        '-I', str(t), '-I', str(jni / 'includes'), '-I', str(jni / 'features'),
                         str(t / 'test.c'), '-o', str(t / 'test')], check=True)
         result = subprocess.run([str(t / 'test')], check=True, text=True, capture_output=True)
-    report = {'status':'PASS', 'tests':9, 'source_sha256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
+    report = {'status':'PASS', 'tests':9, 'source_sha256':hashlib.sha256(source.read_bytes()).hexdigest(),
+              'source':source_label(source, ROOT, 'cli/sus_kstat.c'),
               'scope':'Actual CLI parser, recorded syscall payload; host stat fixture; no phone interaction',
               'result':result.stdout.splitlines()[-1]}
-    (ROOT / 'logs').mkdir(exist_ok=True)
-    (ROOT / 'logs/userspace_ctime_test.json').write_text(json.dumps(report, indent=2)+'\n')
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(report, indent=2))
 
 if __name__ == '__main__':
-    main()
+    run_cli(main)

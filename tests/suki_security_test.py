@@ -18,6 +18,7 @@ import shutil
 import struct
 import subprocess
 import tempfile
+from test_support import TestInputError, project_path, require_command, require_files, run_cli, source_label
 
 ROOT = Path(__file__).resolve().parents[1]
 OFFICIAL_SHA256 = "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3"
@@ -395,7 +396,8 @@ def changed(data, offset, fmt, value):
 
 def apk_cases(directory, official):
     raw = official.read_bytes()
-    assert hashlib.sha256(raw).hexdigest() == OFFICIAL_SHA256, "Official 40900 APK checksum differs"
+    if hashlib.sha256(raw).hexdigest() != OFFICIAL_SHA256:
+        raise TestInputError("Official 40900 APK checksum differs; pass the unmodified v4.2.0 release APK.")
     pairs = signing_pairs(raw)
     v2 = next(p for p in pairs if struct.unpack_from("<I", p, 8)[0] == 0x7109871A)
     valid = envelope([v2])
@@ -443,13 +445,21 @@ def apk_cases(directory, official):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--source", type=Path, default=ROOT / "sources/SukiSU-Ultra/kernel")
-    parser.add_argument("--apk", type=Path, default=ROOT.parent / "research_versions_20261013/SukiSU_v4.2.0_40900-release.apk")
+    parser.add_argument("--source", type=Path, default=Path("sources/SukiSU-Ultra/kernel"))
+    parser.add_argument("--apk", type=Path, required=True, help="Official SukiSU v4.2.0 / 40900 release APK")
     parser.add_argument("--cc", default=shutil.which("clang") or "cc")
-    parser.add_argument("--json-output", type=Path, default=ROOT / "tests/suki_security_results.json")
+    parser.add_argument("--json-output", type=Path, default=Path("tests/suki_security_results.json"))
+    parser.epilog = "Relative input and output paths are relative to the project root."
     opts = parser.parse_args()
+    opts.source = project_path(opts.source, ROOT)
+    opts.apk = project_path(opts.apk, ROOT)
+    opts.json_output = project_path(opts.json_output, ROOT)
     # A failed rerun must not leave an earlier PASS available to the finalizer.
     opts.json_output.unlink(missing_ok=True)
+    require_files([opts.source / name for name in REVIEWED_FILES],
+                  "Run bash prepare-sources.sh first, or pass --source /path/to/SukiSU-Ultra/kernel.")
+    require_files([opts.apk], "Pass --apk /path/to/SukiSU_v4.2.0_40900-release.apk.")
+    require_command(opts.cc, "Install clang or a C compiler and OpenSSL development headers, or set --cc.")
     source_hashes = {"kernel/" + name: hashlib.sha256((opts.source / name).read_bytes()).hexdigest()
                      for name in REVIEWED_FILES}
     apk = (opts.source / "manager/apk_sign.c").read_text()
@@ -464,17 +474,19 @@ def main():
         cases = apk_cases(directory, opts.apk)
         compile_run(directory, "apk", apk_source, opts.cc, cases, ["-lcrypto"])
         compile_run(directory, "sepolicy", policy_source, opts.cc)
-    assert source_hashes == {"kernel/" + name: hashlib.sha256((opts.source / name).read_bytes()).hexdigest()
-                             for name in REVIEWED_FILES}, "Sources changed during the test run"
+    if source_hashes != {"kernel/" + name: hashlib.sha256((opts.source / name).read_bytes()).hexdigest()
+                         for name in REVIEWED_FILES}:
+        raise RuntimeError("Sources changed during the test run")
     apk_count, policy_count = len(cases) // 2, 17
     results = {
         "schema_version": 1,
         "status": "PASS",
         "tested_at_utc": datetime.now(timezone.utc).isoformat(),
-        "source_root": str(opts.source.resolve()),
+        "source_root": source_label(opts.source, ROOT, "sukisu-source/kernel"),
         "source_sha256": source_hashes,
         "test_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "official_apk_sha256": OFFICIAL_SHA256,
+        "official_apk": source_label(opts.apk, ROOT, "official-manager/SukiSU_v4.2.0_40900-release.apk"),
         "tests": apk_count + policy_count,
         "passed": apk_count + policy_count,
         "suite_cases": {"apk": apk_count, "sepolicy": policy_count},
@@ -482,7 +494,7 @@ def main():
                    "actual 5.15 filename transition function with allocation/insert fault injection",
                    "actual policy duplication function with serializer contract mock",
                    "runtime/sulog/version changes source-reviewed only"],
-        "compiler": opts.cc,
+        "compiler": Path(opts.cc).name,
         "sanitizers": ["address", "undefined"],
         "leak_sanitizer": False,
         "allocation_and_handle_tracking": True,
@@ -491,10 +503,11 @@ def main():
                         "not a kernel build or runtime device test",
                         "#3679 scoped su-session behavior intentionally absent; UAPI 2 preserved"],
     }
+    opts.json_output.parent.mkdir(parents=True, exist_ok=True)
     opts.json_output.write_text(json.dumps(results, indent=2) + "\n")
     print("PASS: AddressSanitizer and UndefinedBehaviorSanitizer clean; allocation/handle counters balanced.")
     print("LeakSanitizer disabled for the ptrace sandbox; tests do not modify production sources.")
 
 
 if __name__ == "__main__":
-    main()
+    run_cli(main)

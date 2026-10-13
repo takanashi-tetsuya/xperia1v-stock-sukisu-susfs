@@ -1,5 +1,11 @@
 {
-  "source": "/home/liu/android/build_sukisu_20261013/sources/common",
+  "source": "sources/common",
+  "sha256": {
+    "fs/susfs.c": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570",
+    "fs/namei.c": "5319336a801d6e6cb928ca6f306ebdd1dbc509d5e48344b5a252e4af9d3acfef",
+    "fs/proc/base.c": "1a804f4fd899fcdf82f01e173fab94cce3005fba31c01752a1cf77a9c70b377b",
+    "include/linux/susfs.h": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+  },
   "extracted_function_count": 12,
   "tests": 63,
   "passed": 63,

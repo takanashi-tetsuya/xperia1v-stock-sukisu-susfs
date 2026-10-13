@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""Finalize this candidate only after its build, package and host evidence passes."""
+"""Maintainer-only delivery finalization after build, package and host checks.
+
+All external release/preservation inputs must be supplied explicitly. This is
+not part of the portable prepare/build/verify/package workflow.
+"""
 import argparse
 import io
 import json
@@ -15,6 +19,7 @@ import tempfile
 from pipeline_common import (atomic_json, cli_error, git, load_lock, require,
                              safe_relative, sha, verify_sources)
 from verify_build import verify_completion
+from export_publication import PublicExport
 
 OFFICIAL_APK = 'SukiSU_v4.2.0_40900-release.apk'
 OFFICIAL_SHA = '4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3'
@@ -31,7 +36,11 @@ EVIDENCE = (
     'logs/vendor_audit/vermagic_check.json',
     'logs/anykernel_host_test.json', 'logs/userspace_ctime_test.json',
     'logs/userspace_wire_test.json', 'logs/packaging_final_tests.txt',
+    'logs/publication_export_tests.txt',
     'logs/previous40900_unchanged.json',
+    'logs/old40922_unchanged.json', 'logs/prior_20261013_unchanged.json',
+    'logs/stock_kernel_release.json',
+    'logs/r2_source_delta.json',
     'tests/susfs_namei_candidate.json', 'tests/susfs_namei_baseline.json',
     'tests/susfs_40900_preserved.json', 'tests/susfs_source_hashes.json',
     'tests/susfs_repair_report.txt', 'tests/suki_security_results.json',
@@ -75,7 +84,7 @@ def check_count(report, count, label):
                 f'{label}: individual results disagree')
 
 
-def verify_inputs(root, research, original):
+def verify_inputs(root, research, original, previous_dist, cli_binary):
     lock_path = root / 'source-lock.json'
     lock = load_lock(lock_path)
     require(lock['build']['ksu_version'] == 40900 and lock['build']['ksu_uapi'] == 2,
@@ -94,6 +103,17 @@ def verify_inputs(root, research, original):
     require(build.get('artifact_sha256') == completion['artifact_sha256'], 'Build artifact set differs')
     match(root / 'logs/build_completion.json', build.get('build_completion_sha256'))
     require(build.get('kernel_release') == lock['build']['kernel_release'], 'Kernel release differs')
+    stock_release = reports['logs/stock_kernel_release.json']
+    require(stock_release.get('status') == 'PASS_STOCK_BOOT_BANNER_READ' and
+            stock_release.get('stock_boot_sha256') == lock['stock']['sha256'] and
+            stock_release.get('stock_kernel_release') == build.get('kernel_release'),
+            'Candidate release string does not match the recorded stock boot banner')
+    delta = reports['logs/r2_source_delta.json']
+    require(delta.get('status') == 'PASS_SINGLE_LOCALVERSION_CHANGE' and
+            delta.get('source_lock_sha256') == sha(lock_path) and
+            delta.get('new_kernel_release') == build.get('kernel_release') and
+            delta.get('application_fix_claimed') is False and delta.get('device_access') == 'NOT_USED',
+            'r2 source-change record does not match this candidate')
     require(build.get('sukisu_version_code') == 40900 and build.get('ksu_uapi') == 2,
             'Compiled version generation differs')
     require(build.get('embedded_config_matches') is True and build.get('phone_runtime') == 'NOT_RUN',
@@ -151,12 +171,14 @@ def verify_inputs(root, research, original):
     check_count(candidate, 215, 'SUSFS pathname/stat')
     check_count(legacy, 63, 'SUSFS retained fixes')
     for report in (candidate, legacy):
-        require(Path(report['source']).resolve() == root / 'sources/common', 'SUSFS test targets another tree')
+        require(report.get('source') == 'sources/common', 'SUSFS test must identify project-relative sources/common')
     check_source_hashes(root / 'sources/common', candidate.get('sha256'))
+    check_source_hashes(root / 'sources/common', legacy.get('sha256'))
     susfs_hashes = reports['tests/susfs_source_hashes.json']
     check_source_hashes(root / 'sources/common', {k: v['after'] for k, v in susfs_hashes.items()})
     security = reports['tests/suki_security_results.json']
     require(security.get('status') == 'PASS', 'SukiSU host security regression did not pass')
+    require(security.get('source_root') == 'sources/SukiSU-Ultra/kernel', 'SukiSU security test targets another tree')
     check_count(security, 59, 'SukiSU security')
     check_source_hashes(root / 'sources/SukiSU-Ultra', security.get('source_sha256'))
     match(root / 'tests/suki_security_test.py', security.get('test_sha256'))
@@ -164,7 +186,7 @@ def verify_inputs(root, research, original):
     cli = read(root / 'userspace/manifest.json')
     require(cli.get('status') == 'ANDROID_ARM64_COMPILED_HOST_PAYLOAD_TESTS_PASS_NOT_DEVICE_TESTED' and
             cli.get('upstream_commit') == SUSFS_COMMIT and cli.get('abi') == 'arm64-v8a', 'CLI identity differs')
-    match(root / 'userspace/bin/ksu_susfs', cli.get('binary_sha256'))
+    match(cli_binary, cli.get('binary_sha256'))
     match(root / 'userspace/ctime-flag.patch', cli.get('patch_sha256'))
     ctime = reports['logs/userspace_ctime_test.json']
     require(ctime.get('status') == 'PASS' and ctime.get('tests') == 9 and cli.get('feature_tests') == ctime,
@@ -199,6 +221,11 @@ def verify_inputs(root, research, original):
     test_log = (root / 'logs/packaging_final_tests.txt').read_text()
     require(re.search(r'^OK\s*$', test_log, re.M) and not re.search(r'^(FAILED|ERROR:)\b', test_log, re.M),
             'Packaging host test log lacks a passing unittest result')
+    export_log = (root / 'logs/publication_export_tests.txt').read_text()
+    require(len(re.findall(r'^Ran 16 tests in ', export_log, re.M)) == 2 and
+            len(re.findall(r'^OK\s*$', export_log, re.M)) == 2 and
+            not re.search(r'^(FAILED|ERROR:)\b', export_log, re.M),
+            'Publication normal/optimized host test evidence did not pass')
 
     versions = {name: read(research / name) for name in VERSION_EVIDENCE}
     inspected = versions['apk-inspection.json']
@@ -217,10 +244,12 @@ def verify_inputs(root, research, original):
     match(research / OFFICIAL_APK, OFFICIAL_SHA)
     for name, expected in ORIGINAL_HASHES.items():
         match(original / name, expected)
+    require(reports['logs/old40922_unchanged.json'] == {'status': 'PASS', 'files': ORIGINAL_HASHES},
+            'Original 40922 preservation record differs')
     previous = reports['logs/previous40900_unchanged.json']
     require(previous.get('status') == 'PASS' and len(previous.get('files', {})) == 3,
             'Previous 40900 preservation evidence incomplete')
-    check_source_hashes(root.parent / 'build_sukisu_20260930/dist', previous['files'])
+    check_source_hashes(previous_dist, previous['files'])
     for name in EVIDENCE:
         require((root / name).is_file() and not (root / name).is_symlink(), f'Missing evidence: {name}')
     return lock, sources, reports, cli
@@ -319,11 +348,18 @@ def archive_files(path, root, files, epoch, generated=None):
             info.uname = info.gname = ''
             info.mtime = epoch
             if info.isfile():
-                with source.open('rb') as stream:
-                    archive.addfile(info, stream)
+                if name in (generated or {}):
+                    data = generated[name]
+                    info.size = len(data)
+                    archive.addfile(info, io.BytesIO(data))
+                else:
+                    with source.open('rb') as stream:
+                        archive.addfile(info, stream)
             else:
                 archive.addfile(info)
         for name, data in sorted((generated or {}).items()):
+            if root / name in files:
+                continue
             info = tarfile.TarInfo(name)
             info.size, info.mode, info.mtime = len(data), 0o644, epoch
             archive.addfile(info, io.BytesIO(data))
@@ -364,7 +400,30 @@ def verify_offline_archive(archive_path, lock, sources):
             'scope': 'Fresh extraction; Git identities, patches, untracked hashes and modes verified'}
 
 
-def finalize(root, research, original):
+def validate_external_inputs(root, research, original, previous_dist, cli_binary):
+    """Reject missing maintainer inputs before touching any delivery attestation."""
+    require(root.is_dir(), 'Project root is missing')
+    for label, directory in (('--research', research), ('--original-dist', original),
+                             ('--previous-40900-dist', previous_dist)):
+        require(directory.is_dir() and not directory.is_symlink(), f'{label}: directory is missing or symlinked')
+    for name in VERSION_EVIDENCE + (OFFICIAL_APK,):
+        require((research / name).is_file() and not (research / name).is_symlink(),
+                f'--research: missing regular file {name}')
+    for name in ORIGINAL_HASHES:
+        require((original / name).is_file() and not (original / name).is_symlink(),
+                f'--original-dist: missing regular file {name}')
+    record = root / 'logs/previous40900_unchanged.json'
+    require(record.is_file() and not record.is_symlink(), 'Missing previous 40900 preservation record')
+    previous = read(record)
+    require(isinstance(previous.get('files'), dict) and len(previous['files']) == 3,
+            'Previous 40900 preservation record must identify three files')
+    for name in previous['files']:
+        relative_file(previous_dist, name)
+    require(cli_binary.is_file() and not cli_binary.is_symlink(), '--cli-binary: regular binary is missing')
+
+
+def finalize(root, research, original, previous_dist, cli_binary):
+    validate_external_inputs(root, research, original, previous_dist, cli_binary)
     dist = root / 'dist'
     require(dist.is_dir() and not dist.is_symlink(), 'Missing regular dist directory')
     require(all(not path.is_symlink() for path in dist.rglob('*')),
@@ -372,7 +431,7 @@ def finalize(root, research, original):
     # Never retain a prior successful delivery attestation after a failed rerun.
     (dist / 'manifest.json').unlink(missing_ok=True)
     (dist / 'SHA256SUMS').unlink(missing_ok=True)
-    lock, sources, reports, cli = verify_inputs(root, research, original)
+    lock, sources, reports, cli = verify_inputs(root, research, original, previous_dist, cli_binary)
     small = small_inputs(root, lock)
     full = list(small)
     generated = {}
@@ -382,29 +441,61 @@ def finalize(root, research, original):
         full.extend(metadata)
         generated[f'sources/{repo}/.git/config'] = config
     evidence_hashes = {name: sha(root / name) for name in EVIDENCE}
+    exporter = PublicExport(root, [('official-release', research), ('original-40922', original),
+                                 ('previous-40900', previous_dist), ('cli-binary', cli_binary),
+                                 ('toolchains', root / 'toolchains'), ('host-tools', root / 'host-tools')])
+    for path in small:
+        if path.is_file() and not path.is_symlink():
+            exporter.add(path, path.relative_to(root).as_posix())
+    for name in EVIDENCE:
+        exporter.add(root / name, name)
+    for name in VERSION_EVIDENCE:
+        exporter.add(research / name, 'versions/' + name)
+    # Package metadata may quote local tool/firmware paths; keep raw logs intact.
+    package = reports['logs/packaging_verification.json']
+    package_path = Path(package['boot_path']).parent
+    for path in sorted((root / package_path).glob('*.txt')):
+        exporter.add(path, path.relative_to(root).as_posix())
+    exporter.add(root / package_path / 'packaging_verification.json',
+                 (package_path / 'packaging_verification.json').as_posix())
+    public = exporter.render()
+    public_reports = {name: json.loads(public[name]) for name in reports}
+    public_cli = json.loads(public['userspace/manifest.json'])
     with tempfile.TemporaryDirectory(prefix='.delivery-', dir=root) as temp:
         stage = Path(temp)
-        def copy(source, relative):
+        def copy(source, relative, public_name=None):
             destination = stage / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(source, destination)
-            match(destination, sha(source))
+            if public_name is not None:
+                destination.write_bytes(public[public_name])
+                match(destination, exporter.public_sha(public_name))
+            else:
+                shutil.copy2(source, destination)
+                match(destination, sha(source))
         for name in EVIDENCE:
-            copy(root / name, 'verification/' + name)
+            copy(root / name, 'verification/' + name, name)
         for name in VERSION_EVIDENCE:
-            copy(research / name, 'verification/versions/' + name)
+            copy(research / name, 'verification/versions/' + name, 'versions/' + name)
         copy(research / OFFICIAL_APK, OFFICIAL_APK)
         for name in ('README.txt', 'manifest.json', 'ctime-flag.patch'):
-            copy(root / 'userspace' / name, 'userspace/' + name)
-        copy(root / 'userspace/bin/ksu_susfs', 'userspace/ksu_susfs')
-        copy(root / 'docs/修復報告_20261013.txt', '修復報告_20261013.txt')
-        copy(root / 'README.md', 'README.md')
-        copy(root / 'LICENSE', 'LICENSE')
-        copy(root / 'licenses/NOTICE.txt', 'LICENSE_NOTICE.txt')
+            copy(root / 'userspace' / name, 'userspace/' + name, 'userspace/' + name)
+        copy(cli_binary, 'userspace/ksu_susfs')
+        copy(root / 'docs/修復報告_20261013.txt', '修復報告_20261013.txt', 'docs/修復報告_20261013.txt')
+        copy(root / 'README.md', 'README.md', 'README.md')
+        copy(root / 'LICENSE', 'LICENSE', 'LICENSE')
+        copy(root / 'licenses/NOTICE.txt', 'LICENSE_NOTICE.txt', 'licenses/NOTICE.txt')
+        for name in public:
+            if name.startswith(package_path.as_posix() + '/'):
+                copy(root / name, name.removeprefix('dist/'), name)
+        atomic_json(stage / 'verification/publication_export.json', exporter.receipt())
         epoch = lock['build']['source_date_epoch']
         print('Creating the patch/source bundle...', flush=True)
-        archive_files(stage / 'source_changes.tar.gz', root, small, epoch)
+        archive_files(stage / 'source_changes.tar.gz', root, small, epoch,
+                      {p.relative_to(root).as_posix(): public[p.relative_to(root).as_posix()]
+                       for p in small if p.is_file() and not p.is_symlink()})
         print('Creating the complete source/Git bundle...', flush=True)
+        generated.update({p.relative_to(root).as_posix(): public[p.relative_to(root).as_posix()]
+                          for p in small if p.is_file() and not p.is_symlink()})
         archive_files(stage / 'full_source.tar.gz', root, full, epoch, generated)
         print('Extracting and verifying the complete source bundle offline...', flush=True)
         offline = verify_offline_archive(stage / 'full_source.tar.gz', lock, sources)
@@ -413,8 +504,9 @@ def finalize(root, research, original):
         for name, expected in evidence_hashes.items():
             match(root / name, expected)
         # Recheck completed build and payloads immediately before publishing.
-        verify_inputs(root, research, original)
-        package = reports['logs/packaging_verification.json']
+        verify_inputs(root, research, original, previous_dist, cli_binary)
+        package = public_reports['logs/packaging_verification.json']
+        reports = public_reports
         manifest = {
             'schema_version': 1, 'status': 'OFFLINE_VERIFIED_CANDIDATE',
             'device': 'Sony Xperia 1 V XQ-DQ72 / pdx234', 'firmware': '67.2.A.3.178', 'android': 15,
@@ -422,17 +514,24 @@ def finalize(root, research, original):
                         'installer': 'AK3_NOT_RUN', 'boot': 'NOT_RUN', 'module_loading': 'NOT_RUN',
                         'applications': 'APPLICATION_FIXES_NOT_CLAIMED'},
             'phone_modified': False, 'application_fixes_claimed': False,
+            'validation_scope': {
+                'local_full_build': 'PASS',
+                'independent_host_ci': 'NOT_ATTESTED_BY_THIS_LOCAL_FINALIZER',
+                'third_party_full_rebuild': 'NOT_RUN',
+                'candidate_device_and_installer': 'NOT_RUN',
+            },
             'kernel_release': reports['logs/build_verification.json']['kernel_release'],
             'source_lock_sha256': sha(root / 'source-lock.json'), 'source_inputs': sources,
             'manager': {'version_code': 40900, 'uapi': 2, 'official_unchanged_apk': OFFICIAL_APK,
                         'sha256': OFFICIAL_SHA, 'source_commit': lock['repositories']['SukiSU-Ultra']['paired_commit']},
-            'userspace_cli': cli,
+            'userspace_cli': public_cli,
             'build': reports['logs/build_verification.json'], 'packaging': package,
             'vendor_module_abi': reports['logs/vendor_audit/summary.json'],
             'module_protection': reports['logs/vendor_audit/protection.json'],
             'module_vermagic': reports['logs/vendor_audit/vermagic_check.json'],
             'host_tests': {'susfs_namei': 215, 'susfs_preserved': 63, 'sukisu_security': 59,
                            'cli_payload': 9, 'anykernel_functions': 20,
+                           'publication_export_normal_and_optimized': 16,
                            'cli_wire_abi': reports['logs/userspace_wire_test.json'],
                            'scope': 'Host/static evidence; not candidate device or installer execution'},
             'source_reconstruction': reports['logs/source_reconstruction_check.json'],
@@ -447,13 +546,15 @@ def finalize(root, research, original):
                     'external_requirements': 'Pinned compiler/host tools and matching original firmware still required'},
             },
             'original_40922_unchanged_sha256': ORIGINAL_HASHES,
-            'evidence_sha256': evidence_hashes,
+            'evidence_sha256': {name: exporter.public_sha(name) for name in EVIDENCE},
+            'evidence_hash_scope': 'SHA256 of the redacted public copies under verification/; raw input hashes are in verification/publication_export.json',
             'license_distribution_status': 'UNRESOLVED_NO_PUBLIC_DISTRIBUTION_CLEARANCE',
             'license_note': 'Pinned SUSFS GPL-3.0 and Linux GPL-2.0-only binary redistribution compatibility remains unresolved; notices do not resolve it.',
         }
         (stage / 'README_繁體中文.txt').write_text(
-            'Xperia 1 V / XQ-DQ72 — SukiSU 官方 40900 / UAPI 2 修復候選（2026-10-13）\n\n'
+            'Xperia 1 V / XQ-DQ72 — SukiSU 官方 40900 / UAPI 2 修復候選 r2（2026-10-13）\n\n'
             '適用目標：Android 15、韌體 67.2.A.3.178。已完成的離線建置、封裝及主機測試見 manifest.json。\n'
+            f'核心 release 字串已與原廠完整對齊：{reports["logs/build_verification.json"]["kernel_release"]}。\n'
             '本候選尚未刷入、尚未開機或驗證模組載入，AnyKernel3 安裝器未實際執行；不宣稱已修復任何 App。\n\n'
             f'boot 映像：{package["boot_path"].removeprefix("dist/")}\n'
             f'安裝 ZIP：{package["anykernel_path"].removeprefix("dist/")}\n'
@@ -463,6 +564,8 @@ def finalize(root, research, original):
             '必要 Git 資料，可離線核對 source-lock；本程式已解壓到暫存目錄完成來源驗證，沒有在該解壓目錄重新編譯。\n'
             '完整包仍不含編譯器、主機工具或 Sony 原廠韌體；請依 README.md 準備。\n'
             '核驗結果見 verification/，逐項修復與保留限制見 修復報告_20261013.txt。SHA256SUMS 涵蓋全部交付檔。\n\n'
+            '此檔為本機交付說明；GitHub 草稿及完整上傳狀態須由後續遠端核驗紀錄確認，本程式不宣稱上傳完成。\n'
+            '本機完整建置、獨立主機 CI、第三方完整重建與實機測試分別記錄，不互相替代。\n'
             'SUSFS GPL-3.0 與 Linux GPL-2.0-only 整合的二進位公開散布授權問題尚未解決；本地成功建置不代表可公開散布。\n'
             '原可用 40922 的三個交付檔已重新核對雜湊，未被本次流程改動。\n', encoding='utf-8')
         # Only the current package and explicitly selected delivery material belong here.
@@ -494,13 +597,14 @@ def finalize(root, research, original):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--root', type=Path, default=Path(__file__).resolve().parent)
-    parser.add_argument('--research', type=Path, help='Directory containing the three approved version JSONs and official APK')
-    parser.add_argument('--original-dist', type=Path, help='Original working 40922 dist directory (read only)')
+    parser.add_argument('--research', type=Path, required=True, help='Directory containing the three approved version JSONs and official APK')
+    parser.add_argument('--original-dist', type=Path, required=True, help='Original working 40922 dist directory (read only)')
+    parser.add_argument('--previous-40900-dist', type=Path, required=True, help='Previous 40900 dist directory (read only)')
+    parser.add_argument('--cli-binary', type=Path, required=True, help='Built ARM64 ksu_susfs matching userspace/manifest.json')
     args = parser.parse_args()
     root = args.root.resolve()
-    research = (args.research or root.parent / 'research_versions_20261013').resolve()
-    original = (args.original_dist or root.parent / 'build_sukisu_20260920/dist').resolve()
-    finalize(root, research, original)
+    finalize(root, args.research.absolute(), args.original_dist.absolute(),
+             args.previous_40900_dist.absolute(), args.cli_binary.absolute())
 
 
 if __name__ == '__main__':

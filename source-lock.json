@@ -1,7 +1,7 @@
 {
   "build": {
     "build_timestamp": "Tue Oct 13 00:00:00 UTC 2026",
-    "kernel_release": "5.15.189-android13-8-g51bba4309aac",
+    "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
     "ksu_full_version": "v4.2.0-e2912817+local-susfs2.3@xperia-20261013",
     "ksu_uapi": 2,
     "ksu_version": 40900,
@@ -28,7 +28,7 @@
     "common": {
       "commit": "51bba4309aac6b0889f1546c72865851cba20612",
       "patch_file": "patches/final_common.patch",
-      "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
       "untracked": {
         "drivers/kernelsu": {
           "kind": "symlink",

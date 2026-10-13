@@ -6,11 +6,15 @@ concurrency, actual Android callers, or establish the cause of app failures.
 Run against the old source to demonstrate failure, then against the candidate.
 """
 import argparse
+import hashlib
 import json
 from pathlib import Path
 import re
 import subprocess
 import tempfile
+from test_support import project_path, require_command, require_files, run_cli, source_label
+
+ROOT = Path(__file__).resolve().parents[1]
 
 FUNCTIONS = [
     "susfs_sus_kstat_spoof_generic_fillattr",
@@ -326,8 +330,16 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument("source", type=Path)
     p.add_argument("--output", type=Path)
+    p.epilog = "Relative input and output paths are relative to the project root."
     args = p.parse_args()
-    src = args.source.resolve()
+    src = project_path(args.source, ROOT)
+    if args.output:
+        args.output = project_path(args.output, ROOT)
+        args.output.unlink(missing_ok=True)
+    inputs = ("fs/susfs.c", "fs/namei.c", "fs/proc/base.c", "include/linux/susfs.h")
+    require_files([src / name for name in inputs],
+                  "Run bash prepare-sources.sh first, or pass /path/to/common as the source argument.")
+    require_command("cc")
     susfs = (src / "fs/susfs.c").read_text()
     namei = (src / "fs/namei.c").read_text()
     proc = (src / "fs/proc/base.c").read_text()
@@ -360,16 +372,19 @@ def main():
             run = subprocess.run([str(binary), *map(str, case)], text=True, capture_output=True)
             results.append({"case": list(case), "passed": run.returncode == 0,
                             "detail": (run.stdout + run.stderr).strip()})
-    report = {"source": str(src), "extracted_function_count": 12,
+    report = {"source": source_label(src, ROOT, "susfs-baseline/common"),
+              "sha256": {name: hashlib.sha256((src / name).read_bytes()).hexdigest() for name in inputs},
+              "extracted_function_count": 12,
               "tests": len(results), "passed": sum(r["passed"] for r in results),
               "scope": "Host execution of extracted C functions with mocked kernel services; no concurrency or device validation",
               "results": results}
     output = json.dumps(report, indent=2)
     if args.output:
+        args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(output + "\n")
     print(output)
     raise SystemExit(0 if all(r["passed"] for r in results) else 1)
 
 
 if __name__ == "__main__":
-    main()
+    run_cli(main)

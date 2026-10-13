@@ -1,0 +1,10 @@
+{
+  "status": "PASS_STOCK_BOOT_BANNER_READ",
+  "stock_boot_sha256": "06dbe42eccb4ea14a53e7b34d1f509bc7b176776db89d3280adba44c4b8b3731",
+  "kernel_offset": 4096,
+  "kernel_size": 47512064,
+  "stock_kernel_sha256": "83a36d57811b16e3742150a72236727300cbceb345850eca6aad0dd826dd0232",
+  "banner_kernel_offset": 34651232,
+  "stock_kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+  "method": "Read Android boot v4 kernel bytes and locate embedded Linux version banner; no device access."
+}

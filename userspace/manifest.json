@@ -16,6 +16,7 @@
     "status": "PASS",
     "tests": 9,
     "source_sha256": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4",
+    "source": "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c",
     "scope": "Actual CLI parser, recorded syscall payload; host stat fixture; no phone interaction",
     "result": "PASS: 9 actual CLI payload cases; no real syscalls performed"
   },

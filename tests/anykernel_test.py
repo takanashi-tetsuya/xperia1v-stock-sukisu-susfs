@@ -1,18 +1,31 @@
 #!/usr/bin/env python3
 """Run only actual AK3 level and firmware checks against host property fixtures."""
 from pathlib import Path
+import argparse
 import hashlib
 import json
 import os
 import re
 import subprocess
 import tempfile
+from test_support import project_path, require_command, require_files, run_cli, source_label
 
 ROOT = Path(__file__).resolve().parents[1]
 
 def main():
-    ak = (ROOT / 'sources/AnyKernel3/anykernel.sh').read_text()
-    backend = (ROOT / 'sources/AnyKernel3/META-INF/com/google/android/update-binary').read_text()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source', type=Path, default=Path('sources/AnyKernel3'),
+                        help='AnyKernel3 tree; relative paths are relative to the project root')
+    parser.add_argument('--output', type=Path, default=Path('logs/anykernel_host_test.json'),
+                        help='JSON report; relative paths are relative to the project root')
+    args = parser.parse_args()
+    source, output = project_path(args.source, ROOT), project_path(args.output, ROOT)
+    output.unlink(missing_ok=True)
+    inputs = [source / 'anykernel.sh', source / 'META-INF/com/google/android/update-binary']
+    require_files(inputs, 'Run bash prepare-sources.sh first, or pass --source /path/to/AnyKernel3.')
+    require_command('bash')
+    require_command('busybox')
+    ak, backend = [path.read_text() for path in inputs]
     functions = '\n'.join(re.search(r'^'+name+r'\(\) \{.*?^\}', backend, re.M|re.S).group(0)
                           for name in ('do_levelcheck','do_vendorlevelcheck'))
     results = []
@@ -45,12 +58,13 @@ abort() { exit 42; }
             if r.returncode != expected: raise RuntimeError((fileval,propval,r.returncode))
             results.append({'file_firmware':fileval,'fallback_firmware':propval,'returncode':r.returncode})
     report = {'status':'PASS','tests':len(results),'anykernel_sha256':hashlib.sha256(ak.encode()).hexdigest(),
+              'source':source_label(source, ROOT, 'anykernel-source'),
               'scope':'Actual extracted installer functions; no installer entrypoint, mounting or flashing',
               'limits':'Upstream level check alone can accept missing property; exact firmware guard remains required',
               'results':results}
-    (ROOT/'logs').mkdir(exist_ok=True)
-    (ROOT/'logs/anykernel_host_test.json').write_text(json.dumps(report,indent=2)+'\n')
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(report,indent=2)+'\n')
     print(f'PASS: {len(results)} AK3 property cases; installer not run')
 
 if __name__ == '__main__':
-    main()
+    run_cli(main)

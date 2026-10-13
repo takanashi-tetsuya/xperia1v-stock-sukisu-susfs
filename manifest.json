@@ -3,24 +3,24 @@
   "application_fixes_claimed": false,
   "build": {
     "artifact_sha256": {
-      "dist/Image": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+      "dist/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
       "dist/Module.symvers": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
-      "dist/kernel.config": "212d0adfbb6b680b0ef88e2558af839dff75de43f4215aa5962add32b1a8b302",
-      "dist/kernel.release": "0c19b1522ff4d21d7662b934063bb37e46233d2037c48deea05d77186608c10c",
-      "logs/build.log": "f1de8326471dc5d50c1eefd3e0deb64852c13a1d8a0ae38540939a0e98b22ce5",
-      "out/.config": "212d0adfbb6b680b0ef88e2558af839dff75de43f4215aa5962add32b1a8b302",
-      "out/arch/arm64/boot/Image": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
-      "out/drivers/kernelsu/.ksu.o.cmd": "41d1394bbedf71d0c1d129f7abaea4aa0ffa742b93e7e072dc5fa186e777a37f",
-      "out/include/config/kernel.release": "0c19b1522ff4d21d7662b934063bb37e46233d2037c48deea05d77186608c10c",
-      "out/vmlinux": "60e24a2aae6fd84ddd8c2688bac0a88aac2c06b9ee6e9ec8c68595aa4d45c268"
+      "dist/kernel.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+      "dist/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+      "logs/build.log": "488e2b6771832233d69be7dcaacfdbcd4555af9c97f8ee9eddbdc417aac6a645",
+      "out/.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+      "out/arch/arm64/boot/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+      "out/drivers/kernelsu/.ksu.o.cmd": "a07ba07273eebede5c3bfc88cbf35919853230d14598a04b311e608fe23d36de",
+      "out/include/config/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+      "out/vmlinux": "2f63ac0ade614824ae232c05dc3848cbe674ab0aa9d29ba94f9cdccf53756086"
     },
     "btf_required_function_count": 15,
-    "build_completion_sha256": "f1f91dce16c39d89b2dfc5cb69a13ac2eecf2c092d9020416b7d6a2530faab4d",
+    "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
     "built_modules": 5,
     "compiler": "\"Android (8508608, based on r450784e) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)\"",
     "embedded_config_matches": true,
-    "kernel_release": "5.15.189-android13-8-g51bba4309aac",
-    "kernel_sha256": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+    "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
     "ksu_uapi": 2,
     "phone_runtime": "NOT_RUN",
     "required_config": {
@@ -63,7 +63,7 @@
       },
       "common": {
         "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-        "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
         "untracked": {
           "drivers/kernelsu": {
             "kind": "symlink",
@@ -87,30 +87,36 @@
         }
       }
     },
-    "source_lock_sha256": "1e10abd0acb3483774aef2ef0d86fd070be4c377b0ce8afbcc62319bf0925160",
+    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
     "status": "PASS_OFFLINE_BUILD_CHECKS",
     "sukisu_version_code": 40900
   },
   "device": "Sony Xperia 1 V XQ-DQ72 / pdx234",
+  "evidence_hash_scope": "SHA256 of the redacted public copies under verification/; raw input hashes are in verification/publication_export.json",
   "evidence_sha256": {
-    "logs/anykernel_host_test.json": "f74ba8aae8f320c2906db61181871b44ffcc9b646ca483354ca1dff59f1e8b56",
-    "logs/build_completion.json": "f1f91dce16c39d89b2dfc5cb69a13ac2eecf2c092d9020416b7d6a2530faab4d",
-    "logs/build_verification.json": "e6c7920c52b8feedf1ac1c4a7d220b4a84be5217dd2eb71d9cc912a618267b97",
-    "logs/packaging_final_tests.txt": "a8368fb49c68d695ad2810aca7b5fda32a783ca9cd9f3b5540f1102b164fb7d9",
-    "logs/packaging_verification.json": "808ae63f6fbac799a203472950066d1f7239f7261548763746c4b3a4e291ceb4",
+    "logs/anykernel_host_test.json": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+    "logs/build_completion.json": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+    "logs/build_verification.json": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
+    "logs/old40922_unchanged.json": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
+    "logs/packaging_final_tests.txt": "0c043849c3818fd8c22dce7e8ade2ef228294e0dd2fa8e551d9a6552157c3b56",
+    "logs/packaging_verification.json": "8e66e5638cbced86ec6ac425a7223df5cd55f9253c523c66b0f3298e09ae290b",
     "logs/previous40900_unchanged.json": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
-    "logs/source_reconstruction_check.json": "7e01b5e554430ce057666cf29896c53de6119a60852d79f76548e689ae81c329",
-    "logs/userspace_ctime_test.json": "9df7318ee8f898c9ac7b52de3ef0da5c767a8b53bb7656560defe47d5ded90bb",
+    "logs/prior_20261013_unchanged.json": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
+    "logs/publication_export_tests.txt": "2045e50d9fe62d682ee9b19f6ec4f2fd9bb4ffec9f9506b23442729a4a9c5654",
+    "logs/r2_source_delta.json": "03a0f6e080a3de72289e1b829ea2e9989a54db10230f58fceaa3161a5fb9f4f1",
+    "logs/source_reconstruction_check.json": "a8e0d2a799e182ac34c46400f0d5955a351a6ba18827914e972143e532fdaa34",
+    "logs/stock_kernel_release.json": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
+    "logs/userspace_ctime_test.json": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
     "logs/userspace_wire_test.json": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
-    "logs/vendor_audit/protection.json": "eb0035d69251766fb0db977723d207117447eed348dc589311f5ec722417e30d",
-    "logs/vendor_audit/summary.json": "eb1bd14d1563eb7a293efa04416de0501254ee0b377daaa871e0a15a45bfad71",
-    "logs/vendor_audit/vermagic_check.json": "42ad96cd67ba56c67bddd203aeb50897de421cae9a252f3c109d17c5ab3502de",
-    "tests/suki_security_results.json": "cb9cb51c0d047c5a7013b74ea49cdd3fe0d4b097abdc8870ed73156cc975272b",
-    "tests/suki_security_review.txt": "0853f14be1837147ea8469ca14a7f1fbf779100e7d2a922546b80fb4e62a6d3f",
-    "tests/susfs_40900_preserved.json": "40157b765d3931358751c03f45f9d365a6c0670c6ad6dddca9970f60ec9db3d5",
-    "tests/susfs_namei_baseline.json": "b5dcfdb90cc849133ee752c405c26b8d2e89945fb63fd024fd918dbb8fde8716",
-    "tests/susfs_namei_candidate.json": "81a6322d4ce004fda051961434c4e6bbb5785f3530358d941ce967126969b7fe",
-    "tests/susfs_repair_report.txt": "44319d9a13fe8197b208533b72d81347f4476bd6475aae8578c716aa2d1621c2",
+    "logs/vendor_audit/protection.json": "891cd36b0d1a3dd39224875815cef6eb0696f9614150060ee214de7ce36dd066",
+    "logs/vendor_audit/summary.json": "63b12efb814fb1004e238a7320af68a2057d77bd04145b2fd337c540927b6657",
+    "logs/vendor_audit/vermagic_check.json": "d5950432a750bbc5fbff3d930453993d78a224162cc9bf3e418d06abe2eead6e",
+    "tests/suki_security_results.json": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
+    "tests/suki_security_review.txt": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
+    "tests/susfs_40900_preserved.json": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+    "tests/susfs_namei_baseline.json": "1c945270c893b3fe7f1a91fb26dfe6b71beff59d207db9ed6b6a8ab7cba43dd3",
+    "tests/susfs_namei_candidate.json": "3ed0db1b1abf2c3fc6085b8efb7a3c4a27ee110af80ed5b85def54961558c039",
+    "tests/susfs_repair_report.txt": "05cd929037819f661ee1205f9d840654e69d9118c7a09774ad5f75532a9a3456",
     "tests/susfs_source_hashes.json": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01"
   },
   "firmware": "67.2.A.3.178",
@@ -129,12 +135,13 @@
       },
       "status": "PASS"
     },
+    "publication_export_normal_and_optimized": 16,
     "scope": "Host/static evidence; not candidate device or installer execution",
     "sukisu_security": 59,
     "susfs_namei": 215,
     "susfs_preserved": 63
   },
-  "kernel_release": "5.15.189-android13-8-g51bba4309aac",
+  "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
   "license_distribution_status": "UNRESOLVED_NO_PUBLIC_DISTRIBUTION_CLEARANCE",
   "license_note": "Pinned SUSFS GPL-3.0 and Linux GPL-2.0-only binary redistribution compatibility remains unresolved; notices do not resolve it.",
   "manager": {
@@ -161,14 +168,14 @@
     "protected_import_table_entries": 0,
     "signature_verification": "NOT_VERIFIED",
     "signed_modules": [
-      "/home/liu/android/build_sukisu_20260920/vendor_audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/drivers/block/zram/zram.ko",
-      "/home/liu/android/build_sukisu_20260920/vendor_audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/mm/zsmalloc.ko"
+      "external/redacted-home",
+      "external/redacted-home"
     ],
     "status": "PASS_STATIC_NO_TRUST_NEEDED",
     "untrusted_module_protection_collisions": []
   },
   "module_vermagic": {
-    "candidate_vermagic": "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+    "candidate_vermagic": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557 SMP preempt mod_unload modversions aarch64",
     "loader_source": "sources/common/kernel/module.c:1316",
     "loader_source_sha256": "102f733f1b3275db74818190166ba721a08a3c5f9b4f2336238b3be750b5840a",
     "mismatches": [],
@@ -189,17 +196,17 @@
     "boot_XQ-DQ72_67.2.A.3.178_sukisu40922.img": "5369d90ccdea043cbe00657a4a733aef183c7ac230bc2d55894cc0aeeb91c3a8"
   },
   "packaging": {
-    "anykernel_path": "dist/packages/8ca2f33c14ca4d82-1e10abd0acb3/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip",
-    "anykernel_sha256": "caf68af8f9d59ca5faad5b262b99b0ea8ce40b4d017ac6433730f743f2dcc90c",
+    "anykernel_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip",
+    "anykernel_sha256": "755feefd4e78547fd3da28d185892b32a32cd7315c422d060017919c4f19a359",
     "avb_algorithm": "NONE (unsigned custom image)",
     "avb_hash_check": "PASS",
     "boot_and_zip_kernel_payloads_match_Image": true,
     "boot_header_other_fields_match_stock": true,
     "boot_header_version": 4,
     "boot_partition_size": 100663296,
-    "boot_path": "dist/packages/8ca2f33c14ca4d82-1e10abd0acb3/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
+    "boot_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
     "boot_ramdisk_size": 0,
-    "boot_sha256": "8e2a4ac8299b99414e829f54b8a2119cf092f4d0bcff87a4f0fc243381a5cde7",
+    "boot_sha256": "2bc757daab5eb648d0833f1bbcd2e07757b6e3693a53f2b0a08abebbe8e66f72",
     "candidate_avb_metadata": {
       "algorithm": "NONE",
       "flags": 0,
@@ -228,9 +235,9 @@
       "rollback_index_location": 0,
       "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
     },
-    "kernel_sha256": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
     "phone_boot_and_installer_execution": "NOT_RUN",
-    "source_lock_sha256": "1e10abd0acb3483774aef2ef0d86fd070be4c377b0ce8afbcc62319bf0925160",
+    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
     "status": "PASS_OFFLINE_PACKAGING_CHECKS",
     "stock_avb_metadata": {
       "algorithm": "SHA256_RSA4096",
@@ -289,12 +296,12 @@
         "scope": "Fresh extraction; Git identities, patches, untracked hashes and modes verified",
         "status": "PASS_EXTRACTED_SOURCE_LOCK_CHECK"
       },
-      "sha256": "9bb77bd35753ee8634b11e527824a0fc9483aa756189f948cc183f3d7214a326"
+      "sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b"
     },
     "source_changes.tar.gz": {
       "base_sources": "Requires exact upstream bases from network or a local source cache",
       "contents": "Locked patches, added sources, scripts, tests, CLI source and licenses",
-      "sha256": "a4ef55d4ae33118cc0d0cd99e81a6e9221e431fc83fdacaa11a3bfd84bc3f7bb"
+      "sha256": "6940262490a493a29b8e4f421182ceb2eb6253baad206abcc02170c20c4a3540"
     }
   },
   "source_inputs": {
@@ -310,7 +317,7 @@
     },
     "common": {
       "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-      "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
       "untracked": {
         "drivers/kernelsu": {
           "kind": "symlink",
@@ -334,16 +341,16 @@
       }
     }
   },
-  "source_lock_sha256": "1e10abd0acb3483774aef2ef0d86fd070be4c377b0ce8afbcc62319bf0925160",
+  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
   "source_reconstruction": {
     "build": {
-      "build_completion_sha256": "f1f91dce16c39d89b2dfc5cb69a13ac2eecf2c092d9020416b7d6a2530faab4d",
-      "build_verification_sha256": "e6c7920c52b8feedf1ac1c4a7d220b4a84be5217dd2eb71d9cc912a618267b97",
+      "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+      "build_verification_sha256": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
       "clean_output_directory": true,
-      "completed_at": "2026-10-13T04:03:58.359733+00:00",
-      "kernel_sha256": "8ca2f33c14ca4d826356ea7315256e1b72e1e955015c0729b0a84cdc7c8b6994",
+      "completed_at": "2026-10-13T11:15:14.053381+00:00",
+      "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
       "process_exit_code": 0,
-      "started_at": "2026-10-13T03:38:45.208866+00:00",
+      "started_at": "2026-10-13T10:58:07.505919+00:00",
       "status": "PASS_OFFLINE_BUILD_CHECKS"
     },
     "environment": {
@@ -375,7 +382,7 @@
         },
         "common": {
           "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-          "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+          "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
           "untracked": {
             "drivers/kernelsu": {
               "kind": "symlink",
@@ -414,7 +421,7 @@
       },
       "common": {
         "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-        "patch_sha256": "28e503a4ed7ed564e54959a574df0371fb35a37d997161e863a7132d3175608a",
+        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
         "untracked": {
           "drivers/kernelsu": {
             "kind": "symlink",
@@ -439,7 +446,7 @@
       }
     },
     "schema_version": 1,
-    "source_lock_sha256": "1e10abd0acb3483774aef2ef0d86fd070be4c377b0ce8afbcc62319bf0925160",
+    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
     "source_trees_match": true,
     "status": "PASS_NETWORK_RECONSTRUCTION_AND_BUILD"
   },
@@ -452,6 +459,7 @@
     "feature_tests": {
       "result": "PASS: 9 actual CLI payload cases; no real syscalls performed",
       "scope": "Actual CLI parser, recorded syscall payload; host stat fixture; no phone interaction",
+      "source": "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c",
       "source_sha256": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4",
       "status": "PASS",
       "tests": 9
@@ -479,6 +487,12 @@
       "status": "PASS"
     }
   },
+  "validation_scope": {
+    "candidate_device_and_installer": "NOT_RUN",
+    "independent_host_ci": "NOT_ATTESTED_BY_THIS_LOCAL_FINALIZER",
+    "local_full_build": "PASS",
+    "third_party_full_rebuild": "NOT_RUN"
+  },
   "vendor_module_abi": {
     "candidate_crc_mismatch_count": 0,
     "candidate_export_count": 15418,
@@ -493,7 +507,7 @@
     "peer_imports": 3405,
     "status": "PASS_STATIC",
     "stock_module_export_count": 2652,
-    "symvers": "/home/liu/android/build_sukisu_20261013/out/Module.symvers",
+    "symvers": "./out/Module.symvers",
     "symvers_sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
     "unique_module_hashes": 370,
     "unresolved_reference_count": 0,
