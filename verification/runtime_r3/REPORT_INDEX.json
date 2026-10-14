@@ -21,10 +21,14 @@
     "r3_sensor_runtime_zh_TW.txt": "b11d3480012b45f7b46a09c550eb58a76328535b14cc12180b70cddef5a9b96a",
     "r3_network_runtime.json": "77f28e7f8e2235f349ca6bab51dc7f3ba36e94cd8fa316f0c5bcde28524699cb",
     "r3_network_runtime_zh_TW.txt": "8926b3269bd1f58c78228217a2957412f527527fcc3be80747bca37c64d6e153",
-    "r3_vendor_qns_init_diagnosis.json": "b3d1954b14b4dc9c070d57d2cf1b2a67b2e9833717b32a181b557d1be6ee5a44",
-    "r3_vendor_qns_init_diagnosis_zh_TW.txt": "7ca9b22030e5ea3f83095a611eede2da23d4617aaa4aad4bfc24720f83b1e6bc",
+    "r3_vendor_qns_init_diagnosis.json": "b3b0b96808875aab872e6a0158b6a6c4e307579aad0bcbd094ba08e73c3f3af3",
+    "r3_vendor_qns_init_diagnosis_zh_TW.txt": "521e417b53affee8f312f3552611cb0171af7ae4e14a2cec9032b513b21bdd43",
     "r3_zygisk_next_shamiko_runtime.json": "a2a63ef59edeb110bab7c2f44721efe179da99ee7b9e16907a4ab18d0c0ea2bc",
-    "r3_zygisk_next_shamiko_runtime_zh_TW.txt": "1b78c115cadac8bb4bab6e32adea147fd596ddc4a5ddb4cc7f4fa945929e865e"
+    "r3_zygisk_next_shamiko_runtime_zh_TW.txt": "1b78c115cadac8bb4bab6e32adea147fd596ddc4a5ddb4cc7f4fa945929e865e",
+    "r3_vendor_failure_evidence.json": "566808ba52470bd019421185d005bc87fd2eed0911ec6a922b224ed9eab6a613",
+    "r3_vendor_failure_evidence_zh_TW.txt": "363773c85af054b08442873f861eca061876cb5d5258fee199ea27a88ee48410",
+    "r3_stock_ab_runtime.json": "10942fa0c93256874a5a9a8dc44321d336312075974da2ab2f9fcece288cfede",
+    "r3_stock_ab_runtime_zh_TW.txt": "a1340d35e529c11cf3713ddff6ca1c5d4327036cd890ccc5fec236b8ff0a3587"
   },
   "scope": "Sanitized maintainer-reviewed reports; private digest references do not publish raw device logs."
 }

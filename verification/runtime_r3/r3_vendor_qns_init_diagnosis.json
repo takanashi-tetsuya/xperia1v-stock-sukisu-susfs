@@ -34,11 +34,12 @@
       "framework_call_code_units_hex": "0x010a",
       "source_line": 122
     },
-    "confirmed_conclusion": "The installed vendor implementation intentionally creates the null argument on this branch. The observed exception can be explained by this userspace API-contract defect; there is no need to hypothesize that kernel compilation corrupted a Java List.",
+    "confirmed_conclusion": "The installed vendor method explicitly constructs the null argument on the observed call path. This locates the immediate Java API-contract defect; it does not establish why the path was reached or exclude a kernel, root-stack, module, modem or timing contribution to the trigger.",
     "trigger_not_proven": [
       "Which APN mask and physical slot supplied the empty/null networks response in the failed process.",
       "Why this branch was triggered in this boot but not in the other retained captures.",
-      "Whether module behavior, timing, SIM provisioning or modem response conditions influenced when the existing defect was reached."
+      "Whether module behavior, timing, SIM provisioning or modem response conditions influenced when the existing defect was reached.",
+      "Whether the same event is reproducible on the unmodified stock kernel under matched firmware, SIM, settings and observation windows; a separate controlled comparison is required."
     ],
     "retained_runtime_observation": {
       "startup_exception_occurrences_in_crash_buffer": 1,
@@ -86,7 +87,8 @@
     "not_established": [
       "The exact parent process, init service name or native abort message.",
       "A shared cause for all early and later non-PID1 events.",
-      "That these aborts are harmless, or that a specific kernel or module patch caused them."
+      "That these aborts are harmless, or that a specific kernel or module patch caused them.",
+      "A difference in event rate between kernels: these historical captures have unequal conditions/windows and very small samples, so their raw counts are not a controlled frequency comparison."
     ],
     "logging_scope_correction": "Retained kernel captures do include some early init messages before one second. The limitation is missing attribution/abort-reason records for these particular processes, not a demonstrated loss of all logs from the first six seconds.",
     "mechanism_reference": "AOSP distinguishes child abort handling from PID1 fatal handling and can abort a child before exec; this is consistent with the observed process naming but is not device-specific proof of the failing branch."
@@ -137,5 +139,20 @@
     "previous_persistent_android_log": "f63d11868be198a0995d0e96d98c196749d97260cec016ec4a971f38407e0c70",
     "r3_initial_kernel_capture": "e5f78aa15d7ed76dbf4d0bc6a8991726990ed878fb2c0cb56e53ceb9f7ca0ef7"
   },
-  "privacy": "No device identifiers, network identifiers, APK/DEX bytes or raw logs are embedded. Evidence hashes are opaque bindings only."
+  "privacy": "No device identifiers, network identifiers, APK/DEX bytes or raw logs are embedded. Evidence hashes are opaque bindings only.",
+  "evidence_qualification": {
+    "type": "MAINTAINER_ANALYSIS_OF_PRIVATE_ORIGINALS",
+    "independent_reproduction": false,
+    "hash_meaning": "Opaque integrity bindings to retained originals, not public access to or independent authentication of their contents.",
+    "public_readable_excerpt_report": "r3_vendor_failure_evidence.json",
+    "controlled_ab_results": "See separate r3_stock_ab_runtime.json for the four matched module-isolated boots and separate original-module restoration fault observation; this historical diagnosis alone does not establish a stock baseline."
+  },
+  "retained_init_followup": {
+    "status": "NATIVE_INIT_CAUSE_STILL_UNAVAILABLE",
+    "tombstone_header_count_reviewed": 32,
+    "matching_init_tombstone_found": false,
+    "pstore_bytes": 0,
+    "scope": "Read-only follow-up of retained tombstones, DropBox and current logs. qvrservice native failures are separate processes and are not used to explain init aborts.",
+    "receipt_sha256": "49c198ea5ae7f02077e1c3808ae1e9f8bc8601834220640576c2fae81a9c4b42"
+  }
 }

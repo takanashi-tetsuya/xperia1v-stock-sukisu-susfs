@@ -1,0 +1,49 @@
+r3 IWLAN / 非 PID 1 init 故障摘錄
+
+證據等級：維護者從私人保留日誌中挑選、去識別化的摘錄；不是可獨立驗證的完整原始裝置證據。
+來源雜湊綁定原始完整檔案，不包含下列去識別化變換。公開的雜湊和行號本身無法證明來源真實、完整，或不存在其他錯誤。
+
+選取規則：source_A 的第 2–3 行保留 init fatal signal 與 helper 失敗，第 4–14 行保留完整 IWLAN Java 堆疊；source_B 的第 2–3 行保留同類型 signal 與 helper 失敗作比較。行號從原檔第一行開始，包含 logcat buffer 標頭；原始順序不變。
+唯一逐行文字變換：以 [timestamp redacted] 取代每行開頭的 MM-DD HH:MM:SS.mmm。其後所有字元（含空白及縮排）保留。精確日期時間不公開，因此不能據此重建事件間隔。
+私人完整路徑、序號、網路/帳號識別資訊、完整日誌、APK/DEX 和 tombstone 都不公開；短期 PID/TID、類別、方法、程式行號與 signal 保留，以便核對錯誤內容。
+
+source_A：r3 modules-enabled boot crash buffer
+完整原檔 SHA-256：7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721
+原檔大小 1768 bytes；14 行。
+
+r3_non_pid1_init_abort：原檔第 2–3 行
+L2: [timestamp redacted]   981   981 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 981 (init), pid 981 (init)
+L3: [timestamp redacted]   981   981 F libc    : crash_dump helper failed to exec, or was killed
+
+r3_iwlan_npe：原檔第 4–14 行
+L4: [timestamp redacted]  4549  5290 E AndroidRuntime: FATAL EXCEPTION: QualifiedNetworksServiceImpl
+L5: [timestamp redacted]  4549  5290 E AndroidRuntime: Process: .qtidataservices, PID: 4549
+L6: [timestamp redacted]  4549  5290 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.stream.Stream java.util.List.stream()' on a null object reference
+L7: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes(QualifiedNetworksService.java:186)
+L8: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks(QualifiedNetworksServiceImpl.java:122)
+L9: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.access$100(QualifiedNetworksServiceImpl.java:41)
+L10: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl$1.handleMessage(QualifiedNetworksServiceImpl.java:67)
+L11: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:107)
+L12: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:232)
+L13: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:317)
+L14: [timestamp redacted]  4549  5290 E AndroidRuntime: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+
+source_B：working 40922 rollback crash buffer
+完整原檔 SHA-256：47cc94483a9d6a73587ace62ed5c5f64f3f80e1fb6510aa433052a02b14c67d0
+原檔大小 244 bytes；3 行。
+
+working_40922_non_pid1_init_abort：原檔第 2–3 行
+L2: [timestamp redacted]  1024  1024 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1024 (init), pid 1024 (init)
+L3: [timestamp redacted]  1024  1024 F libc    : crash_dump helper failed to exec, or was killed
+
+可以直接看到：
+• IWLAN 的 .qtidataservices 程序記錄 NullPointerException；framework 對 null List 參照呼叫 stream()（不是非 null 的空集合），堆疊指向 QualifiedNetworksService.java:186 及 vendor updateQualifiedNetworks 的第 122 行。
+• r3 的 init 命名程序 PID/TID 為 981，舊版 40922 比較項為 1024，都不是日誌中的 PID 1；兩者均緊接 crash_dump helper 失敗。
+
+不能據此斷定：
+• 摘錄不是所有錯誤的清單，也不是沒有其他故障、長期穩定或完整行動通訊功能的證明。
+• IWLAN 的觸發來源（modem、SIM/APN/slot、模組或時序）仍未由這些堆疊確定。另份 r3_vendor_qns_init_diagnosis.json 描述私人 DEX 分析；此摘錄不等於第三方重現該分析。
+• init 的父程序、服務身分、native abort 訊息、呼叫堆疊、確切原因與危害仍未確認。兩版出現相似 signal 不證明是共同根因。
+• 不能以此排除核心或模組的參與；也沒有改寫既有測試結果或宣稱通話、IMS、VoWiFi 已驗證。
+
+隱私審閱：15 行逐行人工檢查；保留內容未見序號、IMEI、帳號、token、URL、IP/MAC/SSID/APN 值或私人絕對路徑。這是維護者審閱，沒有獨立隱私稽核。

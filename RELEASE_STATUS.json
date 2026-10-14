@@ -9,8 +9,8 @@
   "source_commit": "RESOLVE_FROM_RELEASE_TARGET",
   "checkpoint_scope": "Pre-upload local assembly checkpoint; the separate final GitHub sync receipt records the exact source commit and remote CI result without a self-referential commit hash.",
   "local_asset_count": 21,
-  "local_asset_bytes": 649009409,
-  "expected_assets_sha256": "c97116aa6058d09b257f6b59aa45577dc0bc321045f51db57ea5663094475f53",
+  "local_asset_bytes": 649107475,
+  "expected_assets_sha256": "1cb103211838f3884883da1295bc323ebfd9d873d5917944ef64fdbfb00adf68",
   "runtime_manifest_sha256": "3e9026b19cd91c85a8c65f223442ac212d5a419b5c9ed495230ab643db38e2b3",
   "runtime": {
     "audio": "PASS",
@@ -27,6 +27,7 @@
     "wifi": "PASS",
     "zygisk": "PASS"
   },
+  "runtime_scope": "Read manifest.json runtime_test_details, runtime_evidence_qualification, unresolved_runtime_findings and paired_stock_boot_comparison with these bounded status enums; the single-device two-boots-per-group comparison has limited causal scope.",
   "remote_asset_verification": "PENDING_FINAL_COMPLETE_SET_VERIFICATION",
   "ci_scope": "Local staged source/host checks passed; remote CI awaits the final source commit.",
   "license_distribution_status": "UNRESOLVED_NO_PUBLIC_DISTRIBUTION_CLEARANCE",

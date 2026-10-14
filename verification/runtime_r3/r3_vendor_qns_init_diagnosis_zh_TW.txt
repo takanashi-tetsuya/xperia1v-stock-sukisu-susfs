@@ -9,7 +9,7 @@ r3 廠商電信服務與 init abort 離線診斷
 
 直接反組譯得到：updateQualifiedNetworks 迭代 QualifiedNetworks 記錄；若記錄的 networks 為 null 或空清單，便把該 APN type 累積到 apnTypeMaskNullNw。當 mask 非零時，原始碼 line 122 的 DEX 先放入 null 常數（code-unit 0x0109），再呼叫 updateQualifiedNetworkTypes(mask, null)（0x010a）。實機堆疊正好是這個 vendor line 122，接著在 framework 的 List.stream() 觸發 NPE。這不是「清單內某個元素為 null」。
 
-因此直接原因已定位到 vendor 使用者態程式的 API 契約錯誤，沒有必要假設核心編譯把 Java List 弄壞。AOSP 對應 API 要求非 null 清單；無可用網路應以空清單表示。正確修正方向是在 vendor caller 傳入非 null 空清單；重新編譯核心不會改變此 APK 方法。本次沒有修改 APK、簽名、framework、系統分割區或注入 hook，也沒有把此方向當成已測試的修復。
+因此已定位到 vendor 使用者態程式直接傳入 null 的 API 契約錯誤；這不等於證明核心、root stack、模組或時序沒有影響觸發條件。AOSP 對應 API 要求非 null 清單；無可用網路應以空清單表示。正確修正方向是在 vendor caller 傳入非 null 空清單；重新編譯核心不會改變此 APK 方法。本次沒有修改 APK、簽名、framework、系統分割區或注入 hook，也沒有把此方向當成已測試的修復。
 
 仍未證明：這次是哪個 APN／slot 的回應為空、為何此輪觸發、模組／SIM 準備狀態／modem 回應／排程時序是否影響觸發。不能把直接原因已知延伸成「所有上游觸發原因都已排除」。
 
@@ -17,7 +17,7 @@ r3 廠商電信服務與 init abort 離線診斷
 
 2. init abort 的證據邊界
 
-工作正常的舊 40922 記錄有 1 筆非 PID1 init SIGABRT；r3 初次模組停用開機 2 筆、AK3 後模組停用開機 2 筆、模組啟用開機 1 筆。這些記錄中的 init-named fatal process 都不是全域 PID1。此前有界穩定性附錄另有 PID1 存活與 system_server 連續性的證據。
+工作正常的舊 40922 記錄有 1 筆非 PID1 init SIGABRT；r3 初次模組停用開機 2 筆、AK3 後模組停用開機 2 筆、模組啟用開機 1 筆。這些記錄中的 init-named fatal process 都不是全域 PID1。此前有界穩定性附錄另有 PID1 存活與 system_server 連續性的證據。這些歷史記錄的條件與擷取時窗不同，不能用 1／2 筆差異推斷某版的發生率較高。
 
 目前仍未取得各筆事件的確切父程序、init service 名稱或原生 abort message，不能指定哪一條服務啟動分支失敗，不能證明各筆具有同一原因，也不能稱為無害。AOSP 在 fork 子程序與 PID1 採不同 fatal 處理，且服務 exec 前可能 abort；這只說明觀察結果與機制相容，不是實機根因證明。
 
@@ -33,3 +33,7 @@ r3 廠商電信服務與 init abort 離線診斷
 - QualifiedNetworksService 的非 null 清單契約：https://android.googlesource.com/platform/frameworks/base/+/02fcb4356a72980f9aff46cb5652bcd74205711d/telephony/java/android/telephony/data/QualifiedNetworksService.java
 - init 的 PID1／非 PID1 abort 處理：https://android.googlesource.com/platform/system/core/+/0bc3f6b124c22477f052245c6461bd254b374dd3/init/util.cpp
 - Android 15 init service 的 exec 前錯誤路徑（官方 AOSP mirror）：https://raw.githubusercontent.com/aosp-mirror/platform_system_core/android-15.0.0_r1/init/service.cpp
+
+證據補註：私人原始資料的 SHA-256 只綁定保存內容，不能讓第三方直接查閱或獨立認證。可閱讀的最小去識別化堆疊另見 r3_vendor_failure_evidence.json／_zh_TW.txt，仍屬維護者整理。此歷史診斷本身沒有原廠配對對照；新 A/B 結果另見 r3_stock_ab_runtime.json；該附錄包含四輪模組隔離比較及第五輪恢復模組後的故障觀察。
+
+補讀目前保留的 32 份 tombstone header、DropBox、dmesg 與 crash buffer 後，仍未找到相應 init 的原生 Abort message／堆疊；pstore 為空。qvrservice 的 native crash 屬另一程序，不可混作 init 的根因。

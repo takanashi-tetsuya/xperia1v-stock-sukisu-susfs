@@ -24,16 +24,16 @@
     "size": 934547
   },
   "README.md": {
-    "sha256": "b24ddd3462a0ab29faef7c4de3db63608179e04fd38d027bc8261a8b87b459c3",
-    "size": 20220
+    "sha256": "ce57eaba4b1321b145bf4c43d222d1f467f67784a060804e6908ab46b7dc1216",
+    "size": 29405
   },
   "README_zh_TW.txt": {
-    "sha256": "7fdd9e0d98323fedbd70e90b1296c864b1871509a4976755df4e2b615157573e",
-    "size": 3871
+    "sha256": "a6a39a2e00d478cd4c1d38190eaac21ae0e0599bbff9027a87766ebd1847cbc2",
+    "size": 12488
   },
   "RELEASE_NOTES.md": {
-    "sha256": "7fdd9e0d98323fedbd70e90b1296c864b1871509a4976755df4e2b615157573e",
-    "size": 3871
+    "sha256": "a6a39a2e00d478cd4c1d38190eaac21ae0e0599bbff9027a87766ebd1847cbc2",
+    "size": 12488
   },
   "REPAIR_REPORT_20261014.txt": {
     "sha256": "f23efdb1455e6479d6c96d3cd692ffd0308bee67c62c5df49edbbd9d3b8fcd0d",
@@ -60,8 +60,8 @@
     "size": 52
   },
   "manifest.json": {
-    "sha256": "27c31f5eb4729ebe91e59d10c5f682be3ba8cbcf348a40daad20f9a9645b1fee",
-    "size": 40764
+    "sha256": "56a94da674419c483f480b265c556b41726e903fe3426b0f58bd162bf3924e6a",
+    "size": 91965
   },
   "packaging_metadata.tar.gz": {
     "sha256": "9da831982946a63df458c2b305be99ee6f445b67a0d9b1400e6f7bc80232c3e9",
@@ -76,11 +76,11 @@
     "size": 11624
   },
   "verification.tar.gz": {
-    "sha256": "b072d3e0deb2324e5f7eb2c3cf18386eaa12bfed8af898c070bc9f6cb98ce245",
-    "size": 601660
+    "sha256": "556afe7839abf004dbbe78dde92ef92da10a1ecb237e12f21d423453a7799340",
+    "size": 622106
   },
   "RELEASE_SHA256SUMS": {
-    "sha256": "d6a93570418dd400bceca031f2d4563c8f75155566dee0dc13b74125d7732d2e",
+    "sha256": "213e0dc5e5e1ecfe22a3ed809209a8ce6f92fcc3e0adb3e8a0918502e5beadb0",
     "size": 1738
   }
 }

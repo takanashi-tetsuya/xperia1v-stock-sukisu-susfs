@@ -1,0 +1,938 @@
+{
+  "schema_version": 1,
+  "status": "PAIRED_BOOT_COMPARISON_COMPLETE_CAUSALITY_LIMITED",
+  "candidate": {
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671"
+  },
+  "stock": {
+    "boot_sha256": "06dbe42eccb4ea14a53e7b34d1f509bc7b176776db89d3280adba44c4b8b3731",
+    "scope": "Exact unmodified same-firmware stock kernel/boot image on the same previously root-modified phone and existing userdata. No factory reset or claim that the entire vendor/system/userdata state is pristine."
+  },
+  "phases": [
+    {
+      "name": "a1_r3_off",
+      "status": "COMPLETE",
+      "variant": "r3",
+      "init_sigabrt_count": 2,
+      "init_pid1_sigabrt_count": 0,
+      "iwlan_npe_count": 0,
+      "first_observed_uptime": 62.13,
+      "last_observed_uptime": 300.93,
+      "matched_comparison_phase": true,
+      "settings_restored": true,
+      "root_module_script_isolation": {
+        "status": "PASS_RECORDED_ISOLATION_SCAN",
+        "disabled_module_marker_count": 6,
+        "common_regular_script_file_count": 0,
+        "source_sha256": "ab22a2d0b8d1b6159d22d4e42691c9655719f773c7a06b497c35a6c9469c2ac8",
+        "scope": "The retained root scan enumerated the six expected module disable files and no regular files in the four common script directories. This is a file-state check, not proof that all kernel/root mechanisms are absent."
+      },
+      "transitions": [
+        {
+          "name": "data_enable",
+          "uptime_seconds": 90.36,
+          "passed": true
+        },
+        {
+          "name": "wifi_disable",
+          "uptime_seconds": 120.17,
+          "passed": true
+        },
+        {
+          "name": "wifi_enable",
+          "uptime_seconds": 150.03,
+          "passed": true
+        },
+        {
+          "name": "data_disable",
+          "uptime_seconds": 181.93,
+          "passed": true
+        }
+      ],
+      "minimal_crash_excerpts": [
+        {
+          "id": "a1_r3_off_event_1",
+          "kind": "init_sigabrt",
+          "source_id": "a1_r3_off_crash_stream",
+          "source_sha256": "a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06",
+          "source_bytes": 459,
+          "source_line_numbers_1_based": [
+            2,
+            3
+          ],
+          "lines": [
+            {
+              "source_line": 2,
+              "text": "[timestamp redacted]  1032  1032 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1032 (init), pid 1032 (init)"
+            },
+            {
+              "source_line": 3,
+              "text": "[timestamp redacted]  1032  1032 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        },
+        {
+          "id": "a1_r3_off_event_2",
+          "kind": "init_sigabrt",
+          "source_id": "a1_r3_off_crash_stream",
+          "source_sha256": "a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06",
+          "source_bytes": 459,
+          "source_line_numbers_1_based": [
+            4,
+            5
+          ],
+          "lines": [
+            {
+              "source_line": 4,
+              "text": "[timestamp redacted]  5030  5030 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5030 (init), pid 5030 (init)"
+            },
+            {
+              "source_line": 5,
+              "text": "[timestamp redacted]  5030  5030 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        }
+      ],
+      "private_bugreport": {
+        "status": "VERIFIED_PRIVATE_POST_WINDOW_BUGREPORT",
+        "sha256": "d23e7702fc7007b93f5da58095dce4e35014ad958a5ad897a5b672eda4f10f6e",
+        "bytes": 12784545,
+        "receipt_sha256": "abba0eb70eadff7990349a7b49f31e823c4ec5723687591a2a1067d58c17b13e",
+        "ordinary_shell": true,
+        "outside_matched_observation_window": true,
+        "raw_archive_published": false,
+        "scope": "Collected after the comparison window. Ordinary adb bugreport uses dumpstate and may contain privileged native crash information even where direct shell dmesg/tombstone access is denied. No absence inference is made from shell access denial."
+      },
+      "evidence_sha256": {
+        "steps.json": "8565af8d3f4851e36c4d8453bfee67565576d8ed97915bd2b83698b7cf417267",
+        "events.jsonl": "97c85e874d680602f76dc5b20112e65788ea6c78e8edaa9c01bf5bb37b58289f",
+        "status_samples.jsonl": "8d8f3232f7599b6b82a71f16a0a08667d965c427ee6ac970901435ce666c5eb0",
+        "identity.txt": "97547c90d68e19a7880cdc6e66c73cc832de1c3ae6f51259fb18c199ad861798",
+        "before_crash.txt": "a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06",
+        "after_crash.txt": "a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06",
+        "crash_stream.txt": "a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06"
+      }
+    },
+    {
+      "name": "b1_stock",
+      "status": "COMPLETE",
+      "variant": "stock",
+      "init_sigabrt_count": 2,
+      "init_pid1_sigabrt_count": 0,
+      "iwlan_npe_count": 0,
+      "first_observed_uptime": 14.23,
+      "last_observed_uptime": 301.64,
+      "matched_comparison_phase": true,
+      "settings_restored": true,
+      "root_module_script_isolation": null,
+      "transitions": [
+        {
+          "name": "data_enable",
+          "uptime_seconds": 90.4,
+          "passed": true
+        },
+        {
+          "name": "wifi_disable",
+          "uptime_seconds": 120.36,
+          "passed": true
+        },
+        {
+          "name": "wifi_enable",
+          "uptime_seconds": 150.36,
+          "passed": true
+        },
+        {
+          "name": "data_disable",
+          "uptime_seconds": 180.36,
+          "passed": true
+        }
+      ],
+      "minimal_crash_excerpts": [
+        {
+          "id": "b1_stock_event_1",
+          "kind": "init_sigabrt",
+          "source_id": "b1_stock_crash_stream",
+          "source_sha256": "df7c6e610b189438761f0a38a0bc9f5191ceae0b7a1981c53ab73b34bd834258",
+          "source_bytes": 459,
+          "source_line_numbers_1_based": [
+            2,
+            3
+          ],
+          "lines": [
+            {
+              "source_line": 2,
+              "text": "[timestamp redacted]  1004  1004 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1004 (init), pid 1004 (init)"
+            },
+            {
+              "source_line": 3,
+              "text": "[timestamp redacted]  1004  1004 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        },
+        {
+          "id": "b1_stock_event_2",
+          "kind": "init_sigabrt",
+          "source_id": "b1_stock_crash_stream",
+          "source_sha256": "df7c6e610b189438761f0a38a0bc9f5191ceae0b7a1981c53ab73b34bd834258",
+          "source_bytes": 459,
+          "source_line_numbers_1_based": [
+            4,
+            5
+          ],
+          "lines": [
+            {
+              "source_line": 4,
+              "text": "[timestamp redacted]  4998  4998 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 4998 (init), pid 4998 (init)"
+            },
+            {
+              "source_line": 5,
+              "text": "[timestamp redacted]  4998  4998 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        }
+      ],
+      "private_bugreport": {
+        "status": "VERIFIED_PRIVATE_POST_WINDOW_BUGREPORT",
+        "sha256": "794216804df4b3f45f1dc6083a0514c1de3e75e460ff324bfd2bbd6092ba21d9",
+        "bytes": 12664231,
+        "receipt_sha256": "6c5b710d689a4cba45dc1b46529efafe5de3b2211117466103247c61ebc787ba",
+        "ordinary_shell": true,
+        "outside_matched_observation_window": true,
+        "raw_archive_published": false,
+        "scope": "Collected after the comparison window. Ordinary adb bugreport uses dumpstate and may contain privileged native crash information even where direct shell dmesg/tombstone access is denied. No absence inference is made from shell access denial."
+      },
+      "evidence_sha256": {
+        "steps.json": "482f4ada8b635b281cc9efa95a7de1cdd74d02691187c133ee83a083b38a96f3",
+        "events.jsonl": "49a099bebb330b8b4a939b2c56d107fcf41e5832ea9f33963088aad3c6576daf",
+        "status_samples.jsonl": "c77a4363b60a4b34f5014f64626281a8d5eaf6a4a64013998afbc2766c07dec9",
+        "identity.txt": "f2e4c479b578622fb4a94850ae2259b9e43227f9180bce5db618204f3608fd49",
+        "before_crash.txt": "2a43f78a0e3466d770b552789871f15638e24661e82300c76b677f0dcf5d2e7b",
+        "after_crash.txt": "df7c6e610b189438761f0a38a0bc9f5191ceae0b7a1981c53ab73b34bd834258",
+        "crash_stream.txt": "df7c6e610b189438761f0a38a0bc9f5191ceae0b7a1981c53ab73b34bd834258"
+      }
+    },
+    {
+      "name": "b2_stock",
+      "status": "COMPLETE",
+      "variant": "stock",
+      "init_sigabrt_count": 2,
+      "init_pid1_sigabrt_count": 0,
+      "iwlan_npe_count": 0,
+      "first_observed_uptime": 11.25,
+      "last_observed_uptime": 300.92,
+      "matched_comparison_phase": true,
+      "settings_restored": true,
+      "root_module_script_isolation": null,
+      "transitions": [
+        {
+          "name": "data_enable",
+          "uptime_seconds": 91.89,
+          "passed": true
+        },
+        {
+          "name": "wifi_disable",
+          "uptime_seconds": 121.93,
+          "passed": true
+        },
+        {
+          "name": "wifi_enable",
+          "uptime_seconds": 151.86,
+          "passed": true
+        },
+        {
+          "name": "data_disable",
+          "uptime_seconds": 181.82,
+          "passed": true
+        }
+      ],
+      "minimal_crash_excerpts": [
+        {
+          "id": "b2_stock_event_1",
+          "kind": "init_sigabrt",
+          "source_id": "b2_stock_crash_stream",
+          "source_sha256": "960663e701ebbff1bdd2f2561af4139cd11beb3c043eb0721899087e3a839b70",
+          "source_bytes": 457,
+          "source_line_numbers_1_based": [
+            2,
+            3
+          ],
+          "lines": [
+            {
+              "source_line": 2,
+              "text": "[timestamp redacted]   993   993 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 993 (init), pid 993 (init)"
+            },
+            {
+              "source_line": 3,
+              "text": "[timestamp redacted]   993   993 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        },
+        {
+          "id": "b2_stock_event_2",
+          "kind": "init_sigabrt",
+          "source_id": "b2_stock_crash_stream",
+          "source_sha256": "960663e701ebbff1bdd2f2561af4139cd11beb3c043eb0721899087e3a839b70",
+          "source_bytes": 457,
+          "source_line_numbers_1_based": [
+            4,
+            5
+          ],
+          "lines": [
+            {
+              "source_line": 4,
+              "text": "[timestamp redacted]  5012  5012 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5012 (init), pid 5012 (init)"
+            },
+            {
+              "source_line": 5,
+              "text": "[timestamp redacted]  5012  5012 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        }
+      ],
+      "private_bugreport": {
+        "status": "VERIFIED_PRIVATE_POST_WINDOW_BUGREPORT",
+        "sha256": "bfe94e431a93500ef16c93068cca1a86eb40e5fb1d13f33ec4784f5f0f05edca",
+        "bytes": 12456250,
+        "receipt_sha256": "7b29cb47184dad7e3df64ad64296447460c4771257879529bc38052c8677eb9b",
+        "ordinary_shell": true,
+        "outside_matched_observation_window": true,
+        "raw_archive_published": false,
+        "scope": "Collected after the comparison window. Ordinary adb bugreport uses dumpstate and may contain privileged native crash information even where direct shell dmesg/tombstone access is denied. No absence inference is made from shell access denial."
+      },
+      "evidence_sha256": {
+        "steps.json": "151b3ce0bb3fb0216a3b28e2dc56af3b304bf2b2df3934ee75293a68a620e326",
+        "events.jsonl": "2a50c5ef587d08aa82aa14b3536b4fd1cf7eae968e1afea10a6cb9ad5da5949d",
+        "status_samples.jsonl": "47cddb67cc9d805cb7a8ae8ebfae5becea1aa747262a987edf516e01910725fd",
+        "identity.txt": "9390b1e78b23cba60adedbb944a09b4ecd7ff81c440c7559d7eceeb5a6d3f24b",
+        "before_crash.txt": "2b614fee138ac2f4033d3211f06bf4951f9bfd0a9046533e97d02ed643f64f7a",
+        "after_crash.txt": "960663e701ebbff1bdd2f2561af4139cd11beb3c043eb0721899087e3a839b70",
+        "crash_stream.txt": "960663e701ebbff1bdd2f2561af4139cd11beb3c043eb0721899087e3a839b70"
+      }
+    },
+    {
+      "name": "a2_r3_off",
+      "status": "COMPLETE",
+      "variant": "r3",
+      "init_sigabrt_count": 2,
+      "init_pid1_sigabrt_count": 0,
+      "iwlan_npe_count": 0,
+      "first_observed_uptime": 11.55,
+      "last_observed_uptime": 301.54,
+      "matched_comparison_phase": true,
+      "settings_restored": true,
+      "root_module_script_isolation": {
+        "status": "PASS_RECORDED_ISOLATION_SCAN",
+        "disabled_module_marker_count": 6,
+        "common_regular_script_file_count": 0,
+        "source_sha256": "9db0996924f55bf4f0ffac375a7216b6c45d496609a064fbd15e1bff5afffce7",
+        "scope": "The retained root scan enumerated the six expected module disable files and no regular files in the four common script directories. This is a file-state check, not proof that all kernel/root mechanisms are absent."
+      },
+      "transitions": [
+        {
+          "name": "data_enable",
+          "uptime_seconds": 90.23,
+          "passed": true
+        },
+        {
+          "name": "wifi_disable",
+          "uptime_seconds": 120.36,
+          "passed": true
+        },
+        {
+          "name": "wifi_enable",
+          "uptime_seconds": 150.33,
+          "passed": true
+        },
+        {
+          "name": "data_disable",
+          "uptime_seconds": 180.35,
+          "passed": true
+        }
+      ],
+      "minimal_crash_excerpts": [
+        {
+          "id": "a2_r3_off_event_1",
+          "kind": "init_sigabrt",
+          "source_id": "a2_r3_off_crash_stream",
+          "source_sha256": "effae93dc63e0f745c48c10ec3b86d8babe7d8c075cdbce418c0328615dd0bf2",
+          "source_bytes": 459,
+          "source_line_numbers_1_based": [
+            2,
+            3
+          ],
+          "lines": [
+            {
+              "source_line": 2,
+              "text": "[timestamp redacted]  1023  1023 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1023 (init), pid 1023 (init)"
+            },
+            {
+              "source_line": 3,
+              "text": "[timestamp redacted]  1023  1023 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        },
+        {
+          "id": "a2_r3_off_event_2",
+          "kind": "init_sigabrt",
+          "source_id": "a2_r3_off_crash_stream",
+          "source_sha256": "effae93dc63e0f745c48c10ec3b86d8babe7d8c075cdbce418c0328615dd0bf2",
+          "source_bytes": 459,
+          "source_line_numbers_1_based": [
+            4,
+            5
+          ],
+          "lines": [
+            {
+              "source_line": 4,
+              "text": "[timestamp redacted]  5172  5172 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5172 (init), pid 5172 (init)"
+            },
+            {
+              "source_line": 5,
+              "text": "[timestamp redacted]  5172  5172 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        }
+      ],
+      "private_bugreport": {
+        "status": "VERIFIED_PRIVATE_POST_WINDOW_BUGREPORT",
+        "sha256": "03ece0387d33d18314bdeda6696b94abf3d4a194ddb1f619c40aa9016328f7d4",
+        "bytes": 11068016,
+        "receipt_sha256": "8ef8e3a6cbf09ea12dd46dc23b299e3f4e1093505c408c38304cbf0a7c6e8d2d",
+        "ordinary_shell": true,
+        "outside_matched_observation_window": true,
+        "raw_archive_published": false,
+        "scope": "Collected after the comparison window. Ordinary adb bugreport uses dumpstate and may contain privileged native crash information even where direct shell dmesg/tombstone access is denied. No absence inference is made from shell access denial."
+      },
+      "evidence_sha256": {
+        "steps.json": "174c04a0f681a6c7b8caafbc76b8d4cbbfbfcdbd61aa7a135b8ea253aa65f5f3",
+        "events.jsonl": "538c828eb33ac14621ec622a3e89f49b643a5604bf4c84979853909125a356fd",
+        "status_samples.jsonl": "1afbf72bf4cb18f3f72a4bbd8490af7587900b0ad911126c014308bbb09112f2",
+        "identity.txt": "8373fc76775973f8898ba4c7877533dde544083a1aa64bdeb20db0e181338918",
+        "before_crash.txt": "67b72735f95d1e617bfbb089de977dc6673e7dc8e59e66ea1c788464f68ff96a",
+        "after_crash.txt": "effae93dc63e0f745c48c10ec3b86d8babe7d8c075cdbce418c0328615dd0bf2",
+        "crash_stream.txt": "effae93dc63e0f745c48c10ec3b86d8babe7d8c075cdbce418c0328615dd0bf2"
+      }
+    },
+    {
+      "name": "restore_r3",
+      "status": "COMPLETE",
+      "variant": "r3",
+      "init_sigabrt_count": 1,
+      "init_pid1_sigabrt_count": 0,
+      "iwlan_npe_count": 2,
+      "first_observed_uptime": 11.79,
+      "last_observed_uptime": 300.97,
+      "matched_comparison_phase": false,
+      "settings_restored": true,
+      "root_module_script_isolation": null,
+      "transitions": [],
+      "minimal_crash_excerpts": [
+        {
+          "id": "restore_r3_event_1",
+          "kind": "init_sigabrt",
+          "source_id": "restore_r3_crash_stream",
+          "source_sha256": "2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba",
+          "source_bytes": 3294,
+          "source_line_numbers_1_based": [
+            2,
+            3
+          ],
+          "lines": [
+            {
+              "source_line": 2,
+              "text": "[timestamp redacted]   990   990 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 990 (init), pid 990 (init)"
+            },
+            {
+              "source_line": 3,
+              "text": "[timestamp redacted]   990   990 F libc    : crash_dump helper failed to exec, or was killed"
+            }
+          ]
+        },
+        {
+          "id": "restore_r3_event_2",
+          "kind": "iwlan_npe",
+          "source_id": "restore_r3_crash_stream",
+          "source_sha256": "2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba",
+          "source_bytes": 3294,
+          "source_line_numbers_1_based": [
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "lines": [
+            {
+              "source_line": 4,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: FATAL EXCEPTION: QualifiedNetworksServiceImpl"
+            },
+            {
+              "source_line": 5,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: Process: .qtidataservices, PID: 4138"
+            },
+            {
+              "source_line": 6,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.stream.Stream java.util.List.stream()' on a null object reference"
+            },
+            {
+              "source_line": 7,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes(QualifiedNetworksService.java:186)"
+            },
+            {
+              "source_line": 8,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks(QualifiedNetworksServiceImpl.java:122)"
+            },
+            {
+              "source_line": 9,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.access$100(QualifiedNetworksServiceImpl.java:41)"
+            },
+            {
+              "source_line": 10,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl$1.handleMessage(QualifiedNetworksServiceImpl.java:67)"
+            },
+            {
+              "source_line": 11,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat android.os.Handler.dispatchMessage(Handler.java:107)"
+            },
+            {
+              "source_line": 12,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat android.os.Looper.loopOnce(Looper.java:232)"
+            },
+            {
+              "source_line": 13,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat android.os.Looper.loop(Looper.java:317)"
+            },
+            {
+              "source_line": 14,
+              "text": "[timestamp redacted]  4138  4893 E AndroidRuntime: \tat android.os.HandlerThread.run(HandlerThread.java:85)"
+            }
+          ]
+        },
+        {
+          "id": "restore_r3_event_3",
+          "kind": "iwlan_npe",
+          "source_id": "restore_r3_crash_stream",
+          "source_sha256": "2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba",
+          "source_bytes": 3294,
+          "source_line_numbers_1_based": [
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25
+          ],
+          "lines": [
+            {
+              "source_line": 15,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: FATAL EXCEPTION: QualifiedNetworksServiceImpl"
+            },
+            {
+              "source_line": 16,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: Process: .qtidataservices, PID: 4908"
+            },
+            {
+              "source_line": 17,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.stream.Stream java.util.List.stream()' on a null object reference"
+            },
+            {
+              "source_line": 18,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes(QualifiedNetworksService.java:186)"
+            },
+            {
+              "source_line": 19,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks(QualifiedNetworksServiceImpl.java:122)"
+            },
+            {
+              "source_line": 20,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.access$100(QualifiedNetworksServiceImpl.java:41)"
+            },
+            {
+              "source_line": 21,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl$1.handleMessage(QualifiedNetworksServiceImpl.java:67)"
+            },
+            {
+              "source_line": 22,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat android.os.Handler.dispatchMessage(Handler.java:107)"
+            },
+            {
+              "source_line": 23,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat android.os.Looper.loopOnce(Looper.java:232)"
+            },
+            {
+              "source_line": 24,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat android.os.Looper.loop(Looper.java:317)"
+            },
+            {
+              "source_line": 25,
+              "text": "[timestamp redacted]  4908  5038 E AndroidRuntime: \tat android.os.HandlerThread.run(HandlerThread.java:85)"
+            }
+          ]
+        }
+      ],
+      "private_bugreport": {
+        "status": "NOT_COLLECTED_FOR_RESTORATION_ONLY_PHASE"
+      },
+      "evidence_sha256": {
+        "steps.json": "988f0e57f497d5f751f20eb7ec73036e3eb0a92c310afa2ef5ab3ecc3895c285",
+        "events.jsonl": "4ecfcc8cb77e39fea4905bf55a25a2c41a176845de2685378d5601c74708c5ec",
+        "status_samples.jsonl": "2a42630faf2a6998af6890839447bae47955e8deceedd1fbeb3582e611377542",
+        "identity.txt": "89a628e1e78795f259e51305708800ad2d0288e01008fcd768e8ac125e552579",
+        "before_crash.txt": "fa4971482ee8a47f726978ac7401573a31c376561b45790dd510cae15feaedaf",
+        "after_crash.txt": "2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba",
+        "crash_stream.txt": "2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba"
+      }
+    }
+  ],
+  "findings": {
+    "init": {
+      "status": "INIT_CLASS_REPRODUCED_ON_STOCK_CAUSE_UNRESOLVED",
+      "conclusion": "The same broad class of init-named SIGABRT was also recorded on stock. The custom kernel is therefore not necessary for this observed class. This does not establish identical causes, harmlessness, frequency equivalence, or that additional r3 events are unrelated to the custom kernel/root stack."
+    },
+    "iwlan": {
+      "status": "IWLAN_REPRODUCED_AFTER_MODULE_RESTORATION_TRIGGER_UNRESOLVED",
+      "conclusion": "The four matched module-isolated/stock windows had no positive IWLAN NPE reproduction, but the separate fifth boot on the same r3 kernel with the original modules restored recorded 2 IWLAN NPE events. This is a positive restoration-phase reproduction, not a matched third r3 replicate. It does not identify a particular module or establish module causation: startup, carrier/modem state, timing and other uncontrolled conditions differ. A later replacement QNS service was observed with 2 providers, 2 processed responses and 7 network-type updates; the same service/providers were present at the window endpoint, whose ring dump had no response/update entries. This bounded later activity means startup restart/backoff messages alone do not establish a continuing outage; it is not an IMS, VoWiFi, calling or long-term functionality test.",
+      "matched_group_counts": {
+        "stock": 0,
+        "r3_modules_isolated": 0
+      },
+      "separate_restoration_phase_count": 2,
+      "restoration_scope": "The fifth boot restores original r3/module state and is reported separately. A restoration PASS means requested state restored, not crash-free runtime or proven module causation.",
+      "later_service_observation": {
+        "status": "VERIFIED_SOURCE_BINDINGS_CURATED_REPLACEMENT_QNS_OBSERVATION",
+        "followup_provider_count": 2,
+        "followup_processed_response_count": 2,
+        "followup_network_type_update_count": 7,
+        "same_service_instance_at_window_end": true,
+        "endpoint_provider_count": 2
+      }
+    }
+  },
+  "installed_vendor_apk_consistency": {
+    "status": "PASS_SAME_INSTALLED_VENDOR_APK_ALL_FOUR_PHASES",
+    "expected_apk_sha256": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+    "verified_phase_count": 4,
+    "phases": [
+      {
+        "phase": "a1_r3_off",
+        "apk_sha256": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+        "capture_sha256": "b5de54da6c27391f3eb690b5a4e8195e9fce2bea65350d62ccf97bb959382891",
+        "receipt_sha256": "c4d42644f86d333fd2067dbfca8ab8d8e8067fd2c6457a5427bc475263fbac44",
+        "outside_window": true
+      },
+      {
+        "phase": "b1_stock",
+        "apk_sha256": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+        "capture_sha256": "b5de54da6c27391f3eb690b5a4e8195e9fce2bea65350d62ccf97bb959382891",
+        "receipt_sha256": "c4d42644f86d333fd2067dbfca8ab8d8e8067fd2c6457a5427bc475263fbac44",
+        "outside_window": true
+      },
+      {
+        "phase": "b2_stock",
+        "apk_sha256": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+        "capture_sha256": "b5de54da6c27391f3eb690b5a4e8195e9fce2bea65350d62ccf97bb959382891",
+        "receipt_sha256": "c4d42644f86d333fd2067dbfca8ab8d8e8067fd2c6457a5427bc475263fbac44",
+        "outside_window": true
+      },
+      {
+        "phase": "a2_r3_off",
+        "apk_sha256": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+        "capture_sha256": "b5de54da6c27391f3eb690b5a4e8195e9fce2bea65350d62ccf97bb959382891",
+        "receipt_sha256": "c4d42644f86d333fd2067dbfca8ab8d8e8067fd2c6457a5427bc475263fbac44",
+        "outside_window": true
+      }
+    ],
+    "scope": "This compares the installed IWlanService APK across the four retained phases. It does not independently compare the APK with a separate Sony firmware extraction or establish pristine vendor/system/userdata."
+  },
+  "supplementary_native_review": {
+    "bugreport_reviews": [
+      {
+        "phase": "a1_r3_off",
+        "status": "VERIFIED_SOURCE_BINDINGS_CURATED_NATIVE_REVIEW",
+        "analysis_sha256": "12f1bd6c2f538971cccc91a6383f49116a6bf257eb4c18426d5707f05db80ab0",
+        "analyzer_sha256": "6dafcdf6fe4004350d7ae6646e61f4f84954b432115d7370b755aa60a8107d34",
+        "bugreport_sha256": "d23e7702fc7007b93f5da58095dce4e35014ad958a5ad897a5b672eda4f10f6e",
+        "bugreport_bytes": 12784545,
+        "main_text_sha256": "0aa13f8f7930d44fda0c5708088e97643d6feb814340d1cc16b671bbe0d2ab54",
+        "main_text_bytes": 93859252,
+        "common_init_event_count": 2,
+        "retained_tombstone_count": 32,
+        "matching_init_tombstone_count": 0,
+        "native_abort_reason_recovered": false,
+        "system_server_fatal_marker_count_in_aggregate_report": 0,
+        "other_named_pid_candidate_count": 0,
+        "manually_excluded_historical_pid_reuse_count": 0,
+        "retained_kernel_uptime_min": 61.016336,
+        "retained_kernel_uptime_max": 333.697988
+      },
+      {
+        "phase": "b1_stock",
+        "status": "VERIFIED_SOURCE_BINDINGS_CURATED_NATIVE_REVIEW",
+        "analysis_sha256": "17b56ce4a1b89d7e3c53aff469ae8fcff2c7da03b17654ffd12462dbf4eafde0",
+        "analyzer_sha256": "6dafcdf6fe4004350d7ae6646e61f4f84954b432115d7370b755aa60a8107d34",
+        "bugreport_sha256": "794216804df4b3f45f1dc6083a0514c1de3e75e460ff324bfd2bbd6092ba21d9",
+        "bugreport_bytes": 12664231,
+        "main_text_sha256": "bc3b4849277bf56dbbdd893d8ff1171a757396454d6080c0feeba1712d33641b",
+        "main_text_bytes": 91499628,
+        "common_init_event_count": 2,
+        "retained_tombstone_count": 32,
+        "matching_init_tombstone_count": 0,
+        "native_abort_reason_recovered": false,
+        "system_server_fatal_marker_count_in_aggregate_report": 0,
+        "other_named_pid_candidate_count": 0,
+        "manually_excluded_historical_pid_reuse_count": 0,
+        "retained_kernel_uptime_min": 56.79412,
+        "retained_kernel_uptime_max": 353.517499
+      },
+      {
+        "phase": "b2_stock",
+        "status": "VERIFIED_SOURCE_BINDINGS_CURATED_NATIVE_REVIEW",
+        "analysis_sha256": "950b50f2ad60f1a83aa6858c1cf08e676a90a6b6f1a56cfffd9f8d92fcb14cf0",
+        "analyzer_sha256": "6dafcdf6fe4004350d7ae6646e61f4f84954b432115d7370b755aa60a8107d34",
+        "bugreport_sha256": "bfe94e431a93500ef16c93068cca1a86eb40e5fb1d13f33ec4784f5f0f05edca",
+        "bugreport_bytes": 12456250,
+        "main_text_sha256": "69f20edf90ba275ceefa84701fe0fad0531a7eefba5ba7386e76ff2cebd37959",
+        "main_text_bytes": 88067054,
+        "common_init_event_count": 2,
+        "retained_tombstone_count": 32,
+        "matching_init_tombstone_count": 0,
+        "native_abort_reason_recovered": false,
+        "system_server_fatal_marker_count_in_aggregate_report": 0,
+        "other_named_pid_candidate_count": 0,
+        "manually_excluded_historical_pid_reuse_count": 0,
+        "retained_kernel_uptime_min": 93.710075,
+        "retained_kernel_uptime_max": 348.594544
+      },
+      {
+        "phase": "a2_r3_off",
+        "status": "VERIFIED_SOURCE_BINDINGS_CURATED_NATIVE_REVIEW",
+        "analysis_sha256": "41a6c89e254791871a0ec162a6744611ffbe2b7d9f812dfed510b5db300b47cb",
+        "analyzer_sha256": "6dafcdf6fe4004350d7ae6646e61f4f84954b432115d7370b755aa60a8107d34",
+        "bugreport_sha256": "03ece0387d33d18314bdeda6696b94abf3d4a194ddb1f619c40aa9016328f7d4",
+        "bugreport_bytes": 11068016,
+        "main_text_sha256": "ed351d05bdab86704dca1fd0395318e4f113351948bdba919f239b28c09f716e",
+        "main_text_bytes": 81331596,
+        "common_init_event_count": 2,
+        "retained_tombstone_count": 32,
+        "matching_init_tombstone_count": 0,
+        "native_abort_reason_recovered": false,
+        "system_server_fatal_marker_count_in_aggregate_report": 0,
+        "other_named_pid_candidate_count": 1,
+        "manually_excluded_historical_pid_reuse_count": 1,
+        "retained_kernel_uptime_min": 2434.558028,
+        "retained_kernel_uptime_max": 3580.668319,
+        "manual_review_note": "Historical non-init application-exit records reused numeric process IDs. The maintainer reviewed their context and different signal, excluded them from current init-abort attribution, and did not recover the current native cause. These exclusions are manual, not automatic parser results."
+      }
+    ],
+    "early_kernel_review": {
+      "status": "VERIFIED_SOURCE_BINDINGS_CURATED_EARLY_KERNEL_REVIEW",
+      "analysis_sha256": "712fb9a033608357a789c36a63eb3ec0b2820c8472d897325dc51f2b3de4d07b",
+      "dmesg_sha256": "cce01adf9305719466170a11a73a3ce3fd3cc7716d24dc64cd26c3fb6a39e373",
+      "dmesg_bytes": 724992,
+      "receipt_sha256": "b441c85b7375c53ab175804c49faf8ba02f155179ed4a880d239812b4f3b642c",
+      "collector_sha256": "d621275225dedf6da250701692a8e4c66d868ff501630bb23f0c2f1f16ddcdd6",
+      "retained_kernel_uptime_min": 0.604939,
+      "retained_kernel_uptime_max": 309.762218,
+      "timestamped_kernel_line_count": 6693,
+      "same_boot_and_r3_banner_verified": true,
+      "target_kernel_record_count": 0,
+      "init_fatal_kernel_record_count": 0,
+      "native_abort_reason_recovered": false,
+      "excluded_from_common_event_counts": true,
+      "scope": "Early retained kernel records are available, but this supplementary analysis did not recover the target init abort cause. It does not prove every early record survived, identify a service, establish harmlessness or exclude the kernel/root stack."
+    },
+    "qualification": "Maintainer-derived supplementary analysis, not independently authenticated raw evidence. Source archives/streams and selected member hashes are rechecked locally; manual classifications remain explicitly manual. Supplementary data never changes common-channel counts.",
+    "limits": "Historical tombstones and reused numeric process IDs are not attributed to a current boot merely because they are present. Missing matching dumps or attribution records does not prove absence, harmlessness or kernel independence."
+  },
+  "restoration_qns_followup": {
+    "status": "VERIFIED_SOURCE_BINDINGS_CURATED_REPLACEMENT_QNS_OBSERVATION",
+    "analysis_sha256": "a71c8e6da06f678838e820d1d696c64f72a0f035952ea96bf15efe11b6d94c00",
+    "same_restoration_boot_verified": true,
+    "replacement_service_observed": true,
+    "followup_provider_count": 2,
+    "followup_processed_response_count": 2,
+    "followup_network_type_update_count": 7,
+    "same_service_instance_at_window_end": true,
+    "endpoint_provider_count": 2,
+    "endpoint_processed_response_count_in_dump": 0,
+    "endpoint_network_type_update_count_in_dump": 0,
+    "sampled_replacement_process_count": 2,
+    "sampled_mapping_line_count": 4778,
+    "identifiable_injection_mapping_count": 0,
+    "source_sha256": {
+      "followup_receipt": "0f67dc3f31fdb60f869f59d74c5a6f57c60a8b4cd7dd9b0730ccb637725602e3",
+      "followup_qns": "bfa371fc4ac0bb8d312dd3ff02f8f752dcdb9aae875d2f1f44b7b42ce6882ae8",
+      "endpoint_qns": "25e76a93798065dcdb6a3dbde63665fc670a6fb14c538a433d50e2668ca8d7d9",
+      "replacement_maps": "e24b3d9403606c3cc5efb61f706e1defb1e6ed4fdeaa57b312d400eee3dd5315"
+    },
+    "qualification": "Maintainer-derived aggregate service/map interpretation; every referenced source file and command receipt rehashed locally. No process IDs, mapping paths, accounts, network identifiers or raw records are published.",
+    "limits": [
+      "A replacement QNS service with providers, processed responses and updates demonstrates bounded later activity, not an IMS/VoWiFi/calling/roaming or long-term functional test.",
+      "The endpoint dump retains the same service and providers but has no response/update ring entries; earlier activity comes from the separate followup, not inference from the empty endpoint ring.",
+      "Scheduled restart/backoff messages alone do not prove a continued outage after the subsequent service activity.",
+      "No identifiable ReZygisk/PIF/Vector mapping name in the replacement-process sample does not prove no earlier injection or unmapped code, and cannot describe the already-crashed processes or attribute a crash to a module."
+    ]
+  },
+  "restoration": {
+    "status": "PASS_ORIGINAL_R3_REZYGISK_RESTORED",
+    "checks": {
+      "partitions_verified": true,
+      "features_restored": true,
+      "modules_restored": true,
+      "common_scripts_restored": true
+    },
+    "evidence": {
+      "partitions_verified": [
+        {
+          "id": "partitions_verified_1",
+          "sha256": "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436",
+          "bytes": 378
+        },
+        {
+          "id": "partitions_verified_2",
+          "sha256": "bc551cd800e0e74cb800759342dd98354eea2ba4eaddbae22288bcccad6aaba8",
+          "bytes": 73
+        },
+        {
+          "id": "partitions_verified_3",
+          "sha256": "bc551cd800e0e74cb800759342dd98354eea2ba4eaddbae22288bcccad6aaba8",
+          "bytes": 73
+        }
+      ],
+      "features_restored": [
+        {
+          "id": "features_restored_1",
+          "sha256": "cb9929479d0335632b1bc077108c86911b378d59cbad2fcd4b51a08ce660f25f",
+          "bytes": 715
+        },
+        {
+          "id": "features_restored_2",
+          "sha256": "fd3fc5e82cb06ffb559fe1312c6bdefd4e18ed6d8b58efad5bb09612c5bc96c1",
+          "bytes": 94
+        }
+      ],
+      "modules_restored": [
+        {
+          "id": "modules_restored_1",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "id": "modules_restored_2",
+          "sha256": "8d8ee22a4354be8963365ca9448e1b15e7f4fc018354eb33f746eb6be4fcb800",
+          "bytes": 81
+        },
+        {
+          "id": "modules_restored_3",
+          "sha256": "2421252bbb0c41c0bf435bfa796ad6d9e3d978a7800efd2b02595ff4bcd89e8d",
+          "bytes": 23944
+        },
+        {
+          "id": "modules_restored_4",
+          "sha256": "e4bf88827d1403dd302cedbdbc1d91aa7cb7f6e338d4737a8bfe353576ab7cbd",
+          "bytes": 445542
+        },
+        {
+          "id": "modules_restored_5",
+          "sha256": "ab37409690302ff50b6386e22b6430cbfc523d90fdf74f81919882fb3301b331",
+          "bytes": 522634
+        },
+        {
+          "id": "modules_restored_6",
+          "sha256": "0954d236f7c3915303257e6a3d8c9be0a8dc48c08875437174bb2b1b717946c5",
+          "bytes": 10
+        }
+      ],
+      "common_scripts_restored": [
+        {
+          "id": "common_scripts_restored_1",
+          "sha256": "8a3c321ff33650e3348c317a7e0ef7adc571956950b42fed7d5a6dc78b0d39bd",
+          "bytes": 204
+        },
+        {
+          "id": "common_scripts_restored_2",
+          "sha256": "9607297108cf2803ad022ff83096406fcdfca74a2839e30b684ef5d4b405c462",
+          "bytes": 122
+        },
+        {
+          "id": "common_scripts_restored_3",
+          "sha256": "1391d9b82a98f3b31aae958d746dabdc3042a22efb3636cc4b3b95a3cfbd2563",
+          "bytes": 120
+        }
+      ]
+    },
+    "qualification": "Restoration verdicts supplied by the maintainer; every referenced local evidence file was independently rehashed by this report builder. Hash verification alone does not re-execute or externally authenticate the checks."
+  },
+  "protocol": {
+    "design": "A-B-B-A; two matched boots per kernel on one owner-controlled phone, then a separate restoration boot",
+    "comparison": "A: r3 with six root modules and two common scripts isolated. B: same-firmware stock boot. The combined kernel/root stack changes; individual patches are not isolated.",
+    "scheduled_transitions_seconds": {
+      "data_enable": 90,
+      "wifi_disable": 120,
+      "wifi_enable": 150,
+      "data_disable": 180
+    },
+    "allowed_transition_delay_seconds": 15,
+    "target_end_uptime_seconds": 300,
+    "final_network_settings_restored_all_phases": true,
+    "common_channel": "Ordinary-shell logcat/process/service/network snapshots; r3 root-only evidence is supplementary.",
+    "collector_sha256_before_readiness_fix": "cb24f5b839cf2e6631a81c8152568dc031f587a48b8d18ef07a2f2bd328ae9a7",
+    "collector_sha256_after_readiness_fix": "08a7ade8778d7d84f20ab4b8e5c06e982aecf4de7e9337f017bd8c1b5ca7522b"
+  },
+  "a1_startup_gap": {
+    "earlier_connection_uptime_seconds": 11.63,
+    "resumed_connection_uptime_seconds": 62.13,
+    "same_boot_verified": true,
+    "network_changes_before_retry": false,
+    "interpretation": "SettingsProvider was not ready; collection resumed on the same boot with retained crash-buffer events. There is a continuous-capture gap, not another replicate. The earlier interrupted pre-boot collector was not a completed boot.",
+    "source_sha256": {
+      "steps.json": "21e550542c1a5720eb9a0fd37e8d70437c69f0e95aab159154326af3a496ce54",
+      "events.jsonl": "00b7ba10143ea3eebeac7553cb916d56cc8ab71b80bce78f66a5de99b7c34b51",
+      "first_status.txt": "006678dd784f9c475dca0fdf19894aa0925553278f936418286bd2acdfed9444",
+      "crash_stream.txt": "8d9f80c619605df6ccee6b9f7f46c78475c770b7eb396dc3fd5375c1b68a7d59",
+      "logcat_all.txt": "4ad0d7a8681f268821f3e23d2ea8f68ef4bb1af5511217e48dbb610cd08715ac"
+    }
+  },
+  "limitations": [
+    "Only two matched boots per group on one phone; no statistical rate or frequency-equivalence conclusion.",
+    "The stock baseline changes only to the exact same-firmware stock boot image on this previously root-modified phone with existing userdata. It is not a factory-clean phone; no factory reset or proof of pristine vendor/system/userdata is provided. Installed APK consistency, when verified, is not independent Sony-firmware authenticity verification.",
+    "A1 has an 11.63-to-62.13-second startup collection interruption; the readiness retry was added for later phases. Instrumentation is not claimed identical across every boot.",
+    "A2 additionally has a root-only early-kernel logging observer, unlike stock. This read-only supplement can add observer load; its success is not required for this report. Comparison counts use common crash records only, and absence in dmesg is not used to infer absence of a fault.",
+    "ADB startup and finite retained ring buffers do not prove capture from process start; zero recorded events is not proof of absence.",
+    "Manual unlock timing, carrier/modem/SIM state and background scheduling were not fully controlled.",
+    "Wall-clock correction appears in device logs. Counts deduplicate timestamp/PID/TID anchors within each phase only; wall-clock fields are removed from public excerpts and do not establish boot-relative event timing.",
+    "Stock reproduction establishes only that the custom kernel is not necessary for the broad observed class, not that all aborts have the same cause, are harmless or that excess r3 events are kernel-unrelated.",
+    "The prior IWLAN null-list stack identifies a userspace failure site, not its upstream trigger. Negative A/B windows cannot exclude the kernel or module stack.",
+    "The fifth boot with original modules restored is a separate observation, not a third matched r3 replicate. Any IWLAN NPE there is a positive reproduction that must accompany the four-window result; it does not isolate a module or prove causation. Restoration PASS describes restored state, not absence of crashes.",
+    "After-window bugreports are private supplementary captures, not extra matched observation windows. dumpstate access must not be confused with direct-shell permissions.",
+    "The A2 bugreport was collected later after a user interruption and same-boot confirmation; the first three were collected soon after their windows. Post-window timing is therefore not identical. The comparison counts remain those from the completed common crash captures, including retained startup events; the delayed bugreport is not used to extend or recalculate the matched counts.",
+    "No call, SMS, IMS, VoWiFi, roaming, throughput, OTA or long-term stability validation is claimed."
+  ],
+  "evidence_qualification": {
+    "level": "Maintainer-curated local device evidence, not independently authenticated raw evidence",
+    "private_analysis_sha256": "6ecb86ea27e7c4ba18c30e13925345c0d5b8a74e9fee6f0c5104c9bca4891aa8",
+    "final_restoration_sha256": "74a613de2ba15536d1ec8e5356a1eaa7e46b671112ac8b0082a71eb76c7ae17e",
+    "five_distinct_boot_identities_verified_privately": true,
+    "protocol_sha256": "e731fa81b327717cadcdbdadae683a1994394ab551ba567733fe56ec0fdf5d5e",
+    "analyzer_sha256": "0f0600cfd12b55bec5c823a5571ee4fdaf74d0d333e621c1cd190f99f572afca",
+    "report_builder_sha256": "13468fe456deb0f57e5fce06475f8d67ffacfbb390923579720818bffd4b3f49",
+    "hash_verification": "All analyzer-referenced phase inputs, startup-exception inputs, restoration references and required post-window bugreport ZIPs were rehashed locally; phase analysis was recomputed read-only.",
+    "authentication_limit": "Private source hashes bind exact retained bytes but are not public authentication, independent reproduction or proof of completeness.",
+    "excerpt_rule": "Only grammar-allowlisted init SIGABRT/helper lines and the selected IWLAN null-List Java stack are included. Each has original 1-based line numbers and whole-source SHA/size. Unknown selected text stops generation for manual review.",
+    "redaction": "Every excerpt timestamp is replaced by [timestamp redacted]; PID/TID, process/class/method names, stack line numbers and signal context are retained. No serial, boot UUID, account, network identifier, private path, full raw log, APK or tombstone is included.",
+    "privacy_review": "Strict message grammar plus output pattern checks; maintainer review remains necessary before external publication."
+  }
+}

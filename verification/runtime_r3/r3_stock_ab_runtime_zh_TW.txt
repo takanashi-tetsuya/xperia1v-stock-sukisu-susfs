@@ -1,0 +1,148 @@
+原廠 / r3 A-B-B-A 實機比較
+
+狀態：四輪比較與第五次 r3 恢復觀察完成；因果結論仍有限。
+證據是維護者整理的私人裝置紀錄；來源雜湊不等於外部認證或獨立重現。
+
+階段 | init SIGABRT | IWLAN NPE | 首次至最後觀察 uptime 秒
+a1_r3_off | 2 | 0 | 62.13–300.93
+b1_stock | 2 | 0 | 14.23–301.64
+b2_stock | 2 | 0 | 11.25–300.92
+a2_r3_off | 2 | 0 | 11.55–301.54
+restore_r3 | 1 | 2 | 11.79–300.97
+
+第五輪是恢復狀態與故障觀察，不納入兩組 matched 比較。四輪操作排程：90 秒啟用預設 SIM 數據、120 秒停用 Wi-Fi、150 秒啟用 Wi-Fi、180 秒停用預設 SIM 數據；各步允許延後 15 秒，觀察至至少 300 秒。五輪最終網路設定均已恢復。
+原廠基準只表示同韌體、未修改的原廠核心/boot 映像。手機仍是同一支曾修改 root、沿用既有 userdata 的裝置；沒有恢復原廠設定，也沒有證明整個 vendor/system/userdata 處於純原廠狀態。
+已安裝 IWlanService APK 跨四輪雜湊核對：PASS_SAME_INSTALLED_VENDOR_APK_ALL_FOUR_PHASES。這只檢查測試期間該 APK 是否一致，不是與獨立 Sony 韌體映像比對的純淨性證明。
+A1 在 11.63 秒首次連線時 SettingsProvider 未就緒，62.13 秒於同次開機恢復收集並讀到保留 crash buffer。這段不是連續監測；後續 collector 加了就緒重試，不能聲稱所有輪次儀器完全一致。
+
+A2 額外安排 root 專用早期核心日誌 observer，原廠組沒有同樣收集；唯讀收集仍可能增加觀察負載。補充收集是否成功不影響本報告的完成門檻；比較計數只取共同 crash 紀錄，不以 dmesg 未出現訊息推論沒有故障。
+
+init 結論：原廠也記錄 init 命名程序 SIGABRT，因此自訂核心不是這一大類事件的必要條件；不能推論每個事件同因、無害、發生率相等，或 r3 額外事件與核心/root 組合無關。
+IWLAN 結論：四輪 matched 的模組隔離 r3 / 原廠窗口都沒有 IWLAN NPE，但相同 r3 核心恢復原模組的第五輪有陽性重現（次數見表格與下列摘錄）。這是另一組條件的恢復觀察，不是第三個 matched r3 樣本；不能判定某個模組有問題或證明模組造成崩潰，啟動、電信商/modem 狀態及時序仍未控制。 後續替換服務有 provider、處理回應與更新活動，窗口末仍見相同服務/provider；啟動 backoff 日誌不足以證明一直停擺。這仍不是 IMS/VoWiFi 或通話功能驗證。
+
+限制：每組只有兩次、同一支手機；無法比較發生率或宣稱頻率相等。手動解鎖、電信商/modem/SIM 狀態和背景排程未完全控制。原廠若重現只表示自訂核心不是這一大類事件的必要條件，不證明每個 abort 同因、無害或 r3 多出的事件與核心無關。兩組均未重現 IWLAN 時仍屬無陽性重現，不能排除核心或模組參與。
+普通 adb bugreport 在比較窗口後取得，dumpstate 可取得部分 shell 無權直接讀取的 native 資料；完整 ZIP 僅留私人目錄。來源 SHA 與行號不能替代完整原始證據或保證沒有其他故障。未驗證通話、SMS、IMS、VoWiFi、漫遊、吞吐、OTA 或長期穩定。
+
+A2 bugreport 是使用者中斷後、確認仍為同次開機才補收；前三輪則在窗口結束後不久取得。因此補充 bugreport 的時點不完全相同。比較計數仍採各輪已完成的共同 crash 收集（含保留的啟動事件），不以延遲補收來延長窗口或改算 matched 計數。
+
+恢復：PASS_ORIGINAL_R3_REZYGISK_RESTORED
+原分割區、功能、模組/ReZygisk 與共用腳本的恢復判定由維護者提供；報告工具重新核對各證據檔 SHA/大小，沒有重新操作手機。恢復 PASS 只代表原狀態已恢復，不代表沒有崩潰。
+
+最小故障摘錄（每行日期時間遮蔽；其後內容原樣保留，行號從原檔 1 起算）：
+
+a1_r3_off
+a1_r3_off_event_1 / init_sigabrt
+來源 SHA-256：a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06
+原檔行號：2, 3
+L2: [timestamp redacted]  1032  1032 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1032 (init), pid 1032 (init)
+L3: [timestamp redacted]  1032  1032 F libc    : crash_dump helper failed to exec, or was killed
+a1_r3_off_event_2 / init_sigabrt
+來源 SHA-256：a413e6c6521bffb01fc332b79e1747ebae8e1670706ca583376d7be207921f06
+原檔行號：4, 5
+L4: [timestamp redacted]  5030  5030 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5030 (init), pid 5030 (init)
+L5: [timestamp redacted]  5030  5030 F libc    : crash_dump helper failed to exec, or was killed
+窗口後私人 bugreport SHA-256：d23e7702fc7007b93f5da58095dce4e35014ad958a5ad897a5b672eda4f10f6e
+
+b1_stock
+b1_stock_event_1 / init_sigabrt
+來源 SHA-256：df7c6e610b189438761f0a38a0bc9f5191ceae0b7a1981c53ab73b34bd834258
+原檔行號：2, 3
+L2: [timestamp redacted]  1004  1004 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1004 (init), pid 1004 (init)
+L3: [timestamp redacted]  1004  1004 F libc    : crash_dump helper failed to exec, or was killed
+b1_stock_event_2 / init_sigabrt
+來源 SHA-256：df7c6e610b189438761f0a38a0bc9f5191ceae0b7a1981c53ab73b34bd834258
+原檔行號：4, 5
+L4: [timestamp redacted]  4998  4998 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 4998 (init), pid 4998 (init)
+L5: [timestamp redacted]  4998  4998 F libc    : crash_dump helper failed to exec, or was killed
+窗口後私人 bugreport SHA-256：794216804df4b3f45f1dc6083a0514c1de3e75e460ff324bfd2bbd6092ba21d9
+
+b2_stock
+b2_stock_event_1 / init_sigabrt
+來源 SHA-256：960663e701ebbff1bdd2f2561af4139cd11beb3c043eb0721899087e3a839b70
+原檔行號：2, 3
+L2: [timestamp redacted]   993   993 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 993 (init), pid 993 (init)
+L3: [timestamp redacted]   993   993 F libc    : crash_dump helper failed to exec, or was killed
+b2_stock_event_2 / init_sigabrt
+來源 SHA-256：960663e701ebbff1bdd2f2561af4139cd11beb3c043eb0721899087e3a839b70
+原檔行號：4, 5
+L4: [timestamp redacted]  5012  5012 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5012 (init), pid 5012 (init)
+L5: [timestamp redacted]  5012  5012 F libc    : crash_dump helper failed to exec, or was killed
+窗口後私人 bugreport SHA-256：bfe94e431a93500ef16c93068cca1a86eb40e5fb1d13f33ec4784f5f0f05edca
+
+a2_r3_off
+a2_r3_off_event_1 / init_sigabrt
+來源 SHA-256：effae93dc63e0f745c48c10ec3b86d8babe7d8c075cdbce418c0328615dd0bf2
+原檔行號：2, 3
+L2: [timestamp redacted]  1023  1023 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1023 (init), pid 1023 (init)
+L3: [timestamp redacted]  1023  1023 F libc    : crash_dump helper failed to exec, or was killed
+a2_r3_off_event_2 / init_sigabrt
+來源 SHA-256：effae93dc63e0f745c48c10ec3b86d8babe7d8c075cdbce418c0328615dd0bf2
+原檔行號：4, 5
+L4: [timestamp redacted]  5172  5172 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 5172 (init), pid 5172 (init)
+L5: [timestamp redacted]  5172  5172 F libc    : crash_dump helper failed to exec, or was killed
+窗口後私人 bugreport SHA-256：03ece0387d33d18314bdeda6696b94abf3d4a194ddb1f619c40aa9016328f7d4
+
+restore_r3
+restore_r3_event_1 / init_sigabrt
+來源 SHA-256：2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba
+原檔行號：2, 3
+L2: [timestamp redacted]   990   990 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 990 (init), pid 990 (init)
+L3: [timestamp redacted]   990   990 F libc    : crash_dump helper failed to exec, or was killed
+restore_r3_event_2 / iwlan_npe
+來源 SHA-256：2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba
+原檔行號：4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14
+L4: [timestamp redacted]  4138  4893 E AndroidRuntime: FATAL EXCEPTION: QualifiedNetworksServiceImpl
+L5: [timestamp redacted]  4138  4893 E AndroidRuntime: Process: .qtidataservices, PID: 4138
+L6: [timestamp redacted]  4138  4893 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.stream.Stream java.util.List.stream()' on a null object reference
+L7: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes(QualifiedNetworksService.java:186)
+L8: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks(QualifiedNetworksServiceImpl.java:122)
+L9: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.access$100(QualifiedNetworksServiceImpl.java:41)
+L10: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl$1.handleMessage(QualifiedNetworksServiceImpl.java:67)
+L11: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:107)
+L12: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:232)
+L13: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:317)
+L14: [timestamp redacted]  4138  4893 E AndroidRuntime: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+restore_r3_event_3 / iwlan_npe
+來源 SHA-256：2dd62cc7c2c0b62d115f0ab9cbf7d086e7c8b95d4b5dd8ba8b9c8b48cdaf66ba
+原檔行號：15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25
+L15: [timestamp redacted]  4908  5038 E AndroidRuntime: FATAL EXCEPTION: QualifiedNetworksServiceImpl
+L16: [timestamp redacted]  4908  5038 E AndroidRuntime: Process: .qtidataservices, PID: 4908
+L17: [timestamp redacted]  4908  5038 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.stream.Stream java.util.List.stream()' on a null object reference
+L18: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes(QualifiedNetworksService.java:186)
+L19: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks(QualifiedNetworksServiceImpl.java:122)
+L20: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.access$100(QualifiedNetworksServiceImpl.java:41)
+L21: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl$1.handleMessage(QualifiedNetworksServiceImpl.java:67)
+L22: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:107)
+L23: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at android.os.Looper.loopOnce(Looper.java:232)
+L24: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:317)
+L25: [timestamp redacted]  4908  5038 E AndroidRuntime: 	at android.os.HandlerThread.run(HandlerThread.java:85)
+
+native 原因補充檢查（維護者衍生分析，來源雜湊已重核；不加入共同通道計數）：
+a1_r3_off：保留 tombstone 32 份，符合本輪 init 的 0 份；native 原因恢復結果=False。
+bugreport 內保留的 kernel uptime 範圍：61.016336–333.697988 秒。
+私人分析 SHA-256：12f1bd6c2f538971cccc91a6383f49116a6bf257eb4c18426d5707f05db80ab0
+b1_stock：保留 tombstone 32 份，符合本輪 init 的 0 份；native 原因恢復結果=False。
+bugreport 內保留的 kernel uptime 範圍：56.79412–353.517499 秒。
+私人分析 SHA-256：17b56ce4a1b89d7e3c53aff469ae8fcff2c7da03b17654ffd12462dbf4eafde0
+b2_stock：保留 tombstone 32 份，符合本輪 init 的 0 份；native 原因恢復結果=False。
+bugreport 內保留的 kernel uptime 範圍：93.710075–348.594544 秒。
+私人分析 SHA-256：950b50f2ad60f1a83aa6858c1cf08e676a90a6b6f1a56cfffd9f8d92fcb14cf0
+a2_r3_off：保留 tombstone 32 份，符合本輪 init 的 0 份；native 原因恢復結果=False。
+bugreport 內保留的 kernel uptime 範圍：2434.558028–3580.668319 秒。
+私人分析 SHA-256：41a6c89e254791871a0ec162a6744611ffbe2b7d9f812dfed510b5db300b47cb
+有歷史非 init 程序紀錄重用數值 PID，已人工核對上下文及不同 signal 後排除；這是人工判讀，不是假稱自動解析器直接找到本輪原因。
+A2 root-only 早期 dmesg 補充：724992 bytes，保留 uptime 0.604939–309.762218 秒，共 6693 行帶核心時間戳。
+dmesg SHA-256：cce01adf9305719466170a11a73a3ce3fd3cc7716d24dc64cd26c3fb6a39e373
+私人分析 SHA-256：712fb9a033608357a789c36a63eb3ec0b2820c8472d897325dc51f2b3de4d07b
+已取得大量早期核心紀錄，並非『所有早期日誌都缺失』；但此補充分析仍未找回指定 init abort 的 native 原因。沒有匹配 tombstone/歸屬記錄不能證明無害、排除核心或指定故障服務。
+
+第五輪 IWLAN 崩潰後的 QNS 活動（另份維護者衍生摘要）：
+新服務觀察到 2 個 provider、2 次 processed response 與 7 次 network-type update。
+窗口末仍為相同服務與 2 個 provider；末次 dump 的 response/update ring 計數為 0/0，不能從空 ring 推斷先前沒有活動。
+這是後續服務活動的有限觀察，不能當作 IMS/VoWiFi、通話、漫遊或長期健康驗證。啟動時排程的 restart/backoff 日誌本身不證明後續仍持續中斷。
+替換程序 maps 樣本共 4778 行，可識別注入名稱 0 筆；沒有辨識到名稱不證明未曾注入/已卸載程式碼，更不能回推已崩潰程序或歸因特定模組。
+私人 QNS 分析 SHA-256：a71c8e6da06f678838e820d1d696c64f72a0f035952ea96bf15efe11b6d94c00
+
+公開來源連結資訊：完整原始日誌/bugreport 不公開；詳機器可讀 JSON 的來源雜湊、限制和挑選規則。
+私人分析 SHA-256：6ecb86ea27e7c4ba18c30e13925345c0d5b8a74e9fee6f0c5104c9bca4891aa8
+恢復證明 SHA-256：74a613de2ba15536d1ec8e5356a1eaa7e46b671112ac8b0082a71eb76c7ae17e

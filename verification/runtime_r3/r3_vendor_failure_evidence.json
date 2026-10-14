@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "status": "CURATED_SANITIZED_FAILURE_EXCERPTS",
+  "evidence_level": "Maintainer-curated excerpts from private retained captures; not raw independently verifiable device evidence.",
+  "candidate": {
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb"
+  },
+  "selection_provenance": {
+    "source_identity": "Neutral source IDs and whole-source SHA-256 replace private paths. Phase labels are maintainer annotations.",
+    "line_numbering": "1-based inclusive line numbers from UTF-8 source split into lines; logcat buffer header counts as line 1. No reordering within excerpts.",
+    "hash_scope": "SHA-256 covers exact original file bytes before redaction, including newline bytes.",
+    "selection_rule": "For source_A, retain the init fatal-signal entry and its following helper-failure line, plus the complete adjacent IWLAN Java exception stack. For source_B, retain the init fatal-signal entry and its following helper-failure line. Buffer headers and unselected content are not published.",
+    "authentication_limit": "Hashes bind the retained source bytes if they are independently obtained; without those private bytes they do not independently establish authenticity, completeness or absence of other faults."
+  },
+  "redactions": [
+    {
+      "operation": "Replace the leading MM-DD HH:MM:SS.mmm field with [timestamp redacted] in every excerpted line.",
+      "reason": "Avoid publishing precise device activity times. Absolute timing and elapsed time cannot be reconstructed from these excerpts.",
+      "affected_excerpt_line_count": 15
+    },
+    {
+      "operation": "Do not publish host/device private file locations, full logs, APK/DEX bytes or tombstones.",
+      "reason": "Minimize disclosure of unrelated device, application and network state."
+    }
+  ],
+  "preserved_fields": [
+    "Ephemeral process and thread IDs, needed to show the recorded init-named processes are not PID 1.",
+    "Process/class/method names, Java source line numbers, exception text, fatal signal/code and crash_dump outcome.",
+    "All characters after the removed timestamp prefix, including spacing and stack indentation."
+  ],
+  "sources": [
+    {
+      "id": "source_A",
+      "phase": "r3 modules-enabled boot crash buffer",
+      "capture_kind": "Android logcat crash buffer retained locally",
+      "sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+      "byte_count": 1768,
+      "line_count": 14,
+      "raw_file_published": false,
+      "private_path_published": false
+    },
+    {
+      "id": "source_B",
+      "phase": "working 40922 rollback crash buffer",
+      "capture_kind": "Android logcat crash buffer retained locally",
+      "sha256": "47cc94483a9d6a73587ace62ed5c5f64f3f80e1fb6510aa433052a02b14c67d0",
+      "byte_count": 244,
+      "line_count": 3,
+      "raw_file_published": false,
+      "private_path_published": false
+    }
+  ],
+  "excerpts": [
+    {
+      "id": "r3_non_pid1_init_abort",
+      "source_id": "source_A",
+      "source_line_range_1_based_inclusive": [
+        2,
+        3
+      ],
+      "lines": [
+        {
+          "source_line": 2,
+          "text": "[timestamp redacted]   981   981 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 981 (init), pid 981 (init)"
+        },
+        {
+          "source_line": 3,
+          "text": "[timestamp redacted]   981   981 F libc    : crash_dump helper failed to exec, or was killed"
+        }
+      ]
+    },
+    {
+      "id": "r3_iwlan_npe",
+      "source_id": "source_A",
+      "source_line_range_1_based_inclusive": [
+        4,
+        14
+      ],
+      "lines": [
+        {
+          "source_line": 4,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: FATAL EXCEPTION: QualifiedNetworksServiceImpl"
+        },
+        {
+          "source_line": 5,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: Process: .qtidataservices, PID: 4549"
+        },
+        {
+          "source_line": 6,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'java.util.stream.Stream java.util.List.stream()' on a null object reference"
+        },
+        {
+          "source_line": 7,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes(QualifiedNetworksService.java:186)"
+        },
+        {
+          "source_line": 8,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks(QualifiedNetworksServiceImpl.java:122)"
+        },
+        {
+          "source_line": 9,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.access$100(QualifiedNetworksServiceImpl.java:41)"
+        },
+        {
+          "source_line": 10,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl$1.handleMessage(QualifiedNetworksServiceImpl.java:67)"
+        },
+        {
+          "source_line": 11,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat android.os.Handler.dispatchMessage(Handler.java:107)"
+        },
+        {
+          "source_line": 12,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat android.os.Looper.loopOnce(Looper.java:232)"
+        },
+        {
+          "source_line": 13,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat android.os.Looper.loop(Looper.java:317)"
+        },
+        {
+          "source_line": 14,
+          "text": "[timestamp redacted]  4549  5290 E AndroidRuntime: \tat android.os.HandlerThread.run(HandlerThread.java:85)"
+        }
+      ]
+    },
+    {
+      "id": "working_40922_non_pid1_init_abort",
+      "source_id": "source_B",
+      "source_line_range_1_based_inclusive": [
+        2,
+        3
+      ],
+      "lines": [
+        {
+          "source_line": 2,
+          "text": "[timestamp redacted]  1024  1024 F libc    : Fatal signal 6 (SIGABRT), code -1 (SI_QUEUE) in tid 1024 (init), pid 1024 (init)"
+        },
+        {
+          "source_line": 3,
+          "text": "[timestamp redacted]  1024  1024 F libc    : crash_dump helper failed to exec, or was killed"
+        }
+      ]
+    }
+  ],
+  "supported_observations": [
+    {
+      "id": "iwlan_npe",
+      "text": "The selected r3 buffer records a .qtidataservices Java fatal exception: a null List is dereferenced by List.stream() in QualifiedNetworksService.java:186, reached from the vendor updateQualifiedNetworks method at line 122.",
+      "excerpt_id": "r3_iwlan_npe"
+    },
+    {
+      "id": "r3_non_pid1_init",
+      "text": "The selected r3 entry records SIGABRT in an init-named process with PID/TID 981, followed by a crash_dump helper failure. The recorded PID is not 1.",
+      "excerpt_id": "r3_non_pid1_init_abort"
+    },
+    {
+      "id": "rollback_non_pid1_init",
+      "text": "A selected working-40922 rollback entry has the same broad signal/process-name pattern with PID/TID 1024, also followed by a helper failure.",
+      "excerpt_id": "working_40922_non_pid1_init_abort"
+    }
+  ],
+  "limits": [
+    "The excerpts show failures, not absence of other failures or overall device stability.",
+    "The IWLAN stack alone does not identify the triggering modem response, SIM/APN/slot, module interaction or timing condition. The separate private-DEX analysis is described in r3_vendor_qns_init_diagnosis.json; this excerpt is not independent reproduction of that analysis.",
+    "The init entries do not establish the parent process, service identity, native abort message, stack, precise cause or harmlessness. A common-looking signal on two kernels does not prove a common cause.",
+    "Neither the stack nor the rollback comparison proves that the kernel or modules were uninvolved.",
+    "This report does not alter runtime test results or claim that cellular calling, IMS or VoWiFi has been validated."
+  ],
+  "privacy_review": {
+    "status": "MANUALLY_REVIEWED_MINIMAL_SELECTION",
+    "scope": "All 15 selected lines were inspected before publication into the local public-report directory.",
+    "result": "Selected text contains no device serial, IMEI, account, token, URL, IP/MAC/SSID/APN identifier, network payload, or private absolute path. Android class/package names and ephemeral PIDs are deliberately retained.",
+    "independent_privacy_audit": false
+  }
+}
