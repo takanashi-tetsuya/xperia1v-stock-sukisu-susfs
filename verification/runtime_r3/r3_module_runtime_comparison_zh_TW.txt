@@ -1,0 +1,11 @@
+r3 真機模組快照比對（2026-10-14）
+
+結果：367 個模組皆為 Live；名称與原廠、working 40922、rollback 40922 三份快照完全一致。
+
+r3 保留的 dmesg 範圍為開機後 6.39–59.30 秒，未見 Protected symbol、vermagic/CRC/Unknown symbol、BTF、CFI failure、kernel BUG/oops/panic。
+
+保留紀錄內五種警告皆能在正常 rollback 40922 找到：eBPF/Spectre 提示、兩種 msm_cvp 提示、wpa_supplicant legacy capability 提示，以及供電/充電通知路徑的 RCU warning。RCU 兩版同經 battery_chg_write → power_supply_get_property → somc_bcext_psy_notifier_cb → power_supply_changed_work；r3 在 mutex 等待，舊版在 completion 等待，並非新出現的 RCU 警告，也不能因此稱它無害。
+
+限制：stock_reference 的 dmesg 讀取被拒絕；r3 最早數秒已不在 ring buffer，不能排除早期簽章/BTF 警告。舊40922完整開機記錄有未受信任簽章造成 taint 的警告，但模組仍載入。KernelSU 掃描一般 APK 時的簽章拒絕，不是 kernel module 載入失敗。
+
+這是已載入模組與核心日誌的快照驗證，尚不代表相機、Wi-Fi、音訊、感測器或長期穩定性通過。公開 JSON 只包含計數、函式名及證據雜湊，沒有原始日誌、App 路徑、帳號或 token。

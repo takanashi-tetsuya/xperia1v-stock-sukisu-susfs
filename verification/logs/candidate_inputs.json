@@ -1,0 +1,16 @@
+{
+  "candidate": "r3-20261014-ikconfig-proc",
+  "parent_candidate": "40900-repair-20261013-r2",
+  "base_archive_sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b",
+  "source_date_epoch": 1791944696,
+  "build_timestamp": "Wed Oct 14 02:24:56 UTC 2026",
+  "kernel_version_code": 40900,
+  "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+  "core_change": "CONFIG_IKCONFIG_PROC=y to provide /proc/config.gz required by this Android userspace",
+  "runtime": "NOT_RUN",
+  "core_source_files_changed": [
+    "sources/common/arch/arm64/configs/gki_defconfig"
+  ],
+  "tools_change": "Previously tested pahole command-line override; verifier expectation aligned with new configuration",
+  "out_initially_absent": true
+}

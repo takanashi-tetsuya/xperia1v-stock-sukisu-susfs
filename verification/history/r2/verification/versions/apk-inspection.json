@@ -1,0 +1,34 @@
+{
+  "path": "external/official-release/SukiSU_v4.2.0_40900-release.apk",
+  "size": 14084162,
+  "sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+  "manifest_attributes": {
+    "versionCode": 40900,
+    "versionName": "v4.2.0",
+    "compileSdkVersion": 37,
+    "compileSdkVersionCodename": "17",
+    "package": "com.sukisu.ultra",
+    "platformBuildVersionCode": 37,
+    "platformBuildVersionName": 17
+  },
+  "embedded_daemons": {
+    "lib/arm64-v8a/libksud.so": {
+      "sha256": "9f57222b06222f461bbb69b24e40a293e34708eeb7b1bbb065110651f7b9c991",
+      "embedded_version_strings": [
+        "4.2.0-1-g904c60d1"
+      ]
+    },
+    "lib/armeabi-v7a/libksud.so": {
+      "sha256": "87290a9f22119a33198bacb60e1d217afe700733aa15ec187e0bc244d1107685",
+      "embedded_version_strings": [
+        "4.2.0-1-g904c60d1"
+      ]
+    },
+    "lib/x86_64/libksud.so": {
+      "sha256": "814b631a45a766f1048b6ed9a2da489e52f8edd8ec6274e4b9073dca979115bd",
+      "embedded_version_strings": [
+        "4.2.0-1-g904c60d1"
+      ]
+    }
+  }
+}

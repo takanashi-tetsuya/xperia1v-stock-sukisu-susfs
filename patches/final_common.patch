@@ -1,16 +1,7 @@
 diff --git a/arch/arm64/configs/gki_defconfig b/arch/arm64/configs/gki_defconfig
-index 518fa2583b3d20b5cb9544cfaaca10e937ad3974..e53e3e9cc8c9832c7c0c054d14fbb81f2ddd81e7 100644
+index 518fa2583b3d20b5cb9544cfaaca10e937ad3974..501586b90daf985e7417135fbfc08b9e914a808b 100644
 --- a/arch/arm64/configs/gki_defconfig
 +++ b/arch/arm64/configs/gki_defconfig
-@@ -18,7 +18,7 @@ CONFIG_RCU_NOCB_CPU=y
- CONFIG_RCU_LAZY=y
- CONFIG_RCU_LAZY_DEFAULT_OFF=y
- CONFIG_IKCONFIG=y
--CONFIG_IKCONFIG_PROC=y
-+# CONFIG_IKCONFIG_PROC is not set
- CONFIG_IKHEADERS=y
- CONFIG_UCLAMP_TASK=y
- CONFIG_UCLAMP_BUCKETS_COUNT=20
 @@ -718,3 +718,28 @@ CONFIG_HIST_TRIGGERS=y
  CONFIG_PID_IN_CONTEXTIDR=y
  CONFIG_FUNCTION_ERROR_INJECTION=y

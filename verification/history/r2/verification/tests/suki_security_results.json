@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "status": "PASS",
+  "tested_at_utc": "2026-10-13T10:57:41.937863+00:00",
+  "source_root": "sources/SukiSU-Ultra/kernel",
+  "source_sha256": {
+    "kernel/manager/apk_sign.c": "e03cee6e29d70add9ab28d3e8af58a0126c7820c825a12502fefd2513b22f364",
+    "kernel/selinux/sepolicy.c": "96bb0e9c8fbf56d5a701ab7cf2fbdb8377f9a142f2f3ac4b5d01d65c7fe24bd0",
+    "kernel/runtime/ksud.c": "3e8771b4239509d10ec06f634e677bffa6a69826d903dabc2bcc01514f09a705",
+    "kernel/sulog/event.c": "11967fca9bb1d9c1ee99574508c2e7d4edf3e4aab7c381a0feaee74f0be73b96",
+    "kernel/sulog/event.h": "73979aedc4ac6629d3c7d21a3e3229b843120a327d21cb2b39768b8bd5fe6517",
+    "kernel/Makefile": "4f9b382a1ca4c87a19bee834f287762c1f0c4491f7e09598b5b4fcafad8e2891"
+  },
+  "test_sha256": "3363f88aa603dafb80d5e7e465b1295f9951f989df63e5179fac0c7622a7b5f0",
+  "official_apk_sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+  "official_apk": "external/official-manager/SukiSU_v4.2.0_40900-release.apk",
+  "tests": 59,
+  "passed": 59,
+  "suite_cases": {
+    "apk": 42,
+    "sepolicy": 17
+  },
+  "scopes": [
+    "actual APK parser with real certificate SHA256",
+    "actual 5.15 filename transition function with allocation/insert fault injection",
+    "actual policy duplication function with serializer contract mock",
+    "runtime/sulog/version changes source-reviewed only"
+  ],
+  "compiler": "clang",
+  "sanitizers": [
+    "address",
+    "undefined"
+  ],
+  "leak_sanitizer": false,
+  "allocation_and_handle_tracking": true,
+  "limitations": [
+    "not an APK installation or full signature validation test",
+    "not a real device policy serialize/load test",
+    "not a kernel build or runtime device test",
+    "#3679 scoped su-session behavior intentionally absent; UAPI 2 preserved"
+  ]
+}

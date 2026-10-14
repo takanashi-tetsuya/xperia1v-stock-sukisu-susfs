@@ -1,0 +1,90 @@
+{
+  "artifact_sha256": {
+    "dist/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "dist/Module.symvers": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+    "dist/kernel.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+    "dist/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+    "logs/build.log": "488e2b6771832233d69be7dcaacfdbcd4555af9c97f8ee9eddbdc417aac6a645",
+    "out/.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+    "out/arch/arm64/boot/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "out/drivers/kernelsu/.ksu.o.cmd": "a07ba07273eebede5c3bfc88cbf35919853230d14598a04b311e608fe23d36de",
+    "out/include/config/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+    "out/vmlinux": "2f63ac0ade614824ae232c05dc3848cbe674ab0aa9d29ba94f9cdccf53756086"
+  },
+  "btf_required_function_count": 15,
+  "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+  "built_modules": 5,
+  "compiler": "\"Android (8508608, based on r450784e) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)\"",
+  "embedded_config_matches": true,
+  "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+  "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+  "ksu_uapi": 2,
+  "phone_runtime": "NOT_RUN",
+  "required_config": {
+    "CONFIG_CFI_CLANG": "y",
+    "CONFIG_DEBUG_INFO_BTF": "y",
+    "CONFIG_DEFAULT_TCP_CONG": "\"cubic\"",
+    "CONFIG_IKCONFIG": "y",
+    "CONFIG_IKCONFIG_PROC": "n",
+    "CONFIG_KPM": "n",
+    "CONFIG_KSU": "y",
+    "CONFIG_KSU_DEBUG": "n",
+    "CONFIG_KSU_FEATURE_ADBROOT": "n",
+    "CONFIG_KSU_SUSFS": "y",
+    "CONFIG_KSU_SUSFS_ENABLE_LOG": "n",
+    "CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS": "y",
+    "CONFIG_KSU_SUSFS_OPEN_REDIRECT": "y",
+    "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG": "y",
+    "CONFIG_KSU_SUSFS_SPOOF_UNAME": "y",
+    "CONFIG_KSU_SUSFS_SUS_KSTAT": "y",
+    "CONFIG_KSU_SUSFS_SUS_MAP": "y",
+    "CONFIG_KSU_SUSFS_SUS_MOUNT": "y",
+    "CONFIG_KSU_SUSFS_SUS_PATH": "y",
+    "CONFIG_KSU_SUSFS_SUS_SU": "n",
+    "CONFIG_LTO_CLANG_FULL": "y",
+    "CONFIG_MODULES": "y",
+    "CONFIG_MODULE_SIG_PROTECT": "y",
+    "CONFIG_MODVERSIONS": "y",
+    "CONFIG_TCP_CONG_BBR": "y"
+  },
+  "source_inputs": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {}
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {}
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+        }
+      }
+    }
+  },
+  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "status": "PASS_OFFLINE_BUILD_CHECKS",
+  "sukisu_version_code": 40900
+}

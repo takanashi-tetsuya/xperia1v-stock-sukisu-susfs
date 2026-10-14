@@ -1,0 +1,319 @@
+{
+  "checked_at_utc": "2026-10-13T03:08:12.169732+00:00",
+  "official_repository": "https://github.com/SukiSU-Ultra/SukiSU-Ultra",
+  "queries": {
+    "latest_release": "https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/releases/latest",
+    "all_releases": "https://api.github.com/repos/SukiSU-Ultra/SukiSU-Ultra/releases?per_page=100",
+    "refs": "git ls-remote --heads --tags https://github.com/SukiSU-Ultra/SukiSU-Ultra.git"
+  },
+  "conclusion": "Latest published official Manager remains v4.2.0 (40900). No 41000 release asset found among all 19 published releases. Current main formula gives 40971, not 41000. Use the unchanged genuine 40900 release and its matched source generation for the authorized baseline.",
+  "release_count": 19,
+  "latest_release": {
+    "id": 380365868,
+    "tag_name": "v4.2.0",
+    "name": "4.2.0",
+    "published_at": "2026-09-01T09:23:37Z",
+    "updated_at": "2026-09-21T09:26:00Z",
+    "prerelease": false,
+    "draft": false,
+    "target_commitish": "main",
+    "html_url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra/releases/tag/v4.2.0"
+  },
+  "latest_apk_asset": {
+    "id": 578701033,
+    "name": "SukiSU_v4.2.0_40900-release.apk",
+    "size": 14084162,
+    "digest": "sha256:4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+    "created_at": "2026-09-21T09:25:57Z",
+    "updated_at": "2026-09-21T09:25:59Z",
+    "browser_download_url": "https://github.com/SukiSU-Ultra/SukiSU-Ultra/releases/download/v4.2.0/SukiSU_v4.2.0_40900-release.apk"
+  },
+  "apk_inspection": {
+    "path": "external/official-release/SukiSU_v4.2.0_40900-release.apk",
+    "size": 14084162,
+    "sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+    "manifest_attributes": {
+      "versionCode": 40900,
+      "versionName": "v4.2.0",
+      "compileSdkVersion": 37,
+      "compileSdkVersionCodename": "17",
+      "package": "com.sukisu.ultra",
+      "platformBuildVersionCode": 37,
+      "platformBuildVersionName": 17
+    },
+    "embedded_daemons": {
+      "lib/arm64-v8a/libksud.so": {
+        "sha256": "9f57222b06222f461bbb69b24e40a293e34708eeb7b1bbb065110651f7b9c991",
+        "embedded_version_strings": [
+          "4.2.0-1-g904c60d1"
+        ]
+      },
+      "lib/armeabi-v7a/libksud.so": {
+        "sha256": "87290a9f22119a33198bacb60e1d217afe700733aa15ec187e0bc244d1107685",
+        "embedded_version_strings": [
+          "4.2.0-1-g904c60d1"
+        ]
+      },
+      "lib/x86_64/libksud.so": {
+        "sha256": "814b631a45a766f1048b6ed9a2da489e52f8edd8ec6274e4b9073dca979115bd",
+        "embedded_version_strings": [
+          "4.2.0-1-g904c60d1"
+        ]
+      }
+    }
+  },
+  "apk_digest_matches_api": true,
+  "previous_saved_apk_asset": {
+    "id": 539332029,
+    "name": "SukiSU_v4.2.0_40900_releases.apk",
+    "size": 14084162,
+    "digest": "sha256:4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+    "created_at": "2026-09-01T09:45:27Z",
+    "updated_at": "2026-09-01T09:45:30Z"
+  },
+  "current_apk_is_identical_to_previous_official_artifact": true,
+  "source_evidence": [
+    {
+      "role": "release_tag",
+      "ref": "v4.2.0",
+      "sha": "85eb4a95b8a61d756ecf53b9c5785e48e1b15039",
+      "commit": "2026-09-01T17:22:41+08:00 fix build",
+      "commit_count": 3714,
+      "uapi_version": 2,
+      "uapi_file": "uapi/supercall.h",
+      "manager_version_code_formula": "40000 + complete HEAD commit count - 2815",
+      "manager_version_code": 40899
+    },
+    {
+      "role": "release_apk_source",
+      "ref": "904c60d1",
+      "sha": "904c60d18f026340ce38ca2d5a1da529aadcba1a",
+      "commit": "2026-09-01T17:28:19+08:00 bump version to 4.2.0",
+      "commit_count": 3715,
+      "uapi_version": 2,
+      "uapi_file": "uapi/supercall.h",
+      "manager_version_code_formula": "40000 + complete HEAD commit count - 2815",
+      "manager_version_code": 40900
+    },
+    {
+      "role": "builtin_release_bump",
+      "ref": "e2912817",
+      "sha": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "commit": "2026-09-01T17:29:26+08:00 bump version to 4.2.0",
+      "commit_count": 801,
+      "uapi_version": 2,
+      "uapi_file": "kernel/include/uapi/supercall.h",
+      "manager_version_code_formula": null,
+      "manager_version_code": null,
+      "kernel_version_source": "Builtin Makefile uses remote/local MAIN commit count, not builtin HEAD count; online count is mutable."
+    },
+    {
+      "role": "previous_builtin_head",
+      "ref": "b20dee70",
+      "sha": "b20dee702035af09cb2ecb5f35443bbc1747f3e6",
+      "commit": "2026-09-13T20:05:00+08:00 kernel: restore missing kernel_umount_feature_set in kernel_umount.c (#964)",
+      "commit_count": 802,
+      "uapi_version": 2,
+      "uapi_file": "kernel/include/uapi/supercall.h",
+      "manager_version_code_formula": null,
+      "manager_version_code": null,
+      "kernel_version_source": "Builtin Makefile uses remote/local MAIN commit count, not builtin HEAD count; online count is mutable."
+    },
+    {
+      "role": "current_main",
+      "ref": "official/main",
+      "sha": "223897c72cc5c23b6fea84d6542aa8ef24459998",
+      "commit": "2026-10-10T19:42:16+08:00 fix(manager): support run on Android 8-12",
+      "commit_count": 3786,
+      "uapi_version": 5,
+      "uapi_file": "uapi/supercall.h",
+      "manager_version_code_formula": "40000 + complete HEAD commit count - 2815",
+      "manager_version_code": 40971
+    },
+    {
+      "role": "current_builtin",
+      "ref": "official/builtin",
+      "sha": "6c284e957feaa9a388a9f1c37dc4ec80d95e434b",
+      "commit": "2026-10-09T20:53:35+08:00 kernel: add missing arch.h (fixes builtin branch build) (#974)",
+      "commit_count": 815,
+      "uapi_version": 2,
+      "uapi_file": "kernel/include/uapi/supercall.h",
+      "manager_version_code_formula": null,
+      "manager_version_code": null,
+      "kernel_version_source": "Builtin Makefile uses remote/local MAIN commit count, not builtin HEAD count; online count is mutable."
+    },
+    {
+      "role": "current_dev",
+      "ref": "official/dev",
+      "sha": "7755cdb36f63945f286d7b1cab662b42b18f2789",
+      "commit": "2026-09-13T22:10:37+08:00 manager: Block background taps without consuming drag events",
+      "commit_count": 3737,
+      "uapi_version": 4,
+      "uapi_file": "uapi/supercall.h",
+      "manager_version_code_formula": "40000 + complete HEAD commit count - 2815",
+      "manager_version_code": 40922
+    }
+  ],
+  "release_tag_explanation": {
+    "tag_sha": "85eb4a95b8a61d756ecf53b9c5785e48e1b15039",
+    "tag_commit_count": 3714,
+    "tag_formula_version": 40899,
+    "apk_source_sha": "904c60d18f026340ce38ca2d5a1da529aadcba1a",
+    "apk_source_commit_count": 3715,
+    "apk_formula_version": 40900,
+    "apk_source_is_direct_child_of_tag": true,
+    "only_change_from_tag_to_apk_source": "diff --git a/kernel/Kbuild b/kernel/Kbuild\nindex 3a856ad0..71d8e3a6 100644\n--- a/kernel/Kbuild\n+++ b/kernel/Kbuild\n@@ -122,7 +122,7 @@ KSU_GITHUB_VER   := $(shell $(CURL_BIN) -s \"$(GITHUB_API_BASE)/releases/latest\"\n GITHUB_COMMITS   := $(shell $(CURL_BIN) -sI \"$(GITHUB_API_BASE)/commits?sha=$(REPO_BRANCH)&per_page=1\" 2>/dev/null | grep -i \"link:\" | sed -n 's/.*page=\\([0-9]*\\)>; rel=\"last\".*/\\1/p')\n LOCAL_COUNT     := $(if $(GITHUB_COMMITS),$(GITHUB_COMMITS),$(git_commit_count))\n KSU_VERSION     := $(if $(LOCAL_COUNT),$(shell expr $(VERSION_BASE) + $(LOCAL_COUNT) - $(VERSION_OFFSET)),13000)\n-VERSION_TAG     := $(or $(KSU_GITHUB_VER),$(git_latest_tag),4.1.3)\n+VERSION_TAG     := $(or $(KSU_GITHUB_VER),$(git_latest_tag),4.2.0)\n KSU_VERSION_FULL := $(if $(call git_short_sha),v$(VERSION_TAG)-$(call git_short_sha)@$(call git_branch),v$(VERSION_TAG)-$(REPO_NAME)-unknown@unknown)\n $(info -- $(REPO_NAME) version: $(KSU_VERSION) [$(KSU_VERSION_FULL)])",
+    "evidence": "The current downloaded APK embeds 4.2.0-1-g904c60d1 in every packaged ksud ABI. This identifies the actual userspace build commit, one commit after the release tag."
+  },
+  "tag_comparison": {
+    "existing_saved_tag_count": 19,
+    "matching_saved_tags": 19,
+    "changed_saved_tags": [],
+    "finding": "No rewrite observed: every tag already in the old checkout matches the official remote. This does not establish all historical tag states."
+  },
+  "all_release_apk_assets": [
+    {
+      "tag": "v4.2.0",
+      "published_at": "2026-09-01T09:23:37Z",
+      "prerelease": false,
+      "name": "SukiSU_v4.2.0_40900-release.apk",
+      "digest": "sha256:4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3"
+    },
+    {
+      "tag": "v4.1.3",
+      "published_at": "2026-06-02T07:33:28Z",
+      "prerelease": false,
+      "name": "SukiSU_v4.1.3_40796-release.apk",
+      "digest": "sha256:1b1e837c0a5b6aa34554882fad67cef6db6ca1a84d43e07dd904cf54f8d261ae"
+    },
+    {
+      "tag": "v4.1.2",
+      "published_at": "2026-03-09T10:11:49Z",
+      "prerelease": false,
+      "name": "SukiSU_v4.1.2_40545-release.apk",
+      "digest": "sha256:b0d75e28ef40b5e143c598f34c8f579f7daa1dfdff9c03940ea7eb215dbbc917"
+    },
+    {
+      "tag": "v4.1.1",
+      "published_at": "2026-01-30T07:47:28Z",
+      "prerelease": false,
+      "name": "SukiSU_v4.1.1_40496-release.apk",
+      "digest": "sha256:9252fc452afc4e0ffd2ff563cadb0d9b3940a5fc3d65a786e434280af3a8b474"
+    },
+    {
+      "tag": "v4.1.0",
+      "published_at": "2025-12-05T06:22:26Z",
+      "prerelease": false,
+      "name": "SukiSU_v4.1.0_40201-release.apk",
+      "digest": "sha256:bf0ee25adee826ff80515e4d0272567fdb10188f06e3804b37f6c229b3517062"
+    },
+    {
+      "tag": "v4.0.0",
+      "published_at": "2025-11-16T06:27:20Z",
+      "prerelease": false,
+      "name": "SukiSU_v4.0.0_40119-release.apk",
+      "digest": "sha256:6f8c68ddfa86e003711dbe5ebb2e7610745d32967e725f87041dc91f83abf41e"
+    },
+    {
+      "tag": "v3.2.0",
+      "published_at": "2025-09-24T14:45:25Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.2.0_13375-release.apk",
+      "digest": "sha256:015393f843f8091f2c4837ecd2a11902bed2ebf7e8fb1f1eb5fab1f370820a23"
+    },
+    {
+      "tag": "v3.1.9",
+      "published_at": "2025-08-24T03:45:40Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.9_13307-release.apk",
+      "digest": "sha256:2295272b25ace642b13ca8a88ae33549ffecad5e99ee3ceb42ddb321419b287f"
+    },
+    {
+      "tag": "v3.1.8",
+      "published_at": "2025-07-21T13:22:49Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.8_13250-release.apk",
+      "digest": "sha256:26989d0109448c22f8cefd34197216d30464a7652229a9d5cf5a964a185ea473"
+    },
+    {
+      "tag": "v3.1.7",
+      "published_at": "2025-06-30T08:58:31Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.7_13200-release.apk",
+      "digest": "sha256:39de9283af1441d6c7a0af00c36ac3d6c110bad0fd00b3f7551e7398658a40ee"
+    },
+    {
+      "tag": "v3.1.6",
+      "published_at": "2025-06-22T10:53:50Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.6_13165-release.apk",
+      "digest": "sha256:ed3d0d3ec8eab3adaffb29b0593459e95739c3ee42b64d4380ea87bc14c62eb8"
+    },
+    {
+      "tag": "v3.1.5",
+      "published_at": "2025-06-08T08:00:20Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.4_13000-release.apk",
+      "digest": "sha256:014a3926c575a75475e904ef79c5375d1c7c4d6354b7003f2fd19b04719ffc56"
+    },
+    {
+      "tag": "v3.1.4",
+      "published_at": "2025-05-31T16:21:50Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.4_12960-release.apk",
+      "digest": "sha256:60cc8a38b1bf36125746cc9836071773ad1678fe6a6978781c586d92f731d684"
+    },
+    {
+      "tag": "v3.1.3",
+      "published_at": "2025-05-20T05:24:25Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.3_12905-release.apk",
+      "digest": null
+    },
+    {
+      "tag": "v3.1.2",
+      "published_at": "2025-05-17T03:35:29Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.2_12882-release.apk",
+      "digest": null
+    },
+    {
+      "tag": "v3.1.1",
+      "published_at": "2025-05-13T16:09:42Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1.1_12866-release.apk",
+      "digest": null
+    },
+    {
+      "tag": "v3.1",
+      "published_at": "2025-05-11T16:07:09Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.1_12860-release.apk",
+      "digest": null
+    },
+    {
+      "tag": "v3.0.1",
+      "published_at": "2025-04-27T14:39:54Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.0.1_12830-release.apk",
+      "digest": null
+    },
+    {
+      "tag": "v3.0",
+      "published_at": "2025-04-19T12:10:47Z",
+      "prerelease": false,
+      "name": "SukiSU_v3.0_12807-release.apk",
+      "digest": null
+    }
+  ],
+  "requested_version_presence": {
+    "40900": true,
+    "41000": false,
+    "49000": false,
+    "50000": false
+  },
+  "limits": [
+    "No firmware build or phone runtime test was performed in this read-only version research.",
+    "No claim is made about deleted or inaccessible CI artifacts. Current main versionCode is computed directly from its complete official Git history."
+  ]
+}

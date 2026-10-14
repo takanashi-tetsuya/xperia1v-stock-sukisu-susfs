@@ -1,0 +1,2389 @@
+{
+  "source": "external/temporary",
+  "sha256": {
+    "fs/namei.c": "3dfa92827e903f4f2f37a30823b59a367150d66ab88ecdee7d56ea811a164787",
+    "fs/stat.c": "c547bdb8b66dd249ac30df553abdf3f5d7a1df24e660c5a072821884eba4b63a"
+  },
+  "extracted_functions": [
+    "lookup_dcache",
+    "lookup_one_qstr_excl",
+    "lookup_fast",
+    "__lookup_slow",
+    "lookup_open",
+    "filename_create",
+    "done_path_create",
+    "do_mkdirat",
+    "do_renameat2",
+    "vfs_getattr_nosec"
+  ],
+  "tests": 215,
+  "passed": 100,
+  "scope": "Actual C bodies; mocked VFS and metadata. Not a kernel, concurrency, filesystem integration, or device test.",
+  "results": [
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        0,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        0,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        1,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        1,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        0,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        1,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        0,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "mkdir",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "mkdir",
+        0,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:866: test_mkdir: Assertion `err==(hidden?-ENOENT:0)' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        1,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        1,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        2,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        2,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        0,
+        2,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        0,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        4
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:916: test_open: Assertion `!atomic_calls&&!create_calls' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        0,
+        1,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        0,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        0,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        1,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        1,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        0,
+        1,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        1,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        0,
+        1,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "mkdir",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "mkdir",
+        0,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:866: test_mkdir: Assertion `err==(hidden?-ENOENT:0)' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        2,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        2,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        0,
+        1,
+        2,
+        2
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        0,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        4
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:916: test_open: Assertion `!atomic_calls&&!create_calls' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        0,
+        1,
+        1,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        0,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        0,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        1,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        1,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        0,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        1,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        0,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "mkdir",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "mkdir",
+        1,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:866: test_mkdir: Assertion `err==(hidden?-ENOENT:0)' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        1,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        1,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        2,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        2,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        0,
+        2,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        0,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        4
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:916: test_open: Assertion `!atomic_calls&&!create_calls' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        0,
+        1,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        0,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        0,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        0,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        1,
+        6
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        1,
+        8
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "excl",
+        1,
+        1,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        1,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "slow",
+        1,
+        1,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "mkdir",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "mkdir",
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:866: test_mkdir: Assertion `err==(hidden?-ENOENT:0)' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        1,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        2,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        2,
+        1
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "rename",
+        1,
+        1,
+        2,
+        2
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:874: test_rename: Assertion `err==expected' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        4
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        0,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        1
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        2
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        3
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        4
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:916: test_open: Assertion `!atomic_calls&&!create_calls' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        5
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        6
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "open",
+        1,
+        1,
+        1,
+        7
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        2,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        3,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        4,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        5,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "fast",
+        0,
+        6,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        2,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        3,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        4,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        5,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "fast",
+        1,
+        6,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "error",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "error",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "error",
+        2,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "error",
+        3,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "error",
+        4,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:858: expect_error: Assertion `IS_ERR(d)' failed."
+    },
+    {
+      "case": [
+        "stat",
+        0,
+        0,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:934: test_stat: Assertion `(s.result_mask&(STATX_SUS_KSTAT|STATX_SUS_KSTAT_FUSE))==expected' failed."
+    },
+    {
+      "case": [
+        "stat",
+        0,
+        0,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:934: test_stat: Assertion `(s.result_mask&(STATX_SUS_KSTAT|STATX_SUS_KSTAT_FUSE))==expected' failed."
+    },
+    {
+      "case": [
+        "stat",
+        0,
+        1,
+        0,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:934: test_stat: Assertion `(s.result_mask&(STATX_SUS_KSTAT|STATX_SUS_KSTAT_FUSE))==expected' failed."
+    },
+    {
+      "case": [
+        "stat",
+        0,
+        1,
+        1,
+        0
+      ],
+      "passed": false,
+      "detail": "test: external/temporary:934: test_stat: Assertion `(s.result_mask&(STATX_SUS_KSTAT|STATX_SUS_KSTAT_FUSE))==expected' failed."
+    },
+    {
+      "case": [
+        "stat",
+        1,
+        0,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "stat",
+        1,
+        0,
+        1,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "stat",
+        1,
+        1,
+        0,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "case": [
+        "stat",
+        1,
+        1,
+        1,
+        0
+      ],
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}

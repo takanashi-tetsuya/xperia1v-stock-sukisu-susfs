@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-10-14T02:52:39.077587+00:00",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "entries": {
+    "logs/anykernel_host_test.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+      "current_report_sha256": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "logs/userspace_ctime_test.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+      "current_report_sha256": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "logs/userspace_wire_test.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
+      "current_report_sha256": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "logs/stock_kernel_release.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
+      "current_report_sha256": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/susfs_namei_candidate.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "3ed0db1b1abf2c3fc6085b8efb7a3c4a27ee110af80ed5b85def54961558c039",
+      "current_report_sha256": "3ed0db1b1abf2c3fc6085b8efb7a3c4a27ee110af80ed5b85def54961558c039",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/susfs_namei_baseline.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "b5dcfdb90cc849133ee752c405c26b8d2e89945fb63fd024fd918dbb8fde8716",
+      "current_report_sha256": "b5dcfdb90cc849133ee752c405c26b8d2e89945fb63fd024fd918dbb8fde8716",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/susfs_40900_preserved.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+      "current_report_sha256": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/susfs_source_hashes.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01",
+      "current_report_sha256": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/susfs_repair_report.txt": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "44319d9a13fe8197b208533b72d81347f4476bd6475aae8578c716aa2d1621c2",
+      "current_report_sha256": "44319d9a13fe8197b208533b72d81347f4476bd6475aae8578c716aa2d1621c2",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/suki_security_results.json": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
+      "current_report_sha256": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "tests/suki_security_review.txt": {
+      "execution": "INHERITED_R2_NOT_RERUN",
+      "parent_report_sha256": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
+      "current_report_sha256": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
+      "parent_candidate": "40900-repair-20261013-r2",
+      "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+    },
+    "logs/old40922_unchanged.json": {
+      "execution": "REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION",
+      "parent_report_sha256": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
+      "current_report_sha256": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
+      "scope": "Re-read each original immutable file and compared SHA; no flashing"
+    },
+    "logs/previous40900_unchanged.json": {
+      "execution": "REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION",
+      "parent_report_sha256": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
+      "current_report_sha256": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
+      "scope": "Re-read each original immutable file and compared SHA; no flashing"
+    },
+    "logs/prior_20261013_unchanged.json": {
+      "execution": "REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION",
+      "parent_report_sha256": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
+      "current_report_sha256": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
+      "scope": "Re-read each original immutable file and compared SHA; no flashing"
+    }
+  },
+  "runtime_scope": "No phone evidence imported by this host publication preparation; current phone phases will be attached separately",
+  "hash_scope": "All parent_report_sha256 and current_report_sha256 values identify raw local inputs; publication_export.json maps raw to public-copy hashes. Inherited reports are byte-identical and have their actual source hashes rechecked by finalizer."
+}

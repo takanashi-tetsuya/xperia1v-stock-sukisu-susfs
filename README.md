@@ -1,8 +1,38 @@
-# Xperia 1 V — SukiSU 40900 + SUSFS 2.3 repair candidate r2
+# Xperia 1 V — SukiSU 40900 + SUSFS 2.3 repair candidate r3
+
+## Current runtime evidence
+
+The root `manifest.json` and `runtime_manifest.json` now contain reviewed phone evidence bound to the r3 Image, boot, ZIP, source-lock and corrected CLI hashes. The exact prior host-only snapshot remains under `verification/host_snapshot/`; original host reports and export receipts keep their historical NOT_RUN fields. Sanitized reports and their hashes are under `verification/runtime_r3/`. The Release `verification.tar.gz` contains this current `runtime_manifest.json` at its root plus the verification tree; the Release `manifest.json` also embeds the same summary.
+
+| Test | Result |
+|---|---|
+| `audio` | PASS |
+| `boot` | PASS |
+| `camera` | PASS |
+| `ctime` | PASS |
+| `flash` | PASS |
+| `installer` | PASS |
+| `ksu` | PASS |
+| `module_loading` | PASS |
+| `ota` | NOT_RUN |
+| `sensors` | NOT_RUN |
+| `sus_path` | PASS |
+| `wifi` | PASS |
+| `zygisk` | PASS |
+
+PASS is limited to each recorded procedure. Module evidence covers 367 matching loaded names and a retained log window starting about six seconds after boot; stock dmesg was unreadable. SUSFS evidence covers disposable F2FS fixtures observed by an ordinary app, including ctime seconds/nanoseconds and bounded lookup/mutation tests. AK3 evidence covers same-version reinstallation on rooted Android and exact partition readback; it is not a recovery-mode or unsupported-firmware test. Hardware, Zygisk and cleanup claims must be read with their dedicated reports. No application compatibility or undetectable-root claim follows. OTA was not performed or tested.
+
+Wi-Fi web browsing, front/rear camera preview and photographs, speaker playback, and the Manager displaying 40900 were confirmed by the device owner after the module-enabled reboot. These PASS entries are user-reported functional checks, not automated quality measurements; see r3_owner_functional_observation.json. Sensors and OTA remain NOT_RUN.
+
+The tested module combination is ReZygisk v1.0.0 `515-333d423-release` and Vector v2.2 `3080-88f8e1fa-JingMatrix-Vector`. The B7 result confirms daemon startup and mapped libraries in 32/64-bit zygotes and system_server, not every hook or application. Zygisk Next and Shamiko were not tested in this run.
+
+Two unresolved observations remain: non-PID1 processes still named `init` aborted during earlier boots without an identified parent/native stack; a later module-enabled boot recorded a vendor `.qtidataservices` `QualifiedNetworksServiceImpl` NullPointerException. Neither establishes that the kernel caused it, and neither should be described as harmless or as a crash-free run. Cellular data/VoWiFi functionality and root cause need separate verification.
+
+The source archives remain frozen. This was an archive-derived same-host clean build, not fresh network or independent third-party reconstruction. `RELEASE_ASSETS.json` lists the complete assembled local assets; `RELEASE_STATUS.json` separately records remote verification status. Binary delivery remains a draft because licensing compatibility is unresolved. The repository sync verifier has a narrow report-label overlay: `NOT_TESTED_BY_THIS_HOST_VERIFIER` describes only that read-only tool, not the phone. Its two file hashes and focused test results are recorded in `verification/publication_tool_overlay.json`; the frozen source archive keeps the original verifier. Kernel sources, patches and source lock are unchanged.
 
 This local candidate targets **Sony XQ-DQ72 / pdx234, firmware 67.2.A.3.178, Android 15**, with an unlocked bootloader. Build and packaging results are recorded in `dist/manifest.json`; do not interpret host tests as phone testing. No application compatibility improvement is promised.
 
-The GitHub repository snapshot mirrors the candidate's `manifest.json` and `verification/` at its root. Upload completeness is recorded in [`RELEASE_STATUS.json`](https://github.com/takanashi-tetsuya/xperia1v-stock-sukisu-susfs/blob/main/RELEASE_STATUS.json). The r2 draft tag is `40900-repair-20261013-r2`; the earlier published beta and previous repair draft are different builds.
+The GitHub repository snapshot mirrors the candidate's `manifest.json` and `verification/` at its root. Upload completeness is recorded in [`RELEASE_STATUS.json`](https://github.com/takanashi-tetsuya/xperia1v-stock-sukisu-susfs/blob/main/RELEASE_STATUS.json). The r3 draft tag is `40900-repair-20261014-r3`; earlier builds are separate candidates. The release's external `runtime_manifest.json` records phone evidence bound to the exact Image/boot/ZIP hashes. This source archive describes the fixed code and host workflow; its contents are not updated after each phone test.
 
 ## Exact versions
 
@@ -22,7 +52,11 @@ The candidate retains SUSFS inline/manual integration, CFI and Full LTO, and the
 
 Hidden inode lookup returns an error instead of substituting a `..5.u.S` sibling name. This intentionally makes creation/rename onto an already hidden inode fail; it must not create or modify a different sibling. Host regressions cover lookup and reference ownership; filesystem and phone runtime validation remain separate.
 
-SUSFS logging, `/proc/config.gz`, and ADB-root support are disabled in the release configuration. Embedded IKCONFIG remains for offline verification. r2 changes the real kernel configuration to use the stock boot's complete release, `5.15.189-android13-8-00016-g51bba4309aac-ab14546557`, and rebuilds the kernel. The previous candidate omitted `-00016` and `-ab14546557`; both kernels have SUBLEVEL 189. The embedded SukiSU full version and manifest still identify this modified build. No claim of undetectable root follows from these settings. KPM remains disabled.
+**r3 restores `CONFIG_IKCONFIG_PROC=y`.** r2 disabled `/proc/config.gz`, but this Sony Android 15 userspace reads it for kernel memory accounting. With root modules disabled, captured r2 logs showed five native `system_server` aborts after this file returned ENOENT. The stack and the Android 15 source identify `Debug.isVmapStack` as the failing check; see `docs/ikconfig_boot_failure_evidence.json` and the r3 repair report. Keeping embedded `CONFIG_IKCONFIG=y` alone does not provide the proc interface. The r3 build verifier now requires both settings. Do not disable the interface to hide kernel configuration.
+
+SUSFS logging and ADB-root support remain disabled. The complete stock kernel release remains `5.15.189-android13-8-00016-g51bba4309aac-ab14546557`. The only kernel source/config change from r2 is restoring IKCONFIG_PROC; SukiSU/SUSFS/AK3 source inputs are unchanged. The build timestamp and epoch are new. The embedded SukiSU full-version label still contains `xperia-20261013`; r3 is identified by its new source lock and artifact hashes, without pretending the SukiSU source changed. No claim of undetectable root follows from these settings. KPM remains disabled.
+
+The host build script also passes the verified pahole executable as a make command-line variable, preserving it in recursive make. This is a build-tool selection repair, separately tested with actual GNU make; it is not the cause of the Android boot failure.
 
 r2 also removes workstation paths from newly exported evidence, preserves their digest references, and gives the host tests clear missing-input errors. Test reports use project-relative paths or named external inputs. The export receipt distinguishes raw local evidence hashes from public-copy hashes. Earlier Git history is retained and may still contain old workstation paths.
 
@@ -35,7 +69,7 @@ The kernel uses the correct ctime-seconds flag, bit 8. **Use the supplied correc
 3. If init_boot still contains Magisk or KernelSU/SukiSU **LKM** root, restore the matching original init_boot before migrating to this built-in kernel. An already original init_boot requires no change. Preserve your backups; do not mix firmware images or install a second root implementation.
 4. The image targets **boot**, not init_boot. The boot image and AK3 ZIP are alternative installation methods, not two required steps. Select the correct current slot deliberately; these scripts do not flash the phone.
 
-AK3's system/vendor patch-level ranges both require June 2026 and its firmware guard requires 67.2.A.3.178. The installer must identify the running device and mount the real vendor partition. In a recovery that cannot provide these properties, it aborts intentionally. `NO_MAGISK_CHECK=1` skips AK3's Magisk-related handling; it is not proof that init_boot is unmodified. Host tests validate its range logic and ZIP payload; an actual AK3 installation is separately recorded as NOT_RUN until tested.
+AK3's system/vendor patch-level ranges both require June 2026 and its firmware guard requires 67.2.A.3.178. The installer must identify the running device and mount the real vendor partition. In a recovery that cannot provide these properties, it aborts intentionally. `NO_MAGISK_CHECK=1` skips AK3's Magisk-related handling; it is not proof that init_boot is unmodified. Host tests validate its range logic and ZIP payload; the actual installation result and its limits are recorded in the external runtime reports.
 
 Keep the old working image and the original stock image for rollback. Restore a matching boot image to the affected slot if this candidate fails; restore init_boot too only when it was changed. Do not disable verified boot or change rollback counters as a workaround. Modified partitions can make incremental OTA fail; a successful OTA may replace the kernel and change vendor compatibility. Return to matching stock for the OTA procedure required by that firmware, then reassess and rebuild against the resulting firmware before using a custom kernel again.
 
@@ -60,7 +94,9 @@ Preparation stages downloads and changes in a temporary directory, then publishe
 
 The small `source_changes.tar.gz` requires obtaining its Git bases. The complete `full_source.tar.gz` also contains the working sources and the minimal Git objects, refs and shallow metadata needed to verify them offline. It excludes reflogs, hooks, tools, build output and device logs. After extracting the complete archive into a new directory, source preparation can validate the already present trees without a download; provide the compiler/pahole/avbtool paths as above. The manifest records the archive extraction and source-identity check separately from a full compile. Toolchains and the matching original boot image still need to be supplied.
 
-Source reconstruction, kernel compilation, module CRC analysis, host regressions, phone boot, actual module loading and AK3 installation are different evidence categories. Read the current manifest for which were actually run. The local clean kernel build is maintainer evidence. GitHub Actions checks source reconstruction and host regressions; it does not compile the kernel. An independent full rebuild and device tests remain NOT_RUN. Module signature flags alone cannot establish failure: examine the generated protected-symbol tables. BTF layout/runtime acceptance and the complete stock/custom loaded module inventory still require device testing.
+Source reconstruction, kernel compilation, module CRC analysis, host regressions, phone boot, actual module loading and AK3 installation are different evidence categories. r3 was built from the verified r2 source archive after applying the reviewed configuration change, in a same-host clean container with networking disabled and an initially empty output directory. This is an archive-derived build, not a fresh network reconstruction or an independent third-party build. The final r3 source archive is separately extracted and source-verified; that extraction check is not another kernel compile. Unchanged-source host reports inherited from r2 are explicitly listed with their source/report hashes in `verification/logs/host_evidence_provenance.json`; they are not described as freshly rerun tests.
+
+Read `runtime_manifest.json` for current phone results; an individual NOT_RUN stays untested. Host reports keep their original NOT_RUN runtime fields because those host tools did not operate the phone. GitHub Actions checks source reconstruction and host regressions; it does not compile the kernel. Module signature flags alone cannot establish failure: examine the generated protected-symbol tables. BTF acceptance, module loading, hardware functionality and SUSFS runtime behavior each require their own device evidence.
 
 Rebuildable source does not imply a byte-identical Image: a clean kernel build generates a fresh module-signing key, which can change binary hashes. The fixed source lock, compiler checks, actual config, kernel release, Module.symvers and packaging metadata are verified separately. Generated private signing keys are not included in the source packages.
 
@@ -73,17 +109,18 @@ python3 finalize_delivery.py --root /path/to/checkout \
   --research /path/to/release-research \
   --original-dist /path/to/preserved-40922-dist \
   --previous-40900-dist /path/to/preserved-40900-dist \
-  --cli-binary /path/to/ksu_susfs
+  --cli-binary /path/to/ksu_susfs \
+  --previous-r2-root /path/to/preserved-r2-checkout
 ```
 
-The required evidence and its validation are defined in that script. `export_publication.py` produces sanitized copies and recomputes references to exported evidence without modifying local input records. Missing preservation or release inputs are errors, not permission to fabricate evidence. Generated `userspace/bin/` files are ignored by Git; the CLI source and correction remain tracked. Binary delivery stays in a draft Release while the licensing and device-validation limits below remain unresolved.
+The required evidence and its validation are defined in that script and `r3_delivery_checks.py`. The previous r2 root authenticates the single kernel configuration change. `export_publication.py` produces sanitized copies and recomputes references to exported evidence without modifying local input records. Historical input hashes and private-device evidence hashes are preserved and clearly scoped; raw device logs are excluded. Missing preservation or release inputs are errors, not permission to fabricate evidence. Generated `userspace/bin/` files are ignored by Git; the CLI source and correction remain tracked. Binary delivery stays in a draft Release while the licensing and device-validation limits below remain unresolved.
 
 After upload, `verify_github_sync.py` independently reads the draft's complete asset list and checks names, sizes, SHA-256 digests, the exact source commit and its latest successful `verify.yml` run. The repository delivery snapshot supplies `RELEASE_ASSETS.json`; an extracted source-only bundle needs that separate expected-asset list. With authenticated `gh` access to the draft, run:
 
 ```sh
 python3 verify_github_sync.py \
   --repo takanashi-tetsuya/xperia1v-stock-sukisu-susfs \
-  --tag 40900-repair-20261013-r2 \
+  --tag 40900-repair-20261014-r3 \
   --expected-assets-json RELEASE_ASSETS.json \
   --source-commit FULL_40_CHARACTER_COMMIT \
   --workflow verify.yml --output /path/to/github-sync-result.json

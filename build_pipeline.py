@@ -62,8 +62,12 @@ def main():
     lock_path = (args.lock or root / 'source-lock.json').resolve()
     lock = load_lock(lock_path)
     clang_dir = (args.clang_dir or root / 'toolchains/clang-r450784e').resolve()
-    pahole = str(Path(args.pahole).resolve()) if args.pahole and '/' in args.pahole else (
-        args.pahole or str((root / 'host-tools/bin/pahole').resolve()))
+    if args.pahole and '/' not in args.pahole:
+        selected_pahole = shutil.which(args.pahole)
+        require(selected_pahole is not None, f'Pahole executable not found in PATH: {args.pahole}')
+        pahole = str(Path(selected_pahole).resolve())
+    else:
+        pahole = str(Path(args.pahole).resolve()) if args.pahole else str((root / 'host-tools/bin/pahole').resolve())
     logs = root / 'logs'
     logs.mkdir(parents=True, exist_ok=True)
     evidence = preflight(root, lock, clang_dir, pahole)
@@ -88,7 +92,9 @@ def main():
                KBUILD_BUILD_TIMESTAMP=lock['build']['build_timestamp'],
                SOURCE_DATE_EPOCH=str(lock['build']['source_date_epoch']),
                KCFLAGS='-D__ANDROID_COMMON_KERNEL__')
-    make = ['make', '-C', root / 'sources/common', f'O={out}']
+    # Kernel Makefile assignments override environment variables; command-line
+    # PAHOLE also propagates through recursive make and retains the checked tool.
+    make = ['make', '-C', root / 'sources/common', f'O={out}', f'PAHOLE={pahole}']
     logged(make + ['gki_defconfig'], logs / 'config.log', env)
     logged(make + [f'-j{args.jobs}', 'Image', 'modules'], logs / 'build.log', env)
     verify_sources(root, lock)

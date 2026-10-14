@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "status": "PASS_SINGLE_IKCONFIG_PROC_CHANGE",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "parent_source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "parent_source_inputs": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {}
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {}
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570",
+          "mode": 436
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+          "mode": 436
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0",
+          "mode": 436
+        }
+      }
+    }
+  },
+  "source_inputs": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {}
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {}
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_sha256": "86eee924ddaaf508fcdab8ed12a266dca8372aa3b49ba6c78b5dc9ca242b64cb",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570",
+          "mode": 436
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+          "mode": 436
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0",
+          "mode": 436
+        }
+      }
+    }
+  },
+  "changed_source": "sources/common/arch/arm64/configs/gki_defconfig",
+  "parent_defconfig_sha256": "2ecd97bbf809772959e2d2751e57b71bd1ab33341e7bb6b81f6e1b71c97bbe1c",
+  "defconfig_sha256": "d422128c8446ca767e8b2aecf6faff44ae56760d4557199794ccde946d66973f",
+  "parent_config_sha256": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+  "config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+  "config_delta": {
+    "CONFIG_IKCONFIG_PROC": {
+      "r2": "n",
+      "r3": "y"
+    }
+  },
+  "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+  "host_tool_changes_excluded_from_kernel_source_claim": true,
+  "application_fixes_claimed": false,
+  "source_audit_device_access": "NOT_USED"
+}

@@ -1,0 +1,523 @@
+{
+  "android": 15,
+  "application_fixes_claimed": false,
+  "build": {
+    "artifact_sha256": {
+      "dist/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+      "dist/Module.symvers": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+      "dist/kernel.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+      "dist/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+      "logs/build.log": "488e2b6771832233d69be7dcaacfdbcd4555af9c97f8ee9eddbdc417aac6a645",
+      "out/.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+      "out/arch/arm64/boot/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+      "out/drivers/kernelsu/.ksu.o.cmd": "a07ba07273eebede5c3bfc88cbf35919853230d14598a04b311e608fe23d36de",
+      "out/include/config/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+      "out/vmlinux": "2f63ac0ade614824ae232c05dc3848cbe674ab0aa9d29ba94f9cdccf53756086"
+    },
+    "btf_required_function_count": 15,
+    "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+    "built_modules": 5,
+    "compiler": "\"Android (8508608, based on r450784e) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)\"",
+    "embedded_config_matches": true,
+    "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "ksu_uapi": 2,
+    "phone_runtime": "NOT_RUN",
+    "required_config": {
+      "CONFIG_CFI_CLANG": "y",
+      "CONFIG_DEBUG_INFO_BTF": "y",
+      "CONFIG_DEFAULT_TCP_CONG": "\"cubic\"",
+      "CONFIG_IKCONFIG": "y",
+      "CONFIG_IKCONFIG_PROC": "n",
+      "CONFIG_KPM": "n",
+      "CONFIG_KSU": "y",
+      "CONFIG_KSU_DEBUG": "n",
+      "CONFIG_KSU_FEATURE_ADBROOT": "n",
+      "CONFIG_KSU_SUSFS": "y",
+      "CONFIG_KSU_SUSFS_ENABLE_LOG": "n",
+      "CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS": "y",
+      "CONFIG_KSU_SUSFS_OPEN_REDIRECT": "y",
+      "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG": "y",
+      "CONFIG_KSU_SUSFS_SPOOF_UNAME": "y",
+      "CONFIG_KSU_SUSFS_SUS_KSTAT": "y",
+      "CONFIG_KSU_SUSFS_SUS_MAP": "y",
+      "CONFIG_KSU_SUSFS_SUS_MOUNT": "y",
+      "CONFIG_KSU_SUSFS_SUS_PATH": "y",
+      "CONFIG_KSU_SUSFS_SUS_SU": "n",
+      "CONFIG_LTO_CLANG_FULL": "y",
+      "CONFIG_MODULES": "y",
+      "CONFIG_MODULE_SIG_PROTECT": "y",
+      "CONFIG_MODVERSIONS": "y",
+      "CONFIG_TCP_CONG_BBR": "y"
+    },
+    "source_inputs": {
+      "AnyKernel3": {
+        "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+        "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+        "untracked": {}
+      },
+      "SukiSU-Ultra": {
+        "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+        "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+        "untracked": {}
+      },
+      "common": {
+        "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+        "untracked": {
+          "drivers/kernelsu": {
+            "kind": "symlink",
+            "target": "../../SukiSU-Ultra/kernel"
+          },
+          "fs/susfs.c": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+          },
+          "include/linux/susfs.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+          },
+          "include/linux/susfs_def.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+          }
+        }
+      }
+    },
+    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+    "status": "PASS_OFFLINE_BUILD_CHECKS",
+    "sukisu_version_code": 40900
+  },
+  "device": "Sony Xperia 1 V XQ-DQ72 / pdx234",
+  "evidence_hash_scope": "SHA256 of the redacted public copies under verification/; raw input hashes are in verification/publication_export.json",
+  "evidence_sha256": {
+    "logs/anykernel_host_test.json": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+    "logs/build_completion.json": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+    "logs/build_verification.json": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
+    "logs/old40922_unchanged.json": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
+    "logs/packaging_final_tests.txt": "0c043849c3818fd8c22dce7e8ade2ef228294e0dd2fa8e551d9a6552157c3b56",
+    "logs/packaging_verification.json": "8e66e5638cbced86ec6ac425a7223df5cd55f9253c523c66b0f3298e09ae290b",
+    "logs/previous40900_unchanged.json": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
+    "logs/prior_20261013_unchanged.json": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
+    "logs/publication_export_tests.txt": "2045e50d9fe62d682ee9b19f6ec4f2fd9bb4ffec9f9506b23442729a4a9c5654",
+    "logs/r2_source_delta.json": "03a0f6e080a3de72289e1b829ea2e9989a54db10230f58fceaa3161a5fb9f4f1",
+    "logs/source_reconstruction_check.json": "a8e0d2a799e182ac34c46400f0d5955a351a6ba18827914e972143e532fdaa34",
+    "logs/stock_kernel_release.json": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
+    "logs/userspace_ctime_test.json": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+    "logs/userspace_wire_test.json": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
+    "logs/vendor_audit/protection.json": "891cd36b0d1a3dd39224875815cef6eb0696f9614150060ee214de7ce36dd066",
+    "logs/vendor_audit/summary.json": "63b12efb814fb1004e238a7320af68a2057d77bd04145b2fd337c540927b6657",
+    "logs/vendor_audit/vermagic_check.json": "d5950432a750bbc5fbff3d930453993d78a224162cc9bf3e418d06abe2eead6e",
+    "tests/suki_security_results.json": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
+    "tests/suki_security_review.txt": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
+    "tests/susfs_40900_preserved.json": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+    "tests/susfs_namei_baseline.json": "1c945270c893b3fe7f1a91fb26dfe6b71beff59d207db9ed6b6a8ab7cba43dd3",
+    "tests/susfs_namei_candidate.json": "3ed0db1b1abf2c3fc6085b8efb7a3c4a27ee110af80ed5b85def54961558c039",
+    "tests/susfs_repair_report.txt": "05cd929037819f661ee1205f9d840654e69d9118c7a09774ad5f75532a9a3456",
+    "tests/susfs_source_hashes.json": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01"
+  },
+  "firmware": "67.2.A.3.178",
+  "host_tests": {
+    "anykernel_functions": 20,
+    "cli_payload": 9,
+    "cli_wire_abi": {
+      "architecture": "AArch64 LP64",
+      "field_offsets": 17,
+      "flags": 12,
+      "scope": "Compiled real kernel/CLI declarations, no runtime syscalls",
+      "sizeof_matches": true,
+      "source_sha256": {
+        "sources/common/include/linux/susfs.h": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+        "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4"
+      },
+      "status": "PASS"
+    },
+    "publication_export_normal_and_optimized": 16,
+    "scope": "Host/static evidence; not candidate device or installer execution",
+    "sukisu_security": 59,
+    "susfs_namei": 215,
+    "susfs_preserved": 63
+  },
+  "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+  "license_distribution_status": "UNRESOLVED_NO_PUBLIC_DISTRIBUTION_CLEARANCE",
+  "license_note": "Pinned SUSFS GPL-3.0 and Linux GPL-2.0-only binary redistribution compatibility remains unresolved; notices do not resolve it.",
+  "manager": {
+    "official_unchanged_apk": "SukiSU_v4.2.0_40900-release.apk",
+    "sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+    "source_commit": "904c60d18f026340ce38ca2d5a1da529aadcba1a",
+    "uapi": 2,
+    "version_code": 40900
+  },
+  "module_protection": {
+    "config": {
+      "CONFIG_MODULE_FORCE_LOAD": "n",
+      "CONFIG_MODULE_SIG": "y",
+      "CONFIG_MODULE_SIG_FORCE": "n",
+      "CONFIG_MODULE_SIG_PROTECT": "y",
+      "CONFIG_MODVERSIONS": "y"
+    },
+    "limits": [
+      "Unknown signing keys may taint the kernel.",
+      "No runtime module loading or initialization has been performed.",
+      "This check covers signature trust and GKI symbol protection, not every loader condition."
+    ],
+    "protected_export_table_entries": 0,
+    "protected_import_table_entries": 0,
+    "signature_verification": "NOT_VERIFIED",
+    "signed_modules": [
+      "external/redacted-home",
+      "external/redacted-home"
+    ],
+    "status": "PASS_STATIC_NO_TRUST_NEEDED",
+    "untrusted_module_protection_collisions": []
+  },
+  "module_vermagic": {
+    "candidate_vermagic": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557 SMP preempt mod_unload modversions aarch64",
+    "loader_source": "sources/common/kernel/module.c:1316",
+    "loader_source_sha256": "102f733f1b3275db74818190166ba721a08a3c5f9b4f2336238b3be750b5840a",
+    "mismatches": [],
+    "module_count": 556,
+    "modules_with_crc_records": 556,
+    "rule": "CONFIG_MODVERSIONS=y: same_magic ignores the first kernel-version token for modules with CRCs",
+    "runtime_loading": "NOT_RUN",
+    "status": "PASS_STATIC",
+    "stock_vermagics": [
+      "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+      "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
+      "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
+    ]
+  },
+  "original_40922_unchanged_sha256": {
+    "AnyKernel3_Xperia1V_SukiSU40922_SUSFS2.3_20260920.zip": "c9751a3f2859b7add985ed97db94acfe7f959c22479226f4de2233631cf66bae",
+    "Image": "31612a88cd898eab9bb379a1f07361430f6fee32b05f60e3b59453f980f7e0cb",
+    "boot_XQ-DQ72_67.2.A.3.178_sukisu40922.img": "5369d90ccdea043cbe00657a4a733aef183c7ac230bc2d55894cc0aeeb91c3a8"
+  },
+  "packaging": {
+    "anykernel_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip",
+    "anykernel_sha256": "755feefd4e78547fd3da28d185892b32a32cd7315c422d060017919c4f19a359",
+    "avb_algorithm": "NONE (unsigned custom image)",
+    "avb_hash_check": "PASS",
+    "boot_and_zip_kernel_payloads_match_Image": true,
+    "boot_header_other_fields_match_stock": true,
+    "boot_header_version": 4,
+    "boot_partition_size": 100663296,
+    "boot_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
+    "boot_ramdisk_size": 0,
+    "boot_sha256": "2bc757daab5eb648d0833f1bbcd2e07757b6e3693a53f2b0a08abebbe8e66f72",
+    "candidate_avb_metadata": {
+      "algorithm": "NONE",
+      "flags": 0,
+      "hash_algorithm": "sha256",
+      "hash_flags": 0,
+      "partition_name": "boot",
+      "properties": [
+        [
+          "com.android.build.boot.os_version",
+          "13"
+        ],
+        [
+          "com.android.build.boot.fingerprint",
+          "Sony/pdx234/pdx234:13/TKQ1.221114.001/YODO-1.2.0-REL-260518-0520:user/release-keys"
+        ],
+        [
+          "com.android.build.boot.security_patch",
+          "2026-06-01"
+        ],
+        [
+          "com.android.build.boot.security_patch",
+          "2026-06-01"
+        ]
+      ],
+      "rollback_index": 1780272000,
+      "rollback_index_location": 0,
+      "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
+    },
+    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "phone_boot_and_installer_execution": "NOT_RUN",
+    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+    "status": "PASS_OFFLINE_PACKAGING_CHECKS",
+    "stock_avb_metadata": {
+      "algorithm": "SHA256_RSA4096",
+      "flags": 0,
+      "hash_algorithm": "sha256",
+      "hash_flags": 0,
+      "partition_name": "boot",
+      "properties": [
+        [
+          "com.android.build.boot.os_version",
+          "13"
+        ],
+        [
+          "com.android.build.boot.fingerprint",
+          "Sony/pdx234/pdx234:13/TKQ1.221114.001/YODO-1.2.0-REL-260518-0520:user/release-keys"
+        ],
+        [
+          "com.android.build.boot.security_patch",
+          "2026-06-01"
+        ],
+        [
+          "com.android.build.boot.security_patch",
+          "2026-06-01"
+        ]
+      ],
+      "rollback_index": 1780272000,
+      "rollback_index_location": 0,
+      "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
+    },
+    "stock_boot_unchanged": true,
+    "stock_sha256": "06dbe42eccb4ea14a53e7b34d1f509bc7b176776db89d3280adba44c4b8b3731"
+  },
+  "phone_modified": false,
+  "runtime": {
+    "applications": "APPLICATION_FIXES_NOT_CLAIMED",
+    "boot": "NOT_RUN",
+    "candidate": "NOT_DEVICE_TESTED",
+    "flash": "NOT_FLASHED",
+    "installer": "AK3_NOT_RUN",
+    "module_loading": "NOT_RUN"
+  },
+  "schema_version": 1,
+  "source_bundles": {
+    "full_source.tar.gz": {
+      "contents": "Same materials plus all three source trees and essential sanitized Git metadata",
+      "excluded": [
+        "toolchains",
+        "build outputs",
+        "private diagnostics",
+        "Git reflogs and hooks"
+      ],
+      "external_requirements": "Pinned compiler/host tools and matching original firmware still required",
+      "offline_verification": {
+        "kernel_rebuilt_from_archive": false,
+        "network_used": false,
+        "scope": "Fresh extraction; Git identities, patches, untracked hashes and modes verified",
+        "status": "PASS_EXTRACTED_SOURCE_LOCK_CHECK"
+      },
+      "sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b"
+    },
+    "source_changes.tar.gz": {
+      "base_sources": "Requires exact upstream bases from network or a local source cache",
+      "contents": "Locked patches, added sources, scripts, tests, CLI source and licenses",
+      "sha256": "6940262490a493a29b8e4f421182ceb2eb6253baad206abcc02170c20c4a3540"
+    }
+  },
+  "source_inputs": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {}
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {}
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+        }
+      }
+    }
+  },
+  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "source_reconstruction": {
+    "build": {
+      "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+      "build_verification_sha256": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
+      "clean_output_directory": true,
+      "completed_at": "2026-10-13T11:15:14.053381+00:00",
+      "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+      "process_exit_code": 0,
+      "started_at": "2026-10-13T10:58:07.505919+00:00",
+      "status": "PASS_OFFLINE_BUILD_CHECKS"
+    },
+    "environment": {
+      "clean_container": false,
+      "reused_verified_toolchain": true,
+      "toolchain_fresh_download": false
+    },
+    "network_reconstruction": {
+      "activated_source_path": "sources",
+      "local_mirror_used": false,
+      "log": "logs/network_prepare.log",
+      "process_exit_code": 0,
+      "remote_urls": {
+        "AnyKernel3": "https://github.com/osm0sis/AnyKernel3.git",
+        "SukiSU-Ultra": "https://github.com/SukiSU-Ultra/SukiSU-Ultra.git",
+        "common": "https://android.googlesource.com/kernel/common"
+      },
+      "reviewed_source_path": "sources-reviewed",
+      "source_inputs": {
+        "AnyKernel3": {
+          "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+          "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+          "untracked": {}
+        },
+        "SukiSU-Ultra": {
+          "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+          "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+          "untracked": {}
+        },
+        "common": {
+          "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+          "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+          "untracked": {
+            "drivers/kernelsu": {
+              "kind": "symlink",
+              "target": "../../SukiSU-Ultra/kernel"
+            },
+            "fs/susfs.c": {
+              "kind": "file",
+              "mode": 436,
+              "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+            },
+            "include/linux/susfs.h": {
+              "kind": "file",
+              "mode": 436,
+              "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+            },
+            "include/linux/susfs_def.h": {
+              "kind": "file",
+              "mode": 436,
+              "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+            }
+          }
+        }
+      },
+      "status": "PASS"
+    },
+    "reviewed_source_inputs": {
+      "AnyKernel3": {
+        "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+        "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+        "untracked": {}
+      },
+      "SukiSU-Ultra": {
+        "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+        "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+        "untracked": {}
+      },
+      "common": {
+        "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+        "untracked": {
+          "drivers/kernelsu": {
+            "kind": "symlink",
+            "target": "../../SukiSU-Ultra/kernel"
+          },
+          "fs/susfs.c": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+          },
+          "include/linux/susfs.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+          },
+          "include/linux/susfs_def.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+          }
+        }
+      }
+    },
+    "schema_version": 1,
+    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+    "source_trees_match": true,
+    "status": "PASS_NETWORK_RECONSTRUCTION_AND_BUILD"
+  },
+  "status": "OFFLINE_VERIFIED_CANDIDATE",
+  "userspace_cli": {
+    "abi": "arm64-v8a",
+    "android_api": 35,
+    "binary_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+    "command": "ndk-build APP_PLATFORM=android-35 -j4",
+    "feature_tests": {
+      "result": "PASS: 9 actual CLI payload cases; no real syscalls performed",
+      "scope": "Actual CLI parser, recorded syscall payload; host stat fixture; no phone interaction",
+      "source": "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c",
+      "source_sha256": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4",
+      "status": "PASS",
+      "tests": 9
+    },
+    "ndk": "r27d / 27.3.13750724",
+    "ndk_download": "https://dl.google.com/android/repository/android-ndk-r27d-linux.zip",
+    "ndk_download_sha256": "601246087a682d1944e1e16dd85bc6e49560fe8b6d61255be2829178c8ed15d9",
+    "ndk_official_sha1": "22105e410cf29afcf163760cc95522b9fb981121",
+    "patch_sha256": "a55a8b6416ce56334514ce3b19ade6f3bff6f82608851d4a17cbea9257a2c8fa",
+    "source_archive_recipe": "Pinned upstream commit + ctime-flag.patch; jni source included in source bundles",
+    "source_url": "https://gitlab.com/simonpunk/susfs4ksu",
+    "status": "ANDROID_ARM64_COMPILED_HOST_PAYLOAD_TESTS_PASS_NOT_DEVICE_TESTED",
+    "upstream_archive_sha256": "340f020adbce3e35a4e46baf9b9777059b0ecca2ca0cdbc95595401b8fb92c7a",
+    "upstream_commit": "7af04b08f86a5f811cbea28805f96d52368e005f",
+    "wire_abi_verification": {
+      "architecture": "AArch64 LP64",
+      "field_offsets": 17,
+      "flags": 12,
+      "scope": "Compiled real kernel/CLI declarations, no runtime syscalls",
+      "sizeof_matches": true,
+      "source_sha256": {
+        "sources/common/include/linux/susfs.h": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+        "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4"
+      },
+      "status": "PASS"
+    }
+  },
+  "validation_scope": {
+    "candidate_device_and_installer": "NOT_RUN",
+    "independent_host_ci": "NOT_ATTESTED_BY_THIS_LOCAL_FINALIZER",
+    "local_full_build": "PASS",
+    "third_party_full_rebuild": "NOT_RUN"
+  },
+  "vendor_module_abi": {
+    "candidate_crc_mismatch_count": 0,
+    "candidate_export_count": 15418,
+    "candidate_imports": 27928,
+    "candidate_module_imports": 10,
+    "kernel_crc_mismatch_count": 0,
+    "kernel_imports": 27918,
+    "mismatched_unique_kernel_symbols": [],
+    "module_count": 556,
+    "module_import_references": 31333,
+    "peer_crc_mismatch_count": 0,
+    "peer_imports": 3405,
+    "status": "PASS_STATIC",
+    "stock_module_export_count": 2652,
+    "symvers": "./out/Module.symvers",
+    "symvers_sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+    "unique_module_hashes": 370,
+    "unresolved_reference_count": 0,
+    "unresolved_strong_unversioned_reference_count": 0,
+    "unresolved_unique_symbols": [],
+    "unversioned_undefined_reference_count": 3,
+    "vermagics": [
+      "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
+      "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
+      "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
+    ]
+  }
+}

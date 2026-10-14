@@ -1,0 +1,13 @@
+r3 B7：ReZygisk／Vector 啟動及注入存在性驗證
+
+結果：有界通過。實機 ReZygisk v1.0.0（515-333d423-release）、Vector v2.2（3080-88f8e1fa-JingMatrix-Vector）。版本來自裝置 module.prop，未把它當作二進位可重現性證明。
+
+已實際看到 zygisk-ptrace64 monitor、zygiskd64、zygiskd32、vectord 程序；用程序清單核對 PID 後，確認 64／32 位元 zygote 均映射 ReZygisk、Vector 與 PIF 程式庫，system_server 映射 Vector 程式庫。此證明啟動與載入／注入存在，不等於每個 hook 或 App 已通過。
+
+配對 ksu_susfs 已持久安裝於 /data/adb/ksu/bin/ksu_susfs，SHA-256 018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026，回報 v2.3.0。這次不是僅使用暫存 CLI。
+
+模組恢復後快照所有檢查通過，boot 與 r3 候選一致、running config 雜湊吻合、367 個模組。完整開機採樣 141 次，同一 boot 與 system_server；完成開機後觀察 290.59 秒。未見 system_server/config-fetch 致命標記或所檢索的嚴重 kernel 標記。
+
+須保留的問題：啟動時 .qtidataservices 的 QualifiedNetworksServiceImpl 發生一次 Java NullPointerException，對 null 的 List 呼叫 stream()，頂層在 updateQualifiedNetworkTypes。這是獨立的廠商電信服務異常，不能把這輪描述為「無崩潰」。可用舊 40922 回滾及兩輪停用模組的 r3 開機 log 未見同一 NPE；原廠與最早基線缺少相應 Android/crash buffer，無法證明從未發生。原因尚未確定，不能直接歸咎核心或某個模組；行動數據／VoWiFi 的功能驗證仍待另行測試。
+
+本報告不涵蓋 Zygisk Next、Shamiko、App／DRM／完整性驗證、長期壓力、完整硬體功能或 OTA。原始日誌留在私有目錄，公開檔僅含必要版本、去敏感統計與證據雜湊。

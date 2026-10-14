@@ -1,0 +1,67 @@
+SUSFS repair handoff — 2026-10-13
+Source: external/redacted-home
+Source frozen after candidate 215/215 and preserved 40900 63/63 passed.
+
+Changes
+- fs/namei.c: remove the '..5.u.S' fallback entirely. lookup_dcache,
+  lookup_one_qstr_excl, __lookup_slow and lookup_open reject a positive hidden
+  inode with ENOENT, releasing their owned dentry exactly once. Creation and
+  rename therefore do not receive either an unrelated sibling or a negative
+  substitute dentry on the hidden pathname.
+- lookup_fast: validate child/parent sequence counts and revalidate before the
+  hidden decision. A positive hidden RCU lookup returns ECHILD to retry under
+  ordinary reference ownership; it neither dputs the borrowed pointer nor calls
+  d_lookup_done. Non-RCU lookup returns ENOENT after releasing its own reference.
+  Ordinary revalidation errors, stale-cache retry, and allocation errors retain
+  their normal handling.
+- lookup_open: only the SUSFS-eligible app path performs a normal lookup before
+  atomic_open, allowing the inode to be checked before an open can occur. A
+  checked negative dentry can still use atomic_open and create the ORIGINAL name.
+  Filesystem lookup aliases and errors retain normal release and lookup_done
+  handling. Other callers retain the normal atomic-open path.
+- fs/susfs.c: remove the unused global fake qstr name.
+- fs/stat.c: regular and FUSE private kstat bits are now mutually exclusive;
+  common mount-id assignment is shared.
+- include/linux/susfs.h is byte-identical to the incoming 40900 source. ctime
+  seconds remain bit 8 (KSTAT_SPOOF_CTIME_TV_SEC). Matching official CLI repair is
+  owned by the parent task. Existing inode/device/FUSE predicates and readlink
+  fixes are unchanged; their full original host regression passes.
+
+Behavior and tradeoffs
+A creation or rename aimed at an existing hidden inode returns ENOENT even when
+its parent exists and is writable. This is deliberate fail-closed pathname
+behavior: it never invents an alternative pathname. It does not offer a separate
+virtual writable namespace at the hidden name. The former reserved-looking name
+is once again just an ordinary file name when requested directly.
+Eligible apps may incur an additional filesystem lookup before atomic_open.
+This is necessary to inspect a cold positive inode before opening it. Tests do
+not establish atomic hiding across remote-filesystem revalidation, policy
+changes, or every possible atomic_open implementation. No claim of general
+privilege bypass or all-filesystem/device correctness is made.
+
+Verification
+1. susfs_namei_regression.py extracts TEN actual C function bodies from namei.c
+   and stat.c, compiles them with UBSan, and executes instrumented host VFS stubs.
+   Candidate: 215/215 passed. Incoming source: 100/215 passed, 115 rejected.
+   Covers actual do_mkdirat, filename_create and do_renameat2, cached/cold lookup,
+   hidden source and destination, sibling absent/present, ordinary creation and
+   rename, NOREPLACE/EXCHANGE, alias/error return, RCU/ref mode, sequence/revalidate
+   errors, owned-reference balance, parallel-lookup completion, and regular/FUSE
+   getattr with and without filesystem callbacks.
+   Open tests include eligible cold negative + atomic_open successful creation
+   of the requested name, hidden cold/cached rejection before atomic_open/create,
+   and alias/error cleanup completing each owned parallel lookup exactly once.
+2. susfs_legacy_regression.py is an unchanged copy of diagnostics_20260930's
+   extracted-C regression. All 63 inode/device/FUSE/readlink cases passed.
+3. git diff --check passed. Exact before/after file digests are in
+   susfs_source_hashes.json. susfs_namei_fix.patch is the three-file delta from
+   the incoming 40900-backported sources.
+
+Reproduction (from build_sukisu_20261013):
+  python3 tests/susfs_namei_regression.py --output external/temporary
+  python3 tests/susfs_legacy_regression.py sources/common --output external/temporary
+  python3 tests/susfs_namei_regression.py --source external/redacted-home --output external/temporary
+The old-tree namei.c digest matches the baseline snapshot exactly. The baseline
+command is expected to exit nonzero. Results are host mocks, not kernel build,
+concurrency, filesystem integration or device validation. This agent did not
+run a full kernel build, use ADB, alter defconfig, or edit SukiSU.

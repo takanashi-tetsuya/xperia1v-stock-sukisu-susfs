@@ -1,0 +1,28 @@
+test_missing_test_or_unrecognized_state_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_missing_test_or_unrecognized_state_rejected) ... ok
+test_non_defconfig_changes_remain_visible (test_r3_delivery_checks.RuntimeBindingTests.test_non_defconfig_changes_remain_visible) ... ok
+test_non_hash_or_duplicate_evidence_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_non_hash_or_duplicate_evidence_rejected) ... ok
+test_not_run_remains_not_run (test_r3_delivery_checks.RuntimeBindingTests.test_not_run_remains_not_run) ... ok
+test_only_explicit_reviewed_result_is_retained (test_r3_delivery_checks.RuntimeBindingTests.test_only_explicit_reviewed_result_is_retained) ... ok
+test_pass_without_evidence_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_pass_without_evidence_rejected) ... ok
+test_private_unrecognized_field_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_private_unrecognized_field_rejected) ... ok
+test_runtime_cannot_claim_phone_unmodified (test_r3_delivery_checks.RuntimeBindingTests.test_runtime_cannot_claim_phone_unmodified) ... ok
+test_wrong_artifact_binding_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_wrong_artifact_binding_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.003s
+
+OK
+test_missing_test_or_unrecognized_state_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_missing_test_or_unrecognized_state_rejected) ... ok
+test_non_defconfig_changes_remain_visible (test_r3_delivery_checks.RuntimeBindingTests.test_non_defconfig_changes_remain_visible) ... ok
+test_non_hash_or_duplicate_evidence_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_non_hash_or_duplicate_evidence_rejected) ... ok
+test_not_run_remains_not_run (test_r3_delivery_checks.RuntimeBindingTests.test_not_run_remains_not_run) ... ok
+test_only_explicit_reviewed_result_is_retained (test_r3_delivery_checks.RuntimeBindingTests.test_only_explicit_reviewed_result_is_retained) ... ok
+test_pass_without_evidence_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_pass_without_evidence_rejected) ... ok
+test_private_unrecognized_field_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_private_unrecognized_field_rejected) ... ok
+test_runtime_cannot_claim_phone_unmodified (test_r3_delivery_checks.RuntimeBindingTests.test_runtime_cannot_claim_phone_unmodified) ... ok
+test_wrong_artifact_binding_rejected (test_r3_delivery_checks.RuntimeBindingTests.test_wrong_artifact_binding_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 0.002s
+
+OK

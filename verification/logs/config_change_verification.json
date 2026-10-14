@@ -1,0 +1,21 @@
+{
+  "status": "PASS_SINGLE_CONFIG_CHANGE",
+  "config_delta": {
+    "CONFIG_IKCONFIG_PROC": {
+      "r2": "n",
+      "r3": "y"
+    }
+  },
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "r2_config_sha256": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+  "r3_config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+  "build_metadata": {
+    "build_timestamp": "Wed Oct 14 02:24:56 UTC 2026",
+    "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+    "ksu_full_version": "v4.2.0-e2912817+local-susfs2.3@xperia-20261013",
+    "ksu_uapi": 2,
+    "ksu_version": 40900,
+    "source_date_epoch": 1791944696
+  },
+  "runtime": "NOT_RUN"
+}

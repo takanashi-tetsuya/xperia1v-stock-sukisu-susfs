@@ -1,0 +1,164 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED_ON_DEVICE_SUSFS_PROBES",
+  "scope": "Independent read-only audit of captured ordinary-app and root evidence; no device commands or fixture mutations by this auditor.",
+  "candidate": {
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "prebuilt_boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "kernel_version_code": 40900,
+    "ksu_uapi": 2,
+    "susfs_version": "2.3.0",
+    "bit8_cli_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+    "probe_apk_sha256": "d291e177fd345e9df8eae225fa1925482bd4313e5cb40a364d001f55c8e06f46"
+  },
+  "artifact_binding": {
+    "running_boot_a_matches_candidate": true,
+    "same_boot_and_system_server_from_initial_snapshot_to_postprobe": true,
+    "local_prepared_input_hashes_match": true,
+    "device_cli_and_helper_hashes_match": true,
+    "apk_scope": "Reviewed local APK/deployment-input digest with matching ordinary-app observer identity; no pulled device APK digest in this probe capture."
+  },
+  "observer": {
+    "ordinary_application_uid": true,
+    "selinux_domain": "untrusted_app",
+    "same_application_before_and_after": true,
+    "ksu_granted_root": false,
+    "ksu_should_umount": true,
+    "changed_process_between_phases": true
+  },
+  "B5_ctime": {
+    "status": "PASS",
+    "app_ctime_seconds_and_nanoseconds_equal_requested_values": true,
+    "target_inode_device_size_owner_unchanged": true,
+    "before_app_matches_real_root_ctime": true,
+    "root_ctime_before_and_after_identical": true,
+    "unhidden_controls_unchanged": true
+  },
+  "B6_sus_path": {
+    "status": "PASS_BOUNDED",
+    "before_hidden_fixtures_accessible": true,
+    "after_stat_open_access_hidden_file_and_stat_hidden_directory": "ENOENT",
+    "after_create_create_excl_mkdir_child_mkdir_rename_into_rename_from": "ENOENT",
+    "directory_entries_observed": {
+      "hidden_before": 2,
+      "hidden_after": 0,
+      "visible_before_and_after": 1,
+      "magic_name_before_and_after": 0
+    },
+    "positive_mutation_controls": "create/rename/unlink/mkdir/rmdir succeeded in both phases",
+    "bounded_parallel_reads": {
+      "threads": 4,
+      "iterations_each": 64,
+      "stat_enoent": 256,
+      "open_enoent": 256,
+      "unexpected": 0
+    },
+    "fixture_integrity": {
+      "regular_file_contents_unchanged": 5,
+      "root_enumerated_names_unchanged": 7,
+      "unexpected_new_name": false
+    }
+  },
+  "execution": {
+    "captured_steps": 29,
+    "all_recorded_exit_codes_zero": true,
+    "host_verifier_recheck_normal": "PASS",
+    "host_verifier_recheck_optimized": "PASS",
+    "postprobe_boot_completed": true,
+    "auxiliary_warning": "Package enumeration was denied access to another Android user; target-app UID still matched both reports and KSU query."
+  },
+  "kernel_log_delta": {
+    "comparison": "Exact before suffix equals after prefix; only following lines classified as new. Earlier same-boot warnings are not attributed to this probe.",
+    "before_lines": 2759,
+    "after_lines": 2789,
+    "oldest_before_lines_rotated_out": 34,
+    "exact_overlap_lines": 2725,
+    "new_lines": 64,
+    "before_last_uptime_seconds": 697.073704,
+    "after_last_uptime_seconds": 697.731089,
+    "new_marker_counts": {
+      "oops_or_bug": 0,
+      "rcu_stall": 0,
+      "lockup_or_hung": 0,
+      "warning": 0,
+      "backtrace": 0,
+      "fault_text": 0
+    },
+    "new_avc_denials": 8,
+    "avc_categories": [
+      {
+        "source_domain": "platform_app",
+        "target_domain": "vendor_display_prop",
+        "class": "file",
+        "access": "read",
+        "count": 1
+      },
+      {
+        "source_domain": "priv_app",
+        "target_domain": "vendor_display_prop",
+        "class": "file",
+        "access": "read",
+        "count": 1
+      },
+      {
+        "source_domain": "system_server",
+        "target_domain": "default_android_service",
+        "class": "service_manager",
+        "access": "find",
+        "count": 1
+      },
+      {
+        "source_domain": "untrusted_app",
+        "target_domain": "vendor_display_prop",
+        "class": "file",
+        "access": "read",
+        "count": 1
+      },
+      {
+        "source_domain": "vendor_hal_perf_default",
+        "target_domain": "ksu",
+        "class": "dir",
+        "access": "search",
+        "count": 4
+      }
+    ],
+    "avc_scope": "Captured denials retained as context; no fault claim or causal attribution from these alone."
+  },
+  "limits": [
+    "One before/after ordinary-app run on disposable F2FS app-data fixtures; not two independent after runs.",
+    "Four threads with 64 read iterations each are a bounded lookup exercise, not long-term race, all-filesystem, all-path or global-hiding proof.",
+    "The JNI listing probe reports observed entry counts but does not separately preserve final readdir errno. Other lookup/mutation syscalls and root fixture integrity provide the primary sus_path evidence.",
+    "Kernel-log delta spans approximately 0.657 seconds around rule application and probe execution; delayed faults and long-term stability are outside this capture.",
+    "No claim for Play Integrity, DRM, third-party apps, every SUSFS feature, OTA or other modules follows from these probes.",
+    "Fixture inodes were intentionally retained until a later reboot because this SUSFS version has no remove-kstat API; cleanup completion is separate evidence."
+  ],
+  "private_evidence_sha256": {
+    "before.json": "37722386e06cf551f0968a773262a1894c91f652b80ecf46df8ecbff3c2fdcbc",
+    "after.json": "c8bbc6cfa63fb93fc1868a947baa6af476e4b14b713e24c40413cc475dc52d7a",
+    "root_ctime_before.txt": "48efd521c596a0d2e30490f63490f2499c832dd6c44dec8710fec4434b8f8ec8",
+    "root_ctime_after.txt": "48efd521c596a0d2e30490f63490f2499c832dd6c44dec8710fec4434b8f8ec8",
+    "fixture_hashes_before.txt": "d8ea5fde65f52df2eba61a8f080229972751af6482580e054d9bb848c7f46899",
+    "fixture_hashes_after.txt": "d8ea5fde65f52df2eba61a8f080229972751af6482580e054d9bb848c7f46899",
+    "fixture_names_before.txt": "094b355694582fd6bf5fabf1f74d5ab9258beb3cd5d2cdd856592f0a2403b4cd",
+    "fixture_names_after.txt": "094b355694582fd6bf5fabf1f74d5ab9258beb3cd5d2cdd856592f0a2403b4cd",
+    "ksu_info.txt": "7e286cc0f54241c33b1fba7361195a2aedfd384412361e41347ba63b5ca8d1e1",
+    "tool_hashes.txt": "3f8d70753ed600c5ccb624438ead680cd225cb2c82b8a63db7a1e3fc56aaaf8b",
+    "steps.json": "4e7608f55dcd37a8f3ba67b3b122954b1792e409145bdfa7a60981f24e54ab26",
+    "dmesg_before_rules.txt": "69f90bd07eb4b865e057b6feb223637a7c9c0f16e9c99ede6b12c43784548161",
+    "dmesg_after_rules.txt": "558b4a024348b0ec148d20837fb9f9a8f48209cac0081109b034b80359e1a014",
+    "post_probe_status.txt": "a241cf01688ba614697edc646d24c81e23358bcc2c288195fe88cff0c4a3a010",
+    "package_uid.txt": "d9395691cf4f6cc3d1b7c584c48bac0aa3e922ac1b2970a96d5e1a0ab16c9355",
+    "package_uid.stderr.txt": "33f5daae80cd30c3529b2baffc84b80c4dc61d86dfc69f21d5f2f0fe83837332",
+    "mark.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "susfs_version.txt": "07e187700fb844f50e119e0120bdde98f26e67927d1356903d39885ca79cc871",
+    "susfs_features.txt": "759993d7c2364d37b615e10565b6385ff4afd1ee3128cd84f4fc2e38c6fa3a5d"
+  },
+  "additional_input_sha256": {
+    "probe_inputs": "eee8fc7660e45e4a451e4bf891b982d80c6a50c989a38793007bf8dc64611fe9",
+    "initial_start_marker": "92715ea10c40437734e5cc2547fc36e4db7ff624ba422991b270ef81b1fb2930",
+    "initial_partition_readback_hashes": "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436",
+    "initial_dmesg": "d4404c862ceb5444c40d06eecd222faf0c3a6be36173ee9243026ed0e50f1bb0",
+    "initial_snapshot_summary": "70b4ce976c602c9f64d5ae98615588fe164bdc4424de16cf36d5e0d5e7a1600c"
+  }
+}

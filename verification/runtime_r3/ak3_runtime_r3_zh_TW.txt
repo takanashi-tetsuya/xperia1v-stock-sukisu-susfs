@@ -1,0 +1,9 @@
+AnyKernel3 r3 真機安裝器與讀回：通過
+
+原版 updater 在已啟動Android的root環境執行，指定active slot a；runner、installer、readback退出碼均為0。記錄含完整96MiB讀取/寫入、boot重封裝及Done，未出現abort/failed/error。
+
+安裝前後boot_a皆為100663296 bytes，完整SHA相同且等於驗證過的r3預製boot：這是同版本重新安裝，不以雜湊改變作為是否执行的判準。讀回kernel精確等於r3 Image；header v4、ramdisk0、signature payload0；AVB info與verify均RC0（NONE）。
+
+錯誤韌體負向驗證已用不變的production函式在主機完成20+5案例。沒有在錯誤韌體實機刷寫，也不宣稱recovery安裝已測。
+
+本報告只證明安裝器與boot_a讀回；安裝後重啟、其他分割區保持不變、模組與硬體功能須引用各自的snapshot/測試。前兩次wrapper因mksh alias與device property假設，在預檢階段停止；修正wrapper後未修改kernel或ZIP。完整hash與證據hash見JSON。

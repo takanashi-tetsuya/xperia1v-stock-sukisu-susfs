@@ -119,7 +119,7 @@ def package(root, lock_path, stock, avbtool):
     require(avbtool.is_file(), f'avbtool missing: {avbtool}; use --avbtool or AVBTOOL')
     version = lock['build']['ksu_version']
     boot_name = f'boot_XQ-DQ72_67.2.A.3.178_sukisu{version}.img'
-    zip_name = f'AnyKernel3_Xperia1V_SukiSU{version}_SUSFS2.3_20261013.zip'
+    zip_name = f'AnyKernel3_Xperia1V_SukiSU{version}_SUSFS2.3_20261014.zip'
     packages = root / 'dist/packages'
     packages.mkdir(parents=True, exist_ok=True)
     # A single directory rename publishes a complete verified bundle. No final image

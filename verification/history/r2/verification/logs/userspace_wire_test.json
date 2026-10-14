@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "architecture": "AArch64 LP64",
+  "field_offsets": 17,
+  "flags": 12,
+  "sizeof_matches": true,
+  "source_sha256": {
+    "sources/common/include/linux/susfs.h": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+    "userspace/upstream-susfs/ksu_susfs/jni/features/sus_kstat.c": "b08830b58e09a7ddc11c29b5630e1635a5447cdc1d653ce751e7277ea5b45ce4"
+  },
+  "scope": "Compiled real kernel/CLI declarations, no runtime syscalls"
+}

@@ -1,0 +1,16 @@
+{
+  "artifact_sha256": {
+    "dist/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "dist/Module.symvers": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+    "dist/kernel.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+    "dist/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+    "logs/build.log": "488e2b6771832233d69be7dcaacfdbcd4555af9c97f8ee9eddbdc417aac6a645",
+    "out/.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+    "out/arch/arm64/boot/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "out/drivers/kernelsu/.ksu.o.cmd": "a07ba07273eebede5c3bfc88cbf35919853230d14598a04b311e608fe23d36de",
+    "out/include/config/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+    "out/vmlinux": "2f63ac0ade614824ae232c05dc3848cbe674ab0aa9d29ba94f9cdccf53756086"
+  },
+  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "status": "BUILD_COMPLETED"
+}

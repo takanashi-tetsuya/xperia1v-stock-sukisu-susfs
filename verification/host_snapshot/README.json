@@ -1,0 +1,12 @@
+{
+  "status": "IMMUTABLE_HOST_ONLY_SNAPSHOT",
+  "scope": "Exact original r3 dist files before phone testing; NOT_RUN values remain historical.",
+  "current_runtime": "../../runtime_manifest.json",
+  "files": {
+    "manifest.json": "f36bb5169ae08baab4c9ad54abd21407af9f6fa02a1d427f907c7c9df6c25e62",
+    "runtime_manifest.json": "ffc96a357fd24cefdf3f108ad32003b544ee07800e33ca30ac49873b38fcea83",
+    "SHA256SUMS": "273ed5485818d5ef97e4bd2b762128c904748331ca6d42e8650a608c4a6435a9",
+    "README.md": "b8dda73511e3111dcd877d1530bf18bd574acbc5d5e173a2b0cd86adcc5aa6ce"
+  },
+  "sha256sums_scope": "Original dist directory layout, not this repository layout."
+}

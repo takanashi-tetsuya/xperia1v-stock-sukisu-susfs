@@ -1,0 +1,15 @@
+{
+  "apk": "SukiSU_v4.2.0_40900-release.apk",
+  "sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+  "v2_signers": [
+    {
+      "certificate_size": 860,
+      "certificate_sha256": "947ae944f3de4ed4c21a7e4f7953ecf351bfa2b36239da37a34111ad29993eef",
+      "certificate_subject": "C=zh,ST=gaungdong,L=guangzhou,O=shirkneko,OU=shirkneko,CN=shirkneko",
+      "signed_data_trailing_bytes": "00000000",
+      "signed_data_signature": "PASS",
+      "protected_content_digest": "PASS",
+      "kernel_manager_certificate_match": "PASS"
+    }
+  ]
+}

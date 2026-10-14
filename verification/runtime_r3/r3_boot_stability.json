@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED_BOOT_AND_ENDPOINT_CONTINUITY",
+  "candidate": {
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "zip_sha256": "be4487e3c7590b7124e135a99d55b525c9daf74158ad3892e70393e34d973399",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671"
+  },
+  "first_boot_capture": {
+    "status": "PASS_BOUNDED_CAPTURE",
+    "samples": 115,
+    "boot_completed_samples": 112,
+    "boot_id_count": 1,
+    "system_server_pid_count": 1,
+    "first_uptime_seconds": 12.06,
+    "last_uptime_seconds": 251.87,
+    "first_completed_uptime_seconds": 18.24,
+    "completed_observation_seconds": 233.63,
+    "capture_closed": true,
+    "system_server_fatal_marker_count": 0,
+    "kernel_config_failure_marker_count": 0,
+    "kernel_serious_marker_count": 0,
+    "native_fatal_signals": [
+      {
+        "signal": 6,
+        "process_name": "init",
+        "global_pid1": false
+      },
+      {
+        "signal": 6,
+        "process_name": "init",
+        "global_pid1": false
+      }
+    ]
+  },
+  "post_ak3_boot_capture": {
+    "status": "PASS_BOUNDED_CAPTURE",
+    "samples": 86,
+    "boot_completed_samples": 83,
+    "boot_id_count": 1,
+    "system_server_pid_count": 1,
+    "first_uptime_seconds": 11.88,
+    "last_uptime_seconds": 191.2,
+    "first_completed_uptime_seconds": 18.2,
+    "completed_observation_seconds": 173.0,
+    "capture_closed": true,
+    "system_server_fatal_marker_count": 0,
+    "kernel_config_failure_marker_count": 0,
+    "kernel_serious_marker_count": 0,
+    "native_fatal_signals": [
+      {
+        "signal": 6,
+        "process_name": "init",
+        "global_pid1": false
+      },
+      {
+        "signal": 6,
+        "process_name": "init",
+        "global_pid1": false
+      }
+    ]
+  },
+  "snapshots": {
+    "r3_initial": {
+      "status": "PASS_SNAPSHOT",
+      "uptime_seconds": 58.65,
+      "all_snapshot_checks_true": true,
+      "same_boot_and_system_server_within_snapshot": true,
+      "global_pid1_init_observed": true,
+      "module_count": 367,
+      "config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+      "ikconfig_proc_enabled": true,
+      "vmap_stack_enabled": true,
+      "kernel_serious_marker_count": 0
+    },
+    "r3_after_probes": {
+      "status": "PASS_SNAPSHOT",
+      "uptime_seconds": 1616.9,
+      "all_snapshot_checks_true": true,
+      "same_boot_and_system_server_within_snapshot": true,
+      "global_pid1_init_observed": true,
+      "module_count": 367,
+      "config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+      "ikconfig_proc_enabled": true,
+      "vmap_stack_enabled": true,
+      "kernel_serious_marker_count": 0
+    },
+    "r3_ak3": {
+      "status": "PASS_SNAPSHOT",
+      "uptime_seconds": 85.67,
+      "all_snapshot_checks_true": true,
+      "same_boot_and_system_server_within_snapshot": true,
+      "global_pid1_init_observed": true,
+      "module_count": 367,
+      "config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+      "ikconfig_proc_enabled": true,
+      "vmap_stack_enabled": true,
+      "kernel_serious_marker_count": 0
+    }
+  },
+  "endpoint_continuity": {
+    "initial_to_after_probes_same_boot_and_system_server": true,
+    "initial_snapshot_to_after_probes_seconds": 1558.25,
+    "post_ak3_resume_same_boot_and_system_server": true,
+    "resume_uptime_seconds": 20404.85,
+    "post_ak3_snapshot_to_resume_seconds": 20319.18,
+    "continuous_sampling_between_endpoints": false
+  },
+  "init_abort_classification": {
+    "global_pid1_abort_observed": false,
+    "description": "Native SIGABRT entries name init but identify non-PID1 processes. They are consistent with init child/helper processes; exact parent, service and cause are unestablished. PID1 init is alive in all three snapshots. Missing useful stack coincides with crash_dump attach / tombstoned failures. This does not establish that the aborts are harmless.",
+    "working_40922_comparison": {
+      "same_shaped_non_pid1_init_sigabrt_count": 1,
+      "scope": "An early non-PID1 init abort also exists in working rollback evidence. This does not prove a common cause for later r3 aborts."
+    }
+  },
+  "limits": [
+    "Status is bounded evidence, not long-term stability or absence of all faults.",
+    "The long intervals use boot identity and system_server PID equality at endpoints, not continuous process monitoring.",
+    "No system_server config-fetch fatal marker or serious kernel marker was observed in reviewed captures/snapshots; this is not a claim that all logs are warning-free.",
+    "Root modules were inactive at runtime for these observations. Enabled marker restoration alone does not establish loaded or functional Zygisk/Vector; B7 is outside this appendix.",
+    "Module counts and service presence do not establish camera, Wi-Fi, audio, sensor, application, DRM or attestation function.",
+    "No OTA operation is covered."
+  ],
+  "evidence_sha256": {
+    "runtime_r3_20261014/private/r3_initial/snapshot_summary.json": "70b4ce976c602c9f64d5ae98615588fe164bdc4424de16cf36d5e0d5e7a1600c",
+    "runtime_r3_20261014/private/r3_initial/identity.txt": "1ed4056f29f954e7a6d0c7d237e8ee33f7ef05cd502743c03f1436c1fec88768",
+    "runtime_r3_20261014/private/r3_initial/start_marker.txt": "92715ea10c40437734e5cc2547fc36e4db7ff624ba422991b270ef81b1fb2930",
+    "runtime_r3_20261014/private/r3_initial/end_marker.txt": "92715ea10c40437734e5cc2547fc36e4db7ff624ba422991b270ef81b1fb2930",
+    "runtime_r3_20261014/private/r3_initial/processes.txt": "c6b7e41de07625554026fb689f4b48e0c5150f7ea5a350e6c3ed6ece58a7fc52",
+    "runtime_r3_20261014/private/r3_initial/config.txt": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+    "runtime_r3_20261014/private/r3_initial/dmesg.txt": "d4404c862ceb5444c40d06eecd222faf0c3a6be36173ee9243026ed0e50f1bb0",
+    "runtime_r3_20261014/private/r3_after_probes/snapshot_summary.json": "d1411d1a61e523317e8c766672a82ab515371589a89ac9c61fe4737afff8766d",
+    "runtime_r3_20261014/private/r3_after_probes/identity.txt": "4b62226bb4e1c78f7c342e67e08b56444b32aba5196ed1699c421fee06dd4568",
+    "runtime_r3_20261014/private/r3_after_probes/start_marker.txt": "92715ea10c40437734e5cc2547fc36e4db7ff624ba422991b270ef81b1fb2930",
+    "runtime_r3_20261014/private/r3_after_probes/end_marker.txt": "92715ea10c40437734e5cc2547fc36e4db7ff624ba422991b270ef81b1fb2930",
+    "runtime_r3_20261014/private/r3_after_probes/processes.txt": "2f25d40eafb9da9dc13984dfbe9f25df2fa86bcd6a0aebd8fe1215779fd6c1e1",
+    "runtime_r3_20261014/private/r3_after_probes/config.txt": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+    "runtime_r3_20261014/private/r3_after_probes/dmesg.txt": "b43eeb586b638d23a1b0c10595d959bd8b9217719c707ec9b0da5f8ae146761e",
+    "runtime_r3_20261014/private/r3_ak3/snapshot_summary.json": "3564f67476599aef10ffc3d93cda24800871a3a615819a245cea4111b3692da0",
+    "runtime_r3_20261014/private/r3_ak3/identity.txt": "34e60651873b1e10817e6e8761016cc907d34232289c58d6413249b730b93a37",
+    "runtime_r3_20261014/private/r3_ak3/start_marker.txt": "afed8f997912a64964e458199168a6139654b88ad3fc23957cf2745f25efc72e",
+    "runtime_r3_20261014/private/r3_ak3/end_marker.txt": "afed8f997912a64964e458199168a6139654b88ad3fc23957cf2745f25efc72e",
+    "runtime_r3_20261014/private/r3_ak3/processes.txt": "99e07cba148722017ab007a4e345e328958843977b564bc46e9e16c5bf3655dd",
+    "runtime_r3_20261014/private/r3_ak3/config.txt": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+    "runtime_r3_20261014/private/r3_ak3/dmesg.txt": "ead0740e1d64f904e867fe5402b3adf449aca60f838116366c8f58b795dcb8aa",
+    "runtime_r3_20261014/private/r3_first_boot/events.jsonl": "0c0dcefb7885545e6cbdb46a083c62833d2832d1b54304e6269b6df6e47a5fb2",
+    "runtime_r3_20261014/private/r3_first_boot/connection_001/status_samples.jsonl": "f283bd52c5993a1bde7e6553542246b23f2a3560dfbecbdbe43d34c7da31ea11",
+    "runtime_r3_20261014/private/r3_first_boot/connection_001/crash.txt": "b100a3f7d5296a206870066ff21a56b364b8b2a5f58cced6cfe3b839ca78e012",
+    "runtime_r3_20261014/private/r3_first_boot/connection_001/android.txt": "a3cf287e3f089e20fce10e9b1c79ba4af3b8d6493cd6d89e08f30ece850275d2",
+    "runtime_r3_20261014/private/r3_first_boot/connection_001/kernel.txt": "e5f78aa15d7ed76dbf4d0bc6a8991726990ed878fb2c0cb56e53ceb9f7ca0ef7",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/events.jsonl": "e6ddf842a6cb38291f4fb12e2bcec2a53947e8ec33cfee526dbbe53871c46f8c",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/connection_001/status_samples.jsonl": "01685865cf3944473ab035aac67fd7ef781c43b04ef7a122c419fc45ddbb94a0",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/connection_001/crash.txt": "851b8d5203d39e3c5b46753499681dce52a46737b9e5754b07993649e65b9c4a",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/connection_001/android.txt": "905be852a0e5d821bf1749055f5bc30f2b20eeff6c4d3c65c56a6f2a2e532562",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/connection_001/kernel.txt": "54192935b498f2457148df86437646fb748e9d3e8b91f859194d25ac1bc8a74c",
+    "runtime_r3_20261014/private/resume_090232/state.txt": "0fa2a134cc9dd7befab195eaa236d92c06da36ca4ac8105567673524019cb183",
+    "runtime_r2_20261013/private/rollback_40922/crash_log.txt": "47cc94483a9d6a73587ace62ed5c5f64f3f80e1fb6510aa433052a02b14c67d0"
+  }
+}

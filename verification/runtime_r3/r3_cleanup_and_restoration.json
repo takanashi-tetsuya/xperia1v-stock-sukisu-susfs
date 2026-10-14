@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "status": "PASS_SESSION_CLEANUP_AND_ORIGINAL_MODULE_RESTORATION",
+  "scope": "Only session test fixtures and original enabled module selection; not per-app feature validation.",
+  "test_app_uninstalled_after_full_kernel_reboot": true,
+  "temporary_test_rules_cleared_by_full_kernel_reboot": true,
+  "session_temp_directories_removed_after_local_backup_verification": true,
+  "original_enabled_module_ids_restored": [
+    "TA_utl",
+    "hidegesturepill_sony",
+    "playintegrityfix",
+    "rezygisk",
+    "tricky_store",
+    "zygisk_vector"
+  ],
+  "subsequent_reboot_performed": true,
+  "actual_rezygisk_and_vector_injection": "SEE_r3_zygisk_runtime.json",
+  "corrected_cli_persistently_installed": true,
+  "cli_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+  "private_evidence_sha256": {
+    "steps.json": "2e8487f06ae2565585f7c6970e209ee8ea1fa401c554dcc33cea79b5a51be333",
+    "temp_cleanup.txt": "f2305b4f7e36c85c84662bd844356c34fe605ed668b296fa769dff5c666a7c7e",
+    "cli_deployment.txt": "20e02da52a8e50822d0707fce7ebdcd8e853f5e6d48ecea3c4045f8de1ee0acb",
+    "vector_logs_and_status.txt": "0df7e1ec2ca8fcbd9dccf2dec382b84834ae7e29cf7d8acb701ce15713ac615e",
+    "module_flags.txt": "381e582c545a189e608db56d41765e166e22c81133757ef32b319367b4d4bd5d"
+  },
+  "hardware_user_observations": "NOT_RECEIVED_AT_THIS_CHECKPOINT",
+  "ota": "NOT_RUN_NOT_REQUESTED"
+}

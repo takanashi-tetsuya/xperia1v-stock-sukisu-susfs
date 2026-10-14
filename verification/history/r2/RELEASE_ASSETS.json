@@ -1,0 +1,86 @@
+{
+  "AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip": {
+    "sha256": "755feefd4e78547fd3da28d185892b32a32cd7315c422d060017919c4f19a359",
+    "size": 25182738
+  },
+  "DELIVERY_SHA256SUMS.txt": {
+    "sha256": "8002e6cadc4317dd2f7e2d973d80108c7cb2f8f8d995bc9f39579744ec9718c7",
+    "size": 5714
+  },
+  "Image": {
+    "sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "size": 48564736
+  },
+  "LICENSE": {
+    "sha256": "d42deaf93b3de7501064340f9f89273ee688a0d28495afdc0a433190a740f790",
+    "size": 1298
+  },
+  "LICENSE_NOTICE.txt": {
+    "sha256": "b0bd560b8305f5913da904b8838eae98b70209d278c75ee19e7e2e331f6296b6",
+    "size": 1370
+  },
+  "Module.symvers": {
+    "sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+    "size": 934547
+  },
+  "README.md": {
+    "sha256": "5c87678fa3f8b77d8e56618b8a329a8ae0042b37e515303e0dcb73cdcfab2df2",
+    "size": 13009
+  },
+  "README_zh_TW.txt": {
+    "sha256": "5eb6320f4561de19c3d7cdd99f2a9bbfa6fc9cc6e2b5aae229c918a2418afd4c",
+    "size": 1867
+  },
+  "RELEASE_NOTES.md": {
+    "sha256": "2aeb425aa0cdd7cb7774e0b26486154caf381a2e0900466fdebe49686c98ab88",
+    "size": 1425
+  },
+  "REPAIR_REPORT_20261013.txt": {
+    "sha256": "2a2ded3e549f1eb61fd3f4034327640dabb5bcb0eb548ee1de400ea4d990c077",
+    "size": 7253
+  },
+  "SukiSU_v4.2.0_40900-release.apk": {
+    "sha256": "4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3",
+    "size": 14084162
+  },
+  "boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img": {
+    "sha256": "2bc757daab5eb648d0833f1bbcd2e07757b6e3693a53f2b0a08abebbe8e66f72",
+    "size": 100663296
+  },
+  "full_source.tar.gz": {
+    "sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b",
+    "size": 458322854
+  },
+  "kernel.config": {
+    "sha256": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+    "size": 189531
+  },
+  "kernel.release": {
+    "sha256": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+    "size": 52
+  },
+  "manifest.json": {
+    "sha256": "5f565337bb3727f4e1c7960ef3e58ad28e2d9dcb5cf39545a2a064ed68fbb604",
+    "size": 23354
+  },
+  "packaging_metadata.tar.gz": {
+    "sha256": "9f59d7179a226dcaf871a6ba652646befd9d511b0be7aa3850194101e6437b79",
+    "size": 1926
+  },
+  "source_changes.tar.gz": {
+    "sha256": "6940262490a493a29b8e4f421182ceb2eb6253baad206abcc02170c20c4a3540",
+    "size": 163470
+  },
+  "userspace.tar.gz": {
+    "sha256": "8424b0153925a50a6fb176fdc160874c830f95ef0846d27c1d0a5ecb42e7b5a9",
+    "size": 11655
+  },
+  "verification.tar.gz": {
+    "sha256": "1684f8d1df136c1852998d1f0dd49d6bccaa19df217a6f9675850245eadd5efa",
+    "size": 28762
+  },
+  "RELEASE_SHA256SUMS": {
+    "sha256": "e5e7525cea4843e4e6a99ce7e0e15fffaa25d33b2b300eb175173473d99eb3cd",
+    "size": 1738
+  }
+}

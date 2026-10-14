@@ -1,0 +1,83 @@
+{
+  "anykernel_sha256": "be4487e3c7590b7124e135a99d55b525c9daf74158ad3892e70393e34d973399",
+  "application_fixes_claimed": false,
+  "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+  "cli_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+  "kernel_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+  "phone_modified": true,
+  "private_evidence_sha256": {
+    "audio": [
+      "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+    ],
+    "boot": [
+      "3564f67476599aef10ffc3d93cda24800871a3a615819a245cea4111b3692da0",
+      "70b4ce976c602c9f64d5ae98615588fe164bdc4424de16cf36d5e0d5e7a1600c",
+      "d1411d1a61e523317e8c766672a82ab515371589a89ac9c61fe4737afff8766d",
+      "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+    ],
+    "camera": [
+      "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+    ],
+    "ctime": [
+      "37722386e06cf551f0968a773262a1894c91f652b80ecf46df8ecbff3c2fdcbc",
+      "48efd521c596a0d2e30490f63490f2499c832dd6c44dec8710fec4434b8f8ec8",
+      "c8bbc6cfa63fb93fc1868a947baa6af476e4b14b713e24c40413cc475dc52d7a"
+    ],
+    "flash": [
+      "1f2bd22fb5d20ac5642fc1802b99ce9fa4c4adb9e55b5b044fe3da10a3e8d3c1",
+      "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436"
+    ],
+    "installer": [
+      "23bc296738262b75e937ec0399637f527ae419e8897bdc92c89a0e5cd9c5e01d",
+      "3564f67476599aef10ffc3d93cda24800871a3a615819a245cea4111b3692da0",
+      "81417f91c06239ba03c72ece149ff2b5f4d348f3f403a68647a05770516e6400",
+      "834d7042e2ba5ad45a2e198920f02b79143029ec9a1d121cdfe218ab7a101168"
+    ],
+    "ksu": [
+      "34e60651873b1e10817e6e8761016cc907d34232289c58d6413249b730b93a37",
+      "7e286cc0f54241c33b1fba7361195a2aedfd384412361e41347ba63b5ca8d1e1",
+      "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
+      "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+    ],
+    "module_loading": [
+      "135b4ad9f1b707e69531643b58bbbcc14b42230dba036af380d8668becd23540",
+      "240d2acd6662aa32829bf63a15b0203182e55b9719c14291dcdcb837e8e201c4",
+      "ead0740e1d64f904e867fe5402b3adf449aca60f838116366c8f58b795dcb8aa",
+      "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+    ],
+    "ota": [],
+    "sensors": [],
+    "sus_path": [
+      "094b355694582fd6bf5fabf1f74d5ab9258beb3cd5d2cdd856592f0a2403b4cd",
+      "37722386e06cf551f0968a773262a1894c91f652b80ecf46df8ecbff3c2fdcbc",
+      "c8bbc6cfa63fb93fc1868a947baa6af476e4b14b713e24c40413cc475dc52d7a",
+      "d8ea5fde65f52df2eba61a8f080229972751af6482580e054d9bb848c7f46899"
+    ],
+    "wifi": [
+      "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+    ],
+    "zygisk": [
+      "e9c679acaf4a5c83fcc6dd902a6fd6fb0a5a48b5d1a2afde7150dc12e73ff2dd",
+      "0df7e1ec2ca8fcbd9dccf2dec382b84834ae7e29cf7d8acb701ce15713ac615e",
+      "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+    ]
+  },
+  "schema_version": 1,
+  "scope": "MAINTAINER_REVIEWED_PRIVATE_DEVICE_EVIDENCE",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "tests": {
+    "audio": "PASS",
+    "boot": "PASS",
+    "camera": "PASS",
+    "ctime": "PASS",
+    "flash": "PASS",
+    "installer": "PASS",
+    "ksu": "PASS",
+    "module_loading": "PASS",
+    "ota": "NOT_RUN",
+    "sensors": "NOT_RUN",
+    "sus_path": "PASS",
+    "wifi": "PASS",
+    "zygisk": "PASS"
+  }
+}

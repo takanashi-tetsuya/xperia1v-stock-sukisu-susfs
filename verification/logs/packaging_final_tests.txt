@@ -12,6 +12,8 @@ test_real_avbtool_roundtrip_when_available (packaging_pipeline_test.PipelineTest
 test_tool_versions_checked_before_make_and_symlink_invocation (packaging_pipeline_test.PipelineTests.test_tool_versions_checked_before_make_and_symlink_invocation) ... ok
 test_verifier_never_updates_lock_and_removes_stale_pass (packaging_pipeline_test.PipelineTests.test_verifier_never_updates_lock_and_removes_stale_pass) ... ok
 test_verifier_preserves_required_btf_and_config_checks (packaging_pipeline_test.PipelineTests.test_verifier_preserves_required_btf_and_config_checks) ... ok
+test_verifier_rejects_disabled_proc_config (packaging_pipeline_test.PipelineTests.test_verifier_rejects_disabled_proc_config) ... ok
+test_verifier_rejects_missing_proc_config (packaging_pipeline_test.PipelineTests.test_verifier_rejects_missing_proc_config) ... ok
 test_wrong_head_and_ignored_addition_are_rejected (packaging_pipeline_test.PipelineTests.test_wrong_head_and_ignored_addition_are_rejected) ... ok
 test_added_path_traversal_is_rejected (packaging_prepare_test.PrepareSourcesTests.test_added_path_traversal_is_rejected) ... ok
 test_changed_added_file_executable_intent_is_rejected (packaging_prepare_test.PrepareSourcesTests.test_changed_added_file_executable_intent_is_rejected) ... ok
@@ -28,7 +30,7 @@ test_publish_does_not_replace_existing_empty_directory (packaging_prepare_test.P
 test_tampered_patch_and_added_file_are_rejected (packaging_prepare_test.PrepareSourcesTests.test_tampered_patch_and_added_file_are_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 28 tests in 9.392s
+Ran 30 tests in 9.290s
 
 OK
 test_avb_failure_leaves_no_published_boot_or_zip (packaging_pipeline_test.PipelineTests.test_avb_failure_leaves_no_published_boot_or_zip) ... ok
@@ -45,6 +47,8 @@ test_real_avbtool_roundtrip_when_available (packaging_pipeline_test.PipelineTest
 test_tool_versions_checked_before_make_and_symlink_invocation (packaging_pipeline_test.PipelineTests.test_tool_versions_checked_before_make_and_symlink_invocation) ... ok
 test_verifier_never_updates_lock_and_removes_stale_pass (packaging_pipeline_test.PipelineTests.test_verifier_never_updates_lock_and_removes_stale_pass) ... ok
 test_verifier_preserves_required_btf_and_config_checks (packaging_pipeline_test.PipelineTests.test_verifier_preserves_required_btf_and_config_checks) ... ok
+test_verifier_rejects_disabled_proc_config (packaging_pipeline_test.PipelineTests.test_verifier_rejects_disabled_proc_config) ... ok
+test_verifier_rejects_missing_proc_config (packaging_pipeline_test.PipelineTests.test_verifier_rejects_missing_proc_config) ... ok
 test_wrong_head_and_ignored_addition_are_rejected (packaging_pipeline_test.PipelineTests.test_wrong_head_and_ignored_addition_are_rejected) ... ok
 test_added_path_traversal_is_rejected (packaging_prepare_test.PrepareSourcesTests.test_added_path_traversal_is_rejected) ... ok
 test_changed_added_file_executable_intent_is_rejected (packaging_prepare_test.PrepareSourcesTests.test_changed_added_file_executable_intent_is_rejected) ... ok
@@ -61,6 +65,6 @@ test_publish_does_not_replace_existing_empty_directory (packaging_prepare_test.P
 test_tampered_patch_and_added_file_are_rejected (packaging_prepare_test.PrepareSourcesTests.test_tampered_patch_and_added_file_are_rejected) ... ok
 
 ----------------------------------------------------------------------
-Ran 28 tests in 14.643s
+Ran 30 tests in 14.167s
 
 OK

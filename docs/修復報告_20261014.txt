@@ -1,0 +1,45 @@
+Sony Xperia 1 V / XQ-DQ72 / 67.2.A.3.178 — r3 修復說明
+
+r3 修正已確認的 r2 Android 開機循環原因：恢復 CONFIG_IKCONFIG_PROC=y，提供
+/proc/config.gz。r2 在停用全部 root 模組後仍連續五次終止 system_server；記錄顯示
+先開啟此檔案得到 ENOENT，再由 android_os_Debug_isVmapStack 的 native CHECK abort。
+官方 Android 15 程式呼叫链為 AppProfiler 記憶體統計 → MemInfoReader →
+Debug.isVmapStack → LoadKernelConfigs。這是直接 stack/errno 證據，不是根據模組數量推測。
+去敏感資料見 docs/ikconfig_boot_failure_evidence.json；完整私人日誌不公開。
+
+核心唯一變更為 gki_defconfig 中 IKCONFIG_PROC n→y。CONFIG_IKCONFIG=y 保持啟用；
+單獨內嵌config無法代替proc介面。SukiSU 40900 / UAPI 2、SUSFS、AnyKernel3 inputs
+保持 r2 的鎖定來源，安全性 backports、ctime bit 8、VFS修正不因本次故障盲目回退。
+stock kernel.release 保持完整5.15.189-android13-8-00016-g51bba4309aac-ab14546557。
+SukiSU內嵌完整版本中的xperia-20261013屬來源識別；r3由新source-lock和artifact hash識別。
+
+主機腳本另修正PAHOLE命令列指定方式，確保遞迴make使用已核驗的1.31 binary。
+此項有4個實際GNU make案例，不是Android啟動問題的修正。
+
+r3建置來自已核驗r2完整source archive，解壓後只套用上述配置變更，使用相同主機的
+乾淨容器、關閉容器網路、初始空out目錄完成build/verify/package。沒有將這次流程
+冒稱全新網路下載或第三方獨立重建。編譯時間戳不同且簽章key重新生成，Image hash
+不預期與r2一樣；實際config與Module.symvers分別核對。
+
+本次重新解析原廠556個vendor模組，重驗CRC、protected symbols、vermagic與r3。
+沒有CRC衝突、未解析strong references或protected symbol collisions。此為靜態結果，
+不能證明真機Wi-Fi/相機/音訊/感測器全部正常。真機模組清單也不能代替各項硬體操作。
+
+SUSFS/SukiSU/CLI/AK3未變更來源的主機報告，按完整來源與報告SHA核對後明確標為
+INHERITED_R2_NOT_RERUN。新打包/發佈/配置測試及ABI檢查有本次紀錄。來源與證據關係
+见 verification/logs/host_evidence_provenance.json、vendor_audit/revalidation_provenance.json。
+
+手機開機、實際模組載入、KSU/SUSFS、ctime/sus_path、Zygisk、AK3、硬體與OTA各自
+判定。此固定source文件不記會隨測試變動的結果；請讀Release外部runtime_manifest.json
+及manifest的runtime附錄，依各項與Image/boot/ZIP/CLI hash的綁定核對。主機工具原始報告
+中的runtime NOT_RUN保留原意，不會被改寫為實機PASS。不宣稱任何App相容性已修復。
+
+完整來源包不含私人裝置日誌、boot ID、ADB序號、帳號/token、generated private signing
+keys或原廠韌體。後續手機紀錄更新外部runtime附錄，無需改寫此來源包。
+SUSFS GPL-3.0與Linux GPL-2.0-only的二進位散布授權問題未解決；維持draft。
+
+官方參照：
+https://android.googlesource.com/platform/frameworks/base/+/android-15.0.0_r1/core/jni/android_os_Debug.cpp#774
+https://android.googlesource.com/platform/system/libvintf/+/android-15.0.0_r1/KernelConfigs.cpp#32
+https://android.googlesource.com/platform/frameworks/base/+/android-15.0.0_r1/core/java/com/android/internal/util/MemInfoReader.java#110
+https://android.googlesource.com/platform/frameworks/base/+/android-15.0.0_r1/services/core/java/com/android/server/am/AppProfiler.java#553

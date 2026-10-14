@@ -9,8 +9,8 @@
   "protected_import_table_entries": 0,
   "protected_export_table_entries": 0,
   "signed_modules": [
-    "external/redacted-home",
-    "external/redacted-home"
+    "external/vendor-audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/drivers/block/zram/zram.ko",
+    "external/vendor-audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/mm/zsmalloc.ko"
   ],
   "untrusted_module_protection_collisions": [],
   "signature_verification": "NOT_VERIFIED",

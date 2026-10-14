@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "finding": "CONFIG_IKCONFIG_PROC_DISABLED_CAUSES_SYSTEM_SERVER_NATIVE_ABORT",
+  "diagnosis_status": "CONFIRMED_BY_DEVICE_TRACE_AND_OFFICIAL_ANDROID15_SOURCE",
+  "repair_runtime_status": "NOT_RUN_AT_REPORT_CREATION",
+  "device": {
+    "model": "Sony Xperia 1 V XQ-DQ72",
+    "android": 15,
+    "firmware": "67.2.A.3.178"
+  },
+  "scope": "r2 modules-disabled boot, connection_001 only; all raw device logs remain private",
+  "evidence": {
+    "system_server_sigabrt_count": 5,
+    "matching_abort_message_count": 5,
+    "abort_message": "Check failed: result == OK Kernel configs could not be fetched. b/151092221",
+    "first_system_server_fatal_local_time": "2026-10-14T11:21:32.150+09:00",
+    "first_error_before_abort": {
+      "line": 25923,
+      "errno": 2,
+      "description": "Could not open /proc/config.gz"
+    },
+    "native_check_line": 25924,
+    "stack_functions": [
+      "android_os_Debug_isVmapStack",
+      "MemInfoReader.getKernelUsedSizeKb",
+      "AppProfiler$CachedAppsWatermarkData.updateCachedAppsSnapshot",
+      "ActivityManagerService$MainHandler.handleMessage"
+    ],
+    "raw_private_inputs": [
+      {
+        "filename": "crash.txt",
+        "bytes": 40748,
+        "sha256": "d375d367000a135a5166ad499131d16217b2b67c0b92ed7bf6c41ffb8fedefad"
+      },
+      {
+        "filename": "android.txt",
+        "bytes": 12383956,
+        "sha256": "9a349ee993bf1f22d23d6a5b7008a14b94e16c52cc750382a3375f4d7f323cda"
+      },
+      {
+        "filename": "kernel.txt",
+        "bytes": 483328,
+        "sha256": "9e95aa8bf050bc1e2abeca27a3625e2663c863616dc6d6f5869d8e6722af983d"
+      }
+    ],
+    "earlier_init_abort": "A pre-clock init SIGABRT line also exists without a usable stack; not treated as the proven system_server failure cause."
+  },
+  "config_comparison": {
+    "old_working": {
+      "file": "build_sukisu_20260920/out/.config",
+      "sha256": "300ad4729b14a4ece0b32a6de137807b0b15e0e08ad30ace24a7366c64ec5198",
+      "values": {
+        "CONFIG_IKCONFIG": "y",
+        "CONFIG_IKCONFIG_PROC": "y",
+        "CONFIG_VMAP_STACK": "y"
+      }
+    },
+    "r2": {
+      "file": "build_sukisu_20261013_r2/dist/kernel.config",
+      "sha256": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+      "values": {
+        "CONFIG_IKCONFIG": "y",
+        "CONFIG_IKCONFIG_PROC": "n",
+        "CONFIG_VMAP_STACK": "y"
+      }
+    }
+  },
+  "official_aosp_sources": [
+    {
+      "file": "android_os_Debug.cpp",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android-15.0.0_r1/core/jni/android_os_Debug.cpp",
+      "bytes": 30497,
+      "sha256": "4214f7e63f952bc8659a5aa8a21f5733cf82351a488f881c269f215d6890b425"
+    },
+    {
+      "file": "MemInfoReader.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android-15.0.0_r1/core/java/com/android/internal/util/MemInfoReader.java",
+      "bytes": 4177,
+      "sha256": "a46d26661429683dcf522b187a67fbb74041d78c48c4cc1adbb7c2f473240a16"
+    },
+    {
+      "file": "AppProfiler.java",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/android-15.0.0_r1/services/core/java/com/android/server/am/AppProfiler.java",
+      "bytes": 120822,
+      "sha256": "0662c36aa7f9655bc32481db239da99fb463d96029881a53f3dd77eb8c89e612"
+    },
+    {
+      "file": "KernelConfigs.cpp",
+      "url": "https://android.googlesource.com/platform/system/libvintf/+/android-15.0.0_r1/KernelConfigs.cpp",
+      "bytes": 1669,
+      "sha256": "eb3a395e148e27bd8f85184f76a1cfeec44454490142e1897e4cfcefa6a51d34"
+    }
+  ],
+  "causal_chain": [
+    "r2 CONFIG_IKCONFIG_PROC=n removes config.gz proc registration in kernel/configs.c.",
+    "Android AppProfiler reads kernel memory usage through MemInfoReader.getKernelUsedSizeKb.",
+    "Debug.isVmapStack calls LoadKernelConfigs to determine CONFIG_VMAP_STACK.",
+    "LoadKernelConfigs opens /proc/config.gz, receives ENOENT (2), and returns -errno.",
+    "android_os_Debug_isVmapStack CHECK(result == OK) aborts system_server; observed five times."
+  ],
+  "required_minimal_fix": "Restore CONFIG_IKCONFIG_PROC=y while retaining CONFIG_IKCONFIG=y; require it in build verification.",
+  "limits": [
+    "This identifies the observed native system_server abort; successful corrected boot still requires a device retest.",
+    "Module name counts and host tests cannot certify hardware functionality or boot success.",
+    "No evidence justifies reverting unrelated VFS/SUSFS fixes.",
+    "No root-hiding substitute or fabricated config content is part of this repair."
+  ]
+}

@@ -181,7 +181,8 @@ class MaintainerArgumentsTests(unittest.TestCase):
                                      text=True, capture_output=True)
             self.assertEqual(process.returncode, 2)
             self.assertNotIn('Traceback', process.stderr)
-            for flag in ('--research', '--original-dist', '--previous-40900-dist', '--cli-binary'):
+            for flag in ('--research', '--original-dist', '--previous-40900-dist', '--cli-binary',
+                         '--previous-r2-root'):
                 self.assertIn(flag, process.stderr)
 
     def test_missing_inputs_do_not_delete_attestation(self):
@@ -192,18 +193,20 @@ class MaintainerArgumentsTests(unittest.TestCase):
             manifest.write_text('previous delivery')
             process = subprocess.run([sys.executable, str(ROOT / 'finalize_delivery.py'), '--root', str(root),
                                       '--research', str(root / 'missing'), '--original-dist', str(root),
-                                      '--previous-40900-dist', str(root), '--cli-binary', str(root / 'cli')],
+                                      '--previous-40900-dist', str(root), '--cli-binary', str(root / 'cli'),
+                                      '--previous-r2-root', str(root)],
                                      text=True, capture_output=True)
             self.assertNotEqual(process.returncode, 0)
             self.assertNotIn('Traceback', process.stderr)
-            self.assertIn('--research', process.stderr)
+            self.assertIn('--research: directory is missing or symlinked', process.stderr)
             self.assertEqual(manifest.read_text(), 'previous delivery')
 
     def test_explicit_input_validation(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)
-            research, original, previous = (root / name for name in ('research', 'original', 'previous'))
-            for directory in (research, original, previous):
+            research, original, previous, previous_r2 = (
+                root / name for name in ('research', 'original', 'previous', 'previous-r2'))
+            for directory in (research, original, previous, previous_r2):
                 directory.mkdir()
             for name in VERSION_EVIDENCE + (OFFICIAL_APK,):
                 (research / name).write_text('{}')
@@ -218,10 +221,10 @@ class MaintainerArgumentsTests(unittest.TestCase):
             cli.write_bytes(b'placeholder')
             # Existence validation is deliberately distinct from verify_inputs,
             # which must still authenticate every artifact before finalization.
-            validate_external_inputs(root, research, original, previous, cli)
+            validate_external_inputs(root, research, original, previous, cli, previous_r2)
             cli.unlink()
             with self.assertRaisesRegex(CheckError, '--cli-binary'):
-                validate_external_inputs(root, research, original, previous, cli)
+                validate_external_inputs(root, research, original, previous, cli, previous_r2)
 
 
 if __name__ == '__main__':

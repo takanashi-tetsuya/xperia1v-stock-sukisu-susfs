@@ -1,0 +1,18 @@
+{
+  "fs/namei.c": {
+    "before": "3dfa92827e903f4f2f37a30823b59a367150d66ab88ecdee7d56ea811a164787",
+    "after": "5319336a801d6e6cb928ca6f306ebdd1dbc509d5e48344b5a252e4af9d3acfef"
+  },
+  "fs/stat.c": {
+    "before": "c547bdb8b66dd249ac30df553abdf3f5d7a1df24e660c5a072821884eba4b63a",
+    "after": "c0e6fabb07a6a6ba3cd5e763b605c9c9b7238cd057fe182868b7e526701c60e4"
+  },
+  "fs/susfs.c": {
+    "before": "341ad03df537059bf1c8ac50f641bac458bce317729388f3985ccc161379f84f",
+    "after": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+  },
+  "include/linux/susfs.h": {
+    "before": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79",
+    "after": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+  }
+}

@@ -1,3 +1,5 @@
+HISTORICAL r2 REPORT: the decision to disable /proc/config.gz below caused an Android boot regression and is superseded by r3. See 修復報告_20261014.txt. This file is retained as historical review context.
+
 Xperia 1 V / 67.2.A.3.178 — 2026-10-13 修復報告
 
 r2：新報告十項處置

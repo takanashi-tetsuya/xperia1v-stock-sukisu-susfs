@@ -1,0 +1,12 @@
+SUSFS r3 實機證據獨立審核：通過有限範圍測試
+
+B5：一般 untrusted_app 在同一目標上讀到指定 ctime 秒與納秒；inode、裝置、大小、擁有者不變。root 前後讀到的真實 ctime 完全一致，未隱藏對照檔也未變。
+B6：標記前檔案/目錄可讀；標記後 stat/open/access 與六種建立、mkdir、改名操作均回 ENOENT。四執行緒各64輪，合計256次 stat、256次 open 全數 ENOENT，unexpected=0。一般建立/改名/刪除對照操作正常；root核對5檔內容雜湊及7個名稱前後相同，無多出魔術檔名。
+
+核心日誌：前後精確重疊2725行，舊首34行因ring buffer輪替消失；僅分析新增64行，無新Oops、BUG、RCU stall、lockup、WARNING或Call trace。保留8筆AVC分類，但不僅憑其存在歸因SUSFS。前次相同boot的舊警告未歸因本測試。
+
+範圍：單一F2FS app-data測試的before/after兩個階段，並非兩次獨立after測試；不證明長期競態、全域隱藏、其他檔案系統或所有App相容。readdir只回報實際count，未另保存結尾errno；主要B6證據是各syscall與root完整性對照。dmesg新區間約0.657秒，不能排除延遲故障。
+
+另有查詢其他Android使用者受拒的輔助stderr，但目標app UID與KSU/前後報告一致。所有公開內容已移除boot ID、PID、實際UID、SELinux類別及原始私密日誌。候選Image/boot、修正版CLI、APK的完整SHA與證據雜湊見同名JSON。APK為本機已審核與部署輸入身分，本capture未包含從手機拉回APK的再次雜湊。
+
+測試後須保留fixture inode直到reboot；本報告不宣稱清理已完成。未修改手機、App檔案或既有raw evidence。

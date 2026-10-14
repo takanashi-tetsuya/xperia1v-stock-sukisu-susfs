@@ -18,6 +18,9 @@ jobs:
           python3 -O -m unittest discover -s tests -p 'test_cli_inputs.py'
           python3 -m unittest discover -s tests -p 'test_publication_export.py'
           python3 -O -m unittest discover -s tests -p 'test_publication_export.py'
+          python3 -m unittest discover -s tests -p 'test_r3_delivery_checks.py'
+          python3 -O -m unittest discover -s tests -p 'test_r3_delivery_checks.py'
+          python3 -m unittest discover -s tests -p 'test_build_tool_selection.py'
           python3 -m unittest discover -s tests -p 'test_github_sync_verifier.py'
           python3 -O -m unittest discover -s tests -p 'test_github_sync_verifier.py'
       - name: Fetch exact sources and check all patches and added files

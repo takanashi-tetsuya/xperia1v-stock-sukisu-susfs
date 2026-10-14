@@ -1,15 +1,15 @@
 {
-  "anykernel_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip",
-  "anykernel_sha256": "755feefd4e78547fd3da28d185892b32a32cd7315c422d060017919c4f19a359",
+  "anykernel_path": "dist/packages/025b92a4997663bd-65009dcfb1b9/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261014.zip",
+  "anykernel_sha256": "be4487e3c7590b7124e135a99d55b525c9daf74158ad3892e70393e34d973399",
   "avb_algorithm": "NONE (unsigned custom image)",
   "avb_hash_check": "PASS",
   "boot_and_zip_kernel_payloads_match_Image": true,
   "boot_header_other_fields_match_stock": true,
   "boot_header_version": 4,
   "boot_partition_size": 100663296,
-  "boot_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
+  "boot_path": "dist/packages/025b92a4997663bd-65009dcfb1b9/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
   "boot_ramdisk_size": 0,
-  "boot_sha256": "2bc757daab5eb648d0833f1bbcd2e07757b6e3693a53f2b0a08abebbe8e66f72",
+  "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
   "candidate_avb_metadata": {
     "algorithm": "NONE",
     "flags": 0,
@@ -38,9 +38,9 @@
     "rollback_index_location": 0,
     "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
   },
-  "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+  "kernel_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
   "phone_boot_and_installer_execution": "NOT_RUN",
-  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
   "status": "PASS_OFFLINE_PACKAGING_CHECKS",
   "stock_avb_metadata": {
     "algorithm": "SHA256_RSA4096",

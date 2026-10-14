@@ -1,0 +1,37 @@
+{
+  "status": "PASS_STATIC_REVALIDATION",
+  "scope": "Host only; fresh parsing of the original firmware module set against r3; no phone operations",
+  "module_directory": "external/vendor-audit/modules",
+  "module_count": 556,
+  "unique_module_hashes": 370,
+  "module_inventory_matches_r2": true,
+  "module_inventory_sha256": "59b9544ab7e7926fd5fe41d0dd90173b67100d89fb0afa2ea77020654c7c3841",
+  "runtime_loading": "NOT_RUN",
+  "python": "3.14.8 (main, Oct  1 2026, 20:09:47) [GCC 15.3.0]",
+  "host_cc": "cc (Ubuntu 15.3.0-4ubuntu1) 15.3.0",
+  "scripts": {
+    "external/vendor-audit/audit_modules.py": "968d869a29a95c52ee7946e4f11d8f002d076cd24db0f4319c8f086c9f9dc3c9",
+    "external/vendor-audit/audit_module_protection.py": "a37e84e374406c12649057fff05cf9beca1594f77516c817436bd008c1559460",
+    "./logs/vendor_audit/revalidate_vermagic.py": "e18caafaff133606b3bec9080053fde3ed1fce8b691ba70c043c1174bde707a4"
+  },
+  "inputs": {
+    "source-lock.json": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "out/.config": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+    "out/Module.symvers": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+    "out/include/config/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
+    "out/kernel/gki_module_protected.h": "c918cb781b75b1d2dc0682b8c60a855fb744dcee6b942306fda57c3322ee51e6",
+    "out/kernel/gki_module_exported.h": "8ce4500134c956e0c942017529adc99260312d80ac8c08a8e04256d92a2f88c8",
+    "sources/common/kernel/module.c": "102f733f1b3275db74818190166ba721a08a3c5f9b4f2336238b3be750b5840a",
+    "sources/common/include/linux/vermagic.h": "26317221374ed40e0551217089b914be29b49cc2bf53f198b7fa58bc3377e155"
+  },
+  "reports": {
+    "kernel_crc_mismatches.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "modules.json": "59b9544ab7e7926fd5fe41d0dd90173b67100d89fb0afa2ea77020654c7c3841",
+    "peer_crc_mismatches.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "protection.json": "3a537491c2f810f273ecfcaf5c3cb381426c69a14a57fe489f52f7d18e949bd1",
+    "summary.json": "63b12efb814fb1004e238a7320af68a2057d77bd04145b2fd337c540927b6657",
+    "unresolved.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+    "unversioned_undefined.json": "e9115ae2c01d9e15676508993ed0878424c095fd319f2b02e37e9db8fe495b64",
+    "vermagic_check.json": "593d5d7e37dfc964384f7d68e0fc699359c78c42b8663a9517de40797af01902"
+  }
+}

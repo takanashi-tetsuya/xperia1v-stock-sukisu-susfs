@@ -234,7 +234,9 @@ def verify(api, repo, tag, expected, source_commit, workflow):
             'release_draft': True, 'release_target_commitish': source_commit,
             'asset_count': len(checked), 'assets': checked, 'missing_assets': [],
             'ci': workflow_result, 'kernel_full_build_verified_by_this_tool': False,
-            'runtime': 'NOT_DEVICE_TESTED', 'phone_modified': False,
+            'runtime': 'NOT_TESTED_BY_THIS_HOST_VERIFIER', 'phone_modified': False,
+            'runtime_scope': 'These two fields describe this read-only host verifier only; '
+                             'candidate device results are recorded separately in runtime_manifest.json.',
             'github_mutations_performed': False}
 
 

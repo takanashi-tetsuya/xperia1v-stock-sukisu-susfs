@@ -1,0 +1,108 @@
+{
+  "build": {
+    "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+    "build_verification_sha256": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
+    "clean_output_directory": true,
+    "completed_at": "2026-10-13T11:15:14.053381+00:00",
+    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "process_exit_code": 0,
+    "started_at": "2026-10-13T10:58:07.505919+00:00",
+    "status": "PASS_OFFLINE_BUILD_CHECKS"
+  },
+  "environment": {
+    "clean_container": false,
+    "reused_verified_toolchain": true,
+    "toolchain_fresh_download": false
+  },
+  "network_reconstruction": {
+    "activated_source_path": "sources",
+    "local_mirror_used": false,
+    "log": "logs/network_prepare.log",
+    "process_exit_code": 0,
+    "remote_urls": {
+      "AnyKernel3": "https://github.com/osm0sis/AnyKernel3.git",
+      "SukiSU-Ultra": "https://github.com/SukiSU-Ultra/SukiSU-Ultra.git",
+      "common": "https://android.googlesource.com/kernel/common"
+    },
+    "reviewed_source_path": "sources-reviewed",
+    "source_inputs": {
+      "AnyKernel3": {
+        "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+        "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+        "untracked": {}
+      },
+      "SukiSU-Ultra": {
+        "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+        "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+        "untracked": {}
+      },
+      "common": {
+        "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+        "untracked": {
+          "drivers/kernelsu": {
+            "kind": "symlink",
+            "target": "../../SukiSU-Ultra/kernel"
+          },
+          "fs/susfs.c": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+          },
+          "include/linux/susfs.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+          },
+          "include/linux/susfs_def.h": {
+            "kind": "file",
+            "mode": 436,
+            "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+          }
+        }
+      }
+    },
+    "status": "PASS"
+  },
+  "reviewed_source_inputs": {
+    "AnyKernel3": {
+      "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+      "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
+      "untracked": {}
+    },
+    "SukiSU-Ultra": {
+      "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+      "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
+      "untracked": {}
+    },
+    "common": {
+      "commit": "51bba4309aac6b0889f1546c72865851cba20612",
+      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+      "untracked": {
+        "drivers/kernelsu": {
+          "kind": "symlink",
+          "target": "../../SukiSU-Ultra/kernel"
+        },
+        "fs/susfs.c": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
+        },
+        "include/linux/susfs.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
+        },
+        "include/linux/susfs_def.h": {
+          "kind": "file",
+          "mode": 436,
+          "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
+        }
+      }
+    }
+  },
+  "schema_version": 1,
+  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "source_trees_match": true,
+  "status": "PASS_NETWORK_RECONSTRUCTION_AND_BUILD"
+}

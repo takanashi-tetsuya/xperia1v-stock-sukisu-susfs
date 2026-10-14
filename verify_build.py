@@ -42,12 +42,12 @@ def verify(root, lock_path, bpftool):
                 'CONFIG_CFI_CLANG': 'y', 'CONFIG_MODULES': 'y', 'CONFIG_MODVERSIONS': 'y',
                 'CONFIG_MODULE_SIG_PROTECT': 'y', 'CONFIG_TCP_CONG_BBR': 'y',
                 'CONFIG_DEFAULT_TCP_CONG': '"cubic"', 'CONFIG_IKCONFIG': 'y',
-                'CONFIG_IKCONFIG_PROC': 'n', 'CONFIG_KSU_SUSFS_ENABLE_LOG': 'n',
+                'CONFIG_IKCONFIG_PROC': 'y', 'CONFIG_KSU_SUSFS_ENABLE_LOG': 'n',
                 'CONFIG_KSU_SUSFS_SUS_SU': 'n', 'CONFIG_KSU_DEBUG': 'n',
                 'CONFIG_KSU_FEATURE_ADBROOT': 'n', 'CONFIG_KPM': 'n', 'CONFIG_DEBUG_INFO_BTF': 'y'}
     # Unknown optional symbols may be absent in this kernel, which also means disabled.
     forbidden = ('CONFIG_CFI_PERMISSIVE', 'CONFIG_KPM', 'CONFIG_MODULE_SIG_FORCE',
-                 'CONFIG_KSU_SUSFS_ENABLE_LOG', 'CONFIG_IKCONFIG_PROC', 'CONFIG_KSU_DEBUG',
+                 'CONFIG_KSU_SUSFS_ENABLE_LOG', 'CONFIG_KSU_DEBUG',
                  'CONFIG_ADBROOT', 'CONFIG_KSU_ADBROOT', 'CONFIG_KSU_FEATURE_ADBROOT')
     for name in ('SUS_PATH', 'SUS_MOUNT', 'SUS_KSTAT', 'SPOOF_UNAME', 'HIDE_KSU_SUSFS_SYMBOLS',
                  'SPOOF_CMDLINE_OR_BOOTCONFIG', 'OPEN_REDIRECT', 'SUS_MAP'):

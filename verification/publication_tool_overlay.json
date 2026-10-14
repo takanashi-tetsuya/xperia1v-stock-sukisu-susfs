@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "status": "PASS_PUBLICATION_ONLY_TOOL_OVERLAY",
+  "scope": "Only wording of host verifier receipt and its focused test expectations; no kernel/build/source-lock or original archive changes.",
+  "reason": "Avoid describing a tested candidate as NOT_DEVICE_TESTED when this host verifier itself never performs phone tests.",
+  "files": {
+    "verify_github_sync.py": {
+      "frozen_source_archive_sha256": "cbe486a8a533879c723d21696a81177873b091d6088ec9f08bcfdd4819faabf5",
+      "repository_sha256": "3c822b721e1611c6f9e3366d79513b0b9bf1a534ae47d5fe989db5203c03cc77"
+    },
+    "tests/test_github_sync_verifier.py": {
+      "frozen_source_archive_sha256": "fcdb1124683d5bf2fae1073de128659ebad69d1340384f7c6d36c1674e0466ec",
+      "repository_sha256": "4b4e5f8bde46d9d50205f1182fc4004ae93a5fc9fd4fe50d12c20f0e14433472"
+    }
+  },
+  "tests": {
+    "normal": 30,
+    "optimized": 30,
+    "scope": "Focused sync verifier tests rerun after wording change"
+  },
+  "private_host_log_sha256": {
+    "sync_overlay_normal.log": "9a7d0289f0fc9893b55dafc78438408f4cf30962a20a700009de5829c2d78465",
+    "sync_overlay_optimized.log": "b75b323d4f0b3b27b9289e44c34b6e607bcabddac253f5a6aebaaccd89f5f2f6"
+  }
+}

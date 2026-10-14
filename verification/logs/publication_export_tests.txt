@@ -1,4 +1,3 @@
-Mode: normal
 test_binary_digest_references_never_rebound (test_publication_export.ExportTests.test_binary_digest_references_never_rebound) ... ok
 test_binary_unchanged (test_publication_export.ExportTests.test_binary_unchanged) ... ok
 test_changed_input_rejected (test_publication_export.ExportTests.test_changed_input_rejected) ... ok
@@ -17,10 +16,9 @@ test_missing_inputs_do_not_delete_attestation (test_publication_export.Maintaine
 test_required_arguments_friendly_under_both_modes (test_publication_export.MaintainerArgumentsTests.test_required_arguments_friendly_under_both_modes) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 0.297s
+Ran 16 tests in 0.296s
 
 OK
-Mode: optimized
 test_binary_digest_references_never_rebound (test_publication_export.ExportTests.test_binary_digest_references_never_rebound) ... ok
 test_binary_unchanged (test_publication_export.ExportTests.test_binary_unchanged) ... ok
 test_changed_input_rejected (test_publication_export.ExportTests.test_changed_input_rejected) ... ok
@@ -39,6 +37,6 @@ test_missing_inputs_do_not_delete_attestation (test_publication_export.Maintaine
 test_required_arguments_friendly_under_both_modes (test_publication_export.MaintainerArgumentsTests.test_required_arguments_friendly_under_both_modes) ... ok
 
 ----------------------------------------------------------------------
-Ran 16 tests in 0.298s
+Ran 16 tests in 0.291s
 
 OK

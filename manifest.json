@@ -3,24 +3,24 @@
   "application_fixes_claimed": false,
   "build": {
     "artifact_sha256": {
-      "dist/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+      "dist/Image": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
       "dist/Module.symvers": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
-      "dist/kernel.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
+      "dist/kernel.config": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
       "dist/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
-      "logs/build.log": "488e2b6771832233d69be7dcaacfdbcd4555af9c97f8ee9eddbdc417aac6a645",
-      "out/.config": "5f3d5132f950bf6264acd81213148bf561796ff961d36f1874300322d46760d7",
-      "out/arch/arm64/boot/Image": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
-      "out/drivers/kernelsu/.ksu.o.cmd": "a07ba07273eebede5c3bfc88cbf35919853230d14598a04b311e608fe23d36de",
+      "logs/build.log": "43f7217946d48b54fa2c837a9b18e4a1ba698009d49399a11b06b3a8c741e7e2",
+      "out/.config": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+      "out/arch/arm64/boot/Image": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+      "out/drivers/kernelsu/.ksu.o.cmd": "a7e128a16c4352ca5760482ffdfc64c807ed4acac5c8f1816b080f7af90ab387",
       "out/include/config/kernel.release": "aa29ca00a3b7a3e95326c22f5ec251f80763ffcffe34413d489aa59122c93253",
-      "out/vmlinux": "2f63ac0ade614824ae232c05dc3848cbe674ab0aa9d29ba94f9cdccf53756086"
+      "out/vmlinux": "e9df29b86b5e9cbf3adf0a0bc1725c803cd09705dd29b54baf16ba31241222e4"
     },
     "btf_required_function_count": 15,
-    "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
+    "build_completion_sha256": "c8c5462a0b2d6bbe6be68fe37d6b4a5fa6471aa90496a3d5fb58dca8827ba105",
     "built_modules": 5,
     "compiler": "\"Android (8508608, based on r450784e) clang version 14.0.7 (https://android.googlesource.com/toolchain/llvm-project 4c603efb0cca074e9238af8b4106c30add4418f6)\"",
     "embedded_config_matches": true,
     "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
-    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "kernel_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
     "ksu_uapi": 2,
     "phone_runtime": "NOT_RUN",
     "required_config": {
@@ -28,7 +28,7 @@
       "CONFIG_DEBUG_INFO_BTF": "y",
       "CONFIG_DEFAULT_TCP_CONG": "\"cubic\"",
       "CONFIG_IKCONFIG": "y",
-      "CONFIG_IKCONFIG_PROC": "n",
+      "CONFIG_IKCONFIG_PROC": "y",
       "CONFIG_KPM": "n",
       "CONFIG_KSU": "y",
       "CONFIG_KSU_DEBUG": "n",
@@ -63,7 +63,7 @@
       },
       "common": {
         "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+        "patch_sha256": "86eee924ddaaf508fcdab8ed12a266dca8372aa3b49ba6c78b5dc9ca242b64cb",
         "untracked": {
           "drivers/kernelsu": {
             "kind": "symlink",
@@ -87,30 +87,41 @@
         }
       }
     },
-    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
     "status": "PASS_OFFLINE_BUILD_CHECKS",
     "sukisu_version_code": 40900
   },
   "device": "Sony Xperia 1 V XQ-DQ72 / pdx234",
   "evidence_hash_scope": "SHA256 of the redacted public copies under verification/; raw input hashes are in verification/publication_export.json",
   "evidence_sha256": {
+    "docs/ikconfig_boot_failure_evidence.json": "7ce3d0a5e0072377de644da9ae04388af347b44c5e5f0a41daca861f14e8ca7f",
     "logs/anykernel_host_test.json": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
-    "logs/build_completion.json": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
-    "logs/build_verification.json": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
+    "logs/build_completion.json": "c8c5462a0b2d6bbe6be68fe37d6b4a5fa6471aa90496a3d5fb58dca8827ba105",
+    "logs/build_verification.json": "74b79b4a956ea1f6a7b2e8129faaebd50b5e95c6754ce3106eaab88a2dea42e3",
+    "logs/candidate_inputs.json": "7b916a0d9695874a7101d593c0613d459e2ddf6b95083e0ffe8ea53869bac045",
+    "logs/config_change_verification.json": "7813abf3866fac434b4027e4038eca14233c510c1eea96add2ee050cf7a9261e",
+    "logs/freeze.log": "2a4d692bb5ec17c6a4d5cbf150f9adec1ec9d82ffbe9f2304b409404f207f1c8",
+    "logs/host_evidence_provenance.json": "e387449dc897ec2e7daba67ea8fbae5706f531320be044b7fb9434b484655929",
     "logs/old40922_unchanged.json": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
-    "logs/packaging_final_tests.txt": "0c043849c3818fd8c22dce7e8ade2ef228294e0dd2fa8e551d9a6552157c3b56",
-    "logs/packaging_verification.json": "8e66e5638cbced86ec6ac425a7223df5cd55f9253c523c66b0f3298e09ae290b",
+    "logs/packaging_final_tests.txt": "486a15c2bd3be37b00237cf6581839db90296964a04774ac9c537c0f24ce837a",
+    "logs/packaging_verification.json": "1bf3dfd8e5d5d3512d5a5111adc1182bc0bbf889ea1f13d4eeb8933734ebaeaa",
     "logs/previous40900_unchanged.json": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
     "logs/prior_20261013_unchanged.json": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
-    "logs/publication_export_tests.txt": "2045e50d9fe62d682ee9b19f6ec4f2fd9bb4ffec9f9506b23442729a4a9c5654",
-    "logs/r2_source_delta.json": "03a0f6e080a3de72289e1b829ea2e9989a54db10230f58fceaa3161a5fb9f4f1",
-    "logs/source_reconstruction_check.json": "a8e0d2a799e182ac34c46400f0d5955a351a6ba18827914e972143e532fdaa34",
+    "logs/publication_export_tests.txt": "a24129d3f91eaaee241b4a045f2362d0608c334bfc6a4e47a4b0473e1de40247",
+    "logs/r3_candidate_manifest.json": "d44ca2e415b27f20b4310e3f347c6054a3ab01e1aa99858d6f7ef830487a91c8",
+    "logs/r3_delivery_guard_tests.txt": "f9cc039e9d83ee754f160a28ad7189cbfba6f8d0bf8a65030f261eb4e19ccd21",
+    "logs/r3_source_delta.json": "c952d4d1645fcb1a8ecb70508d70906e9e9819d32daaaeb14ac30abdc778d945",
+    "logs/runtime_report.json": "ffc96a357fd24cefdf3f108ad32003b544ee07800e33ca30ac49873b38fcea83",
+    "logs/source-check.log": "50f04f2889d6fcba8c9ebf8fcdd17f0ca6d6608f2adb55adee9fa45ef05efba7",
+    "logs/source_reconstruction_check.json": "536eaf68cb1a9af8611fa6c2d681a604a799d5ac7589b8fb248d7eea3305348a",
     "logs/stock_kernel_release.json": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
     "logs/userspace_ctime_test.json": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
     "logs/userspace_wire_test.json": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
-    "logs/vendor_audit/protection.json": "891cd36b0d1a3dd39224875815cef6eb0696f9614150060ee214de7ce36dd066",
+    "logs/vendor_audit/modules.json": "59b9544ab7e7926fd5fe41d0dd90173b67100d89fb0afa2ea77020654c7c3841",
+    "logs/vendor_audit/protection.json": "3a537491c2f810f273ecfcaf5c3cb381426c69a14a57fe489f52f7d18e949bd1",
+    "logs/vendor_audit/revalidation_provenance.json": "d57998a849d8e188fdc5eb9b9b44b4635a7de63767ad43cd18ba2a9b7b0fc7c7",
     "logs/vendor_audit/summary.json": "63b12efb814fb1004e238a7320af68a2057d77bd04145b2fd337c540927b6657",
-    "logs/vendor_audit/vermagic_check.json": "d5950432a750bbc5fbff3d930453993d78a224162cc9bf3e418d06abe2eead6e",
+    "logs/vendor_audit/vermagic_check.json": "593d5d7e37dfc964384f7d68e0fc699359c78c42b8663a9517de40797af01902",
     "tests/suki_security_results.json": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
     "tests/suki_security_review.txt": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
     "tests/susfs_40900_preserved.json": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
@@ -120,6 +131,110 @@
     "tests/susfs_source_hashes.json": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01"
   },
   "firmware": "67.2.A.3.178",
+  "host_evidence_provenance": {
+    "entries": {
+      "logs/anykernel_host_test.json": {
+        "current_report_sha256": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "logs/old40922_unchanged.json": {
+        "current_report_sha256": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
+        "execution": "REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION",
+        "parent_report_sha256": "21b4450b54879c078814fe7e0d18222d1e7f04465c60640c8920418ed15145ac",
+        "scope": "Re-read each original immutable file and compared SHA; no flashing"
+      },
+      "logs/previous40900_unchanged.json": {
+        "current_report_sha256": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
+        "execution": "REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION",
+        "parent_report_sha256": "1cbdfd0aea06849c058936564b3028d6a32f82835b74b9eeb35f766db7774f82",
+        "scope": "Re-read each original immutable file and compared SHA; no flashing"
+      },
+      "logs/prior_20261013_unchanged.json": {
+        "current_report_sha256": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
+        "execution": "REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION",
+        "parent_report_sha256": "ca3bdb0112bb63dbc2d005c1905a72b6de27bd29b2aa65256e1b1878f6f715e7",
+        "scope": "Re-read each original immutable file and compared SHA; no flashing"
+      },
+      "logs/stock_kernel_release.json": {
+        "current_report_sha256": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "2a6ee3eb21aa25f847449cfd2becca3e93d01aae7e952b33086b220a8bc6e518",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "logs/userspace_ctime_test.json": {
+        "current_report_sha256": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "logs/userspace_wire_test.json": {
+        "current_report_sha256": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/suki_security_results.json": {
+        "current_report_sha256": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "af5b4f38865b38506feab7d1b501e9e8aa1542354db7f909c55a3e82aa2a3e37",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/suki_security_review.txt": {
+        "current_report_sha256": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "e097e1083ea420752e91eff7966d3a1ca98f9e6e0ec8fa21058791e08574ce81",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/susfs_40900_preserved.json": {
+        "current_report_sha256": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/susfs_namei_baseline.json": {
+        "current_report_sha256": "b5dcfdb90cc849133ee752c405c26b8d2e89945fb63fd024fd918dbb8fde8716",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "b5dcfdb90cc849133ee752c405c26b8d2e89945fb63fd024fd918dbb8fde8716",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/susfs_namei_candidate.json": {
+        "current_report_sha256": "3ed0db1b1abf2c3fc6085b8efb7a3c4a27ee110af80ed5b85def54961558c039",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "3ed0db1b1abf2c3fc6085b8efb7a3c4a27ee110af80ed5b85def54961558c039",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/susfs_repair_report.txt": {
+        "current_report_sha256": "44319d9a13fe8197b208533b72d81347f4476bd6475aae8578c716aa2d1621c2",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "44319d9a13fe8197b208533b72d81347f4476bd6475aae8578c716aa2d1621c2",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      },
+      "tests/susfs_source_hashes.json": {
+        "current_report_sha256": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01",
+        "execution": "INHERITED_R2_NOT_RERUN",
+        "parent_candidate": "40900-repair-20261013-r2",
+        "parent_report_sha256": "920618e8ad4abcd8335013e91c5aef4544c0d52cd97e25e2b14f2e7f1d28ff01",
+        "scope": "Applicable immutable source inputs revalidated by finalizer; not a new execution or runtime test"
+      }
+    },
+    "generated_at_utc": "2026-10-14T02:52:39.077587+00:00",
+    "hash_scope": "All parent_report_sha256 and current_report_sha256 values identify raw local inputs; publication_export.json maps raw to public-copy hashes. Inherited reports are byte-identical and have their actual source hashes rechecked by finalizer.",
+    "runtime_scope": "No phone evidence imported by this host publication preparation; current phone phases will be attached separately",
+    "schema_version": 1,
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671"
+  },
   "host_tests": {
     "anykernel_functions": 20,
     "cli_payload": 9,
@@ -136,6 +251,7 @@
       "status": "PASS"
     },
     "publication_export_normal_and_optimized": 16,
+    "r3_delivery_guards_normal_and_optimized": 9,
     "scope": "Host/static evidence; not candidate device or installer execution",
     "sukisu_security": 59,
     "susfs_namei": 215,
@@ -168,27 +284,45 @@
     "protected_import_table_entries": 0,
     "signature_verification": "NOT_VERIFIED",
     "signed_modules": [
-      "external/redacted-home",
-      "external/redacted-home"
+      "external/vendor-audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/drivers/block/zram/zram.ko",
+      "external/vendor-audit/modules/system_dlkm_a/lib/modules/5.15.189-android13-8-g51bba4309aac/kernel/mm/zsmalloc.ko"
     ],
     "status": "PASS_STATIC_NO_TRUST_NEEDED",
     "untrusted_module_protection_collisions": []
   },
   "module_vermagic": {
+    "built_module_sha256": {
+      "out/drivers/block/zram/zram.ko": "9bec916b655ae6fd936f849513fa96022806579432a4334d5d11db8b09148f79",
+      "out/mm/zsmalloc.ko": "8ebd386282199991c0fdef064b9b063af8fd92bf0d3204aeaaf70432f2905813",
+      "out/net/ipv4/tcp_bic.ko": "667ae246599a34e16e8f8f8605a37110003011b336ddd987a640fab6a6583233",
+      "out/net/ipv4/tcp_htcp.ko": "a96473fb2c63cf91447ea1d4bbabbc27efb5ff8e43c110c8518ff56000b05676",
+      "out/net/ipv4/tcp_westwood.ko": "858077b6838548c64e2c0c25032494cecd5ec942f207417152a7e3d4a91b1880"
+    },
     "candidate_vermagic": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557 SMP preempt mod_unload modversions aarch64",
-    "loader_source": "sources/common/kernel/module.c:1316",
+    "limits": [
+      "Host execution of the loader comparison function is a static check; device loading is not inferred."
+    ],
+    "loader_function_sha256": "e6bf1e5989a21294656716c6e3bd2df3112693407eea302ae90fdfbbc2f0171f",
+    "loader_source": "sources/common/kernel/module.c:1317",
     "loader_source_sha256": "102f733f1b3275db74818190166ba721a08a3c5f9b4f2336238b3be750b5840a",
     "mismatches": [],
     "module_count": 556,
+    "module_inventory_sha256": "59b9544ab7e7926fd5fe41d0dd90173b67100d89fb0afa2ea77020654c7c3841",
     "modules_with_crc_records": 556,
+    "original_module_inventory_matches_r2": true,
+    "parser_sha256": "968d869a29a95c52ee7946e4f11d8f002d076cd24db0f4319c8f086c9f9dc3c9",
+    "r2_vermagic_report_sha256": "d5950432a750bbc5fbff3d930453993d78a224162cc9bf3e418d06abe2eead6e",
     "rule": "CONFIG_MODVERSIONS=y: same_magic ignores the first kernel-version token for modules with CRCs",
     "runtime_loading": "NOT_RUN",
+    "script_sha256": "e18caafaff133606b3bec9080053fde3ed1fce8b691ba70c043c1174bde707a4",
     "status": "PASS_STATIC",
     "stock_vermagics": [
       "5.15.189-android13-8-g51bba4309aac SMP preempt mod_unload modversions aarch64",
       "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
       "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
-    ]
+    ],
+    "symvers_sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+    "verification_mode": "STATIC_REVALIDATION_WITH_FRESH_ELF_PARSE_AND_ACTUAL_C_LOADER_FUNCTION"
   },
   "original_40922_unchanged_sha256": {
     "AnyKernel3_Xperia1V_SukiSU40922_SUSFS2.3_20260920.zip": "c9751a3f2859b7add985ed97db94acfe7f959c22479226f4de2233631cf66bae",
@@ -196,17 +330,17 @@
     "boot_XQ-DQ72_67.2.A.3.178_sukisu40922.img": "5369d90ccdea043cbe00657a4a733aef183c7ac230bc2d55894cc0aeeb91c3a8"
   },
   "packaging": {
-    "anykernel_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261013.zip",
-    "anykernel_sha256": "755feefd4e78547fd3da28d185892b32a32cd7315c422d060017919c4f19a359",
+    "anykernel_path": "dist/packages/025b92a4997663bd-65009dcfb1b9/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261014.zip",
+    "anykernel_sha256": "be4487e3c7590b7124e135a99d55b525c9daf74158ad3892e70393e34d973399",
     "avb_algorithm": "NONE (unsigned custom image)",
     "avb_hash_check": "PASS",
     "boot_and_zip_kernel_payloads_match_Image": true,
     "boot_header_other_fields_match_stock": true,
     "boot_header_version": 4,
     "boot_partition_size": 100663296,
-    "boot_path": "dist/packages/55ed8c4481826ac7-e35a60b113bc/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
+    "boot_path": "dist/packages/025b92a4997663bd-65009dcfb1b9/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
     "boot_ramdisk_size": 0,
-    "boot_sha256": "2bc757daab5eb648d0833f1bbcd2e07757b6e3693a53f2b0a08abebbe8e66f72",
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
     "candidate_avb_metadata": {
       "algorithm": "NONE",
       "flags": 0,
@@ -235,9 +369,9 @@
       "rollback_index_location": 0,
       "salt": "aee087a5be3b982978c923f566a94613496b417f2af592639bc80d141e34dfe7"
     },
-    "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
+    "kernel_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
     "phone_boot_and_installer_execution": "NOT_RUN",
-    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
     "status": "PASS_OFFLINE_PACKAGING_CHECKS",
     "stock_avb_metadata": {
       "algorithm": "SHA256_RSA4096",
@@ -270,15 +404,109 @@
     "stock_boot_unchanged": true,
     "stock_sha256": "06dbe42eccb4ea14a53e7b34d1f509bc7b176776db89d3280adba44c4b8b3731"
   },
-  "phone_modified": false,
+  "phone_modified": true,
   "runtime": {
-    "applications": "APPLICATION_FIXES_NOT_CLAIMED",
-    "boot": "NOT_RUN",
-    "candidate": "NOT_DEVICE_TESTED",
-    "flash": "NOT_FLASHED",
-    "installer": "AK3_NOT_RUN",
-    "module_loading": "NOT_RUN"
+    "audio": "PASS",
+    "boot": "PASS",
+    "camera": "PASS",
+    "ctime": "PASS",
+    "flash": "PASS",
+    "installer": "PASS",
+    "ksu": "PASS",
+    "module_loading": "PASS",
+    "ota": "NOT_RUN",
+    "sensors": "NOT_RUN",
+    "sus_path": "PASS",
+    "wifi": "PASS",
+    "zygisk": "PASS",
+    "candidate": "SEE_INDIVIDUAL_RUNTIME_RESULTS",
+    "applications": "APPLICATION_FIXES_NOT_CLAIMED"
   },
+  "runtime_baseline_scope": "Original host-only checkpoint preserved under verification/host_snapshot; this top-level manifest overlays later reviewed phone results.",
+  "runtime_report": {
+    "anykernel_sha256": "be4487e3c7590b7124e135a99d55b525c9daf74158ad3892e70393e34d973399",
+    "application_fixes_claimed": false,
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "cli_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+    "kernel_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "phone_modified": true,
+    "private_evidence_sha256": {
+      "audio": [
+        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+      ],
+      "boot": [
+        "3564f67476599aef10ffc3d93cda24800871a3a615819a245cea4111b3692da0",
+        "70b4ce976c602c9f64d5ae98615588fe164bdc4424de16cf36d5e0d5e7a1600c",
+        "d1411d1a61e523317e8c766672a82ab515371589a89ac9c61fe4737afff8766d",
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+      ],
+      "camera": [
+        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+      ],
+      "ctime": [
+        "37722386e06cf551f0968a773262a1894c91f652b80ecf46df8ecbff3c2fdcbc",
+        "48efd521c596a0d2e30490f63490f2499c832dd6c44dec8710fec4434b8f8ec8",
+        "c8bbc6cfa63fb93fc1868a947baa6af476e4b14b713e24c40413cc475dc52d7a"
+      ],
+      "flash": [
+        "1f2bd22fb5d20ac5642fc1802b99ce9fa4c4adb9e55b5b044fe3da10a3e8d3c1",
+        "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436"
+      ],
+      "installer": [
+        "23bc296738262b75e937ec0399637f527ae419e8897bdc92c89a0e5cd9c5e01d",
+        "3564f67476599aef10ffc3d93cda24800871a3a615819a245cea4111b3692da0",
+        "81417f91c06239ba03c72ece149ff2b5f4d348f3f403a68647a05770516e6400",
+        "834d7042e2ba5ad45a2e198920f02b79143029ec9a1d121cdfe218ab7a101168"
+      ],
+      "ksu": [
+        "34e60651873b1e10817e6e8761016cc907d34232289c58d6413249b730b93a37",
+        "7e286cc0f54241c33b1fba7361195a2aedfd384412361e41347ba63b5ca8d1e1",
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
+        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+      ],
+      "module_loading": [
+        "135b4ad9f1b707e69531643b58bbbcc14b42230dba036af380d8668becd23540",
+        "240d2acd6662aa32829bf63a15b0203182e55b9719c14291dcdcb837e8e201c4",
+        "ead0740e1d64f904e867fe5402b3adf449aca60f838116366c8f58b795dcb8aa",
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+      ],
+      "ota": [],
+      "sensors": [],
+      "sus_path": [
+        "094b355694582fd6bf5fabf1f74d5ab9258beb3cd5d2cdd856592f0a2403b4cd",
+        "37722386e06cf551f0968a773262a1894c91f652b80ecf46df8ecbff3c2fdcbc",
+        "c8bbc6cfa63fb93fc1868a947baa6af476e4b14b713e24c40413cc475dc52d7a",
+        "d8ea5fde65f52df2eba61a8f080229972751af6482580e054d9bb848c7f46899"
+      ],
+      "wifi": [
+        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+      ],
+      "zygisk": [
+        "e9c679acaf4a5c83fcc6dd902a6fd6fb0a5a48b5d1a2afde7150dc12e73ff2dd",
+        "0df7e1ec2ca8fcbd9dccf2dec382b84834ae7e29cf7d8acb701ce15713ac615e",
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+      ]
+    },
+    "schema_version": 1,
+    "scope": "MAINTAINER_REVIEWED_PRIVATE_DEVICE_EVIDENCE",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "tests": {
+      "audio": "PASS",
+      "boot": "PASS",
+      "camera": "PASS",
+      "ctime": "PASS",
+      "flash": "PASS",
+      "installer": "PASS",
+      "ksu": "PASS",
+      "module_loading": "PASS",
+      "ota": "NOT_RUN",
+      "sensors": "NOT_RUN",
+      "sus_path": "PASS",
+      "wifi": "PASS",
+      "zygisk": "PASS"
+    }
+  },
+  "runtime_report_validation_scope": "Artifact/schema binding only; private device traces reviewed by maintainer, not replayed by this host finalizer",
   "schema_version": 1,
   "source_bundles": {
     "full_source.tar.gz": {
@@ -296,12 +524,12 @@
         "scope": "Fresh extraction; Git identities, patches, untracked hashes and modes verified",
         "status": "PASS_EXTRACTED_SOURCE_LOCK_CHECK"
       },
-      "sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b"
+      "sha256": "09431f740e61af5e1b1356f8008e437f9a2e99caf13cdd37c6b9b82761f4cf15"
     },
     "source_changes.tar.gz": {
       "base_sources": "Requires exact upstream bases from network or a local source cache",
       "contents": "Locked patches, added sources, scripts, tests, CLI source and licenses",
-      "sha256": "6940262490a493a29b8e4f421182ceb2eb6253baad206abcc02170c20c4a3540"
+      "sha256": "4b3269722d47893b65da7dc90ffd1e75c002b754e11a8686d6ab851b71f449f2"
     }
   },
   "source_inputs": {
@@ -317,7 +545,7 @@
     },
     "common": {
       "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-      "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+      "patch_sha256": "86eee924ddaaf508fcdab8ed12a266dca8372aa3b49ba6c78b5dc9ca242b64cb",
       "untracked": {
         "drivers/kernelsu": {
           "kind": "symlink",
@@ -341,74 +569,28 @@
       }
     }
   },
-  "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
   "source_reconstruction": {
     "build": {
-      "build_completion_sha256": "0c50bf806f153147e10d1b0a48dc862b4ed4621fa619f0fa2635730c3816a8c9",
-      "build_verification_sha256": "f9bb4665bd11994edbb992f29799ecaf46e700830f6c702436fa5f17af4b0a03",
+      "build_completion_sha256": "c8c5462a0b2d6bbe6be68fe37d6b4a5fa6471aa90496a3d5fb58dca8827ba105",
+      "build_verification_sha256": "74b79b4a956ea1f6a7b2e8129faaebd50b5e95c6754ce3106eaab88a2dea42e3",
       "clean_output_directory": true,
-      "completed_at": "2026-10-13T11:15:14.053381+00:00",
-      "kernel_sha256": "55ed8c4481826ac7f975dde14e756cfa2305e3ba89fd9abf18b863b7a20fdf52",
-      "process_exit_code": 0,
-      "started_at": "2026-10-13T10:58:07.505919+00:00",
+      "kernel_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
       "status": "PASS_OFFLINE_BUILD_CHECKS"
     },
-    "environment": {
-      "clean_container": false,
-      "reused_verified_toolchain": true,
-      "toolchain_fresh_download": false
+    "derivation_evidence_sha256": {
+      "logs/candidate_inputs.json": "7b916a0d9695874a7101d593c0613d459e2ddf6b95083e0ffe8ea53869bac045",
+      "logs/freeze.log": "2a4d692bb5ec17c6a4d5cbf150f9adec1ec9d82ffbe9f2304b409404f207f1c8",
+      "logs/source-check.log": "50f04f2889d6fcba8c9ebf8fcdd17f0ca6d6608f2adb55adee9fa45ef05efba7"
     },
-    "network_reconstruction": {
-      "activated_source_path": "sources",
-      "local_mirror_used": false,
-      "log": "logs/network_prepare.log",
-      "process_exit_code": 0,
-      "remote_urls": {
-        "AnyKernel3": "https://github.com/osm0sis/AnyKernel3.git",
-        "SukiSU-Ultra": "https://github.com/SukiSU-Ultra/SukiSU-Ultra.git",
-        "common": "https://android.googlesource.com/kernel/common"
-      },
-      "reviewed_source_path": "sources-reviewed",
-      "source_inputs": {
-        "AnyKernel3": {
-          "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
-          "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
-          "untracked": {}
-        },
-        "SukiSU-Ultra": {
-          "commit": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
-          "patch_sha256": "48920f9900f4ac9caf08808c489711bccd625ca5908ded6631effd6440822545",
-          "untracked": {}
-        },
-        "common": {
-          "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-          "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
-          "untracked": {
-            "drivers/kernelsu": {
-              "kind": "symlink",
-              "target": "../../SukiSU-Ultra/kernel"
-            },
-            "fs/susfs.c": {
-              "kind": "file",
-              "mode": 436,
-              "sha256": "6c619fe680b7c4238bc82ed858c5fac00b6a9c9717350d6eaa0ac927ce4c5570"
-            },
-            "include/linux/susfs.h": {
-              "kind": "file",
-              "mode": 436,
-              "sha256": "e755bf34538b8f2eec1e401d2d6b18811d82931770f56cf98448eaad5757cb79"
-            },
-            "include/linux/susfs_def.h": {
-              "kind": "file",
-              "mode": 436,
-              "sha256": "db7f98dcf8119a4eb5c45c05205b6c1065766047d6f803b0e86f3d14b1a251f0"
-            }
-          }
-        }
-      },
-      "status": "PASS"
+    "network_reconstruction": "NOT_RUN_FOR_R3",
+    "parent_archive": {
+      "sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b",
+      "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67"
     },
-    "reviewed_source_inputs": {
+    "scope": "Verified r2 archive extracted, reviewed IKCONFIG_PROC restoration applied, clean r3 build in same-host network-disabled container; not fresh network reconstruction or third-party rebuild",
+    "source_delta_sha256": "c952d4d1645fcb1a8ecb70508d70906e9e9819d32daaaeb14ac30abdc778d945",
+    "source_inputs": {
       "AnyKernel3": {
         "commit": "020dfeccf9d7e962a48400fc94d3e451df92eead",
         "patch_sha256": "5e7cc52afb77eb296b02db1a19e044b27e260231837ca778a5572dbccd0b46e2",
@@ -421,7 +603,7 @@
       },
       "common": {
         "commit": "51bba4309aac6b0889f1546c72865851cba20612",
-        "patch_sha256": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+        "patch_sha256": "86eee924ddaaf508fcdab8ed12a266dca8372aa3b49ba6c78b5dc9ca242b64cb",
         "untracked": {
           "drivers/kernelsu": {
             "kind": "symlink",
@@ -445,12 +627,10 @@
         }
       }
     },
-    "schema_version": 1,
-    "source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
-    "source_trees_match": true,
-    "status": "PASS_NETWORK_RECONSTRUCTION_AND_BUILD"
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "status": "PASS_R2_ARCHIVE_DERIVED_R3_BUILD"
   },
-  "status": "OFFLINE_VERIFIED_CANDIDATE",
+  "status": "CANDIDATE_WITH_BOUND_RUNTIME_EVIDENCE",
   "userspace_cli": {
     "abi": "arm64-v8a",
     "android_api": 35,
@@ -488,7 +668,7 @@
     }
   },
   "validation_scope": {
-    "candidate_device_and_installer": "NOT_RUN",
+    "candidate_device_and_installer": "SEE_INDIVIDUAL_RUNTIME_RESULTS",
     "independent_host_ci": "NOT_ATTESTED_BY_THIS_LOCAL_FINALIZER",
     "local_full_build": "PASS",
     "third_party_full_rebuild": "NOT_RUN"
@@ -519,5 +699,31 @@
       "5.15.41-g22b7aaa816dc SMP preempt mod_unload modversions aarch64",
       "5.15.41-g22b7aaa816dc-dirty SMP preempt mod_unload modversions aarch64"
     ]
+  },
+  "publication_runtime_update": {
+    "host_manifest_sha256": "f36bb5169ae08baab4c9ad54abd21407af9f6fa02a1d427f907c7c9df6c25e62",
+    "host_manifest_path": "verification/host_snapshot/manifest.json",
+    "runtime_manifest_sha256": "85a731c21a1a89e80dc536b146ae0c070a19231b5bed370baf36a14e8a22c4e5",
+    "runtime_manifest_path": "runtime_manifest.json",
+    "public_report_index_sha256": "7b1bc404016e7309aca7e273d1a8d50fe09f444f3fc7bc1c19069afa746e7b76",
+    "public_report_index_path": "verification/runtime_r3/REPORT_INDEX.json",
+    "public_report_sha256": {
+      "susfs_runtime_r3.json": "eaa58e5880694641abb27021652f7dea4c5e1ad9771c21da20d5ab1dc790b52c",
+      "susfs_runtime_r3_zh_TW.txt": "8180def99a348ccda69c0a5bcb4c7d73455ee68649b026c0af84671ecca8b9d7",
+      "r3_module_runtime_comparison.json": "84b5a985abbf6a5dc1db72a4295d7cfaa650c8fdb2f0c8ea31568afea3deeea7",
+      "r3_module_runtime_comparison_zh_TW.txt": "e11806d36f2ed3f39430a606a5befb0d1d9afac45a1e2234d194209d46d6774b",
+      "ak3_runtime_r3.json": "bdf0881a74249ed1cb78ab9da86e96331dcb5b177ece47c08b38eafc93ea318d",
+      "ak3_runtime_r3_zh_TW.txt": "86035e5e130263c87ffb8474490ce4be95a23584e110497a4f05dfaee754045c",
+      "r3_boot_stability.json": "65b9cccd79359f224655b6ebb777c58d66d29ceec282bece7f8c86620825f194",
+      "r3_boot_stability_zh_TW.txt": "17c8cbf06bc737136bdd5f9496f27c9ffa499854ca806f14b4b1021d57e22ff8",
+      "r3_zygisk_runtime.json": "4b19cd1bb31e8b9a55f713d93e77878a8625391b9e35388f6516b098284cf7fd",
+      "r3_zygisk_runtime_zh_TW.txt": "515b577bda1326686699b3376cbd6193a5348e7c7ccfef9ac3a34f49cf32a925",
+      "r3_cleanup_and_restoration.json": "17fdf79b6eb94ece45c8b5775a3d2b8992e9733bdb4a9bd1f489c960ac644253",
+      "r3_owner_functional_observation.json": "4b4adb9edb0c217527a38bcb347ebd1ccc413d2b27b3e89618f48f2a4c7708d7"
+    },
+    "staged_source_checks_sha256": "6c94a61ea237d2c2a6e2655b1009c529b949b264ac8a0f3d22f4e8e7c1adc4d8",
+    "scope": "Artifact binding and reviewed summaries; not automatic replay or proof of untested behavior.",
+    "historical_export_receipt_scope": "verification/publication_export.json describes original source/host exports; current README and runtime overlay have separate identities.",
+    "immutable_source_archives_rebuilt": false
   }
 }

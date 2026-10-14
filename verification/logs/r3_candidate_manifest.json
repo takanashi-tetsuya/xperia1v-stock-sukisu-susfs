@@ -1,0 +1,110 @@
+{
+  "candidate": "r3-20261014-ikconfig-proc",
+  "status": "PASS_OFFLINE_CANDIDATE_CHECKS",
+  "build_environment": "Same-host clean Podman container; network disabled; empty out directory",
+  "build_started_at": "2026-10-14T02:25:38+00:00",
+  "build_completed_at": "2026-10-14T02:49:20+00:00",
+  "parent_archive_sha256": "c2c8da0724008c3bb3cd55c65dbe2a25c370ea9347ca579b695d452e3e52bc6b",
+  "parent_source_lock_sha256": "e35a60b113bccfeb1320a2ddc5923dbca23ddacbeebc5e04abf57e1291382d67",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "source_input_delta": [
+    {
+      "repository": "common",
+      "field": "patch_sha256",
+      "r2": "2858d7d50ec88bd3c3f561b8e3829cd29ca400398b81e6f059cee339c8320e5b",
+      "r3": "86eee924ddaaf508fcdab8ed12a266dca8372aa3b49ba6c78b5dc9ca242b64cb"
+    }
+  ],
+  "build_metadata": {
+    "build_timestamp": "Wed Oct 14 02:24:56 UTC 2026",
+    "kernel_release": "5.15.189-android13-8-00016-g51bba4309aac-ab14546557",
+    "ksu_full_version": "v4.2.0-e2912817+local-susfs2.3@xperia-20261013",
+    "ksu_uapi": 2,
+    "ksu_version": 40900,
+    "source_date_epoch": 1791944696
+  },
+  "build_metadata_delta": {
+    "build_timestamp": {
+      "r2": "Tue Oct 13 00:00:00 UTC 2026",
+      "r3": "Wed Oct 14 02:24:56 UTC 2026"
+    },
+    "source_date_epoch": {
+      "r2": 1791849600,
+      "r3": 1791944696
+    }
+  },
+  "config_delta": {
+    "CONFIG_IKCONFIG_PROC": {
+      "r2": "n",
+      "r3": "y"
+    }
+  },
+  "config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+  "module_symvers_matches_r2": true,
+  "module_symvers_sha256": "ee94211d7ba5799f57a5e14d044ca689c2ffe1c597179cee5d62ffc5e0478662",
+  "module_symbol_count": 15418,
+  "kernel_release_matches_r2": true,
+  "artifacts": {
+    "Image": {
+      "path": "dist/Image",
+      "sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+      "size": 48499200
+    },
+    "boot": {
+      "path": "dist/packages/025b92a4997663bd-65009dcfb1b9/boot_XQ-DQ72_67.2.A.3.178_sukisu40900.img",
+      "sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+      "size": 100663296
+    },
+    "AnyKernel3": {
+      "path": "dist/packages/025b92a4997663bd-65009dcfb1b9/AnyKernel3_Xperia1V_SukiSU40900_SUSFS2.3_20261014.zip",
+      "sha256": "be4487e3c7590b7124e135a99d55b525c9daf74158ad3892e70393e34d973399",
+      "size": 25155040
+    }
+  },
+  "tests": {
+    "pahole_actual_gnu_make": "PASS 4/4",
+    "packaging_normal": "PASS 17/17",
+    "packaging_optimized": "PASS 17/17",
+    "required_btf_functions": 15,
+    "built_modules": 5
+  },
+  "evidence_sha256": {
+    "source-lock.json": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "logs/candidate_inputs.json": "7b916a0d9695874a7101d593c0613d459e2ddf6b95083e0ffe8ea53869bac045",
+    "logs/build_inputs.json": "667f1f1d0a7a23eb9141197c238523ca5c179a8f77850ce46ba35fb0b266ebdb",
+    "logs/build_completion.json": "c8c5462a0b2d6bbe6be68fe37d6b4a5fa6471aa90496a3d5fb58dca8827ba105",
+    "logs/build_verification.json": "74b79b4a956ea1f6a7b2e8129faaebd50b5e95c6754ce3106eaab88a2dea42e3",
+    "logs/packaging_verification.json": "1bf3dfd8e5d5d3512d5a5111adc1182bc0bbf889ea1f13d4eeb8933734ebaeaa",
+    "logs/config_change_verification.json": "7813abf3866fac434b4027e4038eca14233c510c1eea96add2ee050cf7a9261e",
+    "logs/gki_defconfig_change.diff": "8e954807b64e03e563648df226e152f85e25cac65de8d0c675613a6b61861761",
+    "logs/common_patch_delta.diff": "5b9fda130b9d242c9e611a7dd19eea47d31cbc901f14102c13df81162b097e07",
+    "logs/container-image.txt": "3920c76d0c9be0e4485569d1fb669725095de6a9f9bcd898b26a7c90b8a49d2b",
+    "logs/container-os.txt": "59a77b5f2666d9c85c489bd1911a6eebbd91ef22fe48b90a3b75f1b21f3844d4",
+    "logs/container-packages.txt": "d9386a7dda9c1a7181a4fbebb90c9931988b955f58eb509e0c7067bdaa3b5a12",
+    "logs/build-started-at.txt": "ca69558de36444afdc16d2015fb9b13feb8eec0dade1b5c391d0db06d8b1104a",
+    "logs/build-completed-at.txt": "a95a9d50bdc80df7562d9658c4364dd8341231784ba45580a0333d122be67b3b",
+    "logs/pahole-regression.log": "e26c7d647e99771c962c4dda14f5a2ad261c67f5db5edaf67dc29a05085bcbce",
+    "logs/packaging-regression-normal.log": "bdf93afb9331f3ac6b825061836c82d5a29842878513927f20db5d006e2a3c2d",
+    "logs/packaging-regression-optimized.log": "ed406e9e2906e893f41dd243a8299118d4af6057b7cc5bbc32560be5a14c80d2",
+    "build_pipeline.py": "e97c37feb88afb675bf93a8964bff973892e9e2167971ae5cf59f744e129bb8c",
+    "verify_build.py": "90d0df5f7274d493981454872e09ea84aca4dd90a6c6286d287c2692bd5fffd8",
+    "package.py": "466f1f932e7b7d08361852373b1916ac339339a68114cee70befa8107e41a420",
+    "tests/test_build_tool_selection.py": "5de811c203b7704c8982adc19f91f9a89910947b664250bde13dc0f6fecfc9e1",
+    "tests/packaging_pipeline_test.py": "01e450096ce23321306093cc85fc94a7df1434efb8a69d74b58978ed5e4661c0"
+  },
+  "runtime": {
+    "boot": "NOT_RUN",
+    "installer": "NOT_RUN",
+    "module_loading": "NOT_RUN",
+    "susfs": "NOT_RUN",
+    "zygisks": "NOT_RUN"
+  },
+  "network_reconstruction": "NOT_RUN_FOR_R3; derived from verified r2 source archive",
+  "independent_third_party_rebuild": "NOT_RUN",
+  "notes": [
+    "The only kernel configuration change from r2 is enabling CONFIG_IKCONFIG_PROC.",
+    "The PAHOLE pipeline correction selects the verified binary in recursive make; it is not a boot fix.",
+    "Image/boot hashes are not expected to match r2: config and build timestamp changed; signing key is regenerated.",
+    "Runtime results require evidence from the device and are not inferred from static checks."
+  ]
+}

@@ -199,7 +199,7 @@ class PipelineTests(unittest.TestCase):
 
     def config_fixture(self):
         enabled = ['KSU', 'KSU_SUSFS', 'LTO_CLANG_FULL', 'CFI_CLANG', 'MODULES', 'MODVERSIONS',
-                   'MODULE_SIG_PROTECT', 'TCP_CONG_BBR', 'IKCONFIG', 'DEBUG_INFO_BTF']
+                   'MODULE_SIG_PROTECT', 'TCP_CONG_BBR', 'IKCONFIG', 'IKCONFIG_PROC', 'DEBUG_INFO_BTF']
         enabled += ['KSU_SUSFS_' + key for key in ('SUS_PATH', 'SUS_MOUNT', 'SUS_KSTAT', 'SPOOF_UNAME',
                     'HIDE_KSU_SUSFS_SYMBOLS', 'SPOOF_CMDLINE_OR_BOOTCONFIG', 'OPEN_REDIRECT', 'SUS_MAP')]
         config = ''.join(f'CONFIG_{name}=y\n' for name in enabled)
@@ -225,13 +225,37 @@ class PipelineTests(unittest.TestCase):
             with self.assertRaisesRegex(common.CheckError, 'BTF functions missing'):
                 verify_build.verify(self.root, self.lock_path, 'fixture-bpftool')
         # Re-attesting a config is insufficient: the forbidden option remains rejected under -O.
-        for option in ('CONFIG_IKCONFIG_PROC', 'CONFIG_KSU_FEATURE_ADBROOT'):
+        for option in ('CONFIG_KSU_FEATURE_ADBROOT',):
             with self.subTest(option=option):
                 (self.root / 'out/.config').write_text(config + option + '=y\n')
                 self.attest()
                 result = self.cli('verify_build.py', optimized=True)
                 self.assertNotEqual(result.returncode, 0)
                 self.assertIn(option, result.stderr)
+
+    def test_verifier_rejects_disabled_proc_config(self):
+        config = self.config_fixture().replace('CONFIG_IKCONFIG_PROC=y\n', '# CONFIG_IKCONFIG_PROC is not set\n')
+        for relative in ('out/.config', 'dist/kernel.config'):
+            (self.root / relative).write_text(config)
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                self.attest()
+                result = self.cli('verify_build.py', optimized=optimized)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('Config mismatch: CONFIG_IKCONFIG_PROC=n; expected y', result.stderr)
+                self.assertFalse((self.root / 'logs/build_verification.json').exists())
+
+    def test_verifier_rejects_missing_proc_config(self):
+        config = self.config_fixture().replace('CONFIG_IKCONFIG_PROC=y\n', '')
+        for relative in ('out/.config', 'dist/kernel.config'):
+            (self.root / relative).write_text(config)
+        for optimized in (False, True):
+            with self.subTest(optimized=optimized):
+                self.attest()
+                result = self.cli('verify_build.py', optimized=optimized)
+                self.assertNotEqual(result.returncode, 0)
+                self.assertIn('Config mismatch: CONFIG_IKCONFIG_PROC=None; expected y', result.stderr)
+                self.assertFalse((self.root / 'logs/build_verification.json').exists())
 
     def test_avb_parser_preserves_duplicate_props_and_rejects_flags(self):
         metadata = package.parse_avb(AVB_INFO)

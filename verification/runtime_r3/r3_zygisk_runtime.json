@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED_REZYGISK_VECTOR_STARTUP",
+  "candidate": {
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "running_config_sha256": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc"
+  },
+  "module_identity": {
+    "source": "device module.prop; version metadata, not an independent binary reproducibility audit",
+    "rezygisk": {
+      "id": "rezygisk",
+      "name": "ReZygisk",
+      "version": "v1.0.0 (515-333d423-release)",
+      "versionCode": "515"
+    },
+    "vector": {
+      "id": "zygisk_vector",
+      "name": "Vector",
+      "version": "v2.2 (3080-88f8e1fa-JingMatrix-Vector)",
+      "versionCode": "3080"
+    }
+  },
+  "runtime_evidence": {
+    "processes_observed": {
+      "zygisk-ptrace64": true,
+      "zygiskd64": true,
+      "zygiskd32": true,
+      "vectord": true
+    },
+    "library_mapping_by_verified_process_name": {
+      "zygote64": [
+        "playintegrityfix/zygisk/arm64-v8a.so",
+        "rezygisk/lib64/libzygisk.so",
+        "zygisk_vector/zygisk/arm64-v8a.so"
+      ],
+      "zygote": [
+        "playintegrityfix/zygisk/armeabi-v7a.so",
+        "rezygisk/lib/libzygisk.so",
+        "zygisk_vector/zygisk/armeabi-v7a.so"
+      ],
+      "system_server": [
+        "zygisk_vector/zygisk/arm64-v8a.so"
+      ]
+    },
+    "scope": "Observed module processes and library mappings establish startup/injection presence; they do not prove every hook or application behavior."
+  },
+  "paired_cli": {
+    "installed_location": "/data/adb/ksu/bin/ksu_susfs",
+    "installed_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+    "reported_version": "v2.3.0",
+    "persistent_installation_observed": true
+  },
+  "snapshot": {
+    "all_checks_true": true,
+    "boot_partition_exact_candidate": true,
+    "config_hash_independently_matches": true,
+    "same_boot_and_system_server_within_snapshot": true,
+    "module_count": 367,
+    "uptime_seconds": 111.82
+  },
+  "bounded_capture": {
+    "closed": true,
+    "sample_count": 141,
+    "boot_completed_samples": 137,
+    "boot_id_count": 1,
+    "system_server_pid_count": 1,
+    "first_uptime_seconds": 21.31,
+    "last_uptime_seconds": 320.14,
+    "first_completed_uptime_seconds": 29.55,
+    "completed_observation_seconds": 290.59,
+    "system_server_fatal_marker_count": 0,
+    "kernel_config_failure_marker_count": 0,
+    "kernel_serious_marker_count": 0,
+    "snapshot_kernel_serious_marker_count": 0,
+    "native_fatal_signals": [
+      {
+        "signal": 6,
+        "process_name": "init",
+        "global_pid1": false
+      }
+    ]
+  },
+  "startup_crash_limitation": {
+    "status": "OBSERVED_CAUSE_UNDETERMINED",
+    "occurrences_in_crash_buffer": 1,
+    "process": ".qtidataservices",
+    "thread": "QualifiedNetworksServiceImpl",
+    "exception": "java.lang.NullPointerException: List.stream() invoked on a null reference",
+    "top_frame": "android.telephony.data.QualifiedNetworksService$NetworkAvailabilityProvider.updateQualifiedNetworkTypes",
+    "same_npe_comparison": {
+      "working_40922_rollback": {
+        "same_npe_observed": false,
+        "evidence": "available boot Android and crash buffers only"
+      },
+      "r3_modules_disabled_first_boot": {
+        "same_npe_observed": false,
+        "evidence": "available boot Android and crash buffers only"
+      },
+      "r3_modules_disabled_after_ak3": {
+        "same_npe_observed": false,
+        "evidence": "available boot Android and crash buffers only"
+      }
+    },
+    "stock_and_original_baseline_comparison": "Available stock_reference and baseline_40922 snapshots lack Android/crash buffers; no claim about their absence of this crash is justified.",
+    "attribution": "This is a vendor telephony service Java crash, not a system_server fatal. Temporal appearance after enabling modules does not establish that the kernel or a particular module caused it. Functional mobile-data/VoWiFi validation remains outside this report."
+  },
+  "not_tested": [
+    "Zygisk Next",
+    "Shamiko",
+    "Per-app hook correctness or stability",
+    "Play Integrity/DRM/app login",
+    "Long-term stability and stress",
+    "Full hardware and cellular/VoWiFi function",
+    "OTA"
+  ],
+  "evidence_sha256": {
+    "runtime_r3_20261014/private/r3_zygisk/runtime.txt": "e9c679acaf4a5c83fcc6dd902a6fd6fb0a5a48b5d1a2afde7150dc12e73ff2dd",
+    "runtime_r3_20261014/private/r3_modules_restored/snapshot_summary.json": "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
+    "runtime_r3_20261014/private/r3_modules_restored/processes.txt": "f95cc96b0b37adae4a8bcca7952055d6a035e0866d554282a27d6e18de3f0344",
+    "runtime_r3_20261014/private/r3_modules_restored/start_marker.txt": "08d3bdcd534ee6709dc48ce1bb56de5f16a1b6471ccb9c561298a03575cc81c2",
+    "runtime_r3_20261014/private/r3_modules_restored/end_marker.txt": "08d3bdcd534ee6709dc48ce1bb56de5f16a1b6471ccb9c561298a03575cc81c2",
+    "runtime_r3_20261014/private/r3_modules_restored/config.txt": "6516f2bd6c3281568d30e9a49c0fcaf5c4ceee0f45e45da4e5f64d24c4d1f9cc",
+    "runtime_r3_20261014/private/r3_modules_restored/identity.txt": "f399a4a6b36796a3bbceb3d09a64a870191c799524f82cba536ad91dbb0d9088",
+    "runtime_r3_20261014/private/r3_modules_restored/partitions.txt": "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436",
+    "runtime_r3_20261014/private/r3_modules_boot_capture/events.jsonl": "039e77d1eaaae11b42d6dd351e301c88e6cf9c5f30cb6272574c5e2958cf18d2",
+    "runtime_r3_20261014/private/r3_modules_boot_capture/connection_001/status_samples.jsonl": "36161b2b7b3edd73813803d7c52fc4618a7edcf7b6d57720e87b3816c8a36da5",
+    "runtime_r3_20261014/private/r3_modules_boot_capture/connection_001/crash.txt": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+    "runtime_r3_20261014/private/r3_modules_boot_capture/connection_001/android.txt": "ff764d757cb87e26c19b1d977f12394860c6648210c76f1e8d2f262befb14c2a",
+    "runtime_r3_20261014/private/r3_modules_boot_capture/connection_001/kernel.txt": "b7df8f35f95069bb177ea632cdeccbc824c1abcd3465851d0c50d8c98d809688",
+    "runtime_r3_20261014/private/r3_modules_restored/dmesg.txt": "188020d04c8ebb0152df2e8cd10585eddb96cd5f0cf89796f79b39a81baf523b",
+    "runtime_r2_20261013/private/rollback_40922/ksu_boot_logcat.txt": "9207153faa8f1fe8cec3ad01e6a58b039abbd67daa3ae1f43a94797267828689",
+    "runtime_r2_20261013/private/rollback_40922/crash_log.txt": "47cc94483a9d6a73587ace62ed5c5f64f3f80e1fb6510aa433052a02b14c67d0",
+    "runtime_r3_20261014/private/r3_first_boot/connection_001/android.txt": "a3cf287e3f089e20fce10e9b1c79ba4af3b8d6493cd6d89e08f30ece850275d2",
+    "runtime_r3_20261014/private/r3_first_boot/connection_001/crash.txt": "b100a3f7d5296a206870066ff21a56b364b8b2a5f58cced6cfe3b839ca78e012",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/connection_001/android.txt": "905be852a0e5d821bf1749055f5bc30f2b20eeff6c4d3c65c56a6f2a2e532562",
+    "runtime_r3_20261014/private/r3_ak3_boot_capture/connection_001/crash.txt": "851b8d5203d39e3c5b46753499681dce52a46737b9e5754b07993649e65b9c4a"
+  }
+}

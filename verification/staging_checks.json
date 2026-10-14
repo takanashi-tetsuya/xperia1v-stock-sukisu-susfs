@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "status": "PASS_STAGED_SOURCE_AND_HOST_CHECKS",
+  "scope": "This publication checkout; local Git source reconstruction and host fixtures only. No new kernel build, network or device actions by this step.",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "source_archive_sha256": "4b3269722d47893b65da7dc90ffd1e75c002b754e11a8686d6ab851b71f449f2",
+  "source_entries": 86,
+  "source_entries_exact_except_readme": false,
+  "source_reconstruction": "PASS_LOCAL_CACHE_RECONSTRUCTION",
+  "network_reconstruction": "NOT_RUN_BY_THIS_CHECK",
+  "source_repository_commits": {
+    "AnyKernel3": "020dfeccf9d7e962a48400fc94d3e451df92eead",
+    "SukiSU-Ultra": "e2912817f4e1b194e582a06e0b5eacf6a3fb7083",
+    "common": "51bba4309aac6b0889f1546c72865851cba20612"
+  },
+  "checks": {
+    "shellcheck": "PASS",
+    "git_diff_check": "PASS",
+    "packaging_normal": 30,
+    "packaging_optimized": 30,
+    "unit_normal": 69,
+    "unit_optimized": 69,
+    "source_regressions": {
+      "susfs_namei": "PASS",
+      "susfs_legacy": "PASS",
+      "ctime": "PASS",
+      "wire": "PASS",
+      "anykernel": "PASS",
+      "suki_security": "PASS"
+    },
+    "public_evidence_path_token_scan": "PASS",
+    "publication_sync_overlay": {
+      "normal": 30,
+      "optimized": 30
+    }
+  },
+  "private_host_log_sha256": {
+    "anykernel.json": "13173cb7bc73e135c572f15f6dee83a85d9d7f97b1ac0df75d9c326ace9fd043",
+    "anykernel.log": "7da4b0f56b04170c41aaea07e6218381592c12f826703b7d71ff6df8a466f290",
+    "ctime.json": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+    "ctime.log": "9bb994f3ef4b16982217b864712418411fc3176b2062f66d9652de0eb0ebb42a",
+    "local_prepare.log": "8771757b4d9efbdede5c6eb41b0d70da057b7705790eaba47fb1f779ca9f14ed",
+    "packaging.log": "295e4749db7b893882b62565578a120bb5072668240597b5f0addfa8d4b2b1e9",
+    "shellcheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source_regressions.json": "be39e1c66e50432dfdaa790e1398aa1bf773e61d8487170bbdf13efc1e2ce2fe",
+    "suki_security.json": "1e18e463879db74c31cc46c66ad788a63f7ea4a93f7c7020fc7cb89eab879b69",
+    "suki_security.log": "d798a3979a62cd381044bf15634c2371d2c871b350a070c6fff3999d9e2a2c84",
+    "susfs_legacy.log": "8d9858aaf46d39c5ea4a325d48e52f746a45547ce570cbf4c42a991e694f90ea",
+    "susfs_namei.log": "bb0a2acb07c9bb1924d55282b918418ed99246c16f6c08b4c6db275303fd88b0",
+    "unit_normal.log": "a76e2fd359698cfd7c8a11bca283a7ae542e77a848b3bbb196c2bc6dc6303604",
+    "unit_optimized.log": "826f68e8f920ade6ba6c7c5a75c437cdee4384b5182d53f96fb01a53b3cbd403",
+    "unit_summary.json": "6af09246ed8788aa25eddb6c5a7429964728abd4d61e699a54be3a5edc45e111",
+    "wire.json": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8",
+    "wire.log": "8f2f867ccf817f5b615588bc6ca62cb5f2be12c6556a8a19ae05e1af1af8bce8"
+  },
+  "runtime": "NOT_EXERCISED_BY_HOST_CHECKS",
+  "source_copy_exceptions": {
+    "README.md": "Updated runtime publication documentation",
+    "verify_github_sync.py": "Public receipt scope label only; see publication_tool_overlay.json",
+    "tests/test_github_sync_verifier.py": "Corresponding receipt assertions"
+  },
+  "publication_tool_overlay_sha256": "767d81f61bb3a22fe817ef416e51d9ac313c4394a5f4cd66d78943a4e2f03c9a"
+}

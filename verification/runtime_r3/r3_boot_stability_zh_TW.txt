@@ -1,0 +1,14 @@
+r3 開機與穩定性附錄（有界觀察）
+
+候選 Image: 025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc
+候選 boot: 68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb
+
+初次開機：115 次有效採樣，同一 boot 與 system_server；完成開機後連續採樣 233.63 秒。後續探針後快照到 uptime 1616.90 秒仍相同 boot/PID，與初始快照相距 1558.25 秒；中間並非全程採樣。
+
+AnyKernel3 安裝後已重啟：86 次有效採樣，同一 boot 與 system_server；完成開機後連續採樣 173.00 秒。新 boot 與前一輪不同。其快照全部檢查通過；恢復工作時的唯讀記錄到 uptime 20404.85 秒（約 5.67 小時）仍相同 boot/PID。此為端點連續性證據，不等於 5.67 小時完整監控。
+
+三份快照均可讀 /proc/config.gz，CONFIG_IKCONFIG_PROC=y 與 CONFIG_VMAP_STACK=y，running config 與候選吻合，367 個模組。兩輪採樣未見 system_server 致命錯誤、Kernel configs could not be fetched 或所檢索的 Oops／panic／RCU stall／lockup 標記。服務清單及模組數量不能代替硬體功能測試。
+
+兩輪 crash buffer 各有兩筆名為 init 的非 PID1 程序 SIGABRT。三份快照的全域 PID1/init 存活，並無 PID1 abort 證據。可將它們歸為非 PID1、仍名為 init 的程序，與 child/helper 一致；未取得足夠父程序／服務名稱／原生堆疊，具體原因未定，不能因此宣稱無害。工作正常的舊 40922 回滾記錄也有一筆同形態的早期事件，但不能證明 r3 後續事件具有相同原因。
+
+此附錄觀察期間 root 模組未在執行；模組 enable 標記恢復不等於已載入。Zygisk／Vector、各 App、DRM、完整硬體功能與 OTA 不在本附錄的通過範圍。原始日誌保留於私有證據目錄，公開 JSON 僅含去敏感統計及證據雜湊。

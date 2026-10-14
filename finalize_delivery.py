@@ -20,6 +20,8 @@ from pipeline_common import (atomic_json, cli_error, git, load_lock, require,
                              safe_relative, sha, verify_sources)
 from verify_build import verify_completion
 from export_publication import PublicExport
+from r3_delivery_checks import (verify_r3_delta, verify_runtime_report,
+                                verify_archive_derived_build)
 
 OFFICIAL_APK = 'SukiSU_v4.2.0_40900-release.apk'
 OFFICIAL_SHA = '4ca9810e6355fbff0bbe4bf5ce159808e64a40d85987a11894030cd990a6bdf3'
@@ -36,11 +38,15 @@ EVIDENCE = (
     'logs/vendor_audit/vermagic_check.json',
     'logs/anykernel_host_test.json', 'logs/userspace_ctime_test.json',
     'logs/userspace_wire_test.json', 'logs/packaging_final_tests.txt',
-    'logs/publication_export_tests.txt',
+    'logs/publication_export_tests.txt', 'logs/r3_delivery_guard_tests.txt',
     'logs/previous40900_unchanged.json',
     'logs/old40922_unchanged.json', 'logs/prior_20261013_unchanged.json',
     'logs/stock_kernel_release.json',
-    'logs/r2_source_delta.json',
+    'logs/r3_source_delta.json', 'logs/config_change_verification.json',
+    'logs/runtime_report.json', 'docs/ikconfig_boot_failure_evidence.json',
+    'logs/candidate_inputs.json', 'logs/source-check.log', 'logs/freeze.log',
+    'logs/r3_candidate_manifest.json', 'logs/host_evidence_provenance.json',
+    'logs/vendor_audit/revalidation_provenance.json', 'logs/vendor_audit/modules.json',
     'tests/susfs_namei_candidate.json', 'tests/susfs_namei_baseline.json',
     'tests/susfs_40900_preserved.json', 'tests/susfs_source_hashes.json',
     'tests/susfs_repair_report.txt', 'tests/suki_security_results.json',
@@ -84,7 +90,7 @@ def check_count(report, count, label):
                 f'{label}: individual results disagree')
 
 
-def verify_inputs(root, research, original, previous_dist, cli_binary):
+def verify_inputs(root, research, original, previous_dist, cli_binary, previous_r2_root):
     lock_path = root / 'source-lock.json'
     lock = load_lock(lock_path)
     require(lock['build']['ksu_version'] == 40900 and lock['build']['ksu_uapi'] == 2,
@@ -108,12 +114,8 @@ def verify_inputs(root, research, original, previous_dist, cli_binary):
             stock_release.get('stock_boot_sha256') == lock['stock']['sha256'] and
             stock_release.get('stock_kernel_release') == build.get('kernel_release'),
             'Candidate release string does not match the recorded stock boot banner')
-    delta = reports['logs/r2_source_delta.json']
-    require(delta.get('status') == 'PASS_SINGLE_LOCALVERSION_CHANGE' and
-            delta.get('source_lock_sha256') == sha(lock_path) and
-            delta.get('new_kernel_release') == build.get('kernel_release') and
-            delta.get('application_fix_claimed') is False and delta.get('device_access') == 'NOT_USED',
-            'r2 source-change record does not match this candidate')
+    verify_r3_delta(root, previous_r2_root, reports['logs/r3_source_delta.json'],
+                    reports['logs/config_change_verification.json'])
     require(build.get('sukisu_version_code') == 40900 and build.get('ksu_uapi') == 2,
             'Compiled version generation differs')
     require(build.get('embedded_config_matches') is True and build.get('phone_runtime') == 'NOT_RUN',
@@ -203,14 +205,17 @@ def verify_inputs(root, research, original, previous_dist, cli_binary):
     match(root / 'sources/AnyKernel3/anykernel.sh', ak3.get('anykernel_sha256'))
 
     reconstruction = reports['logs/source_reconstruction_check.json']
-    require(reconstruction.get('status') == 'PASS_NETWORK_RECONSTRUCTION_AND_BUILD' and
-            reconstruction.get('source_trees_match') is True and
-            reconstruction.get('source_lock_sha256') == sha(lock_path), 'Network source reconstruction incomplete')
-    network = reconstruction['network_reconstruction']
-    require(network.get('status') == 'PASS' and network.get('local_mirror_used') is False and
-            network.get('source_inputs') == sources, 'Network reconstruction source inputs differ')
-    require(network.get('remote_urls') == {k: v['url'] for k, v in lock['repositories'].items()},
-            'Network source URLs differ from lock')
+    if reconstruction.get('status') == 'PASS_NETWORK_RECONSTRUCTION_AND_BUILD':
+        require(reconstruction.get('status') == 'PASS_NETWORK_RECONSTRUCTION_AND_BUILD' and
+                reconstruction.get('source_trees_match') is True and
+                reconstruction.get('source_lock_sha256') == sha(lock_path), 'Network source reconstruction incomplete')
+        network = reconstruction['network_reconstruction']
+        require(network.get('status') == 'PASS' and network.get('local_mirror_used') is False and
+                network.get('source_inputs') == sources, 'Network reconstruction source inputs differ')
+        require(network.get('remote_urls') == {k: v['url'] for k, v in lock['repositories'].items()},
+                'Network source URLs differ from lock')
+    else:
+        verify_archive_derived_build(root, previous_r2_root, reconstruction, sources)
     rebuilt = reconstruction['build']
     require(rebuilt.get('status') == 'PASS_OFFLINE_BUILD_CHECKS' and rebuilt.get('clean_output_directory') is True,
             'Reconstructed tree clean build did not pass')
@@ -226,6 +231,11 @@ def verify_inputs(root, research, original, previous_dist, cli_binary):
             len(re.findall(r'^OK\s*$', export_log, re.M)) == 2 and
             not re.search(r'^(FAILED|ERROR:)\b', export_log, re.M),
             'Publication normal/optimized host test evidence did not pass')
+    guard_log = (root / 'logs/r3_delivery_guard_tests.txt').read_text()
+    require(len(re.findall(r'^Ran 9 tests in ', guard_log, re.M)) == 2 and
+            len(re.findall(r'^OK\s*$', guard_log, re.M)) == 2 and
+            not re.search(r'^(FAILED|ERROR:)\b', guard_log, re.M),
+            'r3 normal/optimized delivery guard tests did not pass')
 
     versions = {name: read(research / name) for name in VERSION_EVIDENCE}
     inspected = versions['apk-inspection.json']
@@ -250,6 +260,18 @@ def verify_inputs(root, research, original, previous_dist, cli_binary):
     require(previous.get('status') == 'PASS' and len(previous.get('files', {})) == 3,
             'Previous 40900 preservation evidence incomplete')
     check_source_hashes(previous_dist, previous['files'])
+    provenance = reports['logs/host_evidence_provenance.json']
+    require(provenance.get('source_lock_sha256') == sha(lock_path), 'Host provenance source lock differs')
+    require(isinstance(provenance.get('entries'), dict) and provenance['entries'], 'Missing host provenance entries')
+    for name, entry in provenance['entries'].items():
+        match(relative_file(root, name), entry.get('current_report_sha256'))
+        match(relative_file(previous_r2_root, name), entry.get('parent_report_sha256'))
+        require(entry.get('execution') in ('INHERITED_R2_NOT_RERUN',
+                'REVALIDATED_OLD_ARTIFACT_HASHES_ON_R3_FINALIZATION'), 'Unknown host evidence provenance')
+        if entry['execution'] == 'INHERITED_R2_NOT_RERUN':
+            require(entry['current_report_sha256'] == entry['parent_report_sha256'],
+                    'Inherited host report bytes changed')
+    verify_runtime_report(root, reports['logs/runtime_report.json'], build, package, cli)
     for name in EVIDENCE:
         require((root / name).is_file() and not (root / name).is_symlink(), f'Missing evidence: {name}')
     return lock, sources, reports, cli
@@ -400,11 +422,12 @@ def verify_offline_archive(archive_path, lock, sources):
             'scope': 'Fresh extraction; Git identities, patches, untracked hashes and modes verified'}
 
 
-def validate_external_inputs(root, research, original, previous_dist, cli_binary):
+def validate_external_inputs(root, research, original, previous_dist, cli_binary, previous_r2_root):
     """Reject missing maintainer inputs before touching any delivery attestation."""
     require(root.is_dir(), 'Project root is missing')
     for label, directory in (('--research', research), ('--original-dist', original),
-                             ('--previous-40900-dist', previous_dist)):
+                             ('--previous-40900-dist', previous_dist),
+                             ('--previous-r2-root', previous_r2_root)):
         require(directory.is_dir() and not directory.is_symlink(), f'{label}: directory is missing or symlinked')
     for name in VERSION_EVIDENCE + (OFFICIAL_APK,):
         require((research / name).is_file() and not (research / name).is_symlink(),
@@ -422,8 +445,8 @@ def validate_external_inputs(root, research, original, previous_dist, cli_binary
     require(cli_binary.is_file() and not cli_binary.is_symlink(), '--cli-binary: regular binary is missing')
 
 
-def finalize(root, research, original, previous_dist, cli_binary):
-    validate_external_inputs(root, research, original, previous_dist, cli_binary)
+def finalize(root, research, original, previous_dist, cli_binary, previous_r2_root):
+    validate_external_inputs(root, research, original, previous_dist, cli_binary, previous_r2_root)
     dist = root / 'dist'
     require(dist.is_dir() and not dist.is_symlink(), 'Missing regular dist directory')
     require(all(not path.is_symlink() for path in dist.rglob('*')),
@@ -431,7 +454,7 @@ def finalize(root, research, original, previous_dist, cli_binary):
     # Never retain a prior successful delivery attestation after a failed rerun.
     (dist / 'manifest.json').unlink(missing_ok=True)
     (dist / 'SHA256SUMS').unlink(missing_ok=True)
-    lock, sources, reports, cli = verify_inputs(root, research, original, previous_dist, cli_binary)
+    lock, sources, reports, cli = verify_inputs(root, research, original, previous_dist, cli_binary, previous_r2_root)
     small = small_inputs(root, lock)
     full = list(small)
     generated = {}
@@ -442,13 +465,17 @@ def finalize(root, research, original, previous_dist, cli_binary):
         generated[f'sources/{repo}/.git/config'] = config
     evidence_hashes = {name: sha(root / name) for name in EVIDENCE}
     exporter = PublicExport(root, [('official-release', research), ('original-40922', original),
-                                 ('previous-40900', previous_dist), ('cli-binary', cli_binary),
+                                 ('previous-40900', previous_dist), ('previous-r2', previous_r2_root),
+                                 ('vendor-audit', original.parent / 'vendor_audit'),
+                                 ('cli-binary', cli_binary),
                                  ('toolchains', root / 'toolchains'), ('host-tools', root / 'host-tools')])
     for path in small:
         if path.is_file() and not path.is_symlink():
             exporter.add(path, path.relative_to(root).as_posix())
     for name in EVIDENCE:
-        exporter.add(root / name, name)
+        # Private evidence digests identify retained raw records, not public transformed copies.
+        exporter.add(root / name, name, rebind=False if name in
+                     ('logs/runtime_report.json', 'logs/host_evidence_provenance.json') else None)
     for name in VERSION_EVIDENCE:
         exporter.add(research / name, 'versions/' + name)
     # Package metadata may quote local tool/firmware paths; keep raw logs intact.
@@ -480,8 +507,9 @@ def finalize(root, research, original, previous_dist, cli_binary):
         for name in ('README.txt', 'manifest.json', 'ctime-flag.patch'):
             copy(root / 'userspace' / name, 'userspace/' + name, 'userspace/' + name)
         copy(cli_binary, 'userspace/ksu_susfs')
-        copy(root / 'docs/修復報告_20261013.txt', '修復報告_20261013.txt', 'docs/修復報告_20261013.txt')
+        copy(root / 'docs/修復報告_20261014.txt', '修復報告_20261014.txt', 'docs/修復報告_20261014.txt')
         copy(root / 'README.md', 'README.md', 'README.md')
+        copy(root / 'logs/runtime_report.json', 'runtime_manifest.json', 'logs/runtime_report.json')
         copy(root / 'LICENSE', 'LICENSE', 'LICENSE')
         copy(root / 'licenses/NOTICE.txt', 'LICENSE_NOTICE.txt', 'licenses/NOTICE.txt')
         for name in public:
@@ -504,21 +532,26 @@ def finalize(root, research, original, previous_dist, cli_binary):
         for name, expected in evidence_hashes.items():
             match(root / name, expected)
         # Recheck completed build and payloads immediately before publishing.
-        verify_inputs(root, research, original, previous_dist, cli_binary)
+        verify_inputs(root, research, original, previous_dist, cli_binary, previous_r2_root)
         package = public_reports['logs/packaging_verification.json']
         reports = public_reports
+        runtime_report = reports['logs/runtime_report.json']
+        runtime = dict(runtime_report['tests'])
+        runtime['candidate'] = ('NOT_DEVICE_TESTED' if all(v == 'NOT_RUN' for v in runtime.values())
+                                else 'SEE_INDIVIDUAL_RUNTIME_RESULTS')
+        runtime['applications'] = 'APPLICATION_FIXES_NOT_CLAIMED'
         manifest = {
             'schema_version': 1, 'status': 'OFFLINE_VERIFIED_CANDIDATE',
             'device': 'Sony Xperia 1 V XQ-DQ72 / pdx234', 'firmware': '67.2.A.3.178', 'android': 15,
-            'runtime': {'candidate': 'NOT_DEVICE_TESTED', 'flash': 'NOT_FLASHED',
-                        'installer': 'AK3_NOT_RUN', 'boot': 'NOT_RUN', 'module_loading': 'NOT_RUN',
-                        'applications': 'APPLICATION_FIXES_NOT_CLAIMED'},
-            'phone_modified': False, 'application_fixes_claimed': False,
+            'runtime': runtime, 'runtime_report': runtime_report,
+            'runtime_baseline_scope': 'Host finalization checkpoint only; current phone evidence is supplied in the external runtime_manifest.json without rebuilding source archives',
+            'runtime_report_validation_scope': 'Artifact/schema binding only; private device traces reviewed by maintainer, not replayed by this host finalizer',
+            'phone_modified': runtime_report['phone_modified'], 'application_fixes_claimed': False,
             'validation_scope': {
                 'local_full_build': 'PASS',
                 'independent_host_ci': 'NOT_ATTESTED_BY_THIS_LOCAL_FINALIZER',
                 'third_party_full_rebuild': 'NOT_RUN',
-                'candidate_device_and_installer': 'NOT_RUN',
+                'candidate_device_and_installer': 'SEE_INDIVIDUAL_RUNTIME_RESULTS',
             },
             'kernel_release': reports['logs/build_verification.json']['kernel_release'],
             'source_lock_sha256': sha(root / 'source-lock.json'), 'source_inputs': sources,
@@ -532,9 +565,11 @@ def finalize(root, research, original, previous_dist, cli_binary):
             'host_tests': {'susfs_namei': 215, 'susfs_preserved': 63, 'sukisu_security': 59,
                            'cli_payload': 9, 'anykernel_functions': 20,
                            'publication_export_normal_and_optimized': 16,
+                           'r3_delivery_guards_normal_and_optimized': 9,
                            'cli_wire_abi': reports['logs/userspace_wire_test.json'],
                            'scope': 'Host/static evidence; not candidate device or installer execution'},
             'source_reconstruction': reports['logs/source_reconstruction_check.json'],
+            'host_evidence_provenance': reports['logs/host_evidence_provenance.json'],
             'source_bundles': {
                 'source_changes.tar.gz': {'sha256': sha(stage / 'source_changes.tar.gz'),
                     'contents': 'Locked patches, added sources, scripts, tests, CLI source and licenses',
@@ -552,10 +587,10 @@ def finalize(root, research, original, previous_dist, cli_binary):
             'license_note': 'Pinned SUSFS GPL-3.0 and Linux GPL-2.0-only binary redistribution compatibility remains unresolved; notices do not resolve it.',
         }
         (stage / 'README_繁體中文.txt').write_text(
-            'Xperia 1 V / XQ-DQ72 — SukiSU 官方 40900 / UAPI 2 修復候選 r2（2026-10-13）\n\n'
+            'Xperia 1 V / XQ-DQ72 — SukiSU 官方 40900 / UAPI 2 修復候選 r3（2026-10-14）\n\n'
             '適用目標：Android 15、韌體 67.2.A.3.178。已完成的離線建置、封裝及主機測試見 manifest.json。\n'
             f'核心 release 字串已與原廠完整對齊：{reports["logs/build_verification.json"]["kernel_release"]}。\n'
-            '本候選尚未刷入、尚未開機或驗證模組載入，AnyKernel3 安裝器未實際執行；不宣稱已修復任何 App。\n\n'
+            '本候選恢復 CONFIG_IKCONFIG_PROC=y；實機、模組、探針與安裝器逐項結果見 manifest.runtime_report，未跑項仍為 NOT_RUN；不宣稱已修復任何 App。\n\n'
             f'boot 映像：{package["boot_path"].removeprefix("dist/")}\n'
             f'安裝 ZIP：{package["anykernel_path"].removeprefix("dist/")}\n'
             '兩者是替代方式，目標為 boot，不是 init_boot。安裝前提、備份、還原、OTA 與 init_boot 狀態請讀 README.md。\n'
@@ -563,7 +598,7 @@ def finalize(root, research, original, previous_dist, cli_binary):
             'source_changes.tar.gz 是小型重建材料，需另取得鎖定 Git 基底。full_source.tar.gz 包含三棵完整來源與\n'
             '必要 Git 資料，可離線核對 source-lock；本程式已解壓到暫存目錄完成來源驗證，沒有在該解壓目錄重新編譯。\n'
             '完整包仍不含編譯器、主機工具或 Sony 原廠韌體；請依 README.md 準備。\n'
-            '核驗結果見 verification/，逐項修復與保留限制見 修復報告_20261013.txt。SHA256SUMS 涵蓋全部交付檔。\n\n'
+            '核驗結果見 verification/，逐項修復與保留限制見 修復報告_20261014.txt。SHA256SUMS 涵蓋全部交付檔。\n\n'
             '此檔為本機交付說明；GitHub 草稿及完整上傳狀態須由後續遠端核驗紀錄確認，本程式不宣稱上傳完成。\n'
             '本機完整建置、獨立主機 CI、第三方完整重建與實機測試分別記錄，不互相替代。\n'
             'SUSFS GPL-3.0 與 Linux GPL-2.0-only 整合的二進位公開散布授權問題尚未解決；本地成功建置不代表可公開散布。\n'
@@ -601,10 +636,11 @@ def main():
     parser.add_argument('--original-dist', type=Path, required=True, help='Original working 40922 dist directory (read only)')
     parser.add_argument('--previous-40900-dist', type=Path, required=True, help='Previous 40900 dist directory (read only)')
     parser.add_argument('--cli-binary', type=Path, required=True, help='Built ARM64 ksu_susfs matching userspace/manifest.json')
+    parser.add_argument('--previous-r2-root', type=Path, required=True, help='Preserved r2 root with locked sources and dist (read only)')
     args = parser.parse_args()
     root = args.root.resolve()
     finalize(root, args.research.absolute(), args.original_dist.absolute(),
-             args.previous_40900_dist.absolute(), args.cli_binary.absolute())
+             args.previous_40900_dist.absolute(), args.cli_binary.absolute(), args.previous_r2_root.absolute())
 
 
 if __name__ == '__main__':

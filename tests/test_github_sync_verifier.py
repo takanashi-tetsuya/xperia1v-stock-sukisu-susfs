@@ -94,7 +94,9 @@ class VerificationTests(unittest.TestCase):
         self.assertEqual(report['missing_assets'], [])
         self.assertTrue(report['release_draft'])
         self.assertFalse(report['github_mutations_performed'])
-        self.assertEqual(report['runtime'], 'NOT_DEVICE_TESTED')
+        self.assertEqual(report['runtime'], 'NOT_TESTED_BY_THIS_HOST_VERIFIER')
+        self.assertIn('host verifier only', report['runtime_scope'])
+        self.assertIn('runtime_manifest.json', report['runtime_scope'])
         self.assertFalse(report['kernel_full_build_verified_by_this_tool'])
         self.assertEqual(report['ci']['run_id'], 6)
         self.assertEqual(report['release_url'], self.api.release['html_url'])
@@ -277,7 +279,7 @@ class ApiAndCliTests(unittest.TestCase):
     def test_atomic_receipt_has_no_workstation_path(self):
         with tempfile.TemporaryDirectory() as temporary:
             path = Path(temporary) / 'nested/receipt.json'
-            verify.atomic_report(path, {'status': 'PASS', 'runtime': 'NOT_DEVICE_TESTED'})
+            verify.atomic_report(path, {'status': 'PASS', 'runtime': 'NOT_TESTED_BY_THIS_HOST_VERIFIER'})
             self.assertEqual(json.loads(path.read_text())['status'], 'PASS')
             self.assertNotIn(temporary, path.read_text())
 

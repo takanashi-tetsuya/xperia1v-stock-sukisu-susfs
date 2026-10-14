@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "REVIEWED_BOUNDED_RUNTIME_REPORTS",
+  "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+  "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+  "runtime_manifest_sha256": "85a731c21a1a89e80dc536b146ae0c070a19231b5bed370baf36a14e8a22c4e5",
+  "reports": {
+    "susfs_runtime_r3.json": "eaa58e5880694641abb27021652f7dea4c5e1ad9771c21da20d5ab1dc790b52c",
+    "susfs_runtime_r3_zh_TW.txt": "8180def99a348ccda69c0a5bcb4c7d73455ee68649b026c0af84671ecca8b9d7",
+    "r3_module_runtime_comparison.json": "84b5a985abbf6a5dc1db72a4295d7cfaa650c8fdb2f0c8ea31568afea3deeea7",
+    "r3_module_runtime_comparison_zh_TW.txt": "e11806d36f2ed3f39430a606a5befb0d1d9afac45a1e2234d194209d46d6774b",
+    "ak3_runtime_r3.json": "bdf0881a74249ed1cb78ab9da86e96331dcb5b177ece47c08b38eafc93ea318d",
+    "ak3_runtime_r3_zh_TW.txt": "86035e5e130263c87ffb8474490ce4be95a23584e110497a4f05dfaee754045c",
+    "r3_boot_stability.json": "65b9cccd79359f224655b6ebb777c58d66d29ceec282bece7f8c86620825f194",
+    "r3_boot_stability_zh_TW.txt": "17c8cbf06bc737136bdd5f9496f27c9ffa499854ca806f14b4b1021d57e22ff8",
+    "r3_zygisk_runtime.json": "4b19cd1bb31e8b9a55f713d93e77878a8625391b9e35388f6516b098284cf7fd",
+    "r3_zygisk_runtime_zh_TW.txt": "515b577bda1326686699b3376cbd6193a5348e7c7ccfef9ac3a34f49cf32a925",
+    "r3_cleanup_and_restoration.json": "17fdf79b6eb94ece45c8b5775a3d2b8992e9733bdb4a9bd1f489c960ac644253",
+    "r3_owner_functional_observation.json": "4b4adb9edb0c217527a38bcb347ebd1ccc413d2b27b3e89618f48f2a4c7708d7"
+  },
+  "scope": "Sanitized maintainer-reviewed reports; private digest references do not publish raw device logs."
+}

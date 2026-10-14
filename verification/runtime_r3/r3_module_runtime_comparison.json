@@ -1,0 +1,241 @@
+{
+  "status": "PASS_OBSERVED_MODULE_PARITY",
+  "scope": "Read-only comparison of completed snapshots; no phone actions; no raw logs copied",
+  "candidate": "r3-20261014-ikconfig-proc",
+  "candidate_boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+  "capture_time_utc": "2026-10-14T02:54:07.638331+00:00",
+  "snapshot_checks": {
+    "all_commands_succeeded": true,
+    "partition_hashes_match": true,
+    "config_proc_enabled": true,
+    "running_config_matches_candidate": true,
+    "vmap_stack_enabled": true,
+    "boot_completed": true,
+    "root_effective": true,
+    "same_boot_and_system_server": true,
+    "active_slot_a": true,
+    "module_list_valid": true,
+    "memory_accounting_reported": true
+  },
+  "snapshot_summary_sha256": "70b4ce976c602c9f64d5ae98615588fe164bdc4424de16cf36d5e0d5e7a1600c",
+  "captures": {
+    "r3_initial": {
+      "module_count": 367,
+      "unique_module_count": 367,
+      "module_states": {
+        "Live": 367
+      },
+      "module_inventory_sha256": "240d2acd6662aa32829bf63a15b0203182e55b9719c14291dcdcb837e8e201c4",
+      "dmesg": {
+        "availability": "CAPTURED_BOUNDED_WINDOW",
+        "sha256": "d4404c862ceb5444c40d06eecd222faf0c3a6be36173ee9243026ed0e50f1bb0",
+        "retained_uptime_seconds": [
+          6.393015,
+          59.300583
+        ],
+        "line_count": 2664,
+        "matched_counts": {
+          "protected_symbol": 0,
+          "vermagic_crc_or_unknown_symbol": 0,
+          "btf": 0,
+          "cfi_failure": 0,
+          "kernel_oops_bug_panic": 0,
+          "module_signature_warning": 0
+        },
+        "warning_line_count": 7,
+        "warning_signatures": [
+          "WARNING: CPU: <redacted> PID: <redacted> at kernel/rcu/tree_plugin.h:316 rcu_note_context_switch+0x338/0x6b8",
+          "WARNING: Unprivileged eBPF is enabled, data leaks possible via Spectre v2 BHB attacks!",
+          "capability: warning: `wpa_supplicant' uses 32-bit capabilities (legacy support in use)",
+          "msm_cvp: warn: cvp_dsp_send_hfi_queue: Done init of HFI queue headers",
+          "msm_cvp: warn: msm_cvp_cleanup_instance Unexpected pm_qos off vote 0"
+        ],
+        "manager_apk_scan_rejections": 16
+      }
+    },
+    "stock_reference": {
+      "module_count": 367,
+      "unique_module_count": 367,
+      "module_states": {
+        "Live": 367
+      },
+      "module_inventory_sha256": "852650c84eb00107d3942b21b75da1328f1c86768aa42631b4588537fb2fa533",
+      "dmesg": {
+        "availability": "UNAVAILABLE_PERMISSION_DENIED",
+        "sha256": "b054ce89fe79532d0062843e417cf560575ff78b0b84f4768e09ca255cd53ca0",
+        "matched_counts": null
+      }
+    },
+    "baseline_40922": {
+      "module_count": 367,
+      "unique_module_count": 367,
+      "module_states": {
+        "Live": 367
+      },
+      "module_inventory_sha256": "563474841b47e6e8d7ee4f33328277f72cd9a2f37539576e6a33c2e3665cf465",
+      "dmesg": {
+        "availability": "CAPTURED_BOUNDED_WINDOW",
+        "sha256": "ace2ebe00d3ca4360bcda1755896d4dfdcc21ec0f8e99b8d5cc802e3c15be4c0",
+        "retained_uptime_seconds": [
+          165149.903609,
+          165635.490028
+        ],
+        "line_count": 3419,
+        "matched_counts": {
+          "protected_symbol": 0,
+          "vermagic_crc_or_unknown_symbol": 0,
+          "btf": 0,
+          "cfi_failure": 0,
+          "kernel_oops_bug_panic": 0,
+          "module_signature_warning": 0
+        },
+        "warning_line_count": 0,
+        "warning_signatures": [],
+        "manager_apk_scan_rejections": 0
+      }
+    },
+    "rollback_40922": {
+      "module_count": 367,
+      "unique_module_count": 367,
+      "module_states": {
+        "Live": 367
+      },
+      "module_inventory_sha256": "fc396f07dbb7c1ba157333848479c5ea7bb0f31a7afc9c18ff17f70b8d506b28",
+      "dmesg": {
+        "availability": "CAPTURED_BOUNDED_WINDOW",
+        "sha256": "ec6c7511c8c0294cf0b6b4fceab245399b52de876c05f1882840cfe3bc1a2bd6",
+        "retained_uptime_seconds": [
+          14.657647,
+          55.790087
+        ],
+        "line_count": 2633,
+        "matched_counts": {
+          "protected_symbol": 0,
+          "vermagic_crc_or_unknown_symbol": 0,
+          "btf": 0,
+          "cfi_failure": 0,
+          "kernel_oops_bug_panic": 0,
+          "module_signature_warning": 0
+        },
+        "warning_line_count": 7,
+        "warning_signatures": [
+          "WARNING: CPU: <redacted> PID: <redacted> at kernel/rcu/tree_plugin.h:316 rcu_note_context_switch+0x338/0x6b8",
+          "WARNING: Unprivileged eBPF is enabled, data leaks possible via Spectre v2 BHB attacks!",
+          "capability: warning: `wpa_supplicant' uses 32-bit capabilities (legacy support in use)",
+          "msm_cvp: warn: cvp_dsp_send_hfi_queue: Done init of HFI queue headers",
+          "msm_cvp: warn: msm_cvp_cleanup_instance Unexpected pm_qos off vote 0"
+        ],
+        "manager_apk_scan_rejections": 15
+      }
+    }
+  },
+  "module_comparisons": {
+    "stock_reference": {
+      "same_module_names": true,
+      "r3_only_modules": [],
+      "reference_only_modules": []
+    },
+    "baseline_40922": {
+      "same_module_names": true,
+      "r3_only_modules": [],
+      "reference_only_modules": []
+    },
+    "rollback_40922": {
+      "same_module_names": true,
+      "r3_only_modules": [],
+      "reference_only_modules": []
+    }
+  },
+  "supplemental_rollback_40922_early_boot_dmesg": {
+    "availability": "CAPTURED_BOUNDED_WINDOW",
+    "sha256": "8d8c7b62e6e60a6e1f7d263b976e08107dfb40dd58552e192e46745ab63f4fbd",
+    "retained_uptime_seconds": [
+      0.0,
+      42.5262
+    ],
+    "line_count": 5232,
+    "matched_counts": {
+      "protected_symbol": 0,
+      "vermagic_crc_or_unknown_symbol": 0,
+      "btf": 1,
+      "cfi_failure": 0,
+      "kernel_oops_bug_panic": 0,
+      "module_signature_warning": 1
+    },
+    "warning_line_count": 11,
+    "warning_signatures": [
+      "WARNING: CPU: <redacted> PID: <redacted> at drivers/base/core.c:1318 device_links_driver_bound+0x258/0x54c",
+      "WARNING: CPU: <redacted> PID: <redacted> at drivers/spmi/spmi-pmic-arb.c:310 pmic_arb_wait_for_done+0x148/0x1a8 [spmi_pmic_arb]",
+      "WARNING: CPU: <redacted> PID: <redacted> at kernel/rcu/tree_plugin.h:316 rcu_note_context_switch+0x338/0x6b8",
+      "WARNING: Unprivileged eBPF is enabled, data leaks possible via Spectre v2 BHB attacks!",
+      "Warning: unable to open an initial console.",
+      "capability: warning: `wpa_supplicant' uses 32-bit capabilities (legacy support in use)",
+      "msm_cvp: warn: cvp_dsp_send_hfi_queue: Done init of HFI queue headers",
+      "msm_cvp: warn: msm_cvp_cleanup_instance Unexpected pm_qos off vote 0"
+    ],
+    "manager_apk_scan_rejections": 15
+  },
+  "new_r3_warning_signatures_vs_rollback_snapshot": [],
+  "rcu_warning": {
+    "classification": "PREEXISTING_WARNING_SAME_VENDOR_BATTERY_PATH",
+    "r3_frames": [
+      "rcu_note_context_switch",
+      "__schedule",
+      "schedule",
+      "schedule_preempt_disabled",
+      "__mutex_lock",
+      "__mutex_lock_slowpath",
+      "mutex_lock",
+      "battery_chg_write",
+      "wls_psy_get_prop",
+      "power_supply_get_property",
+      "somc_bcext_psy_notifier_cb",
+      "atomic_notifier_call_chain",
+      "power_supply_changed_work",
+      "process_one_work",
+      "worker_thread",
+      "kthread",
+      "ret_from_fork"
+    ],
+    "rollback_frames": [
+      "rcu_note_context_switch",
+      "__schedule",
+      "schedule",
+      "schedule_timeout",
+      "wait_for_common",
+      "wait_for_completion_timeout",
+      "battery_chg_write",
+      "wls_psy_get_prop",
+      "power_supply_get_property",
+      "somc_bcext_psy_notifier_cb",
+      "atomic_notifier_call_chain",
+      "power_supply_changed_work",
+      "process_one_work",
+      "worker_thread",
+      "kthread",
+      "ret_from_fork"
+    ],
+    "common_vendor_path": [
+      "battery_chg_write",
+      "wls_psy_get_prop",
+      "power_supply_get_property",
+      "somc_bcext_psy_notifier_cb",
+      "atomic_notifier_call_chain",
+      "power_supply_changed_work"
+    ],
+    "difference": "r3 waits on mutex_lock; rollback waits on completion timeout. The common vendor RCU warning predates r3; this does not prove the warning is harmless."
+  },
+  "conclusions": [
+    "All 367 loaded module names match stock_reference and both working 40922 snapshots; all r3 modules report Live.",
+    "No protected-symbol, vermagic/CRC/unknown-symbol, BTF, CFI-failure or oops/panic matches occur in the retained r3 dmesg window.",
+    "All five normalized r3 warning signatures also occur in the working rollback 40922 snapshot.",
+    "Manager APK signature-rejection scan messages are not kernel module signature-loader failures. No package identifiers or application paths are published."
+  ],
+  "limitations": [
+    "Stock dmesg was permission denied: its zero-warning condition cannot be assessed.",
+    "r3 dmesg begins at 6.393015 seconds; earlier loader or signature/BTF warnings may have rolled out.",
+    "A retained rollback early-boot log records a missing-key module-signature taint warning, despite successful module loading. The r3 retained window cannot rule out an equivalent early warning.",
+    "367 loaded names do not imply every firmware module was required or loaded; the static audit separately checked 556 module files.",
+    "This does not verify camera, Wi-Fi, audio, sensors, long-term stability or OTA behavior."
+  ]
+}
