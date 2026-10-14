@@ -3,7 +3,7 @@
   "status": "REVIEWED_BOUNDED_RUNTIME_REPORTS",
   "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
   "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
-  "runtime_manifest_sha256": "85a731c21a1a89e80dc536b146ae0c070a19231b5bed370baf36a14e8a22c4e5",
+  "runtime_manifest_sha256": "3e9026b19cd91c85a8c65f223442ac212d5a419b5c9ed495230ab643db38e2b3",
   "reports": {
     "susfs_runtime_r3.json": "eaa58e5880694641abb27021652f7dea4c5e1ad9771c21da20d5ab1dc790b52c",
     "susfs_runtime_r3_zh_TW.txt": "8180def99a348ccda69c0a5bcb4c7d73455ee68649b026c0af84671ecca8b9d7",
@@ -16,7 +16,15 @@
     "r3_zygisk_runtime.json": "4b19cd1bb31e8b9a55f713d93e77878a8625391b9e35388f6516b098284cf7fd",
     "r3_zygisk_runtime_zh_TW.txt": "515b577bda1326686699b3376cbd6193a5348e7c7ccfef9ac3a34f49cf32a925",
     "r3_cleanup_and_restoration.json": "17fdf79b6eb94ece45c8b5775a3d2b8992e9733bdb4a9bd1f489c960ac644253",
-    "r3_owner_functional_observation.json": "4b4adb9edb0c217527a38bcb347ebd1ccc413d2b27b3e89618f48f2a4c7708d7"
+    "r3_owner_functional_observation.json": "4b4adb9edb0c217527a38bcb347ebd1ccc413d2b27b3e89618f48f2a4c7708d7",
+    "r3_sensor_runtime.json": "108521b26d4d3e8e6972d4ba62416427e1824230d9f98f7b4d9c986365a51536",
+    "r3_sensor_runtime_zh_TW.txt": "b11d3480012b45f7b46a09c550eb58a76328535b14cc12180b70cddef5a9b96a",
+    "r3_network_runtime.json": "77f28e7f8e2235f349ca6bab51dc7f3ba36e94cd8fa316f0c5bcde28524699cb",
+    "r3_network_runtime_zh_TW.txt": "8926b3269bd1f58c78228217a2957412f527527fcc3be80747bca37c64d6e153",
+    "r3_vendor_qns_init_diagnosis.json": "b3d1954b14b4dc9c070d57d2cf1b2a67b2e9833717b32a181b557d1be6ee5a44",
+    "r3_vendor_qns_init_diagnosis_zh_TW.txt": "7ca9b22030e5ea3f83095a611eede2da23d4617aaa4aad4bfc24720f83b1e6bc",
+    "r3_zygisk_next_shamiko_runtime.json": "a2a63ef59edeb110bab7c2f44721efe179da99ee7b9e16907a4ab18d0c0ea2bc",
+    "r3_zygisk_next_shamiko_runtime_zh_TW.txt": "1b78c115cadac8bb4bab6e32adea147fd596ddc4a5ddb4cc7f4fa945929e865e"
   },
   "scope": "Sanitized maintainer-reviewed reports; private digest references do not publish raw device logs."
 }

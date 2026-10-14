@@ -1,0 +1,20 @@
+r3 Wi-Fi／行動數據 HTTPS 實機證據審核（2026-10-14）
+
+結論：兩條傳輸路徑的限定測試通過。Wi-Fi 與行動數據各進行 2 次綁定介面的 HTTPS 請求，4 次均 exit 0、HTTP 204、curl ssl_verify_result 0。204 回應沒有本文，因此這是少量 TLS／HTTP 交換證據，不是速度或大量傳輸測試。
+
+第一輪（09:28:16–09:28:55 UTC）：Wi-Fi 兩次成功。關閉 Wi-Fi 後，首個快照仍是過渡中的 Wi-Fi，其後 14 個快照都沒有預設 Internet 網路；保留的行動網路只有 IMS 能力，沒有 INTERNET。本輪沒有執行行動 HTTPS。雖然舊的全域 mobile_data=1，但其後保留的設定讀值及第二輪前置讀值均顯示 mobile_data1=0；第一輪未修改這個每張 SIM 的數據開關。不能把這個結果歸為核心行動數據故障。
+
+第二輪（09:42:02–09:42:10 UTC）：透過 cmd phone data enable 暫時啟用預設 SIM 數據，讀回 mobile_data1=1，關閉 Wi-Fi 後，實際預設網路成為 CELLULAR，具 INTERNET、VALIDATED 及 IPv4／IPv6 預設路由。兩次 HTTPS 分別約 0.251 秒、0.210 秒，均成功；請求前後快照中的行動預設路由一致。Wi-Fi 第一輪兩次分別約 0.995 秒、1.185 秒。以上時間只描述這幾次請求。
+
+還原：finally 路徑已執行，5 項設定逐項讀回並精確相同：wifi_on=1、mobile_data=1、mobile_data1=0、multi_sim_data_call=1、airplane_mode_on=0。最後快照已恢復 connected Wi-Fi 預設網路及 IPv4 預設路由；快照當下尚未帶 VALIDATED。另一次稍後保留的 Wi-Fi HTTPS 補測回應 HTTP 204、ssl_verify_result 0，stderr 為空；執行端亦回報命令 exit 0。這項補測與上述兩輪分開記錄。
+
+錯誤與穩定性：事前基準及兩輪的前／後 crash buffer 共 5 份位元組完全一致，沒有新增 crash 記錄。既有的一次開機 QNS Java 例外仍存在，沒有被刪除或改判為已修復。每輪的 after-cellular crash 快照是在還原之前，因此不涵蓋隨後還原期間；第二輪事前快照則補充第一輪後至第二輪前的有限觀察。QNS 在比較端點的 service record、程序與 user 相同，第二輪可見新的 qualified-networks callback 及 updateQualifiedNetworkTypes 呼叫，沒有看到此次操作造成服務更換。
+
+第一輪結束、第二輪開始與結束的 boot identity、system_server 程序一致，均 boot_completed=1；uptime 約為 1477.96、2265.37、2273.45 秒，也與既有 r3 模組啟用開機身分一致。第一輪沒有獨立的 before-state；端點一致不等於全程持續監測。
+
+限制：未測 VoWiFi、電話、SMS、IMS 功能、通話或 App 活動期間的交接、大量傳輸／速度、漫遊、所有電信網路組合與長期穩定性。QNS 啟動期空 List 缺陷及非 PID 1 init abort 的既有診斷另見 r3_vendor_qns_init_diagnosis.json；本測試不宣稱修復它們。
+
+對應 r3 Image SHA-256：025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc
+對應 boot SHA-256：68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb
+
+本報告由保留資料獨立唯讀審核產生，沒有再次操作手機，也沒有更改 manifest。配套 JSON 保存每份證據及執行腳本的 SHA-256。公開內容不含 raw log、設備／boot／程序識別、IP、SSID、APN 或 SIM／電信識別。

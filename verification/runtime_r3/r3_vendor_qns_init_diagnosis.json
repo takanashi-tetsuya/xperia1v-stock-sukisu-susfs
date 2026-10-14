@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "status": "VENDOR_NULL_ARGUMENT_CAUSE_IDENTIFIED_TRIGGER_UNRESOLVED",
+  "candidate": {
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb"
+  },
+  "scope": "Offline read-only diagnosis of retained device logs and the device vendor APK. This report does not change runtime PASS/NOT_RUN statuses or patch the APK, framework, kernel or modules.",
+  "vendor_qns": {
+    "status": "DIRECT_CALLER_BUG_CONFIRMED_FROM_DEVICE_DEX_AND_STACK",
+    "artifact": {
+      "apk_sha256": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+      "classes_dex_sha256": "626a72021bb02388bf1f7e667887957241970eea52d02edc5d4bd65ff34cc22b",
+      "provenance": "Current vendor APK read from the device. No independent claim that its bytes match a separately extracted Sony firmware package.",
+      "apk_or_dex_published": false
+    },
+    "method": "vendor.qti.iwlan.QualifiedNetworksServiceImpl$NetworkAvailabilityProviderImpl.updateQualifiedNetworks",
+    "verified_control_flow": [
+      "The method iterates a non-null qnpList of QualifiedNetworks records.",
+      "A record whose networks field is null or empty enters the no-available-networks branch.",
+      "That branch ORs the record APN type into apnTypeMaskNullNw.",
+      "When the accumulated mask is nonzero, code at source line 122 explicitly passes a null List to framework updateQualifiedNetworkTypes(mask, null).",
+      "The captured crash stack points to this vendor line 122 and the framework List.stream() null dereference. The failure is not a null element inside a non-null List."
+    ],
+    "dex_locations": {
+      "method_file_offset_hex": "0x1030bc",
+      "null_or_empty_branch_code_units_hex": [
+        "0x0019",
+        "0x0023"
+      ],
+      "mask_accumulation_code_units_hex": "0x0093",
+      "mask_nonzero_branch_code_units_hex": "0x00e7",
+      "null_constant_code_units_hex": "0x0109",
+      "framework_call_code_units_hex": "0x010a",
+      "source_line": 122
+    },
+    "confirmed_conclusion": "The installed vendor implementation intentionally creates the null argument on this branch. The observed exception can be explained by this userspace API-contract defect; there is no need to hypothesize that kernel compilation corrupted a Java List.",
+    "trigger_not_proven": [
+      "Which APN mask and physical slot supplied the empty/null networks response in the failed process.",
+      "Why this branch was triggered in this boot but not in the other retained captures.",
+      "Whether module behavior, timing, SIM provisioning or modem response conditions influenced when the existing defect was reached."
+    ],
+    "retained_runtime_observation": {
+      "startup_exception_occurrences_in_crash_buffer": 1,
+      "later_same_boot_exception_occurrences_in_crash_buffer": 1,
+      "framework_automatic_restart_observed": true,
+      "providers_recreated_after_restart": true,
+      "no_additional_occurrence_in_later_snapshot": true,
+      "scope": "Same retained exception, not a second independent reproduction; recovery/startup presence does not establish full cellular or VoWiFi functionality."
+    },
+    "repair_direction": {
+      "status": "NOT_IMPLEMENTED_OR_DEVICE_TESTED",
+      "description": "At the vendor caller, represent no qualified networks with a non-null empty List as required by the framework contract. Rebuilding the kernel does not change this APK method.",
+      "limits": "No APK signing, repackaging, system partition change or runtime hook was attempted; this report does not claim a tested remedy."
+    }
+  },
+  "init_abort": {
+    "status": "NON_PID1_CLASSIFICATION_CONFIRMED_ROOT_CAUSE_UNDETERMINED",
+    "observations": [
+      {
+        "phase": "working_40922",
+        "non_pid1_init_sigabrt_count": 1,
+        "pid1_init_fatal_count": 0
+      },
+      {
+        "phase": "r3_initial_modules_inactive",
+        "non_pid1_init_sigabrt_count": 2,
+        "pid1_init_fatal_count": 0
+      },
+      {
+        "phase": "r3_after_ak3_modules_inactive",
+        "non_pid1_init_sigabrt_count": 2,
+        "pid1_init_fatal_count": 0
+      },
+      {
+        "phase": "r3_modules_enabled",
+        "non_pid1_init_sigabrt_count": 1,
+        "pid1_init_fatal_count": 0
+      }
+    ],
+    "established": [
+      "The recorded init-named fatal processes are not global PID1.",
+      "The same-shaped early event also occurs in retained working 40922 evidence and in r3 with modules inactive and enabled.",
+      "Global PID1 and system_server continuity were separately observed in the previously published bounded stability evidence."
+    ],
+    "not_established": [
+      "The exact parent process, init service name or native abort message.",
+      "A shared cause for all early and later non-PID1 events.",
+      "That these aborts are harmless, or that a specific kernel or module patch caused them."
+    ],
+    "logging_scope_correction": "Retained kernel captures do include some early init messages before one second. The limitation is missing attribution/abort-reason records for these particular processes, not a demonstrated loss of all logs from the first six seconds.",
+    "mechanism_reference": "AOSP distinguishes child abort handling from PID1 fatal handling and can abort a child before exec; this is consistent with the observed process naming but is not device-specific proof of the failing branch."
+  },
+  "minimal_discriminating_checks": [
+    "Review an existing QualifiedNetworksService dump/ring buffer for no-available-networks APN masks without restarting the service; the already-crashed process may have lost its in-memory ring.",
+    "For a later normal Wi-Fi/cellular transition, retain before/after crash buffers, QNS process identity and active Internet-network validation; do not infer general Internet from an IMS-only bearer.",
+    "If a future already-planned reboot reproduces init aborts, retain any native abort message/tombstone and init start/exit attribution. Do not stop critical services or force another reboot merely to obtain it."
+  ],
+  "out_of_scope": [
+    "No outgoing call or SMS",
+    "No OTA or firmware change",
+    "No APK/framework/kernel/module modification",
+    "No claim of complete cellular or VoWiFi validation"
+  ],
+  "references": [
+    {
+      "id": "aosp_qns_contract",
+      "title": "AOSP QualifiedNetworksService.java (fixed commit 02fcb435)",
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/02fcb4356a72980f9aff46cb5652bcd74205711d/telephony/java/android/telephony/data/QualifiedNetworksService.java",
+      "scope": "Independent AOSP counterpart: @NonNull list and direct stream conversion. This is not asserted to be the exact Sony framework binary/source revision."
+    },
+    {
+      "id": "aosp_init_aborter",
+      "title": "AOSP init/util.cpp (fixed commit 0bc3f6b1)",
+      "url": "https://android.googlesource.com/platform/system/core/+/0bc3f6b124c22477f052245c6461bd254b374dd3/init/util.cpp",
+      "scope": "Illustrates the explicit non-PID1 child abort versus PID1 fatal handling. Does not identify the observed child or its cause."
+    },
+    {
+      "id": "aosp_android15_service",
+      "title": "AOSP Android 15 init/service.cpp (official AOSP GitHub mirror)",
+      "url": "https://raw.githubusercontent.com/aosp-mirror/platform_system_core/android-15.0.0_r1/init/service.cpp",
+      "scope": "RunService and SetProcessAttributesAndCaps contain pre-exec fatal paths. No particular path is attributed to this device without its abort message."
+    }
+  ],
+  "private_evidence_sha256": {
+    "device_vendor_iwlan_apk": "0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b",
+    "host_dexdump_tool": "ef273cb9e5a01ccbba046ea7c80d73203f0c908d2779b4c58e21091753c86049",
+    "r3_modules_enabled_crash_buffer": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+    "r3_modules_enabled_android_buffer": "ff764d757cb87e26c19b1d977f12394860c6648210c76f1e8d2f262befb14c2a",
+    "later_same_boot_crash_buffer": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+    "working_40922_crash_buffer": "47cc94483a9d6a73587ace62ed5c5f64f3f80e1fb6510aa433052a02b14c67d0",
+    "r3_initial_modules_inactive_crash_buffer": "b100a3f7d5296a206870066ff21a56b364b8b2a5f58cced6cfe3b839ca78e012",
+    "r3_after_ak3_modules_inactive_crash_buffer": "851b8d5203d39e3c5b46753499681dce52a46737b9e5754b07993649e65b9c4a",
+    "current_persistent_kernel_log": "cf5e7fd0f48478160412c27f67122ec7f72a28dd2042c3766def49ae2a535b77",
+    "previous_persistent_kernel_log": "a1591d5666dbf9c19c1c3ba318dc8274bae86b15c9ab1a288eef50255d0481ea",
+    "current_persistent_android_log": "9a582cf4319a28afd2f07da2f30a997e95edd75c17a3aa53d53d2c358c741640",
+    "previous_persistent_android_log": "f63d11868be198a0995d0e96d98c196749d97260cec016ec4a971f38407e0c70",
+    "r3_initial_kernel_capture": "e5f78aa15d7ed76dbf4d0bc6a8991726990ed878fb2c0cb56e53ceb9f7ca0ef7"
+  },
+  "privacy": "No device identifiers, network identifiers, APK/DEX bytes or raw logs are embedded. Evidence hashes are opaque bindings only."
+}

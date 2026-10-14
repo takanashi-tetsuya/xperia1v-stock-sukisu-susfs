@@ -1,0 +1,38 @@
+r3 最終發布來源包 A1 / A2 重建驗證
+
+結果：PASS_SAME_HOST_FINAL_ARCHIVE_REBUILD_AND_PACKAGING
+來源包 SHA-256：09431f740e61af5e1b1356f8008e437f9a2e99caf13cdd37c6b9b82761f4cf15
+來源鎖 SHA-256：65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671
+容器映像 ID：bf33c00c8000cc462ab45d03cac425b61bca2b74ea33fc6a4a7e90eccdd81fa5
+完整編譯開始／完成（UTC）：2026-10-14T09:38:41+00:00 / 2026-10-14T09:59:26+00:00
+完成封裝（UTC）：2026-10-14T09:59:33+00:00
+
+從最終 full_source.tar.gz 重新解出，out 原先不存在；重建使用同一實體主機的乾淨容器，
+關閉網路，根檔案系統唯讀，只有新目錄可寫；Clang、pahole 完整 runtime 及原廠 boot 均唯讀。
+沿用鎖定的 Clang r450784e / pahole 1.31，jobs=12，完整 Full LTO；沒有複用舊 out 或舊私鑰。
+
+配置逐位元一致：True
+kernel.release 一致：True
+Module.symvers 逐位元一致：True
+Module.symvers 全欄位語義一致：True
+原發布 dist 全部 checksum 保持一致：True
+完整檢查失敗項：無
+
+原 Image SHA-256：025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc
+重建 Image SHA-256：ea08a7efdc057ebfb668740c3b7c382481dceb3e494bd9d4aa87d4f1adaa39f3
+Image 逐位元一致：False
+僅替換各自唯一的嵌入憑證與 build ID 後其餘 bytes 一致：True
+Image 差異解讀：Image bytes differ only in the independently identified embedded public signing certificate and ELF build ID; no private key was copied or reused.
+
+A2 以同版原廠 boot 封裝並驗證 header、空 ramdisk、分區大小、AVB metadata、payload 和 hash。
+自訂映像 AVB 算法為 NONE；原廠 boot 未修改。新的 boot 與 ZIP 僅留作重建證據，沒有刷入。
+重建 boot SHA-256：e5049f891ee805f9ea5a831579f82679e42f2f7d0e2d0f135df2f31c2df1de3f
+重建 ZIP SHA-256：e67c8efb1152946ebce02397ccd0c91f6a8fff17c00249df71cdcdd1817b0c01
+
+兩項環境前置問題均在建立 out 前處理，未改來源：
+1. Python 3.14 tarfile 安全過濾把兩條 symlink 的 ./ 寫法正規化；還原來源包原文字後鎖定檢查通過。
+2. Debian 12 容器需要 pahole 的完整 loader/library closure；只掛宿主 wrapper 會缺 libbpf。
+
+這是同主機、最終來源包的完整重建，不是第三方獨立重建，也未重做網路下載。
+可重建與 bit-for-bit 相同分開判讀；頂層 PASS 不代表所有二進位相同或新的真機通過。
+完整命令、環境與失敗預檢紀錄保留於本機；公開 JSON 只引用必要識別與證據雜湊。

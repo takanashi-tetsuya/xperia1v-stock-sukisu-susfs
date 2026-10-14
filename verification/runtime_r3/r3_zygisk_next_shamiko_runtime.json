@@ -1,0 +1,929 @@
+{
+  "schema_version": 1,
+  "status": "COMPLETED_NEXT_BOUNDED_PASS_SHAMIKO_REJECTED_REZYGISK_RESTORED",
+  "candidate": {
+    "image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671"
+  },
+  "scope": "Reviewed bounded startup/injection observations for the genuine SukiSU 40900 kernel and ksud, followed by verified restoration of the original ReZygisk baseline. No version spoofing, modified installer or Shamiko runtime success is claimed.",
+  "next": {
+    "status": "PASS_BOUNDED_NEXT_INJECTION",
+    "official_version": "1.5.2-864-a4a72ce-release",
+    "zip_sha256": "ce50b13fecb9e4456db69ef17b715f7cfbc094004dd9f30f7d6348dfab619a96",
+    "zip_sha_verified_against_local_archive": true,
+    "release_url": "https://github.com/LSPosed/ZygiskNext/releases/tag/v1.5.2",
+    "install_exit_code": 0,
+    "reported_kernel_version_code": 40900,
+    "reported_ksud_version_code": 40900,
+    "rezygisk_disabled": true,
+    "next_module_enabled": true,
+    "provider_status": {
+      "version": "1.5.2-864-a4a72ce-release",
+      "inject_state": 1,
+      "root_implementation": "KernelSU",
+      "root_version_code": 40900,
+      "zygote_states_count": 2,
+      "modules_with_issue": 0,
+      "modules64": [
+        "playintegrityfix",
+        "zygisk_vector"
+      ],
+      "modules32": [
+        "playintegrityfix",
+        "zygisk_vector"
+      ]
+    },
+    "actual_memory_maps": {
+      "zygote64_next_library": true,
+      "zygote64_pif_library": true,
+      "zygote64_vector_library": true,
+      "zygote32_next_library": true,
+      "zygote32_pif_library": true,
+      "zygote32_vector_library": true,
+      "system_server_next_library": true,
+      "system_server_vector_library": true
+    },
+    "module_versions": {
+      "playintegrityfix": {
+        "version": "v4.7-1-inject-s",
+        "versionCode": "471"
+      },
+      "zygisk_vector": {
+        "version": "v2.2 (3080-88f8e1fa-JingMatrix-Vector)",
+        "versionCode": "3080"
+      },
+      "rezygisk": {
+        "version": "v1.0.0 (515-333d423-release)",
+        "versionCode": "515"
+      },
+      "zygisksu": {
+        "version": "1.5.2 (864-a4a72ce-release)",
+        "versionCode": "864"
+      }
+    },
+    "initial_capture": {
+      "command_count": 12,
+      "all_commands_exit_zero_and_recorded_hashes_match": true,
+      "same_boot_and_system_server_between_start_end": true,
+      "uptime_start_seconds": 71.78,
+      "uptime_end_seconds": 73.25,
+      "planned_reboot_changed_boot_identity_from_rezygisk_baseline": true
+    },
+    "collector": {
+      "status": "COMPLETED_TIME_LIMIT",
+      "duration_limit_seconds": 300,
+      "sample_count": 142,
+      "all_sample_commands_exit_zero": true,
+      "distinct_boot_id_count": 1,
+      "distinct_nonempty_system_server_process_count": 1,
+      "first_uptime_seconds": 11.98,
+      "last_uptime_seconds": 310.33,
+      "boot_completed_sample_count": 138,
+      "first_boot_completed_uptime_seconds": 20.21,
+      "boot_completed_observed_through_last_sample": true,
+      "sampling_interval_nominal_seconds": 2,
+      "scope": "One bounded capture segment. Process identity is sampled, not an exhaustive proof between samples."
+    },
+    "final_snapshot": {
+      "command_count": 12,
+      "all_commands_exit_zero_and_recorded_hashes_match": true,
+      "same_boot_and_system_server_as_initial": true,
+      "uptime_start_seconds": 308.07,
+      "uptime_end_seconds": 309.6,
+      "same_provider_version_root_version_and_zero_issues": true,
+      "both_zygote_and_system_server_library_mappings_reconfirmed": true
+    },
+    "stale_data_exclusion": "The provider dump also contains a retained ReZygisk state.json. It is not treated as an active-provider signal. Current Next status, disabled ReZygisk flag and actual process memory maps establish the provider."
+  },
+  "shamiko": {
+    "installation_status": "REJECTED_VERSION_GUARD",
+    "runtime_status": "NOT_RUN",
+    "official_version": "1.2.5 (414)",
+    "zip_sha256": "308d31b2f52a80e49eb58f46bc4c764a6588a79e4b8d101b44860832023f88b4",
+    "zip_sha_verified_against_local_archive": true,
+    "release_url": "https://github.com/LSPosed/LSPosed.github.io/releases/tag/shamiko-414",
+    "install_exit_code": 1,
+    "observed_kernel_version_code": 40900,
+    "observed_ksud_version_code": 40900,
+    "observed_error": "KernelSU version abnormal!",
+    "exact_guard": "KSU_KERNEL_VER_CODE >= 20000",
+    "customize_sh_sha256": "f0d43ee315e668cef233d27c29d2ca9b7eac775cdc3d3599341ca40643ee4e91",
+    "interpretation": "The official installer rejects numeric kernel version codes at or above 20000. The submodule wording is this guard’s diagnostic; this branch does not inspect the kernel’s Git/source integration history. Genuine SukiSU 40900 triggers it even when Zygisk Next starts successfully.",
+    "post_rejection_checks": {
+      "installed_module_directory_absent": true,
+      "staged_module_directory_absent": true,
+      "shamiko_cleanup_script_absent": true,
+      "same_next_boot_and_system_server": true
+    },
+    "guard_was_not_bypassed": true
+  },
+  "crash_observations": {
+    "initial_crash_buffer_non_pid1_init_abort_count": 2,
+    "initial_crash_buffer_system_server_fatal_present": false,
+    "initial_crash_buffer_qns_java_npe_present": false,
+    "comparison_limit": "Different boots and log-retention windows cannot be compared by byte-equality. Absence of the earlier QNS NPE in this initial Next boot sample does not prove Next fixes that vendor defect. Non-PID1 init aborts remain unresolved.",
+    "completed_collector_and_final_snapshot_review": "COMPLETE",
+    "initial_final_streamed_crash_buffers_identical": true,
+    "crash_buffer_sha256": "351a658416fe3a9de69c376c3a0cb28ed54e6aedbb88e6e9c941e3ec600fa920",
+    "new_crash_entries_between_initial_and_final": 0,
+    "java_fatal_entries_found_in_reviewed_crash_and_android_windows": 0,
+    "system_server_fatal_entries_found_in_reviewed_windows": 0,
+    "qns_npe_found_in_reviewed_windows": false,
+    "non_pid1_init_aborts_remain_unresolved": true
+  },
+  "restoration": {
+    "status": "PASS_REZYGISK_BASELINE_RESTORED",
+    "rezygisk_version": "v1.0.0 (515-333d423-release)",
+    "next_module_not_in_final_inventory": true,
+    "shamiko_module_not_in_final_inventory": true,
+    "rezygisk_enabled": true,
+    "rezygisk_daemon_32_64_and_vectord_running": true,
+    "both_zygote_rezygisk_pif_vector_mappings_reconfirmed": true,
+    "system_server_vector_mapping_reconfirmed": true,
+    "next_library_not_in_three_final_map_snapshots": true,
+    "original_module_flag_sets_exact": true,
+    "original_module_count": 6,
+    "original_rezygisk_regular_files_checked": 86,
+    "changed_original_rezygisk_files": 0,
+    "shared_files_restored": {
+      "content_and_metadata_verified_files": 4,
+      "originally_absent_paths_reconfirmed": 7,
+      "verification_exit_code": 0,
+      "checked_metadata": "mode, owner/group, SELinux context, size and modification time",
+      "rezygisk_daemon_fd_snapshot_did_not_reference_the_four_target_files": true,
+      "scope": "Phone-side bound-path verifier results reviewed with its hashed script. Original ReZygisk regular-file contents independently compared against the retained pre-test tar archive."
+    },
+    "four_boot_init_boot_partition_hashes_match_pretest": true,
+    "pretest_partition_reference": "prior_module_boot/partitions.txt",
+    "allowlist_hash_unchanged": true,
+    "paired_cli_sha256": "018544b85a7645c63161d7896334fc4657c97a6778b03357d3c13310b9555026",
+    "kernel_feature_modes_match_pretest": true,
+    "kernel_umount_restored_to_original_disabled": true,
+    "selinux_enforcing": true,
+    "final_snapshot": {
+      "command_count": 12,
+      "all_exit_codes_and_recorded_hashes_verified": true,
+      "same_boot_and_system_server_as_restored_initial_snapshot": true,
+      "start_uptime_seconds": 211.76,
+      "end_uptime_seconds": 213.13
+    },
+    "collector": {
+      "duration_limit_seconds": 180,
+      "sample_count": 86,
+      "all_sample_commands_exit_zero": true,
+      "distinct_boot_id_count": 1,
+      "distinct_nonempty_system_server_process_count": 1,
+      "first_uptime_seconds": 11.8,
+      "last_uptime_seconds": 191.26,
+      "boot_completed_sample_count": 83,
+      "completed_normally": true
+    },
+    "crash_observation": {
+      "initial_streamed_final_buffers_identical": true,
+      "buffer_sha256": "5e6e4e6a7f2354eb4e38b6f98f2f77210de05667c0b399ee73fd04187a9f273e",
+      "non_pid1_init_abort_count": 1,
+      "new_crash_entries_between_restored_initial_and_final": 0,
+      "system_server_fatal_observed_in_reviewed_windows": false,
+      "limit": "Existing init abort remains unexplained; the restored boot is not described as crash-free."
+    },
+    "wifi_https_after_restoration": {
+      "exit_code": 0,
+      "http_status": 204,
+      "curl_ssl_verify_result": 0
+    },
+    "temporary_file_cleanup": {
+      "status": "PASS_TEMPORARY_TEST_FILES_REMOVED",
+      "private_host_backup_sha256": "a6ae17545c3538595775a3367340d0d5b00385c4195205151f1d9ec24c8ec6fd",
+      "phone_cleanup_completion_marker_verified": true,
+      "sensor_helper_uninstalled": "PHONE_OPERATOR_CONFIRMED; sensor helper cleanup was performed before this module experiment."
+    },
+    "limits": [
+      "Restoration covers the enumerated module files/flags, shared paths, profiles, CLI, features and partitions; it is not a bit-for-bit rollback of all dynamically generated system logs.",
+      "The 180-second sampled boot and final endpoint do not establish long-term stability."
+    ],
+    "loaded_kernel_module_names": {
+      "count": 367,
+      "same_names_as_next_initial_snapshot": true,
+      "scope": "Names only; not proof of every module’s hardware function."
+    }
+  },
+  "not_tested": [
+    "All application login/DRM behavior",
+    "Play Integrity verdicts under Next",
+    "Every PIF or Vector hook",
+    "Long-term stability",
+    "Shamiko injection or hiding behavior"
+  ],
+  "private_evidence_sha256": {
+    "next_install/disable_rezygisk.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_install/disable_rezygisk.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_install/install_next.stderr.txt": {
+      "sha256": "007ba0c0407edbda5847e51ebede9d7ace52c0e028db710974f98df2210eca7a",
+      "size_bytes": 4331
+    },
+    "next_install/install_next.txt": {
+      "sha256": "0fde4ffc64569002c2a316dc4f3ef96773f98ecae6a24c0d146a84cd8cb67b64",
+      "size_bytes": 2004
+    },
+    "next_install/preboot_module_flags.tsv": {
+      "sha256": "056d447544770995fd0e7a2c95366594db95267d35e659c648c61dc2fddb74fb",
+      "size_bytes": 951
+    },
+    "next_install/steps.json": {
+      "sha256": "6788b92f4df285f4cb9c3cd504497cfeabb4068d4486e45c98ec1ded41f2583f",
+      "size_bytes": 200
+    },
+    "next_initial/crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/crash.txt": {
+      "sha256": "351a658416fe3a9de69c376c3a0cb28ed54e6aedbb88e6e9c941e3ec600fa920",
+      "size_bytes": 459
+    },
+    "next_initial/dmesg.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/dmesg.txt": {
+      "sha256": "0ca9ef5ce5e240338bd5f3c8e536bd219e46723f388ce3988fefd6d81c707af6",
+      "size_bytes": 265121
+    },
+    "next_initial/end.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/end.txt": {
+      "sha256": "72037cd35ba67f64127ad6050a0759131c39778b7f53fcb16ed190c2dd2f6e4a",
+      "size_bytes": 57
+    },
+    "next_initial/features.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/features.txt": {
+      "sha256": "38b5ff6474867ee3396ffab8c99d2758678bc49fc19440107c5f00656f5553aa",
+      "size_bytes": 718
+    },
+    "next_initial/kernel_modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/kernel_modules.txt": {
+      "sha256": "586139e95ece129831ef4638988d9557d2d6b771b3625d4f686169743226c44d",
+      "size_bytes": 25675
+    },
+    "next_initial/logcat.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/logcat.txt": {
+      "sha256": "0253aa2c41fe927b52b02d86b7a30644fea77594e9091cbdcbacc88ffe2213c1",
+      "size_bytes": 2761783
+    },
+    "next_initial/modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/modules.txt": {
+      "sha256": "e2c1604102393843f551b5b46cdd277cb6f8c3a4839837e484954d6b255e062d",
+      "size_bytes": 5563
+    },
+    "next_initial/network.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/network.txt": {
+      "sha256": "73d3bb7b8764f78fce24a5870af863edb22f2d9964275a737c3464667a3d2cb1",
+      "size_bytes": 157159
+    },
+    "next_initial/processes.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/processes.txt": {
+      "sha256": "e0275e8630e29f69ffb47efa27b260b001bafe9a0ccedfe4b0432c6e07a6de17",
+      "size_bytes": 100973
+    },
+    "next_initial/provider_status.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/provider_status.txt": {
+      "sha256": "0b3d2301e5461fe2a3b97e03c4359368828b44bbd8469d277b1845bb4a1c1ea8",
+      "size_bytes": 1665
+    },
+    "next_initial/start.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/start.txt": {
+      "sha256": "4db8ac5796d78ee887ee2a9be87179ef2090cc771e97a5cb007e9694a5e50932",
+      "size_bytes": 167
+    },
+    "next_initial/steps.json": {
+      "sha256": "6bc64528276baf1b7dde6d0ff26bcac1d9eb8f07064693b24f878e039c4c0176",
+      "size_bytes": 2337
+    },
+    "next_initial/zygote_maps.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_initial/zygote_maps.txt": {
+      "sha256": "0766ca28cf9c0e31cd583022b976892c2f15cd28067bc9d38e9d98736093a289",
+      "size_bytes": 975565
+    },
+    "shamiko_install/after.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "shamiko_install/after.txt": {
+      "sha256": "84700447757dbf203ffc31a18586c4fe9965989aeec09e2402c34d287f0e7a47",
+      "size_bytes": 183
+    },
+    "shamiko_install/install.stderr.txt": {
+      "sha256": "92c4b47daabf720bf12e20bd15825970a8c65402758f8b45038ea2bfef03d63d",
+      "size_bytes": 959
+    },
+    "shamiko_install/install.txt": {
+      "sha256": "540e4691a042d9c329138b6906efcb73adc9c37745706d291ac3ba95946713c0",
+      "size_bytes": 1185
+    },
+    "shamiko_install/result.json": {
+      "sha256": "5c84cf4627669345e793b56e2a6ce78e3367ded526b1f6dda7586985ce1f1f6d",
+      "size_bytes": 71
+    },
+    "baseline/identity.txt": {
+      "sha256": "e7adaee664702f057eff05926f97c83ff8e5abe079ea1fc6f12d0eb4da76f311",
+      "size_bytes": 190
+    },
+    "baseline/module_flags.txt": {
+      "sha256": "c317ed79796b6b5bf4b8d1f4fc088396160865bbedf59f543222eaff64ee08f5",
+      "size_bytes": 1743
+    },
+    "baseline/zip_hash_verification.json": {
+      "sha256": "6e74f5f01d48aa07bf65cbe75b85b271b1e246dcbc434b68eef8250de4334a92",
+      "size_bytes": 221
+    },
+    "baseline/processes.txt": {
+      "sha256": "7e1878eb4bb32c2b84874606ce22fc71b5c04e6c25ea599fa48ec703858c7164",
+      "size_bytes": 489843
+    },
+    "baseline/features_wifi.txt": {
+      "sha256": "ad073cff782bddcc0295a45b26b58768a6a77e5f1809d48371a2a3ab48d5ae0a",
+      "size_bytes": 1058
+    },
+    "official_distribution/official_zygisk_next_latest.json": {
+      "sha256": "f42d7f01ebda4f0b1d4de28fdb4c562c9ffd7071f99a13f5fe1e44ec6ced6924",
+      "size_bytes": 3656
+    },
+    "official_distribution/official_shamiko_latest.json": {
+      "sha256": "3543d536c5dd75602b776c728ae08cfab3b42cfd3fde8a4e63f7abae9115c8cd",
+      "size_bytes": 3615
+    },
+    "official_distribution/download_and_internal_hash_verification.json": {
+      "sha256": "2e4d5f78b13d497db7e679356f764e01cc98d022f36ec0175972a3aa2284e4de",
+      "size_bytes": 9051
+    },
+    "official_distribution/Shamiko-v1.2.5-414-release_inspection/customize.sh": {
+      "sha256": "f0d43ee315e668cef233d27c29d2ca9b7eac775cdc3d3599341ca40643ee4e91",
+      "size_bytes": 4984
+    },
+    "next_final/crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/crash.txt": {
+      "sha256": "351a658416fe3a9de69c376c3a0cb28ed54e6aedbb88e6e9c941e3ec600fa920",
+      "size_bytes": 459
+    },
+    "next_final/dmesg.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/dmesg.txt": {
+      "sha256": "2edd9dcf2b6ca79f9a7d3c8e70144d55e730e976a49e76ee60bd93f6b7fb1044",
+      "size_bytes": 263994
+    },
+    "next_final/end.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/end.txt": {
+      "sha256": "6d6d29e8c61b8a937f18d5ee78466dc1ad025e46d492d4434f5ba9fdb34201ef",
+      "size_bytes": 59
+    },
+    "next_final/features.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/features.txt": {
+      "sha256": "38b5ff6474867ee3396ffab8c99d2758678bc49fc19440107c5f00656f5553aa",
+      "size_bytes": 718
+    },
+    "next_final/kernel_modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/kernel_modules.txt": {
+      "sha256": "586139e95ece129831ef4638988d9557d2d6b771b3625d4f686169743226c44d",
+      "size_bytes": 25675
+    },
+    "next_final/logcat.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/logcat.txt": {
+      "sha256": "286a1fdb4b55d86f3f432bffec31a9d6bdb7273f6e2e9003f1f7d7eb77a27f17",
+      "size_bytes": 2963623
+    },
+    "next_final/modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/modules.txt": {
+      "sha256": "ad57ad292e395c25abda02c6672edde39c29c820a3bbf69640c99727184d0e75",
+      "size_bytes": 5563
+    },
+    "next_final/network.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/network.txt": {
+      "sha256": "929d863cdfedfa64eca03778d1de13da6e5e5d43d1a6026ccb9daee84d5ee5bc",
+      "size_bytes": 156837
+    },
+    "next_final/processes.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/processes.txt": {
+      "sha256": "9f24838d7e4dab2d31600f8dba7799efae98dfa0914e9c938fc4d3b8db5cc35f",
+      "size_bytes": 101206
+    },
+    "next_final/provider_status.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/provider_status.txt": {
+      "sha256": "0b3d2301e5461fe2a3b97e03c4359368828b44bbd8469d277b1845bb4a1c1ea8",
+      "size_bytes": 1665
+    },
+    "next_final/start.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/start.txt": {
+      "sha256": "5091d1c93ce9815bdc21bfe8084f85af3e62e8e49d61dc6cfbea56c5dde7dcff",
+      "size_bytes": 169
+    },
+    "next_final/steps.json": {
+      "sha256": "6d8da950ed96ddd2d38dea768b8918b9a4052c5446ad048e8a66aeb701322474",
+      "size_bytes": 2337
+    },
+    "next_final/zygote_maps.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_final/zygote_maps.txt": {
+      "sha256": "928a49f98b7dbb8524361ceb669745bef8a0a817ae5edc5e8b93b52be58b1f65",
+      "size_bytes": 942911
+    },
+    "next_boot/connection_001/android.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_boot/connection_001/android.txt": {
+      "sha256": "041195a1a955ec2944c957bdb69031aa7ef8877a5176781d69876efc2e970bc5",
+      "size_bytes": 11621870
+    },
+    "next_boot/connection_001/crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_boot/connection_001/crash.txt": {
+      "sha256": "351a658416fe3a9de69c376c3a0cb28ed54e6aedbb88e6e9c941e3ec600fa920",
+      "size_bytes": 459
+    },
+    "next_boot/connection_001/initial_status.txt": {
+      "sha256": "1426ab90f18ca534cd0929c422f0e0545a81bb6136c5a7201798c4819f682616",
+      "size_bytes": 55
+    },
+    "next_boot/connection_001/kernel.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "next_boot/connection_001/kernel.txt": {
+      "sha256": "ec183c7bf00e20c8a713b9b1e8b981d8a4a425d2324b3e7e425f1e2ea72ac401",
+      "size_bytes": 634880
+    },
+    "next_boot/connection_001/status_samples.jsonl": {
+      "sha256": "225cd3f93d7ef392d3ce7c4c27b7a04d1105420aecc710d5b6f32d297fdbfee5",
+      "size_bytes": 20893
+    },
+    "next_boot/events.jsonl": {
+      "sha256": "c783c05ea6bc1ad11161011472305f9518d6b3ea088d6e41954bb403cb2dc3f8",
+      "size_bytes": 12171
+    },
+    "rezygisk_restore/cleanup.txt": {
+      "sha256": "82c392cd06805dd5e8004ff33c632bc987282cbfd8737ccf7b52b811cf47867a",
+      "size_bytes": 17
+    },
+    "rezygisk_restore/cleanup_receipt.json": {
+      "sha256": "01dcba846dda2a83f70f24d0a94d63006021738d286f04f4861af6648717aab6",
+      "size_bytes": 202
+    },
+    "rezygisk_restore/disable_next.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/disable_next.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/enable_rezygisk.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/enable_rezygisk.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/module_flags.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/module_flags.txt": {
+      "sha256": "3de843d1da96a2bf339ef2d0ec73022388370c8ebd9d78ca03026a06b0b249ef",
+      "size_bytes": 825
+    },
+    "rezygisk_restore/partitions.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/partitions.txt": {
+      "sha256": "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436",
+      "size_bytes": 378
+    },
+    "rezygisk_restore/phone_test_backups_final.tar": {
+      "sha256": "a6ae17545c3538595775a3367340d0d5b00385c4195205151f1d9ec24c8ec6fd",
+      "size_bytes": 1715200
+    },
+    "rezygisk_restore/preboot_guards.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/preboot_guards.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/profiles_cli.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/profiles_cli.txt": {
+      "sha256": "a73e6b69b88fe4c4b629b3e4311deccf95ff962d38445199965a458233153977",
+      "size_bytes": 848
+    },
+    "rezygisk_restore/rez_fds.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/rez_fds.txt": {
+      "sha256": "d51cd166734c121b3f2db2dee0807e4a47396956a90f0cf45dfc29553feb15be",
+      "size_bytes": 1659
+    },
+    "rezygisk_restore/rez_file_hashes.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/rez_file_hashes.txt": {
+      "sha256": "e280f7daf249c3444bf623080391f7b3397092734be2c5a228763a985a635348",
+      "size_bytes": 10430
+    },
+    "rezygisk_restore/shared_restore.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/shared_restore.txt": {
+      "sha256": "4fd2ddcd0e135ecbdad32a2fd75eef93ac372bcc29aa3d44608dfb53d80ad1e3",
+      "size_bytes": 552
+    },
+    "rezygisk_restore/shared_restore_result.json": {
+      "sha256": "e231f247f87326b347070f2d3b5cc97a6b1297c883b6c3a49aa156d7a992fd90",
+      "size_bytes": 71
+    },
+    "rezygisk_restore/steps.json": {
+      "sha256": "b62480e072f585d082f14fa0d6e78894944dbdcec9197ecbc7e0a97aaa9ac60b",
+      "size_bytes": 397
+    },
+    "rezygisk_restore/uninstall_next.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/uninstall_next.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/verification_steps.json": {
+      "sha256": "9acecfcf6b0956f0ddb44007c2e0a30c3bafa90f809aba94dbb37711ba34c8dc",
+      "size_bytes": 584
+    },
+    "rezygisk_restore/verification_summary.json": {
+      "sha256": "134a8b5ae1774e03c40c08d3d55104e2a2a9a99793b5ca8a664a459687f2de23",
+      "size_bytes": 159
+    },
+    "rezygisk_restore/verify_shared.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/verify_shared.txt": {
+      "sha256": "4fd2ddcd0e135ecbdad32a2fd75eef93ac372bcc29aa3d44608dfb53d80ad1e3",
+      "size_bytes": 552
+    },
+    "rezygisk_restore/wifi_https.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restore/wifi_https.txt": {
+      "sha256": "d79da8e89340c5b27b38e06afce643a4237859ec06aa7b4ce13f33e365f04e42",
+      "size_bytes": 30
+    },
+    "rezygisk_restored/crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/crash.txt": {
+      "sha256": "5e6e4e6a7f2354eb4e38b6f98f2f77210de05667c0b399ee73fd04187a9f273e",
+      "size_bytes": 242
+    },
+    "rezygisk_restored/dmesg.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/dmesg.txt": {
+      "sha256": "a0006d51737a555f5c83fe069d00bec9dbf8e5cb466bb1f7c37af54c259da202",
+      "size_bytes": 264702
+    },
+    "rezygisk_restored/end.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/end.txt": {
+      "sha256": "c7ff9d587b5db122ad8af5630ad85038ed25df9fb0556c5bf635d8aac825f8bd",
+      "size_bytes": 57
+    },
+    "rezygisk_restored/features.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/features.txt": {
+      "sha256": "cb9929479d0335632b1bc077108c86911b378d59cbad2fcd4b51a08ce660f25f",
+      "size_bytes": 715
+    },
+    "rezygisk_restored/kernel_modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/kernel_modules.txt": {
+      "sha256": "3f22fc66099c5a07c2f142832f300963c40bef25b8591bff61390a5a8c5f5533",
+      "size_bytes": 25675
+    },
+    "rezygisk_restored/logcat.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/logcat.txt": {
+      "sha256": "5ef29e61ebeb1c4e320ec26c854c10f0baaefca2bd6061b1271041397ff99b34",
+      "size_bytes": 2557270
+    },
+    "rezygisk_restored/modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/modules.txt": {
+      "sha256": "40c5ec59282bdcc4855ec6859af6309036556c0d366acfbe98dce352034c6e0e",
+      "size_bytes": 4678
+    },
+    "rezygisk_restored/network.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/network.txt": {
+      "sha256": "ea5d1453fa2f7fc53e7f9a01ded55a00a6093cfbce9b8b5b6e7ced451faf6284",
+      "size_bytes": 150682
+    },
+    "rezygisk_restored/processes.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/processes.txt": {
+      "sha256": "4cd6e8876cc6bddf4905bf13a510628e5b8b7b6056c265183826bd08721a03ed",
+      "size_bytes": 101643
+    },
+    "rezygisk_restored/provider_status.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/provider_status.txt": {
+      "sha256": "c491b27d6efeab91f1635e24eb43ff852218b24e161be569ee82d45f88da6ae0",
+      "size_bytes": 733
+    },
+    "rezygisk_restored/start.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/start.txt": {
+      "sha256": "016def3ac3ab1eee097debb27b4a56066f9114449828c8cc56e1e35786b7aaef",
+      "size_bytes": 167
+    },
+    "rezygisk_restored/steps.json": {
+      "sha256": "6719f7b8f907294c44f7ebf05536655f800f7e60efd50cf3a62a0ac4000f13d7",
+      "size_bytes": 2336
+    },
+    "rezygisk_restored/zygote_maps.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored/zygote_maps.txt": {
+      "sha256": "7e80e9017d15883d4441cac632ad65c5e707eb4b4033ce8450a3335d323f70ab",
+      "size_bytes": 979724
+    },
+    "rezygisk_final/crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/crash.txt": {
+      "sha256": "5e6e4e6a7f2354eb4e38b6f98f2f77210de05667c0b399ee73fd04187a9f273e",
+      "size_bytes": 242
+    },
+    "rezygisk_final/dmesg.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/dmesg.txt": {
+      "sha256": "725405a6784c6eff6b252955c8cdc3132ed62f44e6668f74e76b40962172915f",
+      "size_bytes": 263907
+    },
+    "rezygisk_final/end.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/end.txt": {
+      "sha256": "adce45827027d1a0aa827f285e86174cc8b1b2cab7b40d5317fe453ef480ff79",
+      "size_bytes": 59
+    },
+    "rezygisk_final/features.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/features.txt": {
+      "sha256": "cb9929479d0335632b1bc077108c86911b378d59cbad2fcd4b51a08ce660f25f",
+      "size_bytes": 715
+    },
+    "rezygisk_final/kernel_modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/kernel_modules.txt": {
+      "sha256": "cf3f73ada1438d3edcfe323040f2282c37383681a5127a18be186ae5659d4ab3",
+      "size_bytes": 25675
+    },
+    "rezygisk_final/logcat.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/logcat.txt": {
+      "sha256": "b0e64d25e7936376a4937bf6a112e6dbb85ad092e741c3b73654e00709cb0e5c",
+      "size_bytes": 2965022
+    },
+    "rezygisk_final/modules.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/modules.txt": {
+      "sha256": "ade615707838df7e2df1990c8834aac69805174f0e5f3441b53bdbc5d1815662",
+      "size_bytes": 4678
+    },
+    "rezygisk_final/network.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/network.txt": {
+      "sha256": "92168e64eb381ca2e36d7c717764f0038bb3e1c8c98a8709942c5bf81d8f0549",
+      "size_bytes": 156914
+    },
+    "rezygisk_final/processes.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/processes.txt": {
+      "sha256": "6981b4095ceaadbac29329d0ef55d44f1a399697a17e0a6a7b5887bc950d7d47",
+      "size_bytes": 101550
+    },
+    "rezygisk_final/provider_status.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/provider_status.txt": {
+      "sha256": "21439b51cbc825d0a56e6d87367dfaeacaee36a76bb4974fbbebc9cea5a64dc7",
+      "size_bytes": 616
+    },
+    "rezygisk_final/start.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/start.txt": {
+      "sha256": "826375106619d9e256ba2258a12f217a8cce0f62b3839479df45535d09043df8",
+      "size_bytes": 169
+    },
+    "rezygisk_final/steps.json": {
+      "sha256": "99b8d973448dc9e0270625589db4882082dfddff063b05d5d2ed51d41d00403b",
+      "size_bytes": 2336
+    },
+    "rezygisk_final/zygote_maps.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_final/zygote_maps.txt": {
+      "sha256": "fd76d3a90319cd46f11737016d5a7630349a076135d440eb82f2369a89045c57",
+      "size_bytes": 959345
+    },
+    "rezygisk_restored_boot/connection_001/android.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored_boot/connection_001/android.txt": {
+      "sha256": "dd9184118598e4e5e1071d852de523bbcf7149b429734e8284ef67c09181fe7d",
+      "size_bytes": 11688746
+    },
+    "rezygisk_restored_boot/connection_001/crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored_boot/connection_001/crash.txt": {
+      "sha256": "5e6e4e6a7f2354eb4e38b6f98f2f77210de05667c0b399ee73fd04187a9f273e",
+      "size_bytes": 242
+    },
+    "rezygisk_restored_boot/connection_001/initial_status.txt": {
+      "sha256": "ec1db7d419be09af32f413dd7b8a15a489f938e9c421e0f57aee1f11268e85d5",
+      "size_bytes": 55
+    },
+    "rezygisk_restored_boot/connection_001/kernel.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "rezygisk_restored_boot/connection_001/kernel.txt": {
+      "sha256": "e06bb51f4b7acaf9b46605e887bd18cad5daa770d2bda9443cc895660995d0d0",
+      "size_bytes": 565248
+    },
+    "rezygisk_restored_boot/connection_001/status_samples.jsonl": {
+      "sha256": "38fdf81713d977dc2f2bb5665011955e3a409d65fe0cc36d8fcba939e28ae65c",
+      "size_bytes": 12607
+    },
+    "rezygisk_restored_boot/events.jsonl": {
+      "sha256": "83984a7fba0382736f19ada3215e0b4450d35c7e4243d4c50aace8f58bf4d4e0",
+      "size_bytes": 7499
+    },
+    "pretest_backup/rezygisk.tar": {
+      "sha256": "79e49b9a66d0322d73bbf796b3ff2fbcc7bdae8f6c15003efc4a40dbfe61fbcc",
+      "size_bytes": 770048
+    },
+    "pretest_backup/rezygisk.verified.json": {
+      "sha256": "ac4eb9de6df2707952241a7a05ae1aeab0b31f8600ab84a9474d6a8ec36e7d9f",
+      "size_bytes": 34963
+    },
+    "pretest_backup/module_flags.tsv": {
+      "sha256": "3de843d1da96a2bf339ef2d0ec73022388370c8ebd9d78ca03026a06b0b249ef",
+      "size_bytes": 825
+    },
+    "pretest_backup/next_shared.verified.json": {
+      "sha256": "7f67df6dfd9d8d831fa4e450748f4fa584cf9eb8660cb3363faa5665a9f610c6",
+      "size_bytes": 2229
+    },
+    "pretest_backup/next_shared.metadata.nul": {
+      "sha256": "053f648612db6c4251187a6e64c743c94f97409e1549d77e255d9f80a63d41d5",
+      "size_bytes": 300
+    },
+    "restoration_verifier/verify_next_shared_restore.sh": {
+      "sha256": "3ae4770c4cee6048c4d2e343ccfcc1a4f39202591a2f29b7c440e002a49e006c",
+      "size_bytes": 12552
+    },
+    "restoration_verifier/restore_next_shared_after_uninstall.sh": {
+      "sha256": "a18bc0613f5dadeff7d2996c2a69208adfbe7889ded5e8ff2fac0ea0cddd42ee",
+      "size_bytes": 19814
+    },
+    "prior_module_boot/partitions.txt": {
+      "sha256": "f318de26c37dbc97f6e369e6925c6cedb14ca03702a63db168b74ebe407b8436",
+      "size_bytes": 378
+    }
+  },
+  "privacy": "Public report contains no raw logs, boot UUID, PID/UID, fd/inode values, credentials, installed app inventory or private source paths. Evidence labels identify retained private files by hashes only."
+}

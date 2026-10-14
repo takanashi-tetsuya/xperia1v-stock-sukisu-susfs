@@ -1,0 +1,739 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED_WIFI_AND_CELLULAR_HTTPS",
+  "candidate": {
+    "kernel_image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_image_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "identity_binding": "The retained network endpoints have the same boot identity as the previously verified r3 module-enabled boot. This report did not re-read the boot partition."
+  },
+  "scope": "Independent offline review of retained device results. Two interface-bound HTTPS 204 requests per successful transport, plus a separate later Wi-Fi HTTPS confirmation; no throughput, application compatibility, IMS registration, VoWiFi, voice-call, SMS or long-term stability claim. No phone operation performed by this reviewer.",
+  "probe_method": {
+    "endpoints": [
+      "https://www.google.com/generate_204",
+      "https://connectivitycheck.gstatic.com/generate_204"
+    ],
+    "interface_bound": true,
+    "explicit_insecure_option_in_runner": false,
+    "connect_timeout_seconds": 8,
+    "max_time_seconds": 15,
+    "response_body_expected_bytes": 0,
+    "interpretation": "HTTP 204 with a zero-byte body verifies a small HTTPS exchange; it is not a bulk-transfer or speed measurement. curl reported certificate verification result zero."
+  },
+  "round_1": {
+    "start_utc": "2026-10-14T09:28:16.605535+00:00",
+    "end_utc": "2026-10-14T09:28:55.238423+00:00",
+    "command_count": 32,
+    "all_command_exit_codes_zero": true,
+    "wifi_https": [
+      {
+        "probe_index": 0,
+        "exit_code": 0,
+        "http_status": 204,
+        "curl_ssl_verify_result": 0,
+        "response_body_bytes": 0,
+        "total_time_seconds": 0.994873
+      },
+      {
+        "probe_index": 1,
+        "exit_code": 0,
+        "http_status": 204,
+        "curl_ssl_verify_result": 0,
+        "response_body_bytes": 0,
+        "total_time_seconds": 1.185342
+      }
+    ],
+    "before_default": {
+      "default_present": true,
+      "transport": "WIFI",
+      "connected": true,
+      "internet_capability": true,
+      "validated_capability": true,
+      "ipv4_default_route": true,
+      "ipv6_default_route": true
+    },
+    "cellular_result": "NOT_EXECUTED_NO_INTERNET_DEFAULT_WHILE_SUBSCRIPTION_DATA_DISABLED",
+    "wifi_off_poll_count": 15,
+    "first_poll_transient_wifi": true,
+    "remaining_14_polls_default_absent": true,
+    "last_poll_cellular_ims_only_without_internet": true,
+    "original_setting_explanation": {
+      "legacy_mobile_data": "1",
+      "per_subscription_mobile_data1": "0",
+      "evidence_scope": "Legacy setting read in round 1; per-subscription setting retained in the intervening phone settings dump and read again before round 2. Round 1 did not change subscription data. The later controlled enable produced a cellular Internet default."
+    },
+    "after_wifi_restore_default": {
+      "default_present": true,
+      "transport": "WIFI",
+      "connected": true,
+      "internet_capability": true,
+      "validated_capability": false,
+      "ipv4_default_route": true,
+      "ipv6_default_route": false
+    },
+    "three_original_settings_restored": true
+  },
+  "round_2": {
+    "start_utc": "2026-10-14T09:42:02.215305+00:00",
+    "end_utc": "2026-10-14T09:42:10.732209+00:00",
+    "command_count": 30,
+    "all_command_exit_codes_zero": true,
+    "temporary_action": "cmd phone data enable for the default subscription, then disable Wi-Fi",
+    "enabled_per_subscription_data_readback": "1",
+    "before_default": {
+      "default_present": true,
+      "transport": "WIFI",
+      "connected": true,
+      "internet_capability": true,
+      "validated_capability": true,
+      "ipv4_default_route": true,
+      "ipv6_default_route": false
+    },
+    "cellular_default_before_and_after_probes": {
+      "default_present": true,
+      "transport": "CELLULAR",
+      "connected": true,
+      "internet_capability": true,
+      "validated_capability": true,
+      "ipv4_default_route": true,
+      "ipv6_default_route": true
+    },
+    "cellular_https": [
+      {
+        "probe_index": 0,
+        "exit_code": 0,
+        "http_status": 204,
+        "curl_ssl_verify_result": 0,
+        "response_body_bytes": 0,
+        "total_time_seconds": 0.251427
+      },
+      {
+        "probe_index": 1,
+        "exit_code": 0,
+        "http_status": 204,
+        "curl_ssl_verify_result": 0,
+        "response_body_bytes": 0,
+        "total_time_seconds": 0.209683
+      }
+    ],
+    "after_wifi_restore_default": {
+      "default_present": true,
+      "transport": "WIFI",
+      "connected": true,
+      "internet_capability": true,
+      "validated_capability": false,
+      "ipv4_default_route": true,
+      "ipv6_default_route": false
+    },
+    "restoration": {
+      "original_settings": {
+        "wifi_on": "1",
+        "mobile_data": "1",
+        "mobile_data1": "0",
+        "multi_sim_data_call": "1",
+        "airplane_mode_on": "0"
+      },
+      "final_settings": {
+        "wifi_on": "1",
+        "mobile_data": "1",
+        "mobile_data1": "0",
+        "multi_sim_data_call": "1",
+        "airplane_mode_on": "0"
+      },
+      "all_five_settings_exactly_restored": true,
+      "default_subscription_selection_unchanged": true,
+      "airplane_setting_unchanged": true,
+      "wifi_connected_default_restored": true,
+      "restoration_caveat": "The immediate final connectivity snapshot did not yet carry VALIDATED. A separate later retained Wi-Fi HTTPS probe returned HTTP 204 and ssl_verify_result 0; see post_restoration_wifi_https."
+    }
+  },
+  "crash_and_service_observations": {
+    "five_retained_crash_dumps_byte_identical": true,
+    "crash_dump_sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+    "new_crash_events_between_compared_snapshots": 0,
+    "existing_startup_java_fatal_count_in_each_dump": 1,
+    "existing_startup_qns_npe_not_cleared_or_reclassified": true,
+    "window_limit": "Each after-cellular crash dump was captured before restoration. These comparisons do not cover the subsequent restoration interval. The second-round before dump additionally covers the interval since round 1, subject to normal log-buffer limits.",
+    "qns_same_service_record_process_and_user_at_compared_endpoints": true,
+    "qns_new_qualified_network_callback_during_round_2": true,
+    "qns_update_types_call_after_callback_observed": true,
+    "qns_interpretation": "Service remained available and processed a later qualified-networks update. This does not fix or disprove the previously identified startup null-list defect. No process identity or APN/network identifiers are published."
+  },
+  "boot_stability_endpoints": {
+    "same_boot_across_first_round_end_and_second_round_before_after": true,
+    "same_system_server_process_at_these_three_endpoints": true,
+    "all_three_boot_completed": true,
+    "uptime_seconds": [
+      1477.96,
+      2265.37,
+      2273.45
+    ],
+    "same_boot_as_previous_module_enabled_identity": true,
+    "limitations": [
+      "The first round has no dedicated before-state capture.",
+      "Endpoint equality is not continuous process monitoring."
+    ]
+  },
+  "interpretation": "The first round was gated by the original per-subscription data setting; it is not evidence of a kernel cellular failure. Enabling that setting yielded a validated cellular Internet default and two successful TLS/HTTP 204 exchanges. Both Wi-Fi and cellular small HTTPS transport tests passed within this bounded scope.",
+  "not_tested": [
+    "VoWiFi",
+    "voice calls",
+    "SMS",
+    "IMS registration/functionality",
+    "handover during an active application session",
+    "large transfer/throughput",
+    "roaming",
+    "all network/carrier combinations",
+    "long-term stability"
+  ],
+  "related_public_report": "r3_vendor_qns_init_diagnosis.json",
+  "private_evidence_sha256": {
+    "network_test/after_cellular_crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/after_cellular_crash.txt": {
+      "sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+      "size_bytes": 1768
+    },
+    "network_test/before_connectivity.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/before_connectivity.txt": {
+      "sha256": "504b15019fba81b5e3608054286d955a1dde8ca20f468d2abe022f9f027ff7dc",
+      "size_bytes": 156119
+    },
+    "network_test/before_crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/before_crash.txt": {
+      "sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+      "size_bytes": 1768
+    },
+    "network_test/cell_state_0.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_0.txt": {
+      "sha256": "048718ff87cce787166d4fd23f723f9eba3ce77295d928ca446a3340cd46bbb2",
+      "size_bytes": 156119
+    },
+    "network_test/cell_state_1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_1.txt": {
+      "sha256": "21f07fa14a8eece97685c73a52e0d920e7087bcc9eb8c1ae899c67cf83736b2d",
+      "size_bytes": 120312
+    },
+    "network_test/cell_state_10.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_10.txt": {
+      "sha256": "1457350f2ffe86f8910c24b9b7f02aa44a188661dc7ed7c8a9b627dfb67c64b2",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_11.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_11.txt": {
+      "sha256": "5cba791bc17eb6d29d603f1bdd236bebed0cb8291f2f2a71672f2d5ce5ceb71b",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_12.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_12.txt": {
+      "sha256": "c4f1a54bd3697829d7a6567356b7443400c8d85b4707f594e08c9b75508bbae1",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_13.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_13.txt": {
+      "sha256": "b3fccd0d0359161938ca48badcd230e61eaa390a41bb1a2bf6827708813247eb",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_14.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_14.txt": {
+      "sha256": "471fe3cccd936782a1eeaf8d8d30d07e3b8b7b2abbf9f987ca8292861bdde349",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_2.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_2.txt": {
+      "sha256": "8cc96a6cd670b86134da7edcf0aed91baa1d66c4cf7a35d4b05b9ee1aebff867",
+      "size_bytes": 120234
+    },
+    "network_test/cell_state_3.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_3.txt": {
+      "sha256": "cc0655b36f991c06c8a25dc4216bc5a59d343a6df7f6a79614b28499097868ea",
+      "size_bytes": 120234
+    },
+    "network_test/cell_state_4.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_4.txt": {
+      "sha256": "afb536b02971e14824c114186b59a49e8223566715b505eb467de9381af0e9f1",
+      "size_bytes": 120234
+    },
+    "network_test/cell_state_5.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_5.txt": {
+      "sha256": "22dfedebf735ffb3543d7cfe3afe68722281390045373921b8f3110c7a0435b5",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_6.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_6.txt": {
+      "sha256": "34216aa37303e2b98a2556a71258fbc2a76bc8a981185d50935bd398ba6d76f0",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_7.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_7.txt": {
+      "sha256": "0f2cb2bd26706f61ef278eb228636e994e159124eaf97377d56943fcc7d398f4",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_8.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_8.txt": {
+      "sha256": "d6bebdf0e6c97f5e1cd01c7e676164177247fe7afbe30edd17c8c33338297772",
+      "size_bytes": 120231
+    },
+    "network_test/cell_state_9.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/cell_state_9.txt": {
+      "sha256": "161e40936e9dd99bc124f382c78345b5725d5490738edd091d94e1694022ba71",
+      "size_bytes": 120231
+    },
+    "network_test/final_state.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/final_state.txt": {
+      "sha256": "1900208a0934c0122497e115cdfe41ee9719b16c3e3032fe61eb17b8bddffdd7",
+      "size_bytes": 61
+    },
+    "network_test/original_airplane.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/original_airplane.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    "network_test/original_mobile_data.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/original_mobile_data.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "network_test/original_wifi.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/original_wifi.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "network_test/restore_state_0.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restore_state_0.txt": {
+      "sha256": "e89b179eb01062c0ef31b79ee7a1e4222c68ea9c6e222d980d51252251fe6e14",
+      "size_bytes": 120231
+    },
+    "network_test/restore_state_1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restore_state_1.txt": {
+      "sha256": "024decfb6dc2c8f9c216631b45c5e03648aaa3a88963276323e294273d3f7a9b",
+      "size_bytes": 120231
+    },
+    "network_test/restore_state_2.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restore_state_2.txt": {
+      "sha256": "6cd6825d729dfcc0686fb480ed4df053cb95c321023442f928472e80ae4f3914",
+      "size_bytes": 156704
+    },
+    "network_test/restore_wifi_enable.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restore_wifi_enable.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restored_airplane.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restored_airplane.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    "network_test/restored_mobile_data.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restored_mobile_data.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "network_test/restored_wifi.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/restored_wifi.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "network_test/steps.json": {
+      "sha256": "049f4eaa504f7f078a7efd33bb81e8c2ece998875ae6142d1a942cdbe6bc892f",
+      "size_bytes": 3332
+    },
+    "network_test/wifi_disable.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/wifi_disable.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/wifi_https_0.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/wifi_https_0.txt": {
+      "sha256": "30c904580056f35fbb24c9dd367ce56d048c00de15e334935486deae3ee1a5d1",
+      "size_bytes": 44
+    },
+    "network_test/wifi_https_1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "network_test/wifi_https_1.txt": {
+      "sha256": "b1dc4e309d24945ba80d937430329eb99cf714dd17bf73de3e645f28ad27ce5c",
+      "size_bytes": 44
+    },
+    "mobile_data_test/after_cellular_crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/after_cellular_crash.txt": {
+      "sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+      "size_bytes": 1768
+    },
+    "mobile_data_test/after_phone.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/after_phone.txt": {
+      "sha256": "22107cc6641a1c935b6e263022cdc43b16f89ba6dc61e30e062dd0df70766049",
+      "size_bytes": 20244
+    },
+    "mobile_data_test/after_qns.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/after_qns.txt": {
+      "sha256": "7c74f1c4e8e8c6a3b4be324e7555430dbb145aa47e61576634f7da754af73ef1",
+      "size_bytes": 760
+    },
+    "mobile_data_test/before_connectivity.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/before_connectivity.txt": {
+      "sha256": "8b12ded41ca974e839fc2277635aaa4e00a6f3c048e432ee5735323fac4ed3f2",
+      "size_bytes": 166988
+    },
+    "mobile_data_test/before_crash.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/before_crash.txt": {
+      "sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+      "size_bytes": 1768
+    },
+    "mobile_data_test/before_state.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/before_state.txt": {
+      "sha256": "c7e9811bd88352d05c3ea89da5701728fdbd24cb4262ae398b2774f28fa2a931",
+      "size_bytes": 61
+    },
+    "mobile_data_test/cell_state_0.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/cell_state_0.txt": {
+      "sha256": "f85ba1ba5a65c2d251249b23cea6ef31e50ddb4cd70c4c4b4be8702656b5088c",
+      "size_bytes": 167753
+    },
+    "mobile_data_test/cell_state_1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/cell_state_1.txt": {
+      "sha256": "064c8346bbb4f83768b8a79b28265401302135477aaf9c533296fb1836704ae4",
+      "size_bytes": 163267
+    },
+    "mobile_data_test/cellular_after_connectivity.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/cellular_after_connectivity.txt": {
+      "sha256": "9eb109af5667730eea786a83d9c1c7774193ff5945a175f17e15cee2ce9d1105",
+      "size_bytes": 163289
+    },
+    "mobile_data_test/cellular_https_0.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/cellular_https_0.txt": {
+      "sha256": "dab1379075bf675f04ef08920717d7849a4a8062c1628df78a6baf9f1596322c",
+      "size_bytes": 44
+    },
+    "mobile_data_test/cellular_https_1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/cellular_https_1.txt": {
+      "sha256": "e5a1808c1a52c23713b17bf5c6b5bc99d9d4572db88d8eea52216c0fed5f149b",
+      "size_bytes": 44
+    },
+    "mobile_data_test/enable_default_sim_data.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/enable_default_sim_data.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/enabled_data1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/enabled_data1.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/final_state.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/final_state.txt": {
+      "sha256": "696639ec2a279ac71ae574fbca60b8f46f7ccc19857f830b20290ec7bef5eeeb",
+      "size_bytes": 61
+    },
+    "mobile_data_test/original_airplane_mode_on.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/original_airplane_mode_on.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    "mobile_data_test/original_mobile_data.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/original_mobile_data.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/original_mobile_data1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/original_mobile_data1.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    "mobile_data_test/original_multi_sim_data_call.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/original_multi_sim_data_call.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/original_wifi_on.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/original_wifi_on.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/restore_sim_data_disable.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restore_sim_data_disable.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restore_state_0.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restore_state_0.txt": {
+      "sha256": "1656c3dadbe7accebf6aa64cb688a49f1f37b1d8bcda26fe59004a2dfc315af3",
+      "size_bytes": 163289
+    },
+    "mobile_data_test/restore_state_1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restore_state_1.txt": {
+      "sha256": "0fa4d7e068959ac2ddcfe330287e9212be3260a21ee13de357cacdd8f996468b",
+      "size_bytes": 127892
+    },
+    "mobile_data_test/restore_state_2.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restore_state_2.txt": {
+      "sha256": "9a6c46797f23323e237c829f8294d97732b418a02b81f051571ffba9d23d3480",
+      "size_bytes": 167024
+    },
+    "mobile_data_test/restore_wifi_enable.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restore_wifi_enable.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restored_airplane_mode_on.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restored_airplane_mode_on.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    "mobile_data_test/restored_mobile_data.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restored_mobile_data.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/restored_mobile_data1.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restored_mobile_data1.txt": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "size_bytes": 2
+    },
+    "mobile_data_test/restored_multi_sim_data_call.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restored_multi_sim_data_call.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/restored_wifi_on.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/restored_wifi_on.txt": {
+      "sha256": "4355a46b19d348dc2f57c046f8ef63d4538ebb936000f3c9ee954a27460dd865",
+      "size_bytes": 2
+    },
+    "mobile_data_test/steps.json": {
+      "sha256": "6da14fd0ae6578824f7f6eba6b82ed9988c87ee2ef098409274adff74fa271e6",
+      "size_bytes": 3364
+    },
+    "mobile_data_test/wifi_disable.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "mobile_data_test/wifi_disable.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    },
+    "supporting/crash.txt": {
+      "sha256": "7e0e90fa455a82f3603e26d0d1b320ac47384dfed57ec219eeddc0b59c942721",
+      "size_bytes": 1768
+    },
+    "supporting/phone_and_data_settings.txt": {
+      "sha256": "b5514fd06127f20abe371f489938f0f9c514fc80d756fe1dd963a3b0278e77c6",
+      "size_bytes": 21225
+    },
+    "supporting/data_help_and_qns.txt": {
+      "sha256": "781b95de4ac8a4e0600aca7949612108e37e97f522fa69ee65a2e03a98c05d1b",
+      "size_bytes": 3481
+    },
+    "runner/test_networks.py": {
+      "sha256": "8bedb096e0d98ec7f057b44798245c6c396e0d6caec732012de9e0a23114e2bd",
+      "size_bytes": 4675
+    },
+    "runner/test_mobile_data.py": {
+      "sha256": "e130b830b2ebf065c7e878ec2de94f82ae665dbd29ce755c3898a513c499884e",
+      "size_bytes": 5044
+    },
+    "prior_module_boot/identity.txt": {
+      "sha256": "f399a4a6b36796a3bbceb3d09a64a870191c799524f82cba536ad91dbb0d9088",
+      "size_bytes": 546
+    },
+    "post_restoration_wifi/features_wifi.txt": {
+      "sha256": "ad073cff782bddcc0295a45b26b58768a6a77e5f1809d48371a2a3ab48d5ae0a",
+      "size_bytes": 1058
+    },
+    "post_restoration_wifi/features_wifi.stderr.txt": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0
+    }
+  },
+  "privacy": "Only bounded outcomes, settings, public test endpoints and evidence hashes are exported. Raw device/service/process/boot identities, IP addresses, SSID/BSSID, APN, subscriber or carrier identifiers, device serial, APK and raw logs are excluded. Evidence keys are logical labels, not download links.",
+  "post_restoration_wifi_https": {
+    "status": "PASS_ONE_ADDITIONAL_HTTPS_204_RESPONSE",
+    "http_status": 204,
+    "curl_ssl_verify_result": 0,
+    "response_body_bytes": 0,
+    "stderr_empty": true,
+    "execution_exit_code": 0,
+    "exit_code_provenance": "Reported by the phone-operating parent from its completed tool call; the retained stdout independently contains the successful HTTP/TLS result.",
+    "scope": "Separate later probe after the two controlled rounds. The immediate final connectivity snapshots remain correctly recorded without VALIDATED. This is not a third cellular test."
+  }
+}

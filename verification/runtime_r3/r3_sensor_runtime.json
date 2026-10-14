@@ -1,0 +1,286 @@
+{
+  "schema_version": 1,
+  "status": "PASS_BOUNDED_NINE_SENSOR_TYPES_TEN_PUBLIC_INTERFACES",
+  "candidate": {
+    "kernel_image_sha256": "025b92a4997663bd20fdbb1a2cb57d89625c8bc958b381478574ef05f3c52dcc",
+    "boot_image_sha256": "68d0c85b408df6512e278394624b0196b2f2330c9a644eb1fcc8e57dd461acfb",
+    "source_lock_sha256": "65009dcfb1b958677b0a2cdb2b4d9e0d0de656f89bd047733d694a976a676671",
+    "identity_binding": "Candidate binding follows the phone operator’s contemporaneous verified r3 session. Sensor result JSON itself does not contain a boot identity or partition hash; this offline sensor review did not re-read either."
+  },
+  "scope": "Independent offline review of two completed ordinary-app sensor runs on the existing r3 boot. Sensor event delivery and bounded physical response only; not calibration, accuracy certification, suspend wakeup or all inventory sensors. This report does not edit the runtime manifest.",
+  "result": {
+    "public_sensor_type_count_tested": 9,
+    "distinct_type_and_wakeup_interfaces_tested": 10,
+    "inventory_entry_count": 30,
+    "all_requested_interfaces_registered_and_delivered_events": true,
+    "all_observed_values_finite": true,
+    "no_nonincreasing_event_timestamps_observed": true,
+    "no_value_dimension_changes_observed": true,
+    "no_registration_or_runtime_errors_reported": true,
+    "proximity_both_interfaces_observed_near_and_far": true
+  },
+  "owner_action_evidence": {
+    "kind": "DEVICE_OWNER_CONFIRMATION_RELAYED_BY_PHONE_OPERATOR",
+    "physical_run": "Owner completed the requested rotation/movement phase.",
+    "proximity_run": "Owner confirmed covering and uncovering the proximity sensor.",
+    "limit": "The app records sensor responses; it does not independently observe the owner’s hand movement."
+  },
+  "physical_run": {
+    "label": "movement_and_public_sensor_delivery",
+    "helper_version": "v3",
+    "helper_apk_sha256": null,
+    "run_id_sha256": "5aac303bfab118311f51705dd1a5a852d247861e1b417baf71468ae316f884b6",
+    "start_utc": "2026-10-14T09:44:15.132000+00:00",
+    "state": "DURATION_COMPLETE",
+    "requested_duration_seconds": 60,
+    "actual_duration_seconds": 60.265688414,
+    "duration_matches_monotonic_timestamps": true,
+    "ordinary_application_uid_verified": true,
+    "requested_sampling_period_us": 100000,
+    "all_callback_arrivals_within_run": true,
+    "inventory_count": 30,
+    "registered_observation_count": 9,
+    "observations": [
+      {
+        "label": "accelerometer",
+        "type": 1,
+        "event_count": 707,
+        "events_with_changed_values": 706,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": true,
+        "errors": []
+      },
+      {
+        "label": "gyroscope",
+        "type": 4,
+        "event_count": 704,
+        "events_with_changed_values": 702,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": []
+      },
+      {
+        "label": "magnetic_field",
+        "type": 2,
+        "event_count": 601,
+        "events_with_changed_values": 600,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": []
+      },
+      {
+        "label": "light",
+        "type": 5,
+        "event_count": 183,
+        "events_with_changed_values": 182,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": true,
+        "errors": []
+      },
+      {
+        "label": "proximity",
+        "type": 8,
+        "event_count": 1,
+        "events_with_changed_values": 0,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": true,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": true,
+        "errors": [],
+        "minimum": [
+          5
+        ],
+        "maximum": [
+          5
+        ]
+      },
+      {
+        "label": "gravity",
+        "type": 9,
+        "event_count": 616,
+        "events_with_changed_values": 615,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": []
+      },
+      {
+        "label": "rotation_vector",
+        "type": 11,
+        "event_count": 616,
+        "events_with_changed_values": 615,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": []
+      },
+      {
+        "label": "pressure",
+        "type": 6,
+        "event_count": 600,
+        "events_with_changed_values": 8,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": []
+      },
+      {
+        "label": "linear_acceleration",
+        "type": 10,
+        "event_count": 616,
+        "events_with_changed_values": 615,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": []
+      }
+    ]
+  },
+  "proximity_run": {
+    "label": "dedicated_cover_uncover_dual_proximity",
+    "helper_version": "v4",
+    "helper_apk_sha256": "5ad8986f5db8e170f24747dfc0ee47f71a98bda8f1b1a9983a9e9165a2484e80",
+    "run_id_sha256": "3bb88c6aec51af1fa18fd44fac85065166b94a30b5970402ee6788886bb76636",
+    "start_utc": "2026-10-14T09:46:43.431000+00:00",
+    "state": "DURATION_COMPLETE",
+    "requested_duration_seconds": 30,
+    "actual_duration_seconds": 30.5170328,
+    "duration_matches_monotonic_timestamps": true,
+    "ordinary_application_uid_verified": true,
+    "requested_sampling_period_us": 100000,
+    "all_callback_arrivals_within_run": true,
+    "inventory_count": 30,
+    "registered_observation_count": 2,
+    "observations": [
+      {
+        "label": "proximity",
+        "type": 8,
+        "event_count": 8,
+        "events_with_changed_values": 7,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": true,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": true,
+        "errors": [],
+        "minimum": [
+          0
+        ],
+        "maximum": [
+          5
+        ]
+      },
+      {
+        "label": "proximity_non_wakeup",
+        "type": 8,
+        "event_count": 8,
+        "events_with_changed_values": 7,
+        "nonfinite_event_count": 0,
+        "changed_value_dimensions_count": 0,
+        "nonincreasing_sensor_timestamps": 0,
+        "wake_up_interface": false,
+        "registration": "REGISTERED",
+        "first_sensor_timestamp_predates_run_start": false,
+        "errors": [],
+        "minimum": [
+          0
+        ],
+        "maximum": [
+          5
+        ]
+      }
+    ]
+  },
+  "helper_provenance": {
+    "v3_exact_apk_sha256_status": "NOT_RETAINED_APK_OVERWRITTEN_BY_V4",
+    "v3_limitation": "The physical run used v3 per the phone operator. Its exact APK was not retained and no v3 APK hash is reconstructed or borrowed from v4. Retained v3 build log and run JSON are hashed separately.",
+    "v4_apk_sha256": "5ad8986f5db8e170f24747dfc0ee47f71a98bda8f1b1a9983a9e9165a2484e80",
+    "v4_apk_size_bytes": 29067,
+    "v4_hash_verified_against_retained_apk": true,
+    "v4_source_hashes_match_build_record": true,
+    "v4_permission_count": 0,
+    "v4_native_library_count": 0,
+    "v4_build_verification_status": "PASS_LOCAL_COMPILE_SIGNATURE_AND_ZERO_PERMISSION_CHECKS"
+  },
+  "excluded_baseline": {
+    "run_id_sha256": "9c40dbe60f12c41320411f582238cbfd3bfb693125ccd3b9e5fa2a871483c80e",
+    "different_run_id_from_both_physical_tests": true,
+    "purpose": "Earlier stationary progress data is retained only as baseline and is not counted as the owner’s motion or cover/uncover test."
+  },
+  "timestamp_interpretation": "Some initial sensor sample timestamps predate listener registration; all callback arrival timestamps are inside their own completed run. In the dedicated wakeup proximity run, an initial cached/on-change state was followed by seven changed-value events and both 0 and 5. Its observed_average_hz is not treated as a fresh-run sampling rate.",
+  "limitations": [
+    "The 60-second physical run received only one far=5 proximity event; near/far validation comes from the separate 30-second run.",
+    "Variation by itself can include normal noise. Pressure response, magnetic heading, distance and all other physical calibration/accuracy were not certified.",
+    "The requested 100000-us period is a request, not proof of a fixed delivered sample rate.",
+    "Wakeup/non-wakeup names distinguish two Android sensor interfaces; wake-from-suspend behavior was not tested.",
+    "Only nine public types and ten interfaces were exercised, not all 30 inventory entries or every sensor/chip.",
+    "No long-term drift, thermal, sustained sampling or concurrent application stress test.",
+    "No new claim about kernel panic absence is made from app sensor statistics alone."
+  ],
+  "private_evidence_sha256": {
+    "physical_run.json": {
+      "sha256": "b3b82ccd7fee3ee8d53a688be0451c245616fb9d7b390586117d953ee08a20e2",
+      "size_bytes": 28543
+    },
+    "proximity_run.txt": {
+      "sha256": "9f5c8650e828bfa9d894f33c6f54661cb84075b04bb271db1556b64b50b3e4cc",
+      "size_bytes": 15599
+    },
+    "excluded_static_baseline.json": {
+      "sha256": "07aa7ac964c3ed87c183004726102564368df2b421ad7b30625206694aad9653",
+      "size_bytes": 28577
+    },
+    "helper_v4_build_verification.json": {
+      "sha256": "e1353f66a2ba968411f6eec990f9e41afc19d9fe7ecf3d9a41b8c1bb397e5224",
+      "size_bytes": 2032
+    },
+    "helper_v3_build_log.txt": {
+      "sha256": "387bad3a00eb1d0674d41bbda24b0f7960d072e5f20784445ebe9c426e8181cc",
+      "size_bytes": 2901
+    },
+    "helper_v4_build_log.txt": {
+      "sha256": "387bad3a00eb1d0674d41bbda24b0f7960d072e5f20784445ebe9c426e8181cc",
+      "size_bytes": 2901
+    },
+    "helper_v4_source.java": {
+      "sha256": "3182716a3ce577cbe0fbaa4e20d614324aaf73cbaf04472237371dbcc7d8e0e3",
+      "size_bytes": 19313
+    },
+    "helper_v4_manifest.xml": {
+      "sha256": "6d56489458577d69aa4d585b79b9a10de1d3dfb0ab505c9b7e7c4cd9a6d7dccd",
+      "size_bytes": 773
+    }
+  },
+  "privacy": "No raw run UUID, UID/PID, device serial, boot identity, private paths or raw sensor time series is exported. Run identities are represented by SHA-256. The inventory is counted, not published in full."
+}

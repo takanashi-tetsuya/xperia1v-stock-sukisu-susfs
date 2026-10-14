@@ -415,7 +415,7 @@
     "ksu": "PASS",
     "module_loading": "PASS",
     "ota": "NOT_RUN",
-    "sensors": "NOT_RUN",
+    "sensors": "PASS",
     "sus_path": "PASS",
     "wifi": "PASS",
     "zygisk": "PASS",
@@ -438,7 +438,8 @@
         "3564f67476599aef10ffc3d93cda24800871a3a615819a245cea4111b3692da0",
         "70b4ce976c602c9f64d5ae98615588fe164bdc4424de16cf36d5e0d5e7a1600c",
         "d1411d1a61e523317e8c766672a82ab515371589a89ac9c61fe4737afff8766d",
-        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
+        "38fdf81713d977dc2f2bb5665011955e3a409d65fe0cc36d8fcba939e28ae65c"
       ],
       "camera": [
         "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
@@ -462,16 +463,21 @@
         "34e60651873b1e10817e6e8761016cc907d34232289c58d6413249b730b93a37",
         "7e286cc0f54241c33b1fba7361195a2aedfd384412361e41347ba63b5ca8d1e1",
         "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
-        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420",
+        "a73e6b69b88fe4c4b629b3e4311deccf95ff962d38445199965a458233153977"
       ],
       "module_loading": [
         "135b4ad9f1b707e69531643b58bbbcc14b42230dba036af380d8668becd23540",
         "240d2acd6662aa32829bf63a15b0203182e55b9719c14291dcdcb837e8e201c4",
         "ead0740e1d64f904e867fe5402b3adf449aca60f838116366c8f58b795dcb8aa",
-        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
+        "cf3f73ada1438d3edcfe323040f2282c37383681a5127a18be186ae5659d4ab3"
       ],
       "ota": [],
-      "sensors": [],
+      "sensors": [
+        "b3b82ccd7fee3ee8d53a688be0451c245616fb9d7b390586117d953ee08a20e2",
+        "9f5c8650e828bfa9d894f33c6f54661cb84075b04bb271db1556b64b50b3e4cc"
+      ],
       "sus_path": [
         "094b355694582fd6bf5fabf1f74d5ab9258beb3cd5d2cdd856592f0a2403b4cd",
         "37722386e06cf551f0968a773262a1894c91f652b80ecf46df8ecbff3c2fdcbc",
@@ -479,12 +485,23 @@
         "d8ea5fde65f52df2eba61a8f080229972751af6482580e054d9bb848c7f46899"
       ],
       "wifi": [
-        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420"
+        "d51666395ed3ad45dbe4fa0a477e53fbf126192293c11db1cc3992267df75420",
+        "30c904580056f35fbb24c9dd367ce56d048c00de15e334935486deae3ee1a5d1",
+        "b1dc4e309d24945ba80d937430329eb99cf714dd17bf73de3e645f28ad27ce5c",
+        "ad073cff782bddcc0295a45b26b58768a6a77e5f1809d48371a2a3ab48d5ae0a"
       ],
       "zygisk": [
         "e9c679acaf4a5c83fcc6dd902a6fd6fb0a5a48b5d1a2afde7150dc12e73ff2dd",
         "0df7e1ec2ca8fcbd9dccf2dec382b84834ae7e29cf7d8acb701ce15713ac615e",
-        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c"
+        "131629b5633665cb2c6a6fad0667cf039a4fcc27e84af5fac92cf5a483984d8c",
+        "6bc64528276baf1b7dde6d0ff26bcac1d9eb8f07064693b24f878e039c4c0176",
+        "6d8da950ed96ddd2d38dea768b8918b9a4052c5446ad048e8a66aeb701322474",
+        "225cd3f93d7ef392d3ce7c4c27b7a04d1105420aecc710d5b6f32d297fdbfee5",
+        "5c84cf4627669345e793b56e2a6ce78e3367ded526b1f6dda7586985ce1f1f6d",
+        "99b8d973448dc9e0270625589db4882082dfddff063b05d5d2ed51d41d00403b",
+        "134a8b5ae1774e03c40c08d3d55104e2a2a9a99793b5ca8a664a459687f2de23",
+        "e231f247f87326b347070f2d3b5cc97a6b1297c883b6c3a49aa156d7a992fd90",
+        "01dcba846dda2a83f70f24d0a94d63006021738d286f04f4861af6648717aab6"
       ]
     },
     "schema_version": 1,
@@ -500,7 +517,7 @@
       "ksu": "PASS",
       "module_loading": "PASS",
       "ota": "NOT_RUN",
-      "sensors": "NOT_RUN",
+      "sensors": "PASS",
       "sus_path": "PASS",
       "wifi": "PASS",
       "zygisk": "PASS"
@@ -703,9 +720,9 @@
   "publication_runtime_update": {
     "host_manifest_sha256": "f36bb5169ae08baab4c9ad54abd21407af9f6fa02a1d427f907c7c9df6c25e62",
     "host_manifest_path": "verification/host_snapshot/manifest.json",
-    "runtime_manifest_sha256": "85a731c21a1a89e80dc536b146ae0c070a19231b5bed370baf36a14e8a22c4e5",
+    "runtime_manifest_sha256": "3e9026b19cd91c85a8c65f223442ac212d5a419b5c9ed495230ab643db38e2b3",
     "runtime_manifest_path": "runtime_manifest.json",
-    "public_report_index_sha256": "7b1bc404016e7309aca7e273d1a8d50fe09f444f3fc7bc1c19069afa746e7b76",
+    "public_report_index_sha256": "1807e53c692d971cd3f3d062d4a8c2878ea059d50ae9211695b8848550d188b8",
     "public_report_index_path": "verification/runtime_r3/REPORT_INDEX.json",
     "public_report_sha256": {
       "susfs_runtime_r3.json": "eaa58e5880694641abb27021652f7dea4c5e1ad9771c21da20d5ab1dc790b52c",
@@ -719,8 +736,19 @@
       "r3_zygisk_runtime.json": "4b19cd1bb31e8b9a55f713d93e77878a8625391b9e35388f6516b098284cf7fd",
       "r3_zygisk_runtime_zh_TW.txt": "515b577bda1326686699b3376cbd6193a5348e7c7ccfef9ac3a34f49cf32a925",
       "r3_cleanup_and_restoration.json": "17fdf79b6eb94ece45c8b5775a3d2b8992e9733bdb4a9bd1f489c960ac644253",
-      "r3_owner_functional_observation.json": "4b4adb9edb0c217527a38bcb347ebd1ccc413d2b27b3e89618f48f2a4c7708d7"
+      "r3_owner_functional_observation.json": "4b4adb9edb0c217527a38bcb347ebd1ccc413d2b27b3e89618f48f2a4c7708d7",
+      "r3_sensor_runtime.json": "108521b26d4d3e8e6972d4ba62416427e1824230d9f98f7b4d9c986365a51536",
+      "r3_sensor_runtime_zh_TW.txt": "b11d3480012b45f7b46a09c550eb58a76328535b14cc12180b70cddef5a9b96a",
+      "r3_network_runtime.json": "77f28e7f8e2235f349ca6bab51dc7f3ba36e94cd8fa316f0c5bcde28524699cb",
+      "r3_network_runtime_zh_TW.txt": "8926b3269bd1f58c78228217a2957412f527527fcc3be80747bca37c64d6e153",
+      "r3_vendor_qns_init_diagnosis.json": "b3d1954b14b4dc9c070d57d2cf1b2a67b2e9833717b32a181b557d1be6ee5a44",
+      "r3_vendor_qns_init_diagnosis_zh_TW.txt": "7ca9b22030e5ea3f83095a611eede2da23d4617aaa4aad4bfc24720f83b1e6bc",
+      "r3_zygisk_next_shamiko_runtime.json": "a2a63ef59edeb110bab7c2f44721efe179da99ee7b9e16907a4ab18d0c0ea2bc",
+      "r3_zygisk_next_shamiko_runtime_zh_TW.txt": "1b78c115cadac8bb4bab6e32adea147fd596ddc4a5ddb4cc7f4fa945929e865e"
     },
+    "final_archive_rebuild_sha256": "e47a30811a459fdd6a4f3975d1fe60c25b8915510d82e4f0c501d13060638330",
+    "final_archive_rebuild_path": "verification/final_archive_rebuild/final_archive_rebuild.json",
+    "final_archive_rebuild_scope": "Separate same-host offline build/packaging evidence; not a phone test or third-party reconstruction.",
     "staged_source_checks_sha256": "6c94a61ea237d2c2a6e2655b1009c529b949b264ac8a0f3d22f4e8e7c1adc4d8",
     "scope": "Artifact binding and reviewed summaries; not automatic replay or proof of untested behavior.",
     "historical_export_receipt_scope": "verification/publication_export.json describes original source/host exports; current README and runtime overlay have separate identities.",

@@ -1,0 +1,35 @@
+r3 廠商電信服務與 init abort 離線診斷
+
+結論：已確認實機 IWlanService 的一條錯誤處理分支會主動傳入 null List，足以解釋這次 Java NPE；觸發該分支的 APN／slot 與時序原因仍未確定。非 PID1 init abort 的根因仍未查明。
+
+1. 已證明的 vendor.qti.iwlan 缺陷
+
+實機 vendor APK SHA-256：0091f5e0c9f696876e6ea8311dad4c99ea65cb192458b85afc12b268b4b0b11b
+檢查的是目前手機上的 vendor APK；未另外宣稱它與獨立解包的 Sony 韌體逐位元組一致。公開報告不包含 APK 或 DEX。
+
+直接反組譯得到：updateQualifiedNetworks 迭代 QualifiedNetworks 記錄；若記錄的 networks 為 null 或空清單，便把該 APN type 累積到 apnTypeMaskNullNw。當 mask 非零時，原始碼 line 122 的 DEX 先放入 null 常數（code-unit 0x0109），再呼叫 updateQualifiedNetworkTypes(mask, null)（0x010a）。實機堆疊正好是這個 vendor line 122，接著在 framework 的 List.stream() 觸發 NPE。這不是「清單內某個元素為 null」。
+
+因此直接原因已定位到 vendor 使用者態程式的 API 契約錯誤，沒有必要假設核心編譯把 Java List 弄壞。AOSP 對應 API 要求非 null 清單；無可用網路應以空清單表示。正確修正方向是在 vendor caller 傳入非 null 空清單；重新編譯核心不會改變此 APK 方法。本次沒有修改 APK、簽名、framework、系統分割區或注入 hook，也沒有把此方向當成已測試的修復。
+
+仍未證明：這次是哪個 APN／slot 的回應為空、為何此輪觸發、模組／SIM 準備狀態／modem 回應／排程時序是否影響觸發。不能把直接原因已知延伸成「所有上游觸發原因都已排除」。
+
+日誌顯示服務崩潰後 framework 自動重啟它，並重新建立兩個 provider。較晚同一 boot 的 crash buffer 仍只有原來的一筆 NPE，並非第二次重現。服務重新啟動不等於行動數據或 VoWiFi 全部通過。
+
+2. init abort 的證據邊界
+
+工作正常的舊 40922 記錄有 1 筆非 PID1 init SIGABRT；r3 初次模組停用開機 2 筆、AK3 後模組停用開機 2 筆、模組啟用開機 1 筆。這些記錄中的 init-named fatal process 都不是全域 PID1。此前有界穩定性附錄另有 PID1 存活與 system_server 連續性的證據。
+
+目前仍未取得各筆事件的確切父程序、init service 名稱或原生 abort message，不能指定哪一條服務啟動分支失敗，不能證明各筆具有同一原因，也不能稱為無害。AOSP 在 fork 子程序與 PID1 採不同 fatal 處理，且服務 exec 前可能 abort；這只說明觀察結果與機制相容，不是實機根因證明。
+
+校正日誌範圍：保留的 kernel capture 有包含 1 秒前的部分 init 訊息。缺的是這些特定 abort 的歸屬／理由記錄，不能宣稱「前 6 秒所有日誌都遺失」。
+
+3. 最小後續判別
+
+可唯讀檢查現有 QNS dump 的 ring buffer，尋找 no-available-networks 的 APN mask；但已崩潰程序的記憶體 ring 可能已不存在。一般 Wi-Fi／行動數據切換可保留前後 crash 次數、QNS 程序身份及 Internet network validation；IMS bearer 不能替代一般 Internet 或 VoWiFi 功能證明。若未來原本就安排的重啟再出現 init abort，應保留 native abort message／tombstone 與 init service start/exit 的對應，不需為了取證停掉重要服務。
+
+本報告沒有執行電話、SMS、OTA、韌體變更或新的手機操作，也不修改既有 manifest 與 PASS／NOT_RUN 結果。
+
+官方來源（AOSP 對應實作，不宣稱等同 Sony framework 的精確來源版本）：
+- QualifiedNetworksService 的非 null 清單契約：https://android.googlesource.com/platform/frameworks/base/+/02fcb4356a72980f9aff46cb5652bcd74205711d/telephony/java/android/telephony/data/QualifiedNetworksService.java
+- init 的 PID1／非 PID1 abort 處理：https://android.googlesource.com/platform/system/core/+/0bc3f6b124c22477f052245c6461bd254b374dd3/init/util.cpp
+- Android 15 init service 的 exec 前錯誤路徑（官方 AOSP mirror）：https://raw.githubusercontent.com/aosp-mirror/platform_system_core/android-15.0.0_r1/init/service.cpp

@@ -1,0 +1,19 @@
+Zygisk Next／Shamiko 實機審核（Next 觀察與 ReZygisk 還原完成）
+
+結論：Next 限定啟動／注入測試通過；Shamiko 官方安裝器被版本檢查拒絕，運行未測；原本 ReZygisk 配置已恢復並驗證。
+
+Next 1.5.2（864-a4a72ce-release）安裝 exit 0，真實 kernel／ksud 皆 40900。ReZygisk 已停用；Next status 回報兩個 zygote、modules32/64 各包含 PIF 與 Vector、issues=0。實際程序 maps 分別確認 64／32 位元 zygote 的 Next、PIF、Vector 程式庫，system_server 亦有 Next 與 Vector 映射。12 項初始擷取均 exit 0，檔案大小／SHA 與步驟紀錄吻合。這只證明實際啟動與映射，不代表每個 hook、App、Play Integrity 或 DRM 通過。舊的 ReZygisk state.json 殘留內容未被當成目前啟用證據。
+
+Shamiko 1.2.5（414）安裝 exit 1，顯示 40900（kernel）+40900（ksud）後進入「KernelSU version abnormal」分支。官方 customize.sh 的條件是 KSU_KERNEL_VER_CODE >= 20000；這個分支沒有查看核心 Git／submodule 歷史。「以 submodule 整合」是該數值檢查的診斷文案，不能反推本核心用了錯誤編譯方式。未修改版本號或繞過安裝器。拒絕後三個精確 Shamiko 模組／暫存／cleanup 路徑均不存在，手機仍是相同 Next boot/system_server。Shamiko 運行狀態為 NOT_RUN，不是 PASS。
+
+初始 crash buffer 可見兩個非 PID1、名稱仍為 init 的 abort；未見 system_server fatal 或先前 QNS Java NPE。不同開機不能做直接 crash buffer 位元組比較；這也不能證明 Next 修好了 QNS 問題。300 秒 collector 已正常結束：142 個狀態樣本始終同一 boot/system_server，uptime 11.98 至 310.33 秒；其中 138 個樣本 boot_completed=1。最終 12 項快照亦均 exit 0 且雜湊吻合，兩個 zygote 與 system_server 的映射仍在。初始、串流與最終 crash buffer 完全相同，檢閱視窗未新增 Java 或 system_server fatal；原本兩個 init abort 仍未解。取樣穩定只限此視窗。
+
+配套 JSON 保存官方 ZIP／腳本與實機證據雜湊。公開稿不含 raw log、設備或程序識別。
+
+還原結果：原本六個模組的旗標逐位元組相同，86 個原 ReZygisk regular files 與事前私人 tar 備份逐一雜湊相同；兩個 zygote 的 ReZygisk／PIF／Vector 映射與 daemon 已確認，system_server 的 Vector 映射亦在。最終三個程序 maps 沒有 Next 程式庫，模組清單沒有 Next 或 Shamiko。
+
+4 個共享檔案的內容與 mode／owner／SELinux／size／mtime，及原本不存在的 7 個路徑均經綁定路徑驗證器確認還原。boot_a、boot_b、init_boot_a、init_boot_b 四個實際分區雜湊與事前一致；root allowlist、bit 8 CLI 與 kernel feature 狀態一致，其中 kernel_umount 回到原本停用。稍後 Wi-Fi HTTPS 再次回應 204、TLS 驗證結果 0。
+
+還原後 180 秒 collector 正常結束，共 86 個樣本、同一 boot/system_server，uptime 11.80–191.26 秒；最終 12 項快照全 exit 0 且大小／雜湊吻合，末端 uptime 213.13 秒。初始／串流／最終 crash buffer 相同，保留一次非 PID1 init abort，未見 system_server fatal；不能稱作零崩潰。
+
+私人最終備份已在主機保留並核對雜湊，手機本次測試暫存清理有完成紀錄。此還原驗證涵蓋明列檔案、旗標、功能及分區，沒有宣稱動態系統日誌逐位元組倒退，也沒有宣稱長期或所有 App 相容。舊 ReZygisk 實測報告及本次狀態轉換各自保留，不需要把操作計畫 note 冒充實機證據。
